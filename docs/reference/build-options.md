@@ -1,0 +1,182 @@
+---
+description: CMake options, generated artifacts, backends, and build configuration reference for Doriax.
+---
+
+# Build Options
+
+Doriax uses CMake for desktop editor/runtime builds and platform tooling for mobile,
+Apple, and web exports.
+
+## Common requirements
+
+| Requirement | Notes |
+| --- | --- |
+| CMake | 3.20 or newer |
+| C++ compiler | MSVC, GCC, Clang, or equivalent, capable of the selected `DORIAX_CXX_STANDARD` (C++17 by default) |
+| Python 3 | Used by code generation scripts |
+| Platform SDK | Required for Android, iOS, macOS, and web builds |
+
+## Editor build
+
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --config Release --target doriax-editor
+cmake --install build --config Release --strip
+```
+
+`DORIAX_CXX_STANDARD` applies here too, building the editor and engine with it. It is
+independent of the standard a project selects: the editor compiles script plugins with
+the project's value regardless of how the editor itself was built.
+
+Leave `DORIAX_PHYSICS_2D` and `DORIAX_PHYSICS_3D` on for the editor: it authors every
+component, and Play links against its engine library, so the editor needs both backends.
+They are meant for runtime builds.
+
+On Windows the build also provides `doriax-editor-cmd`, the same editor linked as a
+console application for automation and terminal output. It is excluded from the default
+build, so request it by name:
+
+```bash
+cmake --build build --config Release --target doriax-editor-cmd
+```
+
+See [Command-Line Tools](../editor/command-line.md).
+
+## Runtime build
+
+```bash
+cmake -S engine -B build -DCMAKE_BUILD_TYPE=Debug
+cmake --build build --config Debug
+```
+
+## Scripting entry options
+
+| Option | Effect |
+| --- | --- |
+| `NO_CPP_INIT` | Disable the C++ startup entry point |
+| `NO_LUA_INIT` | Disable the Lua startup entry point |
+
+## Engine/library options
+
+| Option | Effect |
+| --- | --- |
+| `DORIAX_SHARED` | Build the engine as a shared library when enabled |
+| `ENABLE_OPT` | Enable SPIR-V optimizer support when available |
+| `EMSCRIPTEN_THREAD_SUPPORT` | Enable pthread support for Emscripten builds |
+
+## Runtime project options
+
+| Option | Default | Effect |
+| --- | --- | --- |
+| `DORIAX_VSYNC_ENABLED` | `ON` | Synchronize supported desktop presentation backends to the display refresh rate. Set to `OFF` to request an uncapped build. macOS Metal remains synchronized. |
+| `DORIAX_WINDOW_WIDTH` | `960` | Initial window width in pixels for desktop builds |
+| `DORIAX_WINDOW_HEIGHT` | `540` | Initial window height in pixels for desktop builds |
+| `DORIAX_WINDOW_MODE` | `0` | Initial window state: `0` windowed, `1` maximized, `2` fullscreen. The Sokol app backend has no maximized support and treats `1` as windowed. |
+| `DORIAX_WINDOW_RESIZABLE` | `ON` | Allow resizing the window. Ignored by the Sokol app backend, whose windows are always resizable. |
+| `DORIAX_WINDOW_TITLE` | `"Doriax"` | Window title-bar text |
+| `DORIAX_CXX_STANDARD` | `17` | C++ standard for the engine and the game target. Accepts `17`, `20` or `23` only — configuration fails on any other value. |
+| `DORIAX_PHYSICS_2D` | `ON` | Build and link Box2D. `OFF` leaves out 2D bodies, joints and their Lua API. When on, the engine target also defines the `DORIAX_PHYSICS_2D` macro for the game. |
+| `DORIAX_PHYSICS_3D` | `ON` | Build and link Jolt. `OFF` leaves out 3D bodies, joints and their Lua API. When on, the engine target also defines the `DORIAX_PHYSICS_3D` macro for the game. |
+| `DORIAX_ADMOB` | `ON` | iOS only: link Google Mobile Ads and compile the AdMob adapter, defining the `DORIAX_ADMOB` macro. `OFF` leaves [`AdMob`](classes/admob.md) unavailable. |
+| `DORIAX_STOREKIT` | `ON` | iOS only: compile the StoreKit 2 adapter, a Swift source that needs Swift 6.1 (Xcode 16.3 or later), defining the `DORIAX_STOREKIT` macro. `OFF` leaves [`InAppPurchase`](classes/inapppurchase.md) unavailable on iOS. |
+| `DORIAX_WEB_PORTAL` | `none` | Web only: the game portal SDK built in for [`WebPortal`](classes/webportal.md): `none`, `crazygames`, `poki`, `gamedistribution`, `yandex` or `youtube`. Any other value fails configuration. A portal also defines `DORIAX_WEB_PORTAL_<NAME>`, like `DORIAX_WEB_PORTAL_POKI`. |
+| `DORIAX_WEB_PORTAL_GAME_ID` | `""` | Web only: the game ID of portals that need one, which is GameDistribution. |
+
+The editor writes these options into exported CMake projects from **Project
+Settings** (VSync, the Window settings, the C++ standard, the physics backends, iOS
+**Google AdMob** and **App Store Purchases**, and the web **Game Portal**). For a manually
+configured standalone runtime, override them at configure time:
+
+```bash
+cmake -S engine -B build-runtime \
+  -DPROJECT_ROOT=/path/to/project \
+  -DDORIAX_VSYNC_ENABLED=OFF \
+  -DDORIAX_WINDOW_MODE=2 \
+  -DDORIAX_WINDOW_TITLE="My Game" \
+  -DDORIAX_CXX_STANDARD=23
+```
+
+Vulkan treats `OFF` as a request for Immediate presentation, with Mailbox and then FIFO
+as fallbacks according to surface support.
+
+## Graphics backend
+
+Set `GRAPHIC_BACKEND` when configuring a standalone runtime project. The editor's
+Desktop export selector passes the corresponding value automatically; Web exports use
+`gles3`.
+
+| Option value | Target |
+| --- | --- |
+| `glcore` | Desktop OpenGL Core |
+| `gles3` | OpenGL ES 3 / WebGL-style targets |
+| `d3d11` | Windows Direct3D 11 |
+| `metal` | macOS and iOS Metal |
+| `vulkan` | Vulkan (Linux and Windows) |
+
+On macOS, `vulkan` builds through MoltenVK but cannot run yet — see
+[Vulkan backend](../building/macos.md#vulkan-backend).
+
+The root **editor** build reads the same variable, but accepts only `vulkan` or `glcore`
+(Linux and Windows, defaulting to `glcore`); macOS is forced to `metal`. There it is a
+cached variable, so the build directory keeps the backend it was configured with until
+`-DGRAPHIC_BACKEND=` is passed again.
+
+## App backend
+
+The target system selects the app backend, which handles the window, input, and main
+loop. Configure prints it as `APP_BACKEND`, but the value is informational: setting it
+has no effect.
+
+| Target system | `APP_BACKEND` | Platform code |
+| --- | --- | --- |
+| Windows | `win` | `platform/win`: native Win32 window with a WGL (OpenGL), Vulkan, or D3D11 context |
+| Linux, FreeBSD | `linux` | `platform/linux`: native X11 window with a GLX (OpenGL) or Vulkan context |
+| macOS | `apple` | `platform/mac`: native Cocoa executable. With the Xcode generator and Metal, `platform/apple` builds an `.app` bundle instead |
+| iOS | `apple` | `platform/apple` |
+| Android | `android` | `platform/android`: GameActivity |
+| Emscripten | `emscripten` | `platform/emscripten` |
+
+## Generated artifacts
+
+| Artifact | Generated from |
+| --- | --- |
+| `shaders.h` | Shader sources processed by CMake shader generation |
+| `engine_api_suggestions.h` | Lua binding files parsed by `generate_api_suggestions.py` |
+| Copied engine directory | Editor export/build support |
+
+## Engine capacity macros
+
+Exported CMake projects and their Xcode workspace receive compiler defines for the largest
+capacities the editor measured in the project's scenes and bundles, each floored at the
+engine default in `engine/core/Engine.h`. Growing past the default lets large authored
+content compile; the floor keeps dynamically spawned content inside the known-safe
+baseline.
+
+| Macro | Default | Controls |
+| --- | --- | --- |
+| `MAX_SUBMESHES` | 4 | Submeshes per mesh |
+| `MAX_TILEMAP_TILESRECT` | 64 | Tilemap rectangle tiles |
+| `MAX_TILEMAP_TILES` | 512 | Tiles per tilemap |
+| `MAX_SPRITE_FRAMES` | 32 | Sprite atlas frames |
+| `MAX_EXTERNAL_BUFFERS` | 20 | External vertex/index buffers per mesh |
+| `MAX_BONES` | 96 | Bone matrices per skinned mesh |
+| `MAX_SHAPES_2D` | 4 | Shapes per 2D body |
+| `MAX_SHAPE_POINTS_2D` | 8 | Points per 2D polygon or chain shape |
+| `MAX_SHAPES_3D` | 4 | Shapes per 3D body |
+| `MAX_SHAPE_VERTICES_3D` | 64 | Vertices per 3D convex hull or mesh shape |
+| `MAX_SHAPE_INDICES_3D` | 192 | Indices per 3D mesh shape |
+| `MAX_MESH_LODS` | 4 | Detail levels per mesh submesh (source plus simplified index ranges) |
+
+`MAX_BONES` is the CPU array size used at runtime. Skinned shaders bind those matrices
+through a storage buffer or a bone texture and do not embed this count. The editor can
+load skins larger than 96; export writes the raised value so the standalone build
+matches. If you load a larger skin only from code, edit the generated
+`add_definitions("-DMAX_BONES=N")` line in the exported CMakeLists, or `MAX_BONES` in the
+project-level **Preprocessor Macros** of the exported Xcode workspace (or pass the same
+compiler define in a standalone engine build). The engine and the game must be built with
+the same value.
+
+## Platform guides
+
+See [Building Overview](../building/overview.md), then use the guide for your target
+platform.

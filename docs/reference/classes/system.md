@@ -1,0 +1,379 @@
+---
+description: System API reference — screen dimensions, paths, virtual keyboard, fullscreen, window control, and user preferences.
+---
+
+# System
+
+## Description
+
+`System` is a virtual platform-abstraction layer. It provides screen dimensions, file-system paths, virtual keyboard control, fullscreen management, and persistent key-value storage. You access it via `System::instance()` in C++ or the global `System` table in Lua.
+
+Ads, in-app purchases and web portal SDKs have their own classes: [AdMob](admob.md), [InAppPurchase](inapppurchase.md) and [WebPortal](webportal.md). See [Monetization](../../manual/monetization.md#migrating) for the `System` methods they replaced.
+
+Each target platform provides its own concrete `System` subclass; the engine injects the correct implementation at startup.
+
+=== "C++"
+
+    ```cpp
+    #include "Doriax.h"
+    using namespace doriax;
+
+    int screenW = System::instance().getScreenWidth();
+    int screenH = System::instance().getScreenHeight();
+    Log::print("Screen: %dx%d", screenW, screenH);
+    ```
+
+=== "Lua"
+
+    ```lua
+    local w = System.getScreenWidth()
+    local h = System.getScreenHeight()
+    Log.print("Screen: " .. w .. "x" .. h)
+    ```
+
+### Methods
+
+| Returns | Name | Languages |
+| --- | --- | --- |
+| int | [getScreenWidth](#getscreenwidth-getscreenheight) | C++ \| Lua |
+| int | [getScreenHeight](#getscreenwidth-getscreenheight) | C++ \| Lua |
+| int | [getSampleCount](#getsamplecount) | C++ \| Lua |
+| bool | [isTouchDevice](#istouchdevice) | C++ \| Lua |
+| void | [showVirtualKeyboard](#showvirtualkeyboard) | C++ \| Lua |
+| void | [hideVirtualKeyboard](#showvirtualkeyboard) | C++ \| Lua |
+| bool | [isFullscreen](#isfullscreen-requestfullscreen-exitfullscreen) | C++ \| Lua |
+| void | [requestFullscreen](#isfullscreen-requestfullscreen-exitfullscreen) | C++ \| Lua |
+| void | [exitFullscreen](#isfullscreen-requestfullscreen-exitfullscreen) | C++ \| Lua |
+| bool | [isWindowMaximized](#window-control) | C++ \| Lua |
+| void | [maximizeWindow](#window-control) | C++ \| Lua |
+| void | [restoreWindow](#window-control) | C++ \| Lua |
+| void | [setWindowSize](#window-control) | C++ \| Lua |
+| bool | [isWindowResizable](#window-control) | C++ \| Lua |
+| void | [setWindowResizable](#window-control) | C++ \| Lua |
+| void | [setWindowTitle](#window-control) | C++ \| Lua |
+| void | [quit](#quit) | C++ \| Lua |
+| char | [getDirSeparator](#getdirseparator) | C++ \| Lua |
+| std::string | [getAssetPath](#getassetpath) | C++ \| Lua |
+| std::string | [getUserDataPath](#getuserdatapath) | C++ \| Lua |
+| std::string | [getLuaPath](#getluapath) | C++ \| Lua |
+| std::string | [getShaderPath](#getshaderpath) | C++ \| Lua |
+| std::string | [getImportPath](#getimportpath) | C++ |
+| bool | [getBoolForKey](#persistent-keyvalue-storage) | C++ \| Lua |
+| int | [getIntegerForKey](#persistent-keyvalue-storage) | C++ \| Lua |
+| long | [getLongForKey](#persistent-keyvalue-storage) | C++ \| Lua |
+| float | [getFloatForKey](#persistent-keyvalue-storage) | C++ \| Lua |
+| double | [getDoubleForKey](#persistent-keyvalue-storage) | C++ \| Lua |
+| std::string | [getStringForKey](#persistent-keyvalue-storage) | C++ \| Lua |
+| void | [setBoolForKey](#persistent-keyvalue-storage) | C++ \| Lua |
+| void | [setIntegerForKey](#persistent-keyvalue-storage) | C++ \| Lua |
+| void | [setLongForKey](#persistent-keyvalue-storage) | C++ \| Lua |
+| void | [setFloatForKey](#persistent-keyvalue-storage) | C++ \| Lua |
+| void | [setDoubleForKey](#persistent-keyvalue-storage) | C++ \| Lua |
+| void | [setStringForKey](#persistent-keyvalue-storage) | C++ \| Lua |
+| void | [removeKey](#persistent-keyvalue-storage) | C++ \| Lua |
+| AdMobBackend* | [getAdMobBackend](#service-backends) | C++ |
+| InAppPurchaseBackend* | [getInAppPurchaseBackend](#service-backends) | C++ |
+| WebPortalBackend* | [getWebPortalBackend](#service-backends) | C++ |
+
+## Method details
+
+### getScreenWidth / getScreenHeight {#getscreenwidth-getscreenheight}
+
+* `virtual int getScreenWidth() = 0`
+* `virtual int getScreenHeight() = 0`
+
+Physical screen (window) dimensions in pixels. These may differ from [Engine::canvasWidth / canvasHeight](engine.md#canvaswidth-canvasheight) when a scaling mode other than `NATIVE` is active.
+
+=== "C++"
+
+    ```cpp
+    int w = System::instance().getScreenWidth();
+    int h = System::instance().getScreenHeight();
+    ```
+
+=== "Lua"
+
+    ```lua
+    local w = System.getScreenWidth()
+    local h = System.getScreenHeight()
+    ```
+
+---
+
+### getSampleCount
+
+* `virtual int getSampleCount()`
+
+Returns the MSAA sample count configured for the current graphics backend (e.g. 1, 2, or 4). Useful when creating render targets that must match the main framebuffer.
+
+---
+
+### isTouchDevice
+
+* `virtual bool isTouchDevice()`
+
+Returns `true` when touch is the main input, as on phones and tablets. Android and iOS
+always report it. On the web the browser decides from its primary pointer, so a phone
+reports `true` and a laptop with a touch screen and a mouse reports `false`. Desktop
+platforms report `false`, and the editor reports `true` while
+[touch simulation](../../editor/scene-view.md#touch-simulation) is on.
+
+Use it to decide whether to start with on-screen controls. The player can still connect a
+keyboard or touch a laptop screen, so following the last input used as well is more
+reliable; see [On-screen controls](../../manual/input.md#on-screen-controls).
+
+=== "C++"
+
+    ```cpp
+    bool showControls = System::instance().isTouchDevice();
+    ```
+
+=== "Lua"
+
+    ```lua
+    local showControls = System.isTouchDevice()
+    ```
+
+---
+
+### showVirtualKeyboard
+
+* `virtual void showVirtualKeyboard(std::wstring text = L"")`
+
+Displays the platform's on-screen keyboard with `text` as the initial input buffer. Has no effect on desktop platforms. On iOS/Android, raises the software keyboard and fires `Engine::onCharInput` for each key typed.
+
+=== "C++"
+
+    ```cpp
+    System::instance().showVirtualKeyboard(L"Enter name");
+    ```
+
+=== "Lua"
+
+    ```lua
+    System.showVirtualKeyboard("Enter name")
+    ```
+
+---
+
+### hideVirtualKeyboard
+
+* `virtual void hideVirtualKeyboard()`
+
+Dismisses the on-screen keyboard.
+
+---
+
+### isFullscreen / requestFullscreen / exitFullscreen {#isfullscreen-requestfullscreen-exitfullscreen}
+
+* `virtual bool isFullscreen()`
+* `virtual void requestFullscreen()`
+* `virtual void exitFullscreen()`
+
+Query and control fullscreen mode. On desktop platforms, `requestFullscreen()` typically toggles borderless fullscreen; on web, it requests the Fullscreen API. Has no effect on mobile (always fullscreen).
+
+Whether a desktop build *starts* fullscreen is a project setting (see [Project Workflow — Window](../../editor/project-workflow.md#window)); `exitFullscreen()` restores the window size configured there.
+
+=== "C++"
+
+    ```cpp
+    if (!System::instance().isFullscreen()) {
+        System::instance().requestFullscreen();
+    }
+    ```
+
+=== "Lua"
+
+    ```lua
+    if not System.isFullscreen() then
+        System.requestFullscreen()
+    end
+    ```
+
+---
+
+### Window control {#window-control}
+
+* `virtual bool isWindowMaximized()`
+* `virtual void maximizeWindow()`
+* `virtual void restoreWindow()`
+* `virtual void setWindowSize(int width, int height)`
+* `virtual bool isWindowResizable()`
+* `virtual void setWindowResizable(bool resizable)`
+* `virtual void setWindowTitle(const std::string& title)`
+
+Control the OS window of desktop builds at runtime. `maximizeWindow()`/`restoreWindow()` toggle the maximized state, `setWindowSize()` resizes the window in screen coordinates (while fullscreen it instead updates the size restored by `exitFullscreen()`), and `setWindowTitle()` changes the title-bar text. The initial values come from the project's [Window settings](../../editor/project-workflow.md#window).
+
+Note that `setWindowSize()` takes *window* coordinates while [getScreenWidth/getScreenHeight](#getscreenwidth-getscreenheight) report *framebuffer* pixels — on HiDPI/scaled displays these differ by the content scale, so the two do not round-trip 1:1.
+
+Platform support: fully implemented on GLFW-based desktop builds (generated desktop projects and Linux exports). Windows/macOS Sokol exports support only `setWindowTitle()` — the other calls are no-ops there. On web, `setWindowTitle()` sets the browser tab title and the rest are no-ops. All are no-ops on mobile.
+
+=== "C++"
+
+    ```cpp
+    System::instance().setWindowTitle("My Game — Level 2");
+    System::instance().setWindowSize(1600, 900);
+    if (!System::instance().isWindowMaximized()) {
+        System::instance().maximizeWindow();
+    }
+    ```
+
+=== "Lua"
+
+    ```lua
+    System.setWindowTitle("My Game — Level 2")
+    System.setWindowSize(1600, 900)
+    if not System.isWindowMaximized() then
+        System.maximizeWindow()
+    end
+    ```
+
+---
+
+### quit
+
+* `virtual void quit()`
+
+Closes the application. The shutdown happens after the current frame ends, so it is safe to call from a button callback or any other script code, and [`Engine::onShutdown`](engine.md#onshutdown) still runs before the app goes away.
+
+Platform support: desktop builds close the window, web stops the render loop and shuts the engine down (writing pending [user data](#getuserdatapath) to IndexedDB first — the browser tab itself stays open), and Android finishes the activity. On iOS it is a no-op and logs a warning, since apps are not supposed to terminate themselves.
+
+Running a scene with Play in the editor stops play instead of closing the editor, so a quit button can be tested there.
+
+=== "C++"
+
+    ```cpp
+    void UI_MainMenu::onButtonClickQuit() {
+        System::instance().quit();
+    }
+    ```
+
+=== "Lua"
+
+    ```lua
+    function UI_MainMenu:onButtonClickQuit()
+        System.quit()
+    end
+    ```
+
+---
+
+### getDirSeparator
+
+* `virtual char getDirSeparator()`
+
+Returns the platform path directory separator: `'/'` on Unix/macOS/iOS/Android/Web, `'\\'` on Windows.
+
+---
+
+### getAssetPath
+
+* `virtual std::string getAssetPath()`
+
+Returns the root path for read-only assets bundled with the project: the project's assets directory in the editor, and the `assets` folder beside the executable in an exported build. Prepend this to asset file names when opening files directly from C++. In Lua and the high-level C++ loaders (`setTexture`, etc.), paths are automatically resolved relative to the asset root.
+
+=== "C++"
+
+    ```cpp
+    std::string path = System::instance().getAssetPath() + "textures/sprite.png";
+    ```
+
+---
+
+### getUserDataPath
+
+* `virtual std::string getUserDataPath()`
+
+Returns a writable per-user data directory (Documents on iOS, internal storage on Android, `%AppData%` on Windows, `~/.local/share` on Linux). Use for save files and configuration.
+
+=== "C++"
+
+    ```cpp
+    std::string savePath = System::instance().getUserDataPath() + "save.dat";
+    ```
+
+---
+
+### getLuaPath
+
+* `virtual std::string getLuaPath()`
+
+Returns the base path prepended when Lua `require()` looks for script modules and when a `ScriptComponent` entry is loaded: the project's Lua directory in the editor, and the `lua` folder beside the executable in an exported build.
+
+---
+
+### getShaderPath
+
+* `virtual std::string getShaderPath()`
+
+Returns the directory holding compiled `.sdat` shader binaries, and the root for `shader://` paths: the project's `shaders` folder in the editor, and `assets/shaders` beside the executable in an exported build. The folder name is fixed, not configurable.
+
+---
+
+### getImportPath
+
+* `virtual std::string getImportPath()`
+
+Returns the directory holding the glTF conversions of FBX models: the project's `.doriax/imported` folder in the editor. It is empty in an exported build, where each conversion sits beside its FBX's path as `<name>.fbx.glb`. See [3D Graphics — FBX models](../../manual/3d-graphics.md#fbx-models).
+
+---
+
+### Persistent key–value storage
+
+The system exposes a simple cross-platform persistent store backed by `NSUserDefaults` (iOS/macOS), `SharedPreferences` (Android), `localStorage` (Web), and a JSON file (desktop/Linux/Windows).
+
+On the web, keys are stored as `<id>/<key>`, where `<id>` is the [application identifier](../../editor/project-settings.md#application), so games on the same site keep separate values. While the identifier is the default `com.yourcompany.project`, the project name is used instead, so set one before publishing. Characters other than ASCII letters, digits, `.`, and `-` are written as `_` and their hex code, so `My Game` becomes `My_20Game`. Keys saved by builds before v0.8.1 are still read.
+
+**Getters** return the stored value or `defaultValue` if the key does not exist:
+
+| Method | Type |
+| --- | --- |
+| `getBoolForKey(key, defaultValue)` | bool |
+| `getIntegerForKey(key, defaultValue)` | int |
+| `getLongForKey(key, defaultValue)` | long |
+| `getFloatForKey(key, defaultValue)` | float |
+| `getDoubleForKey(key, defaultValue)` | double |
+| `getStringForKey(key, defaultValue)` | string |
+
+**Setters** write or update a value:
+
+| Method | Type |
+| --- | --- |
+| `setBoolForKey(key, value)` | bool |
+| `setIntegerForKey(key, value)` | int |
+| `setLongForKey(key, value)` | long |
+| `setFloatForKey(key, value)` | float |
+| `setDoubleForKey(key, value)` | double |
+| `setStringForKey(key, value)` | string |
+
+**removeKey** deletes a stored entry:
+
+* `virtual void removeKey(const char* key)`
+
+=== "C++"
+
+    ```cpp
+    System& sys = System::instance();
+
+    // Save high score
+    sys.setIntegerForKey("highScore", score);
+
+    // Load with default 0
+    int best = sys.getIntegerForKey("highScore", 0);
+    ```
+
+=== "Lua"
+
+    ```lua
+    -- Preferences are exposed to Lua through UserSettings (not System).
+    UserSettings.setIntegerForKey("highScore", score)
+    local best = UserSettings.getIntegerForKey("highScore", 0)
+    ```
+
+## Service backends
+
+* `virtual AdMobBackend* getAdMobBackend()`
+* `virtual InAppPurchaseBackend* getInAppPurchaseBackend()`
+* `virtual WebPortalBackend* getWebPortalBackend()`
+
+How the [AdMob](admob.md), [InAppPurchase](inapppurchase.md) and [WebPortal](webportal.md) classes reach the platform's SDKs. Each returns the platform's implementation, or `nullptr` where the platform or the build has none, which the classes report as "not available". Games call those classes rather than these methods; a port to a new platform overrides them to plug in its own SDKs.

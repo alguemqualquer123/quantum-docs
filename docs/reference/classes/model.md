@@ -1,0 +1,247 @@
+---
+description: Model API reference (C++ and Lua).
+---
+
+# Model
+
+**Inherits:** [Mesh](mesh.md)  
+**C++ type:** `Model`
+
+## Description
+
+Loads and displays 3D model files in a scene. `Model` extends [Mesh](mesh.md) and adds support for loading OBJ and GLTF files (including binary GLB), and FBX files through the glTF conversion the editor makes of them, including skeletal animation (via `Animation` / `Bone`), blend-shape morph targets, and PBR materials.
+
+A single GLTF file can contain multiple meshes, materials, textures, skins, and animations; Doriax imports them into the scene hierarchy and makes each accessible through the API. Files with animation clips, or more than one skin, import the **full glTF node tree** so joints, mesh nodes, and transform-only helpers keep the parentage authored in the file. Use [getAnimation()](#getanimation-findanimation) and [getBone()](#getbone) to drive skeletal playback, and [setMorphWeight()](#getmorphweight-setmorphweight) to control blend shapes. See [3D Graphics — GLTF node hierarchy](../../manual/3d-graphics.md#gltf-node-hierarchy).
+
+The Model entity has a `MeshComponent` only when the geometry loads into it (a single mesh, an OBJ, or a merged model). When the meshes go to child entities it keeps just `Transform` and `ModelComponent`, and the inherited [Mesh](mesh.md) methods act on those parts: setters change every part, getters read the first one, and a submesh index counts across the parts the way the merged model numbers its submeshes. `getAABB()` covers all the parts in the model's space and `getWorldAABB()` in the world. Settings made before the model has any geometry are held on a `MeshComponent` of the model's own until the load passes them to the meshes it builds.
+
+Reloading the same file with `loadModel()` keeps the mesh settings (lighting, shadows, detail levels, transparency and the custom shaders) of each part, found by node name and then by index. Another file is a fresh import, and the meshes it creates start with the default settings.
+
+For static multi-node GLTFs that need [GPU instancing](../../manual/rendering-pipeline.md#gpu-instancing) on the root entity, set `ModelComponent::mergeStaticMeshes` (or use **Merge static model** in the editor) so child transforms bake into the root mesh instead of creating child mesh entities. See [3D Graphics — Merging static model meshes](../../manual/3d-graphics.md#merging-static-model-meshes).
+
+### Methods
+
+| Type | Name | Langs |
+| --- | --- | --- |
+| bool | [loadModel](#loadmodel) | C++ \| Lua |
+| bool | [loadOBJ](#loadobj-loadgltf) | C++ \| Lua |
+| bool | [loadGLTF](#loadobj-loadgltf) | C++ \| Lua |
+| [Animation](animation.md) | [getAnimation](#getanimation-findanimation) | C++ \| Lua |
+| [Animation](animation.md) | [findAnimation](#getanimation-findanimation) | C++ \| Lua |
+| void | [playAnimation](#playanimation-stopanimations) | C++ \| Lua |
+| void | [stopAnimations](#playanimation-stopanimations) | C++ \| Lua |
+| [Bone](bone.md) | [getBone](#getbone) | C++ \| Lua |
+| float | [getMorphWeight](#getmorphweight-setmorphweight) | C++ \| Lua |
+| void | [setMorphWeight](#getmorphweight-setmorphweight) | C++ \| Lua |
+| void | [resetToBindPose](#resettobindpose) | C++ \| Lua |
+
+## GLTF import support and limits
+
+| Feature | Import behaviour |
+| --- | --- |
+| Skinning | Bone matrices are a storage buffer (Vulkan, Metal, Direct3D 11) or an unfilterable bone texture (OpenGL / OpenGL ES), so shader variants are not capped by a uniform-block size. The CPU array is still limited by `MAX_BONES` (default **128**). The editor grows past that for large skins; export raises `MAX_BONES` to the largest skin in the project's scenes. A runtime load above the compiled capacity is rejected and logged. |
+| Multiple skins | Supported. Each skinned mesh keeps its own joint order and inverse-bind matrices. |
+| Node hierarchy | Animation clips, or more than one skin, import every glTF node as a child entity. Animation channels target those nodes, including transform-only helpers. |
+| Position-only morph targets | Up to **8** targets per mesh primitive. |
+| Position + normal or position + tangent morph targets | Up to **4** targets per mesh primitive. |
+| Position + normal + tangent morph targets | Up to **2** targets per mesh primitive. |
+| Sparse morph accessors | Supported. The loader expands sparse target data into a dense GPU buffer, including accessors that omit the optional base `bufferView` and therefore start from zeroes. |
+
+The morph limit is derived from the leading target prefix that the loader actually
+binds. Extra trailing targets are ignored; semantics that appear only after that loaded
+prefix do not reduce its shader capacity. Keep the same morph semantics on every target
+when exporting from a DCC tool for predictable results.
+
+Imported PBR materials also preserve GLTF `OPAQUE`, `MASK`, and `BLEND` alpha modes and
+the `alphaCutoff` value used by masked materials. Blended submeshes disable depth writes
+in the colour pass. See [Material](material.md#alphamode-alphacutoff).
+
+Loading rewrites every submesh, so submesh edits made outside the loader are kept in
+`ModelComponent::submeshOverrides` and re-applied at the end of each load. The editor
+fills that list when you change a submesh in Properties; in code you can add entries
+yourself, keyed by the GLTF node and primitive (`nodeIndex` / `primitiveIndex`, with
+`nodeIndex = -1` and the material index for OBJ) and a `fields` mask of the values to
+pin. See [3D Graphics — Editing an imported model's submeshes](../../manual/3d-graphics.md#editing-an-imported-models-submeshes).
+
+## Method details
+
+### loadModel
+
+* bool **loadModel**(const std::string& filename)
+
+Loads a 3D model file from disk. Doriax automatically detects the format based on file extension:
+
+* `.obj` — Wavefront OBJ
+* `.gltf` / `.glb` — GL Transmission Format (GLTF 2.0 / binary GLB)
+* `.fbx` — loaded from its glTF conversion, which the editor makes and an export ships as `<name>.fbx.glb` (see [3D Graphics — FBX models](../../manual/3d-graphics.md#fbx-models))
+
+Returns `true` on success. On failure, check the log for details.
+
+=== "C++"
+    ```cpp
+    Model character(&scene);
+    if (!character.loadModel("characters/hero.glb")) {
+        Log::error("Failed to load hero model");
+    }
+    ```
+
+=== "Lua"
+    ```lua
+    local character = Model(scene)
+    if not character:loadModel("characters/hero.glb") then
+        Log.error("Failed to load hero model")
+    end
+    ```
+
+---
+
+### loadOBJ / loadGLTF
+
+* bool **loadOBJ**(const std::string& filename)
+* bool **loadGLTF**(const std::string& filename)
+
+Format-specific loaders. Use these when you want to be explicit about the format, or when the file extension is non-standard. `loadGLTF()` accepts both text `.gltf` and binary `.glb` files.
+
+---
+
+### getAnimation / findAnimation
+
+* [Animation](animation.md) **getAnimation**(int index)
+* [Animation](animation.md) **findAnimation**(const std::string& name)
+
+Retrieve a skeletal or morph-target animation embedded in the loaded model.
+`getAnimation()` accesses by zero-based index; `findAnimation()` searches the animation
+entity name. GLTF import initializes that entity name from the clip name exported by the
+DCC tool, and an unnamed imported clip receives a generated name such as `"Animation 0"`.
+Both methods return an [Animation](animation.md) object that can be started, stopped, and
+configured for looping.
+
+Renaming an animation entity changes the string accepted by `findAnimation()` and the
+named [playAnimation()](#playanimation-stopanimations) overloads. The
+`AnimationComponent` itself has no separate name property.
+
+=== "C++"
+    ```cpp
+    Model soldier(&scene);
+    soldier.loadModel("soldiers/rifleman.glb");
+
+    Animation walkAnim = soldier.findAnimation("Walk");
+    walkAnim.setLoop(true);
+    walkAnim.start();
+    ```
+
+=== "Lua"
+    ```lua
+    local soldier = Model(scene)
+    soldier:loadModel("soldiers/rifleman.glb")
+
+    local walkAnim = soldier:findAnimation("Walk")
+    walkAnim.loop = true
+    walkAnim:start()
+    ```
+
+---
+
+### playAnimation / stopAnimations
+
+* void **playAnimation**(int index)
+* void **playAnimation**(int index, float fadeTime)
+* void **playAnimation**(const std::string& name)
+* void **playAnimation**(const std::string& name, float fadeTime)
+* void **stopAnimations**(float fadeTime)
+
+Switch the model's active clip with a **smooth crossfade** instead of an instant pose snap. `playAnimation()` fades out every other running clip on this model and fades the requested one in over `fadeTime` seconds; `stopAnimations()` fades all running clips out.
+
+This is the recommended way to change animation state at runtime (idle → run → jump → die). During the fade both clips play and their poses are blended by weight, so the character eases between motions rather than popping. When `fadeTime` is omitted, the target clip's authored [defaultFadeTime](animation.md#defaultfadetime) is used (set per-clip as **AnimationComponent → Fade time**). A `fadeTime` of `0` switches instantly.
+
+Unlike [getAnimation()](#getanimation-findanimation), which returns a handle you start yourself, `playAnimation()` manages the transition for you. Set looping on the clips you intend to hold (idle, run) via [Animation::loop](animation.md#loop).
+
+=== "C++"
+    ```cpp
+    Model hero(&scene);
+    hero.loadModel("characters/hero.glb");
+
+    // Make locomotion clips loop, then start on idle
+    hero.findAnimation("Idle").setLoop(true);
+    hero.findAnimation("Run").setLoop(true);
+    hero.playAnimation("Idle");          // uses each clip's Fade time
+
+    // Later, on input:
+    hero.playAnimation("Run", 0.2f);     // crossfade to run over 0.2s
+    hero.playAnimation("Die", 0.1f);     // snappy transition into a one-shot
+    ```
+
+=== "Lua"
+    ```lua
+    local hero = Model(scene)
+    hero:loadModel("characters/hero.glb")
+
+    hero:findAnimation("Idle").loop = true
+    hero:findAnimation("Run").loop = true
+    hero:playAnimation("Idle")           -- uses each clip's Fade time
+
+    -- Later, on input:
+    hero:playAnimation("Run", 0.2)       -- crossfade to run over 0.2s
+    hero:playAnimation("Die", 0.1)       -- snappy transition into a one-shot
+    ```
+
+!!! note "Crossfades assume full-skeleton clips"
+    The blend is a weight-normalized average per bone, so it looks best when both clips animate the whole skeleton (the usual case for GLTF character clips). A bone animated by only the outgoing clip holds its pose until that clip finishes fading rather than easing.
+
+---
+
+### getBone
+
+* [Bone](bone.md) **getBone**(const std::string& name)
+* [Bone](bone.md) **getBone**(int id)
+
+Returns a [Bone](bone.md) handle by joint name or by glTF node index (`id`). That integer is the node's index in the glTF file, which can differ from its ordinal in a skin's joint list. A `Bone` inherits [Object](object.md) so you can read and write its local transform to override the skeleton. For example, you can aim a character's head bone toward a target while the rest of the body plays a walk cycle.
+
+=== "C++"
+    ```cpp
+    Bone head = soldier.getBone("Head");
+    head.setRotation(targetRotation);
+    ```
+
+=== "Lua"
+    ```lua
+    local head = soldier:getBone("Head")
+    head.rotation = targetRotation
+    ```
+
+---
+
+### getMorphWeight / setMorphWeight
+
+* float **getMorphWeight**(const std::string& name)
+* float **getMorphWeight**(int id)
+* void **setMorphWeight**(const std::string& name, float value)
+* void **setMorphWeight**(int id, float value)
+
+Read or write the weight of a blend-shape morph target. Weights range from `0.0` (no influence) to `1.0` (full influence). Multiple morphs can be active simultaneously. Access by exported name or by zero-based index.
+
+When the model's meshes are child entities, each part numbers its own targets. A name finds the parts that have that target. An index sets every part, and reads the part that has morph targets.
+
+=== "C++"
+    ```cpp
+    Model face(&scene);
+    face.loadModel("characters/face.glb");
+    face.setMorphWeight("Smile", 0.8f);
+    face.setMorphWeight("Blink_L", 1.0f);
+    ```
+
+=== "Lua"
+    ```lua
+    local face = Model(scene)
+    face:loadModel("characters/face.glb")
+    face:setMorphWeight("Smile", 0.8)
+    face:setMorphWeight("Blink_L", 1.0)
+    ```
+
+---
+
+### resetToBindPose
+
+* void **resetToBindPose**()
+
+Resets every imported node (or, on the legacy skeleton path, every bone) back to the bind pose defined in the model file, clearing any programmatic or animation-driven overrides. Useful when switching between animations or when stopping all playback. A mesh part that was [moved away from its file node](../../editor/structure.md#organizing-the-parts-of-a-model) keeps its transform, since the file's pose is relative to another parent.

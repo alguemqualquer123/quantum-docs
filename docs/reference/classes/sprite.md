@@ -1,0 +1,353 @@
+---
+description: Sprite API reference — 2D images, texture atlas frames, pivot, and sprite animation.
+---
+
+# Sprite
+
+## Description
+
+`Sprite` is the primary class for 2D images and sprite sheets. It renders a textured quad, supports texture atlas frames for manual sprite selection, and provides a simple frame animation player for looping sequences.
+
+**Inherits:** [Mesh](mesh.md) → [Object](object.md) → [EntityHandle](entityhandle.md)
+
+=== "C++"
+
+    ```cpp
+    #include "Doriax.h"
+    using namespace doriax;
+
+    Sprite sprite(&scene);
+    sprite.setTexture("sprites/character.png");
+    sprite.setSize(64, 64);
+    sprite.createSprite();
+    ```
+
+=== "Lua"
+
+    ```lua
+    local sprite = Sprite(scene)
+    sprite:setTexture("sprites/character.png")
+    sprite:setSize(64, 64)
+    ```
+
+### Properties
+
+| Type | Name | Default | Languages |
+| --- | --- | --- | --- |
+| unsigned int | [width](#width-height) | `0` | C++ \| Lua |
+| unsigned int | [height](#width-height) | `0` | C++ \| Lua |
+| bool | [flipY](#flipy) | `false` | C++ \| Lua |
+| float | [textureScaleFactor](#texturescalefactor) | `0.0` | C++ \| Lua |
+| Rect | [textureRect](#texturerect) | full texture | C++ \| Lua |
+| [PivotPreset](#pivotpreset) | [pivotPreset](#pivotpreset_1) | `CENTER` | C++ \| Lua |
+
+### Methods
+
+| Returns | Name | Languages |
+| --- | --- | --- |
+| bool | [createSprite](#createsprite) | C++ |
+| [Occluder2D](occluder2d.md) | [getOccluder2D](#getoccluder2d) | C++ \| Lua |
+| void | [removeOccluder2D](#getoccluder2d) | C++ \| Lua |
+| void | [setSize](#setsize) | C++ \| Lua |
+| void | setWidth | C++ \| Lua |
+| void | setHeight | C++ \| Lua |
+| unsigned int | getWidth | C++ \| Lua |
+| unsigned int | getHeight | C++ \| Lua |
+| void | setFlipY | C++ \| Lua |
+| bool | isFlipY | C++ \| Lua |
+| void | setTextureScaleFactor | C++ \| Lua |
+| float | getTextureScaleFactor | C++ \| Lua |
+| void | [setTextureRect](#settexturerect) | C++ \| Lua |
+| Rect | getTextureRect | C++ \| Lua |
+| void | setPivotPreset | C++ \| Lua |
+| PivotPreset | getPivotPreset | C++ \| Lua |
+| void | [addFrame](#addframe) | C++ \| Lua |
+| void | [removeFrame](#removeframe) | C++ \| Lua |
+| void | [setFrame](#setframe) | C++ \| Lua |
+| void | [startAnimation](#startanimation) | C++ \| Lua |
+| void | [pauseAnimation](#pauseanimation) | C++ \| Lua |
+| void | [resumeAnimation](#resumeanimation) | C++ \| Lua |
+| void | [stopAnimation](#stopanimation) | C++ \| Lua |
+
+## Enumerations
+
+### PivotPreset
+
+Controls the origin point used for position and rotation.
+
+* **CENTER** — Origin at the geometric center of the sprite (default).
+* **TOP_LEFT** — Origin at the top-left corner.
+* **TOP_CENTER** — Origin at the top-center.
+* **TOP_RIGHT** — Origin at the top-right corner.
+* **CENTER_LEFT** — Origin at the center-left edge.
+* **CENTER_RIGHT** — Origin at the center-right edge.
+* **BOTTOM_LEFT** — Origin at the bottom-left corner.
+* **BOTTOM_CENTER** — Origin at the bottom-center.
+* **BOTTOM_RIGHT** — Origin at the bottom-right corner.
+
+## Property details
+
+### width / height
+
+* *Setter:* `void setWidth(unsigned int width)` / `void setHeight(unsigned int height)`
+* *Setter combined:* `void setSize(unsigned int width, unsigned int height)`
+* *Getter:* `unsigned int getWidth() const` / `unsigned int getHeight() const`
+
+Physical size of the rendered quad in world units. If both are zero, the sprite uses the texture dimensions automatically after `createSprite()`.
+
+---
+
+### flipY
+
+* *Setter:* `void setFlipY(bool flipY)`
+* *Getter:* `bool isFlipY() const`
+
+Flips the texture vertically. Useful when loading textures from APIs that use a top-left origin (e.g. some framebuffer captures).
+
+---
+
+### textureScaleFactor
+
+* *Setter:* `void setTextureScaleFactor(float textureScaleFactor)`
+* *Getter:* `float getTextureScaleFactor() const`
+
+Insets the UV rectangle by this many texels on every side, `0.0` by default. A small value such as `0.5` pulls the sampled area away from the edges of a packed atlas cell, hiding the neighbouring pixels that bilinear filtering would otherwise bleed in.
+
+---
+
+### textureRect
+
+* *Setter:* `void setTextureRect(float x, float y, float width, float height)`
+* *Setter:* `void setTextureRect(Rect textureRect)`
+* *Getter:* `Rect getTextureRect() const`
+
+Defines the sub-rectangle of the texture to display in **UV coordinates**, where
+`Rect(0, 0, 1, 1)` covers the full texture. Use [addFrame](#addframe) and
+[setFrame](#setframe) for pixel-based atlas regions.
+
+---
+
+### pivotPreset
+
+* *Setter:* `void setPivotPreset(PivotPreset pivotPreset)`
+* *Getter:* `PivotPreset getPivotPreset() const`
+
+Sets the pivot (origin) point used for position placement and rotation. See [PivotPreset](#pivotpreset).
+
+## Method details
+
+### createSprite
+
+* `bool createSprite()`
+
+Builds the quad geometry and uploads it to the GPU. Optional in most cases — the mesh
+system rebuilds sprites automatically — but useful in C++ when you need the geometry
+immediately. **Not bound to Lua.**
+
+=== "C++"
+
+    ```cpp
+    Sprite sprite(&scene);
+    sprite.setTexture("ui/button.png");
+    sprite.setSize(128, 64);
+    sprite.createSprite();
+    ```
+
+---
+
+### getOccluder2D
+
+* `Occluder2D getOccluder2D()`
+* `void removeOccluder2D()`
+
+Attaches an [Occluder2D](occluder2d.md) component to the sprite's entity if one does
+not already exist, then returns an `Occluder2D` handle for configuration. The default
+`AUTO_QUAD` shape uses the sprite's mesh bounds, so it is the quickest way to make a
+sprite cast shadows from [Light2D](light2d.md).
+
+Use `removeOccluder2D()` to remove the occluder component from the sprite.
+
+=== "C++"
+
+    ```cpp
+    Sprite crate(&scene);
+    crate.setTexture("crate.png");
+    crate.setSize(96, 96);
+
+    Occluder2D occluder = crate.getOccluder2D();
+    occluder.setShape(Occluder2DShape::AUTO_QUAD);
+    ```
+
+=== "Lua"
+
+    ```lua
+    local crate = Sprite(scene)
+    crate:setTexture("crate.png")
+    crate:setSize(96, 96)
+
+    local occluder = crate:getOccluder2D()
+    occluder.shape = Occluder2DShape.AUTO_QUAD
+    ```
+
+---
+
+### setSize
+
+* `void setSize(unsigned int width, unsigned int height)`
+
+Sets both width and height in a single call. Equivalent to calling `setWidth` and `setHeight` separately.
+
+---
+
+### setTextureRect
+
+* `void setTextureRect(float x, float y, float width, float height)`
+* `void setTextureRect(Rect textureRect)`
+
+Restricts rendering to a sub-region of the texture using **UV coordinates**. Divide
+pixel x/width by the texture width and pixel y/height by the texture height.
+This setter applies immediately and cancels any pending frame selection waiting
+for texture dimensions. `getTextureRect()` returns the currently applied UV rectangle.
+
+=== "C++"
+
+    ```cpp
+    // Show the top-left 64×64 region of a 256×256 atlas.
+    sprite.setTextureRect(0.0f, 0.0f, 0.25f, 0.25f);
+    ```
+
+=== "Lua"
+
+    ```lua
+    sprite:setTextureRect(0, 0, 0.25, 0.25)
+    ```
+
+---
+
+### addFrame
+
+* `void addFrame(int id, const std::string& name, Rect rect)`
+* `void addFrame(const std::string& name, float x, float y, float width, float height)`
+* `void addFrame(float x, float y, float width, float height)` *(auto-increment id)*
+* `void addFrame(Rect rect)` *(auto-increment id)*
+
+Registers a named frame in the sprite sheet. Frames are used by [setFrame](#setframe) and [startAnimation](#startanimation).
+
+Frame rectangles may use pixels or normalized UVs. If all four rectangle values
+are in `[0, 1]`, the engine treats them as UVs; otherwise it converts them from
+pixels using the texture dimensions when the frame is applied.
+
+=== "C++"
+
+    ```cpp
+    sprite.addFrame(0, "idle",  Rect(  0, 0, 64, 64));
+    sprite.addFrame(1, "run_1", Rect( 64, 0, 64, 64));
+    sprite.addFrame(2, "run_2", Rect(128, 0, 64, 64));
+    ```
+
+=== "Lua"
+
+    ```lua
+    sprite:addFrame(0, "idle",  Rect(  0, 0, 64, 64))
+    sprite:addFrame(1, "run_1", Rect( 64, 0, 64, 64))
+    sprite:addFrame(2, "run_2", Rect(128, 0, 64, 64))
+    ```
+
+---
+
+### removeFrame
+
+* `void removeFrame(int id)`
+* `void removeFrame(const std::string& name)`
+
+Removes a registered frame by ID or name.
+
+---
+
+### setFrame
+
+* `void setFrame(int id)`
+* `void setFrame(const std::string& name)`
+
+Selects the registered frame with the given ID or name. You can call this while
+configuring a new sprite, before its geometry has been built.
+
+UV rectangles and pixel rectangles whose texture dimensions are known apply
+immediately. If dimensions are unavailable, the sprite retains the requested
+rectangle and retries during mesh updates. The currently applied rectangle stays
+unchanged until conversion succeeds.
+
+Each sprite stores one pending rectangle: repeated calls replace it, so the latest
+selection wins. For example, `setFrame(1)` followed by `setFrame(2)` before loading
+finishes eventually displays frame 2. Different sprites keep independent pending
+selections. Use [startAnimation](#startanimation) for a timed sequence of frames.
+
+Calling `setFrame()` does not stop an active animation; its next frame update can
+replace the selection. A direct [setTextureRect](#settexturerect) call cancels a
+pending selection. Stopping editor play also clears pending runtime selections
+when the saved sprite state is restored.
+
+=== "C++"
+
+    ```cpp
+    sprite.setFrame("idle");
+    ```
+
+=== "Lua"
+
+    ```lua
+    sprite:setFrame("idle")
+    ```
+
+---
+
+### startAnimation
+
+* `void startAnimation(std::vector<int> frames, std::vector<int> framesTime, bool loop)`
+* `void startAnimation(int startFrame, int endFrame, int interval, bool loop)`
+* `void startAnimation(const std::string& name, int interval, bool loop)`
+
+Plays a frame animation. Time values are in milliseconds.
+
+* The first overload accepts explicit frame ID lists and per-frame durations.
+* The second overload plays a contiguous range of frame IDs at a fixed interval.
+* The third overload plays all frames whose names begin with `name` at a fixed interval.
+
+=== "C++"
+
+    ```cpp
+    // Play frames 1 and 2 alternating, 150 ms each, looping
+    sprite.startAnimation({1, 2}, {150, 150}, true);
+    // or range:
+    sprite.startAnimation(1, 2, 150, true);
+    ```
+
+=== "Lua"
+
+    ```lua
+    sprite:startAnimation(1, 2, 150, true)
+    ```
+
+---
+
+### pauseAnimation
+
+* `void pauseAnimation()`
+
+Freezes the animation at the current frame. Call [resumeAnimation](#resumeanimation) to continue.
+
+---
+
+### resumeAnimation
+
+* `void resumeAnimation()`
+
+Resumes a paused animation from where it was stopped.
+
+---
+
+### stopAnimation
+
+* `void stopAnimation()`
+
+Stops the animation and resets to the first frame of the sequence.

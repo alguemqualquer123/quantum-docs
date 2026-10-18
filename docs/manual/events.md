@@ -1,0 +1,437 @@
+---
+description: Engine, physics, UI, action, component, and monetization service events in Doriax, including C++ macros and Lua registration helpers.
+---
+
+# Events
+
+Doriax events use `FunctionSubscribe<Ret(Args...)>`, a multicast delegate that stores
+callbacks with string tags. Adding a callback with an existing tag **replaces** the
+previous one, which prevents duplicate subscriptions from the same source.
+
+Events work identically in C++ and Lua. C++ uses macros from `FunctionSubscribe.h`.
+Lua uses `RegisterEvent` and `RegisterEngineEvent` globals registered by `LuaBinding`.
+
+!!! tip "Let the Code Editor write it"
+    The [event menu](../editor/code-editor.md#add-events) of the Code Editor adds the
+    registration and an empty handler for any event on this page, in C++ or Lua.
+
+## How dispatch works
+
+```
+Platform input / frame tick
+        │
+        ▼
+Engine.systemTouchStart / systemUpdate
+        │
+        ▼
+FunctionSubscribe.call ──► C++ callbacks
+                       └─► Lua closures
+```
+
+1. The platform layer calls `Engine::systemDraw()` (or `systemUpdate()` when nothing can
+   be drawn), `systemTouchStart()`, etc.
+2. Engine forwards to static `FunctionSubscribe` members (`onUpdate.call()`, etc.).
+3. Subsystems and components fire their own events during simulation (physics contacts,
+   UI pointer events, action start/stop).
+4. Each subscriber runs in registration order unless disabled or removed.
+
+A callback can add or remove subscribers, or destroy the object that owns the event. A
+subscriber added during a call first runs on the next one, and one removed before its turn
+is skipped.
+
+## FunctionSubscribe API
+
+Defined in `engine/core/util/FunctionSubscribe.h`.
+
+| Method | Purpose |
+| --- | --- |
+| `add(tag, callback)` | Register a callback; replaces existing tag |
+| `add(tag, lua_State*)` | Register a Lua function with tag |
+| `remove(tag)` | Remove one callback by exact tag |
+| `removeByTagSubstring(substr)` | Remove all callbacks whose tag contains substring |
+| `clear()` | Remove all callbacks |
+| `call(args...)` / `operator()` | Invoke all enabled callbacks |
+| `setEnabled(bool)` | Enable or disable the entire event without removing subscribers |
+
+With `DORIAX_CRASH_GUARD` enabled, failing subscribers are removed automatically and
+optionally reported through a global crash handler. A C++ exception that escapes a
+subscriber counts as a failure too, and the report carries its message. Copies of an
+event share their subscribers, so a failing one stops running in all of them.
+
+## Engine events
+
+`Engine` exposes frame, lifecycle, input, and pointer events.
+
+| Event | Signature | Use |
+| --- | --- | --- |
+| `onInit` | `void()` | User init via `DORIAX_INIT` macro (access through `getOnInit()`) |
+| `onViewLoaded` | `void()` | View/surface ready |
+| `onViewChanged` | `void()` | Canvas/view changed; Lua name: `onCanvasChanged` |
+| `onViewDestroyed` | `void()` | View destroyed |
+| `onDraw` | `void()` | Every drawn frame, before the scenes are drawn |
+| `onUpdate` | `void()` | Variable-step gameplay update |
+| `onFixedUpdate` | `void()` | Fixed-step simulation update |
+| `onPostUpdate` | `void()` | Work after regular update |
+| `onPause` / `onResume` | `void()` | App/game pause and resume |
+| `onShutdown` | `void()` | Runtime shutdown |
+| `onSceneLoaded` | `void()` | A scene loaded by `SceneManager` finished loading, before its loading scene closes |
+| `onTouchStart/End/Move` | `void(int, float, float)` | Touch identifier, x, y |
+| `onTouchCancel` | `void(int, float, float)` | One touch canceled; identifier and last recorded canvas position |
+| `onMouseDown/Up` | `void(int, float, float, int)` | Button, x, y, modifiers |
+| `onMouseMove/Scroll` | `void(float, float, int)` | Position or scroll offsets plus modifiers |
+| `onMouseEnter/Leave` | `void()` | Pointer enters/leaves view |
+| `onKeyDown/Up` | `void(int, bool, int)` | Key, repeat flag, modifiers |
+| `onCharInput` | `void(wchar_t)` | Text input codepoint |
+| `onGamepadConnect/Disconnect` | `void(int)` | Gamepad id connected/disconnected |
+| `onGamepadButtonDown/Up` | `void(int, int)` | Gamepad id, button index |
+| `onGamepadAxisMove` | `void(int, int, float)` | Gamepad id, axis index, value `-1`…`1` |
+
+### Touch cancellation
+
+Use `onTouchEnd` for a finger lifting normally and `onTouchCancel` for an
+interrupted contact. Both identify the finger, but cancellation does not dispatch
+UI pointer-up or click events. In a per-pointer cancellation, the canceled touch is
+removed from `Input` before its callback runs; other fingers remain active. Release
+only the gameplay action associated with that identifier in your handler.
+
+A full cancellation removes all tracked touches before emitting `onTouchCancel`
+once for each of them. There is no separate global notification; an empty full
+cancellation emits no callbacks. Each callback receives the last recorded position
+in logical canvas coordinates. An already removed or unknown identifier produces
+no additional notification. Use `Input::numTouches()` (`Input.numTouches()` in Lua)
+to check whether any fingers remain; it is zero during every full-cancel callback.
+
+Subscribe to `onTouchCancel` as well as `onTouchEnd` when tracking held fingers.
+Cancellation notifications follow `pauseGameEvents`, and are not filtered by
+`setIgnoreEventsHandledByUI` or the current pointer position.
+
+In the Code Editor, choose **Add event > Input > Touch > onTouchCancel**
+(`Touch` is the section label). The generated handler has this signature:
+
+```cpp
+void onTouchCancel(int pointer, float x, float y);
+```
+
+Use `REGISTER_ENGINE_EVENT(onTouchCancel)` in the C++ constructor and
+`UNREGISTER_ENGINE_EVENT(onTouchCancel)` in the destructor. In Lua:
+
+```lua
+function Player:init()
+    RegisterEngineEvent(self, "onTouchCancel")
+end
+
+function Player:onTouchCancel(pointer, x, y)
+    -- Release the action associated with this pointer.
+end
+```
+
+### Input routing options
+
+Configure how events reach gameplay vs. UI:
+
+| Engine setting | Effect |
+| --- | --- |
+| `setIgnoreEventsHandledByUI(true)` | Gameplay handlers skip events already consumed by UI |
+| `setAllowEventsOutCanvas(false)` | Clip events to the logical canvas |
+| `pauseGameEvents(true)` | Pause game event delivery (editor pause, etc.) |
+| `setCallMouseInTouchEvent` / `setCallTouchInMouseEvent` | Mirror mouse/touch for cross-platform testing |
+
+## C++ registration macros
+
+All macros live in `FunctionSubscribe.h` and generate a unique tag:
+`typeid(ClassName)_objectAddress_methodName`.
+
+### Engine events
+
+```cpp
+REGISTER_ENGINE_EVENT(onUpdate);
+UNREGISTER_ENGINE_EVENT(onUpdate);
+```
+
+### Any FunctionSubscribe member
+
+```cpp
+PhysicsSystem* physics = scene->getSystem<PhysicsSystem>().get();
+REGISTER_EVENT(physics->beginContact2D, onBeginContact);
+UNREGISTER_EVENT(physics->beginContact2D, onBeginContact);
+```
+
+### Component events on the same entity
+
+```cpp
+REGISTER_COMPONENT_EVENT(UIComponent, onClick, onClick);
+REGISTER_UI_EVENT(onClick, onClick);           // shorthand for UIComponent
+REGISTER_BUTTON_EVENT(onPress, onPress);       // ButtonComponent
+REGISTER_SCROLLBAR_EVENT(onChange, onChange);  // ScrollbarComponent
+REGISTER_PANEL_EVENT(onMove, onMove);          // PanelComponent
+```
+
+Matching `UNREGISTER_*` macros remove subscriptions in destructors.
+
+### Example: full C++ script
+
+```cpp
+class DoorTrigger : public doriax::ScriptBase {
+public:
+    DoorTrigger(doriax::Scene* scene, doriax::Entity entity);
+    ~DoorTrigger();
+
+    void onUpdate();
+    void onClick(float x, float y);
+    void onBeginContact(doriax::Body2D bodyA, unsigned long shapeA, doriax::Body2D bodyB, unsigned long shapeB);
+
+private:
+    doriax::PhysicsSystem* physics = nullptr;
+};
+
+DoorTrigger::DoorTrigger(Scene* scene, Entity entity) : ScriptBase(scene, entity) {
+    physics = scene->getSystem<PhysicsSystem>().get();
+    REGISTER_ENGINE_EVENT(onUpdate);
+    REGISTER_UI_EVENT(onClick, onClick);
+    if (physics) {
+        REGISTER_EVENT(physics->beginContact2D, onBeginContact);
+    }
+}
+
+DoorTrigger::~DoorTrigger() {
+    UNREGISTER_ENGINE_EVENT(onUpdate);
+    UNREGISTER_UI_EVENT(onClick, onClick);
+    if (physics) {
+        UNREGISTER_EVENT(physics->beginContact2D, onBeginContact);
+    }
+}
+```
+
+## Lua event registration
+
+`LuaBinding::registerHelpersFunctions` exposes two globals:
+
+| Function | Arguments | Behavior |
+| --- | --- | --- |
+| `RegisterEvent(self, event, methodName [, tag])` | Script table, event object, method name | Subscribes `self:methodName(...)` to any exposed `FunctionSubscribe` |
+| `RegisterEngineEvent(self, methodName [, tag])` | Script table, engine event name | Looks up `Engine.<methodName>` and subscribes |
+
+If `tag` is omitted, Doriax builds:
+`ClassName_instancePointer_methodName`
+
+### Engine event (Lua)
+
+```lua
+function Player:init()
+    RegisterEngineEvent(self, "onUpdate")
+end
+
+function Player:onUpdate()
+    -- called every frame
+end
+```
+
+### Component event (Lua)
+
+Lua has no per-component macros. The pattern that replaces `REGISTER_UI_EVENT`,
+`REGISTER_BUTTON_EVENT`, and the other component macros is always the same: wrap the
+entity, get the component, and pass its event to `RegisterEvent`:
+
+```lua
+function Trigger:init()
+    -- Get the UIComponent through a wrapper for this entity
+    local image = Image(self.scene, self.entity)
+    local ui = image:getUIComponent()
+    RegisterEvent(self, ui.onClick, "onClick")
+end
+
+function Trigger:onClick(x, y)
+    print("clicked", x, y)
+end
+```
+
+| C++ macro | Lua equivalent |
+| --- | --- |
+| `REGISTER_ENGINE_EVENT(onUpdate)` | `RegisterEngineEvent(self, "onUpdate")` |
+| `REGISTER_UI_EVENT(onClick, onClick)` | `RegisterEvent(self, wrapper:getUIComponent().onClick, "onClick")` |
+| `REGISTER_BUTTON_EVENT(onPress, onPress)` | `RegisterEvent(self, button:getButtonComponent().onPress, "onPress")` |
+| `REGISTER_SCROLLBAR_EVENT(onChange, onChange)` | `RegisterEvent(self, scrollbar:getScrollbarComponent().onChange, "onChange")` |
+| `REGISTER_PANEL_EVENT(onMove, onMove)` | `RegisterEvent(self, panel:getPanelComponent().onMove, "onMove")` |
+| `REGISTER_EVENT(physics->beginContact2D, onBeginContact)` | `RegisterEvent(self, physics.beginContact2D, "onBeginContact")` |
+| `REGISTER_EVENT(AdMob::onAdLoaded, onAdLoaded)` | `RegisterEvent(self, AdMob.onAdLoaded, "onAdLoaded")` |
+
+```lua
+function MenuButton:init()
+    local button = Button(self.scene, self.entity)
+    local bc = button:getButtonComponent()
+    RegisterEvent(self, bc.onPress, "onPress")
+end
+
+function MenuButton:onPress()
+    print("button pressed")
+end
+```
+
+Cleanup is also automatic in Lua: when the scene unloads, or `destroyBundle` removes the
+script's entity, all subscriptions tagged with the script instance are removed — there is
+no `UNREGISTER_*` to call.
+
+### Physics event (Lua)
+
+```lua
+function Trap:init()
+    local physics = self.scene:getPhysicsSystem()
+    RegisterEvent(self, physics.beginContact2D, "onBeginContact")
+end
+
+function Trap:onBeginContact(bodyA, shapeA, bodyB, shapeB)
+    print("2D contact")
+end
+```
+
+The filters (`preSolve2D`, `shouldCollide2D`, `shouldCollide3D`) use what the method
+returns, so end them with an explicit `return`: a method that returns nothing rejects the
+contact. See [PhysicsSystem](../reference/classes/physicssystem.md#events).
+
+### Custom tag
+
+```lua
+RegisterEngineEvent(self, "onUpdate", "player1_update")
+```
+
+Use custom tags when you need to replace or manually remove a specific subscription.
+
+## Physics events
+
+`PhysicsSystem` exposes 2D (Box2D) and 3D (Jolt) collision events.
+
+### 2D events
+
+| Event | Signature | Meaning |
+| --- | --- | --- |
+| `beginContact2D` | `void(Body2D, unsigned long, Body2D, unsigned long)` | Contact begins |
+| `endContact2D` | `void(Body2D, unsigned long, Body2D, unsigned long)` | Contact ends |
+| `hitContact2D` | `void(Body2D, unsigned long, Body2D, unsigned long, Vector2, Vector2, float)` | Impact with hit data |
+| `beginSensorContact2D` | `void(Body2D, unsigned long, Body2D, unsigned long)` | Sensor overlap begins |
+| `endSensorContact2D` | `void(Body2D, unsigned long, Body2D, unsigned long)` | Sensor overlap ends |
+| `preSolve2D` | `bool(Body2D, unsigned long, Body2D, unsigned long, Manifold2D)` | Return `false` to disable contact before solve |
+| `shouldCollide2D` | `bool(Body2D, unsigned long, Body2D, unsigned long)` | Filter pairs before collision |
+
+`beginContact2D`, `endContact2D`, `hitContact2D` and `preSolve2D` fire only for pairs where
+one of the shapes has **Contact Events**, **Enable Hit Events** or **PreSolve Events** on,
+and each is off by default — see
+[Body2D events](../reference/classes/body2d.md#setshapeenablehitevents-setshapecontactevents-setshapepresolveevents-setshapesensorevents).
+
+### 3D events
+
+| Event | Meaning |
+| --- | --- |
+| `onBodyActivated3D` / `onBodyDeactivated3D` | Body activation state changed |
+| `onContactAdded3D` / `onContactPersisted3D` / `onContactRemoved3D` | 3D contact lifecycle |
+| `shouldCollide3D` | Filter whether two 3D bodies/shapes should collide |
+
+Unlike the 2D contact events, these run while Jolt is stepping, which limits what they may
+do to the world — see [What a 3D callback may do](physics.md#what-a-3d-callback-may-do).
+
+## UI component events
+
+`UIComponent` events (also available through `REGISTER_UI_EVENT`):
+
+| Event | Signature | When |
+| --- | --- | --- |
+| `onGetFocus` / `onLostFocus` | `void()` | Focus changes |
+| `onPointerEnter` / `onPointerLeave` | `void(float, float)` | Pointer enters/leaves widget bounds |
+| `onPointerMove` | `void(float, float)` | Pointer moves over widget |
+| `onPointerDown` / `onPointerUp` | `void(float, float)` | Pointer button down/up |
+| `onClick` / `onDoubleClick` | `void(float, float)` | Click gestures |
+| `onDragStart` / `onDrag` / `onDragEnd` | `void(float, float)` | Drag gestures |
+
+### Widget-specific events
+
+| Component | Events |
+| --- | --- |
+| `ButtonComponent` | `onPress`, `onRelease` |
+| `ScrollbarComponent` | `onChange` |
+| `PanelComponent` | `onMove`, `onResize` |
+| `TextEditComponent` | `onChange`, `onSubmit` |
+
+## Action and sound events
+
+| Component | Events |
+| --- | --- |
+| `ActionComponent` | `onStart`, `onStop`, `onPause`, `onStep` |
+| `SoundComponent` | `onStart`, `onStop`, `onPause` |
+
+Use these to chain gameplay reactions to tweens, timelines, or audio playback.
+
+## Service events
+
+The [monetization services](monetization.md) report through static events of their
+classes, which belong to no entity or scene:
+
+| Class | Events |
+| --- | --- |
+| [`AdMob`](../reference/classes/admob.md#events) | `onInitialized`, `onConsentUpdated`, `onAdLoaded`, `onAdFailedToLoad`, `onAdShown`, `onAdFailedToShow`, `onAdDismissed`, `onAdClicked`, `onAdImpression`, `onUserEarnedReward`, `onAdPaid`, `onAdInspectorClosed` |
+| [`InAppPurchase`](../reference/classes/inapppurchase.md#events) | `onInitialized`, `onDisconnected`, `onProductsQueried`, `onPurchaseUpdated`, `onPurchaseFailed`, `onPurchasesQueried`, `onPurchaseAcknowledged`, `onPurchaseConsumed` |
+| [`WebPortal`](../reference/classes/webportal.md#events) | `onInitialized`, `onAdStarted`, `onAdFinished`, `onAdError`, `onDataLoaded`, `onDataLoadFailed`, `onDataSaveFailed` |
+
+Pass the static member to `REGISTER_EVENT` in C++ or `RegisterEvent` in Lua:
+
+=== "C++"
+
+    ```cpp
+    REGISTER_EVENT(AdMob::onUserEarnedReward, onUserEarnedReward);
+    UNREGISTER_EVENT(AdMob::onUserEarnedReward, onUserEarnedReward);
+
+    void Shop::onUserEarnedReward(AdMobFormat format, std::string type, int amount) { }
+    ```
+
+=== "Lua"
+
+    ```lua
+    RegisterEvent(self, AdMob.onUserEarnedReward, "onUserEarnedReward")
+
+    function Shop:onUserEarnedReward(format, rewardType, amount) end
+    ```
+
+The platform answers on its own thread, and the engine calls these subscribers at the
+start of the next frame, on the game thread. A C++ handler must take the parameters by
+value, exactly as the event declares them (`std::string`, not `const std::string&`).
+Since the events outlive scenes, remove C++ subscriptions in the destructor; Lua script
+subscriptions go away with the script. See
+[How results arrive](monetization.md#how-results-arrive).
+
+## Easing as an event
+
+`Ease` extends `FunctionSubscribe<float(float)>`. Timed actions can use custom easing
+curves by subscribing to an `Ease` instance.
+
+## Cleanup
+
+| Context | Cleanup mechanism |
+| --- | --- |
+| C++ script destructor | Call matching `UNREGISTER_*` macros |
+| Lua script unload | `cleanupLuaScripts` removes tags containing instance pointer |
+| Bundle instance destroyed | `destroyBundle` stops its C++ and Lua scripts as a scene unload does |
+| Scene unload | `Scene::removeSubscriptionsByTag`, including the `PhysicsSystem` events |
+| Component callbacks | `Engine::clearComponentSubscriptions(scene)` |
+| Full reset | `Engine::clearAllSubscriptions()` |
+
+Always unregister in C++ destructors when the object can outlive a scene reload. A callback added
+straight to a component event (`button.onPress.add("pressed", ...)`) is not removed with the script
+that added it, so unregister it too — `Engine::clearComponentSubscriptions(scene)` drops every
+component callback of a scene at once.
+
+## Best practices
+
+- Register in a constructor or Lua `init()`. Never register in hot per-frame code.
+- Unregister in destructors (C++) or rely on Lua cleanup for script components.
+- Use `onFixedUpdate` for physics-sensitive simulation, not `onUpdate`.
+- Inside `onFixedUpdate`, move physics bodies with `Body2D`/`Body3D` `setPosition` or
+  velocities — an `Object::setPosition` on a body-carrying entity is discarded there.
+  See [Moving a body](physics.md#moving-a-body).
+- Enable `setIgnoreEventsHandledByUI(true)` when UI and gameplay share screen space.
+- Return `false` from `preSolve2D` or `shouldCollide*` filters to implement one-way
+  platforms, team filters, or trigger volumes.
+
+## Reference
+
+- [Engine](../reference/classes/engine.md) — engine events (`onUpdate`, input, lifecycle)
+- [PhysicsSystem](../reference/classes/physicssystem.md) — collision and contact events
+- [AdMob](../reference/classes/admob.md), [InAppPurchase](../reference/classes/inapppurchase.md), [WebPortal](../reference/classes/webportal.md) — service events
+- Script workflow: [Creating Scripts](creating-scripts.md)

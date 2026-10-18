@@ -1,0 +1,289 @@
+---
+description: Run Doriax exports, shader generation, and scene benchmarks from the command line.
+---
+
+# Command-Line Tools
+
+The `doriax-editor` executable doubles as a **command-line tool**. `export` and `shaders`
+are headless: they run and exit without opening a window, which is what build servers
+and CI want. `benchmark` opens a window, times a scene, prints JSON, and exits.
+
+```bash
+doriax-editor export    --project <path> --out <dir> [options]
+doriax-editor shaders   --out <dir> --shader <spec> [options]
+doriax-editor benchmark --project <path> [--scene <scene>] [options]
+```
+
+Running `doriax-editor` with **no arguments** launches the normal graphical editor.
+`--help`, `-h` or `help` print the top-level usage. Anything else is reported as an
+unrecognized argument and exits with code `2`, so a mistyped subcommand fails instead of
+opening a window.
+
+!!! note "Windows: two executables"
+    Windows builds ship both. `doriax-editor.exe` is a GUI application — it re-attaches
+    to the parent console so subcommand output still appears in your terminal, but `cmd`
+    and PowerShell do not wait for a GUI application, so the prompt returns before the
+    command finishes and its exit code never reaches you. `doriax-editor-cmd.exe` is the
+    same program linked as a console application: use it for scripting and CI. Both
+    accept the same subcommands, and both open the editor when given no arguments.
+
+On Linux and macOS there is a single binary. `export` and `shaders` run before the window
+backend starts, so they work on headless machines. `benchmark` still opens a window.
+
+!!! note "macOS: the binary is inside the app bundle"
+    The editor ships as `Doriax.app`, so the command-line entry point is
+    `Doriax.app/Contents/MacOS/Doriax`:
+
+    ```bash
+    /Applications/Doriax.app/Contents/MacOS/Doriax export \
+      --project ./MyGame --out ./build/MyGame
+    ```
+
+    Alias it or add that directory to your `PATH` if you use it often. The
+    [loose-binary zip](../getting-started/installation.md#download-a-prebuilt-editor) has
+    no bundle, so there the entry point is just `./doriax-editor`.
+
+## `export` — build a project to a target
+
+Serializes scenes, generates the C++ glue and bundle factories, compiles shaders, copies
+assets (FBX models as their glTF conversion) and the engine runtime, and writes a
+self-contained, buildable project directory — the same output as the
+[Export Window](export.md), but scriptable.
+
+```bash
+doriax-editor export --project ./MyGame --out ./build/MyGame --backend vulkan
+```
+
+### Options
+
+| Option | Description |
+| --- | --- |
+| `-p`, `--project <path>` | **Required.** Project directory or a `project.yaml` file. |
+| `-o`, `--out <path>` | **Required** (unless `--list-scenes`). Destination directory. Must be empty. |
+| `--assets <path>` | Asset directory, relative to the project or absolute. Defaults to the project's asset directory. |
+| `--lua <path>` | Lua directory, relative to the project or absolute. Defaults to the project's Lua directory. |
+| `--start-scene <id\|name>` | Override the start scene by numeric ID, scene name, or file stem. |
+| `--backend <list>` | Graphic backend(s) to compile shaders for. Repeatable, or a list (see below). Defaults to **all** supported backends. |
+| `--shader <spec>` | Shader(s) to compile, replacing what the scenes report. Repeatable (see [Shader specs](#shader-specs)). If omitted, shaders discovered while regenerating scenes are exported. |
+| `--list-scenes` | Print the project's scenes (`id`, `name`, `path`) and exit. |
+| `-h`, `--help` | Show usage for this subcommand. |
+
+Asset references are stored relative to the directories configured in the project, so
+`--assets` and `--lua` only make sense when they point at those same folders. Exporting a
+different root ships files the stored paths do not resolve against.
+
+### Project settings the command line uses
+
+The export reads `project.yaml`, so the [Project Settings](project-settings.md) that
+shape the output apply here exactly as they do in the editor — with two deliberate
+exceptions that the flags own instead:
+
+| Project setting | In a CLI export |
+| --- | --- |
+| Application name, identifier, version, build | Applied |
+| Per-platform settings (Web, Linux, Windows, macOS, iOS, Android) | Applied — the generated Xcode and Android Studio workspaces are configured from them |
+| Window settings, VSync, canvas | Applied |
+| 2D and 3D Physics | Applied — a disabled backend is left out of the CMake, Xcode and Android Studio builds |
+| Assets and Lua directories | Applied unless `--assets` / `--lua` override them |
+| Start scene | Applied unless `--start-scene` overrides it |
+| **Native Resource Pack** | Applied. There is no command-line override |
+| **Shader additions and exclusions** | **Ignored.** Use `--shader`, or let the export use the shaders discovered in the scenes |
+| **Graphic backends saved by the Export Window** | **Ignored.** `--backend` decides, and defaults to every supported backend |
+
+The two ignored ones keep a scripted build reproducible from its command line: a CI job
+compiles what its flags say, not what someone last ticked in the Export Window. Pass the
+same backends you selected there when you want the two to match.
+
+When Native Resource Pack is enabled, the source output contains
+`project/assets/resources.pak` in place of loose asset and Lua contents; see
+[Native resource pack](export.md#native-resource-pack) before using it in an automated
+Android export.
+
+### List a project's scenes
+
+Useful for discovering a start-scene ID before exporting:
+
+```bash
+doriax-editor export --project ./MyGame --list-scenes
+# 1   MainMenu   scenes/main_menu.scene
+# 2   Level01    scenes/level_01.scene
+```
+
+## `benchmark` — measure scene FPS
+
+Opens the editor, loads a project, and times the **scene camera** with VSync forced off
+and no frame cap, whether or not its window has focus.
+Unlike [`export`](#export-build-a-project-to-a-target) and [`shaders`](#shaders-generate-shader-files-standalone),
+this is **not headless**: it needs a window and a GPU, waits until meshes, foliage,
+detail levels, and shaders have finished loading (90 seconds, then it measures anyway), warms up, then
+records FPS and draw counters. The JSON result is printed to stdout; `--out` writes the
+same text to a file. The process then exits.
+
+Use it to compare scene settings — mesh LOD, depth prepass, foliage shadows — on the
+same machine without clicking through Play.
+
+```bash
+doriax-editor benchmark --project ./MyGame --scene Level01 --out ./bench.json
+```
+
+On Windows call `doriax-editor-cmd` so the shell waits for the exit code. On macOS the
+entry point is `Doriax.app/Contents/MacOS/Doriax`, same as the other subcommands.
+
+### Options
+
+| Option | Description |
+| --- | --- |
+| `-p`, `--project <path>` | **Required.** Project directory or a `project.yaml` file. |
+| `-s`, `--scene <scene>` | Scene name, scene file name, or path. Defaults to the project's start scene. |
+| `--frames <n>` | Measured frames after warmup. Default `180`. |
+| `--warmup <n>` | Warmup frames after resources finish loading. Default `90`. |
+| `--mesh-lod <on\|off>` | Override the scene's [mesh LOD](../manual/rendering-pipeline.md#mesh-detail-lod) setting for this run. |
+| `--depth-prepass <on\|off>` | Override the scene's [depth prepass](../manual/rendering-pipeline.md#depth-prepass) setting for this run. |
+| `--name <label>` | Label written into the JSON `name` field. Defaults to the scene name. |
+| `--out <path>` | Write the JSON to this file as well as stdout. |
+| `-h`, `--help` | Show usage for this subcommand. |
+
+The capture uses the scene's game camera, hides the editor grid, origin, gizmos, and
+selection outline, and does not enter play mode — scripts that start in `onStart` are
+not run. The viewport is the scene view inside the editor's default window; the JSON
+reports its size.
+
+### Result JSON
+
+```json
+{
+  "name": "Level01",
+  "scene": "Level01",
+  "meshLod": true,
+  "depthPrepass": false,
+  "viewport": [1280, 720],
+  "frames": 180,
+  "warmupFrames": 90,
+  "elapsedSeconds": 3.12,
+  "wallFps": 57.69,
+  "avgFps": 58.20,
+  "minFps": 54.10,
+  "maxFps": 60.00,
+  "avgMs": 17.33,
+  "avgDrawCalls": 142.0,
+  "avgInstances": 8100.0,
+  "avgTriangles": 1850000.0
+}
+```
+
+`wallFps` is measured frames divided by wall time; `avgFps` averages
+`Engine::getFramerate()` per frame. Draw, instance, and triangle averages come from
+[`Engine::getFrameStats()`](../reference/classes/engine.md#framestats).
+
+## `shaders` — generate shader files standalone
+
+Compiles shader variants directly to an output directory, without exporting a whole
+project. Use it to pre-bake a shader cache or produce shader data for custom tooling.
+
+```bash
+doriax-editor shaders --out ./shaders --shader mesh:Uv1,Nor --backend opengles
+```
+
+### Options
+
+| Option | Description |
+| --- | --- |
+| `-o`, `--out <path>` | **Required.** Destination directory for the generated shader files. |
+| `--format <format>` | Output format: `binary` (default, also `sdat`), `header`, or `json`. |
+| `--backend <list>` | Graphic backend(s) to compile for. Repeatable or a list. Defaults to **all** supported backends. |
+| `--shader <spec>` | **Required.** Shader(s) to generate. Repeatable (see [Shader specs](#shader-specs)). |
+| `-h`, `--help` | Show usage for this subcommand. |
+
+## Graphic backends
+
+A shader is compiled for a **graphics API**, not for an operating system — a Windows build
+needs GLSL, HLSL, or SPIR-V depending only on how it was configured. Both subcommands
+accept these backend names (case-insensitive):
+
+| Value | Alias | Shader format |
+| --- | --- | --- |
+| `opengl` | `glcore` | `glsl410` |
+| `opengles` | `gles3` | `glsl300es` |
+| `d3d11` | | `hlsl5` |
+| `metal-macos` | `metal` | `msl21macos` |
+| `metal-ios` | | `msl21ios` |
+| `vulkan` | | `spirv10` |
+| `all` | | selects every supported backend |
+
+One file is written per shader and backend, named `<shader>_<format>`. At startup the
+runtime loads the format matching the backend it was built with, so an export must include
+every backend the final binary may use — see
+[Choosing backends](export.md#choosing-backends).
+
+Pass `--backend` multiple times, or give a single list separated by `,`, `+`, `|`, or
+`;`:
+
+```bash
+doriax-editor export -p ./MyGame -o ./build --backend vulkan --backend opengl
+doriax-editor export -p ./MyGame -o ./build --backend "vulkan,opengl,opengles"
+```
+
+## Shader specs
+
+A `--shader` value is a **shader type** with optional **properties**, separated by a
+colon:
+
+```
+<type>[:<properties>]
+```
+
+- **Type** (case-insensitive): `points`, `lines`, `mesh`, `sky` (or `skybox`), `depth`,
+  `ui`, `postprocess` (or `post`), `water`, `underwater`.
+- **Properties** are either:
+    - a comma-separated list of property names, e.g. `mesh:Uv1,Nor`, or
+    - a numeric bitmask, e.g. `mesh:0x3` or `mesh:12`.
+
+Property names come from the engine's shader system for that shader type; an unknown
+property or type is reported as an error. Omit the properties to generate the base
+variant of a type (e.g. `--shader depth`).
+
+```bash
+# Base mesh shader plus a UV+normal variant, for WebGL 2 and Direct3D 11
+doriax-editor shaders --out ./shaders \
+  --shader mesh \
+  --shader mesh:Uv1,Nor \
+  --backend opengles --backend d3d11
+```
+
+## Exit codes
+
+| Code | Meaning |
+| --- | --- |
+| `0` | Success. |
+| `1` | Runtime failure (project failed to load, export/shader build error). The error is printed to `stderr`. |
+| `2` | Invalid or unrecognized arguments. The error is printed to `stderr`, usage to `stdout`. |
+
+## Use in CI/CD
+
+Because the commands are headless and return meaningful exit codes, they drop straight
+into a pipeline. On Windows runners call `doriax-editor-cmd`: the default PowerShell
+shell does not wait for the GUI binary, so the step can pass even when the export
+failed. Example GitHub Actions step:
+
+```yaml
+- name: Export game (Vulkan + WebGL 2)
+  run: |
+    doriax-editor export \
+      --project ./MyGame \
+      --out ./build/MyGame \
+      --backend "vulkan,opengles"
+```
+
+The exported directory still needs its native toolchain to produce final binaries — see
+[Platform toolchains](export.md#platform-toolchains) and
+[Building from Source](../building/overview.md).
+
+A clean checkout has no FBX conversions yet; the export makes them. It fails when a
+committed scene was saved with an older version of an FBX it uses — see
+[Export Window — FBX models](export.md#fbx-models).
+
+## See also
+
+- [Export Window](export.md) — the graphical equivalent and full export pipeline.
+- [Rendering Pipeline](../manual/rendering-pipeline.md#performance-guidelines) — mesh LOD, instance culling, and the depth prepass.
+- [Build Options](../reference/build-options.md) — CMake flags for the generated project.

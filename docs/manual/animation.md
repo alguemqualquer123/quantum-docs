@@ -1,0 +1,509 @@
+---
+description: Runtime animation, actions, sprite animation, keyframe tracks, skeletal animation, and morph targets in Doriax.
+---
+
+# Animation
+
+Doriax supports two complementary animation approaches: **editor-authored keyframe
+animation** built in the Animation Timeline, and **runtime action playback** written
+in code. Both are updated each frame by `ActionSystem`. You can mix them freely —
+author the idle loop in the timeline and drive attacks and UI effects with runtime
+actions.
+
+## Animation families
+
+| Family | Best for | System |
+| --- | --- | --- |
+| **Actions** | Scripted one-shot or looping motion — position, rotation, scale, color, alpha | `ActionSystem`, `TimedAction` subclasses |
+| **Sprite animation** | 2D frame cycling through an atlas | `SpriteAnimation` |
+| **Skeletal / keyframe** | Imported GLTF character and node clips | `Animation`, `Model` |
+| **Keyframe tracks** | Authored transform and property curves on the timeline | `TranslateTracks`, `RotateTracks`, `ScaleTracks`, `MorphTracks` |
+| **Morph targets** | Blend shape deformation for facial animation | `MorphTracks` |
+| **Particles** | Time-based particle playback | `Particles` |
+
+## Runtime actions
+
+Actions target an entity and update one property over time. They are lightweight,
+code-friendly, and do not require the timeline editor.
+
+### Available action types
+
+| Class | Property controlled |
+| --- | --- |
+| [`PositionAction`](../reference/classes/positionaction.md) | Entity position |
+| [`RotationAction`](../reference/classes/rotationaction.md) | Entity rotation |
+| [`ScaleAction`](../reference/classes/scaleaction.md) | Entity scale |
+| [`ColorAction`](../reference/classes/coloraction.md) | Material or UI element color |
+| [`AlphaAction`](../reference/classes/alphaaction.md) | Opacity / alpha |
+| [`TimedAction`](../reference/classes/timedaction.md) | Callback after a duration or on each loop |
+| [`SpriteAnimation`](../reference/classes/spriteanimation.md) | Sprite atlas frame sequence |
+| [`Animation`](../reference/classes/animation.md) | Skeletal or keyframe clip |
+| [`Particles`](../reference/classes/particles.md) | Particle system playback |
+
+### Basic action example
+
+`setAction` takes the start value, end value, duration in seconds, and an optional loop
+flag. The easing curve is set separately with `setFunctionType`:
+
+=== "Lua"
+
+    ```lua
+    -- Move an entity from (0, 0, 0) to (100, 200, 0) over 1.5 seconds
+    move = PositionAction(scene)
+    move:setTarget(entity)
+    move:setAction(Vector3(0, 0, 0), Vector3(100, 200, 0), 1.5, false)
+    move:setFunctionType(EaseType.QUAD_OUT)
+    move:start()
+    ```
+
+=== "C++"
+
+    ```cpp
+    PositionAction move(&scene);
+    move.setTarget(entity);
+    move.setAction(Vector3(0, 0, 0), Vector3(100, 200, 0), 1.5f, false);
+    move.setFunctionType(EaseType::QUAD_OUT);
+    move.start();
+    ```
+
+### Chaining actions with events
+
+Every action's `ActionComponent` exposes `onStart`, `onPause`, `onStop`, and `onStep`
+events. Subscribe to `onStop` to start the next action when one finishes:
+
+=== "Lua"
+
+    ```lua
+    move:getActionComponent().onStop = function()
+        -- start the next action when this one ends
+        nextAction:start()
+    end
+    move:start()
+    ```
+
+=== "C++"
+
+    ```cpp
+    move.getComponent<ActionComponent>().onStop = []() {
+        nextAction.start();
+    };
+    move.start();
+    ```
+
+### Looping, ping-pong and spins
+
+`loop` repeats a timed action, and `pingPong` plays it to the end and back, in twice its
+duration, so a floating bob is a single `PositionAction` with both set. A
+`RotationAction` interpolates between two rotations, which never turns more than half a
+turn; for a full spin use `setSpinAction`, which turns the start rotation by an angle of
+any size around an axis (**Spin**, **Axis** and **Angle** in the editor):
+
+=== "Lua"
+
+    ```lua
+    bob = PositionAction(scene)
+    bob:setTarget(coin)
+    bob:setAction(Vector3(0, 1, 0), Vector3(0, 1.4, 0), 0.8, true)
+    bob:setFunctionType(EaseType.SINE_IN_OUT)
+    bob.pingPong = true
+    bob:start()
+
+    spin = RotationAction(scene)
+    spin:setTarget(coin)
+    spin:setSpinAction(Quaternion(), Vector3(0, 1, 0), 360, 2.0, true)
+    spin:start()
+    ```
+
+=== "C++"
+
+    ```cpp
+    PositionAction bob(&scene);
+    bob.setTarget(&coin);
+    bob.setAction(Vector3(0, 1, 0), Vector3(0, 1.4f, 0), 0.8f, true);
+    bob.setFunctionType(EaseType::SINE_IN_OUT);
+    bob.setPingPong(true);
+    bob.start();
+
+    RotationAction spin(&scene);
+    spin.setTarget(&coin);
+    spin.setSpinAction(Quaternion(), Vector3(0, 1, 0), 360.0f, 2.0f, true);
+    spin.start();
+    ```
+
+### Starting, restarting and phase
+
+`start()` resumes a paused action and does nothing to a running one, so a `stop()`
+followed by `start()` in the same frame leaves an action running where it was. To play
+it again from the beginning, call `restart()`.
+
+Copies of the same animation, such as the coins of a level, move in sync. Set an
+action's `startOffset` to start it some seconds in, or `randomStart` to start each copy
+at a random time of its duration (**Start offset** and **Random start** in the
+Properties window). Both apply when an action starts from stopped, not when it resumes
+from a pause, and an action inside an Animation keeps its own offset, so a random start
+on one track shifts only that track.
+
+## Easing curves
+
+All `TimedAction` subclasses accept an `EaseType` (via `setFunctionType`) that shapes
+the interpolation curve. Names follow the `<CURVE>_<IN/OUT/IN_OUT>` pattern. Common
+choices:
+
+| EaseType | Best for |
+| --- | --- |
+| `LINEAR` | Constant-speed motion, debug |
+| `STEP` | Held poses — stop-motion and stepped, pose-to-pose motion |
+| `QUAD_IN_OUT` | UI transitions and camera moves |
+| `BOUNCE_OUT` | Playful jumps and pop-in effects |
+| `BACK_IN` | Anticipation before a jump |
+| `ELASTIC_OUT` | Springing UI elements |
+| `CUBIC_OUT` | Smooth deceleration into a stop |
+
+The full set covers `QUAD`, `CUBIC`, `QUART`, `QUINT`, `SINE`, `EXPO`, `CIRC`,
+`ELASTIC`, `BACK`, and `BOUNCE`, each with `_IN`, `_OUT`, and `_IN_OUT` variants, plus
+`STEP` (hold the start value and jump at the end) and `CUSTOM` for supplying your own
+curve function.
+
+## Sprite animation
+
+`SpriteAnimation` cycles through a sequence of atlas frames by **frame index**. Frames
+must be registered on the sprite first — with `addFrame` in code or via the
+[Sprite Slicer](../editor/sprite-slicer.md). The interval is in **milliseconds**, and
+looping is the last argument of `setAnimation`.
+
+=== "Lua"
+
+    ```lua
+    sprite = Sprite(scene)
+    sprite:setTexture("characters/hero.png")
+    -- frames 0..7 previously registered with addFrame or the Sprite Slicer
+
+    anim = SpriteAnimation(scene)
+    anim:setTarget(sprite)
+    anim:setAnimation(0, 7, 80, true)  -- startFrame, endFrame, interval (ms), loop
+    anim:start()
+    ```
+
+=== "C++"
+
+    ```cpp
+    Sprite hero(&scene);
+    hero.setTexture("characters/hero.png");
+
+    SpriteAnimation anim(&scene);
+    anim.setTarget(&hero);
+    anim.setAnimation(0, 7, 80, true);
+    anim.start();
+    ```
+
+For per-frame timing, pass explicit frame and time lists:
+`setAnimation({0, 1, 2, 5}, {100, 80, 80, 200}, true)`.
+
+As a shortcut, `Sprite` can drive its own animation without a separate action object:
+
+```lua
+sprite:startAnimation(0, 7, 80, true)
+-- ...
+sprite:stopAnimation()
+```
+
+!!! note "Lookup uses the sprite animation entity name"
+    `SpriteAnimationComponent` has no separate name. Rename the action entity in the
+    Structure panel (or call `setName`) and find it with `Scene:findEntity` when you need
+    to look it up by name.
+
+## Skeletal animation from GLTF
+
+A `Model` exposes the animation clips embedded in its GLTF file, addressable by name or
+index. How you obtain the `Model` depends on whether the model is **already in your
+scene** or is being **created at runtime** — these are two different things, and mixing
+them up is the most common animation mistake.
+
+GLTF files that contain clips, or more than one skin, import the **full node tree** under
+the Model entity. Animation channels target those node entities — joints *and*
+transform-only helpers — so node animation authored in the DCC plays back, not only
+skeletal deformation. Models may use several skins; each skinned mesh keeps its own joint
+list and inverse-bind matrices. See
+[3D Graphics — GLTF node hierarchy](3d-graphics.md#gltf-node-hierarchy).
+
+### Playing a clip on a model already in the scene
+
+This is the usual case: you imported the GLTF in the editor (so it appears as an entity
+in the Structure panel), and you want a script on that entity — or on a parent — to start
+its idle clip. **Do not reload the file.** The mesh, nodes, and clips are already
+loaded; the script only needs to *reference* the existing entity and start the clip.
+
+The cleanest way to reach another entity is an [entity reference property](script-properties.md):
+expose a `Model` property, then drag the model entity onto it in the Properties window.
+
+=== "Lua"
+
+    ```lua
+    -- player.lua — attached to a parent entity that has a child model
+    local player = {}
+
+    -- 'model' is filled in by dragging the child model onto the property
+    player.properties = {
+        { name = "model", type = "Model" },
+    }
+
+    function player:init()
+        if self.model then
+            local idle = self.model:findAnimation("idle")
+            idle.loop = true
+            idle:start()
+        end
+    end
+
+    return player
+    ```
+
+Don't have a property wired up? Look the child up by name instead. `Scene:findEntity`
+returns the first entity with that name (use the two-argument form to scope the search to
+children of a given parent), and the **two-argument** `Model(scene, entity)` constructor
+*wraps that existing entity* without creating or destroying anything:
+
+=== "Lua"
+
+    ```lua
+    function player:init()
+        -- find the child named "model" under this script's entity
+        local modelEntity = self.scene:findEntity("model", self.entity)
+        if modelEntity ~= NULL_ENTITY then
+            local model = Model(self.scene, modelEntity)
+            model:getAnimation(0):start()   -- first clip, by index
+        end
+    end
+    ```
+
+### Creating a model at runtime
+
+When you genuinely want to spawn a brand-new model from code (an enemy, a pickup), use
+the **single-argument** constructor and then `loadGLTF`. This *creates a new entity*.
+
+=== "Lua"
+
+    ```lua
+    -- store the handle so it lives as long as you need the entity
+    self.enemy = Model(self.scene)
+    self.enemy:loadGLTF("characters/hero.gltf")
+
+    local walk = self.enemy:findAnimation("Walk")
+    walk.loop = true
+    walk:start()
+    ```
+
+=== "C++"
+
+    ```cpp
+    Model hero(&scene);
+    hero.loadGLTF("characters/hero.gltf");
+
+    Animation walk = hero.findAnimation("Walk");
+    walk.setLoop(true);
+    walk.start();
+    ```
+
+!!! warning "`Model(scene)` creates a new entity — it does not find an existing one"
+    `Model(self.scene)` (one argument) **always creates a new entity** and that handle
+    *owns* it. `Model(self.scene, entity)` (two arguments) **wraps an existing entity**
+    and does not own it. So:
+
+    - Never put `Model(...)` + `loadGLTF` inside `onUpdate` — that reloads the file and
+      churns entities every frame. Load once in `init`.
+    - To touch a model placed in the editor, reference it (property or `findEntity`) and
+      use the two-argument constructor. Reloading the GLTF in code is **not** required.
+    - When you do create a model at runtime, keep the handle in `self` (or another
+      long-lived reference). A one-argument handle stored only in a local can have its
+      entity destroyed when the local is garbage-collected.
+
+GLTF can carry multiple named clips in a single file. You can play several clips
+simultaneously for layered animation blending.
+
+!!! note "Clip lookup uses the animation entity name"
+    GLTF import initially names each animation entity from the authored clip name (often
+    Mixamo-style, e.g. `mixamo.com`). `findAnimation` searches that entity name—the same
+    name shown in the Structure panel and animation selector. If you rename the entity,
+    use the new name in `findAnimation` and `playAnimation`. You can also address the clip
+    by index with `getAnimation(0)`. Requesting a name or index that doesn't exist raises
+    an error, so guard lookups you're unsure of.
+
+### Interpolation modes
+
+Imported clips honor the GLTF sampler's `interpolation` setting, following the glTF 2.0
+specification:
+
+| GLTF mode | Playback in Doriax |
+| --- | --- |
+| `LINEAR` (default) | Linear interpolation between keys; rotations use spherical linear interpolation (slerp) |
+| `STEP` | Each key's value holds until the next key — imported as per-segment `STEP` easing |
+| `CUBICSPLINE` | Cubic Hermite interpolation from the clip's per-key in/out tangents; interpolated rotations are normalized |
+
+`CUBICSPLINE` tangents are stored on the track components (`inTangents` / `outTangents`)
+and survive scene saves and code export. Editing an imported cubic track keeps the
+tangents aligned with its keys: a key added in the timeline or the Properties window
+gets zero tangents — its two neighboring segments flatten toward it while the rest of
+the clip keeps its imported shape. If a track's tangents ever fall out of sync with its
+values, playback degrades safely to linear.
+
+### Smooth transitions (crossfading)
+
+Starting a clip with `start()` snaps the skeleton straight into that clip's pose. For
+character motion you almost always want a **crossfade** instead — when the player stops
+running, the skeleton should ease from the run cycle into idle over a fraction of a
+second rather than pop. Doriax blends this for you: while a transition is in progress
+both clips play and each bone's pose is a weight-normalized average of them.
+
+The simplest entry point is [`Model:playAnimation`](../reference/classes/model.md#playanimation-stopanimations),
+which fades out whatever is currently playing on the model and fades the requested clip
+in:
+
+=== "Lua"
+
+    ```lua
+    -- Hold looping clips; playAnimation manages the transition
+    self.model:findAnimation("Idle").loop = true
+    self.model:findAnimation("Run").loop = true
+    self.model:playAnimation("Idle")        -- uses each clip's Fade time
+
+    -- on input, later:
+    self.model:playAnimation("Run", 0.2)    -- crossfade over 0.2s
+    self.model:playAnimation("Die", 0.1)    -- quick blend into a one-shot
+    ```
+
+=== "C++"
+
+    ```cpp
+    model.findAnimation("Idle").setLoop(true);
+    model.findAnimation("Run").setLoop(true);
+    model.playAnimation("Idle");
+
+    model.playAnimation("Run", 0.2f);
+    model.playAnimation("Die", 0.1f);
+    ```
+
+When the fade time is omitted, each clip's authored **Fade time**
+([`defaultFadeTime`](../reference/classes/animation.md#defaultfadetime), set in the
+Properties window or in code) is used. Tune it per clip: ~0.2–0.3s for locomotion,
+shorter (~0.1s) for a snappy hit or death reaction. `playAnimation` works on clips of a
+single model; to crossfade arbitrary clips by hand, ramp their weights directly with
+[`Animation:fadeIn`](../reference/classes/animation.md#fadein-fadeout) and `fadeOut`, or
+set [`blendWeight`](../reference/classes/animation.md#blendweight) yourself for layered
+blending.
+
+You can preview a transition without running the game — see
+[Blending clips in the editor](../editor/animation.md#skeletal-animation).
+
+## Keyframe tracks (timeline-authored)
+
+In the editor, the Animation Timeline writes keyframe data into component tracks. These
+are stored in the scene file and played back at runtime through the action system. The
+track types available are:
+
+| Track class | Property animated |
+| --- | --- |
+| `TranslateTracks` | Entity position over time |
+| `RotateTracks` | Entity rotation over time |
+| `ScaleTracks` | Entity scale over time |
+| `MorphTracks` | Morph target weights for shape blending |
+
+Create track entities from the **Structure panel** (**Create entity → Animation →
+Translate/Rotate/Scale/Morph Tracks**) or from the Animation Timeline's **+ Add
+Action** menu. A track entity holds a shared key-time list plus one value per key,
+and animates the entity set as its action target. In the Animation Timeline,
+right-click empty track space to create and key transform tracks on demand, then use
+the camera **Snapshot** button to store the complete pose across existing tracks as one
+undo step. See [Keying transforms](../editor/animation.md#keying-transforms).
+`TranslateTracks` paths can also be edited visually in the scene view — see
+[Editing movement paths](../editor/scene-view.md#editing-movement-paths-translatetracks).
+
+An action or animation with **Play on start** checked (ActionComponent) starts with
+the scene, so idle motion such as a spinning pickup needs no script. **Loop** on an
+AnimationComponent repeats the animation, and **Loop** on a track's KeyframeTracks
+component repeats the track when it plays on its own, without an animation.
+
+### Relative tracks
+
+Track values are the target's local position, rotation and scale. With **Relative**
+checked on the KeyframeTracks component (`setRelative(true)`), they are offsets from the
+pose the target has when the track starts instead: the position adds to it, the rotation
+is applied after it and the scale multiplies it. The same track then works wherever the
+target is placed, so one bob or wobble serves every copy of a bundle. A relative track
+that does not end where it began moves the target a bit further each time it is started
+again; a looping animation repeats it from the same starting pose.
+
+A UI element with anchors is placed by its layout every frame, so an absolute track
+cannot move it; a relative track moves it through its layout offset, and the anchors keep
+working. Keying a relative track in the Animation Timeline stores the target's offset
+from where it was when the preview started.
+
+### Per-segment easing
+
+Each segment between two consecutive keys can have its own easing curve: segment `i`
+shapes the interpolation from key `i` to key `i+1`, using any
+[`EaseType`](../reference/classes/timedaction.md). Unset segments are linear. `STEP`
+holds key `i`'s value for the whole segment — useful for stepped, pose-to-pose motion.
+GLTF-imported clips arrive with easing matching their sampler: `LINEAR` clips leave the
+list empty, `STEP` clips fill every segment with `STEP`, and `CUBICSPLINE` clips carry
+per-key tangents instead (see [Interpolation modes](#interpolation-modes)). In the
+**Properties** window, **KeyframeTracks → Easing** is a collapsible, sparse list:
+**Add Ease** appends the next explicit segment entry, up to the number of key pairs,
+and the trash button removes an entry and shifts later entries to preceding segments.
+Missing trailing entries remain linear. You can also edit easing in code:
+
+=== "Lua"
+
+    ```lua
+    local path = TranslateTracks(scene)
+    path:setTarget(box.entity)
+    path:setTimes({0.0, 1.0, 2.5, 3.0})
+    path:setValues({Vector3(0,0,0), Vector3(5,0,0), Vector3(5,0,5), Vector3(0,0,0)})
+    path:setEasing(0, EaseType.QUAD_IN_OUT) -- key 0 -> key 1
+    path:setEasing(2, EaseType.BOUNCE_OUT)  -- key 2 -> key 3
+    path:start()
+    ```
+
+=== "C++"
+
+    ```cpp
+    TranslateTracks path(&scene);
+    path.setTarget(box.getEntity());
+    path.setTimes({0.0f, 1.0f, 2.5f, 3.0f});
+    path.setValues({Vector3(0,0,0), Vector3(5,0,0), Vector3(5,0,5), Vector3(0,0,0)});
+    path.setEasing(0, EaseType::QUAD_IN_OUT); // key 0 -> key 1
+    path.setEasing(2, EaseType::BOUNCE_OUT);  // key 2 -> key 3
+    path.start();
+    ```
+
+## Morph targets
+
+Morph targets (blend shapes) are authored in a 3D tool such as Blender and exported
+through GLTF. Use `MorphTracks` on a Model entity to blend between shape keys at
+runtime.
+
+```cpp
+model.setMorphWeight("smile", 0.8f);
+model.setMorphWeight("blink", 1.0f);
+```
+
+## Best practices
+
+- Name animation clips consistently (`idle`, `walk`, `run`, `jump`, `attack`).
+- Keep looping clips separate from one-shot clips.
+- Use runtime actions for UI and gameplay feedback; use the timeline for complex
+  authored motion.
+- Leave dynamic bodies to the simulation. A kinematic body (a moving platform) can be
+  animated: it follows the animation with a velocity, so it carries and pushes dynamic
+  bodies (see [Moving a body](physics.md#moving-a-body)).
+- Test frame intervals in play mode; what looks good in the editor may feel wrong at
+  the actual game frame rate.
+
+## See also
+
+- [Action](../reference/classes/action.md) — base action class
+- [TimedAction](../reference/classes/timedaction.md) — duration-based base
+- [SpriteAnimation](../reference/classes/spriteanimation.md)
+- [SpriteAnimationComponent](../reference/classes/spriteanimationcomponent.md)
+- [Animation](../reference/classes/animation.md)
+- [Particles](../reference/classes/particles.md)
+- [Animation Timeline](../editor/animation.md) — editor authoring

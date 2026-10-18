@@ -1,0 +1,552 @@
+---
+description: Body3D API reference — 3D physics body powered by Jolt Physics, shapes, forces, constraints, buoyancy, and contacts.
+---
+
+# Body3D
+
+## Description
+
+`Body3D` is the 3D rigid-body handle built on top of the **Jolt Physics** library. Obtain one by calling `object.getBody3D()`. Create one or more shapes, set the body type and material properties, then call `load()` to register with the physics world. The body transform is synchronized with the parent [Object](object.md) each physics step.
+
+**Inherits:** [EntityHandle](entityhandle.md)
+
+=== "C++"
+
+    ```cpp
+    Mesh cube(&scene);
+    cube.setTexture("textures/box.png");
+
+    Body3D body = cube.getBody3D();
+    body.createBoxShape(1.0f, 1.0f, 1.0f);
+    body.setType(BodyType::DYNAMIC);
+    body.load();
+    ```
+
+=== "Lua"
+
+    ```lua
+    local cube = Mesh(scene)
+    cube:setTexture("textures/box.png")
+
+    local body = cube:getBody3D()
+    body:createBoxShape(1, 1, 1)
+    body.type = BodyType.DYNAMIC
+    body:load()
+    ```
+
+### Properties
+
+| Type | Name | Default | Languages |
+| --- | --- | --- | --- |
+| [BodyType](#bodytype) | [type](#type) | `STATIC` | C++ \| Lua |
+| [Body3DMotionQuality](#body3dmotionquality) | [motionQuality](#motionquality) | `DISCRETE` | C++ \| Lua |
+| Vector3 | [position](#position-rotation) | — | C++ \| Lua |
+| Quaternion | [rotation](#position-rotation) | — | C++ \| Lua |
+| float | [mass](#mass) | — | C++ \| Lua |
+| float | [gravityFactor](#gravityfactor) | `1.0` | C++ \| Lua |
+| float | [buoyancy](#buoyancy) | `0.0` | C++ \| Lua |
+| float | [waterDrag](#buoyancy) | `0.5` | C++ \| Lua |
+| float | [waterAngularDrag](#buoyancy) | `0.01` | C++ \| Lua |
+| float | [friction](#friction-restitution) | `0.2` | C++ \| Lua |
+| float | [restitution](#friction-restitution) | `0.0` | C++ \| Lua |
+| Vector3 | [linearVelocity](#linearvelocity-angularvelocity) | `(0,0,0)` | C++ \| Lua |
+| Vector3 | [angularVelocity](#linearvelocity-angularvelocity) | `(0,0,0)` | C++ \| Lua |
+| bool | allowSleeping | `true` | C++ \| Lua |
+| bool | [sensor](#sensor) | `false` | C++ \| Lua |
+| bool | [collideKinematicVsNonDynamic](#collidekinematicvsnondynamic) | `false` | C++ \| Lua |
+| uint16_t | [categoryBitsFilter](#categorybitsfilter-maskbitsfilter) | `0xFFFF` | C++ \| Lua |
+| uint16_t | [maskBitsFilter](#categorybitsfilter-maskbitsfilter) | `0xFFFF` | C++ \| Lua |
+| uint32_t | [collisionGroupID](#collisiongroupid) | `0` | C++ \| Lua |
+
+### Methods
+
+| Returns | Name | Languages |
+| --- | --- | --- |
+| void | [load](#load) | C++ \| Lua |
+| int | [createBoxShape](#createboxshape) | C++ \| Lua |
+| int | [createSphereShape](#createsphereshape) | C++ \| Lua |
+| int | [createCapsuleShape](#createcapsuleshape) | C++ \| Lua |
+| int | [createTaperedCapsuleShape](#createtaperedcapsuleshape) | C++ \| Lua |
+| int | [createCylinderShape](#createcylindershape) | C++ \| Lua |
+| int | [createConvexHullShape](#createconvexhullshape) | C++ \| Lua |
+| int | [createMeshShape](#createmeshshape) | C++ \| Lua |
+| int | [createHeightFieldShape](#createheightfieldshape) | C++ \| Lua |
+| size_t | getNumShapes | C++ \| Lua |
+| [Shape3DType](#shape3dtype) | getShapeType | C++ \| Lua |
+| void | [setShapeDensity](#setshapedensity) | C++ \| Lua |
+| float | [getShapeDensity](#setshapedensity) | C++ \| Lua |
+| void | [activate](#activate-deactivate) | C++ \| Lua |
+| void | [deactivate](#activate-deactivate) | C++ \| Lua |
+| bool | canBeKinematicOrDynamic | C++ \| Lua |
+| void | [setAllowedDOFsAll](#setalloweddofsall-setalloweddofs2dplane-setalloweddofs) | C++ \| Lua |
+| void | [setAllowedDOFs2DPlane](#setalloweddofsall-setalloweddofs2dplane-setalloweddofs) | C++ \| Lua |
+| void | [setAllowedDOFs](#setalloweddofsall-setalloweddofs2dplane-setalloweddofs) | C++ \| Lua |
+| void | [setMass](#setmass-setoverridemassandinertia) | C++ \| Lua |
+| void | [setOverrideMassAndInertia](#setmass-setoverridemassandinertia) | C++ \| Lua |
+| void | [setBitsFilter](#categorybitsfilter-maskbitsfilter) | C++ \| Lua |
+| void | [setLinearVelocity](#linearvelocity-angularvelocity) | C++ \| Lua |
+| void | [setLinearVelocityClamped](#setlinearvelocityclamped-setangularvelocityclamped) | C++ \| Lua |
+| void | [setAngularVelocity](#linearvelocity-angularvelocity) | C++ \| Lua |
+| void | [setAngularVelocityClamped](#setlinearvelocityclamped-setangularvelocityclamped) | C++ \| Lua |
+| Vector3 | [getPointVelocity](#getpointvelocity) | C++ \| Lua |
+| Vector3 | getAccumulatedForce | C++ \| Lua |
+| Vector3 | getAccumulatedTorque | C++ \| Lua |
+| void | [applyForce](#applyforce) | C++ \| Lua |
+| void | [applyTorque](#applytorque) | C++ \| Lua |
+| void | [applyImpulse](#applyimpulse) | C++ \| Lua |
+| void | [applyAngularImpulse](#applyangularimpulse) | C++ \| Lua |
+| bool | [applyBuoyancyImpulse](#applybuoyancyimpulse) | C++ \| Lua |
+| Vector3 | [getCenterOfMassPosition](#getcenterofmassposition) | C++ \| Lua |
+| Object | [getAttachedObject](#getattachedobject) | C++ \| Lua |
+
+## Enumerations
+
+### BodyType
+
+* **STATIC** — Infinite mass; never moves. Walls, floors, and terrain.
+* **KINEMATIC** — Controlled by velocity, not forces. Elevators and moving platforms.
+* **DYNAMIC** — Fully simulated by Jolt; reacts to forces and gravity.
+
+---
+
+### Body3DMotionQuality
+
+* **DISCRETE** — Standard collision detection per time step (default). Suitable for most objects.
+* **LINEAR_CAST** — Continuous collision detection: sweeps the shape along its path each step. Use for fast-moving objects that may tunnel through thin geometry.
+
+---
+
+### Shape3DType
+
+`BOX`, `SPHERE`, `CAPSULE`, `TAPERED_CAPSULE`, `CYLINDER`, `CONVEX_HULL`, `MESH`, `HEIGHT_FIELD`
+
+## Property details
+
+### type
+
+* *Setter:* `void setType(BodyType type)`
+* *Getter:* `BodyType getType() const`
+
+Simulation mode. See [BodyType](#bodytype). Can be changed at runtime to switch between, e.g., KINEMATIC and DYNAMIC.
+
+---
+
+### motionQuality
+
+* *Setter:* `void setMotionQuality(Body3DMotionQuality motionQuality)`
+* *Getter:* `Body3DMotionQuality getMotionQuality() const`
+
+Collision detection mode. See [Body3DMotionQuality](#body3dmotionquality).
+
+---
+
+### mass
+
+* *Setter:* `void setMass(float mass)`
+* *Getter:* `float getMass() const`
+
+Manual mass override in kilograms. Applies to dynamic bodies. Set the mass after calling [load](#load), or use [setOverrideMassAndInertia](#setmass-setoverridemassandinertia) for combined mass + inertia control.
+
+---
+
+### gravityFactor
+
+* *Setter:* `void setGravityFactor(float gravityFactor)`
+* *Getter:* `float getGravityFactor() const`
+
+Scales the global gravity for this body. `0` = gravity-free, `2` = double gravity.
+
+Stored on the body component, so it can be set **before** [load](#load) and survives a body
+reload. In the editor it is the **Gravity Factor** field of the Body3D component, saved with
+the scene and applied in exported projects.
+
+---
+
+### buoyancy
+
+* *Setter:* `void setBuoyancy(float buoyancy)`
+* *Getter:* `float getBuoyancy() const`
+* *Setter:* `void setWaterDrag(float waterDrag)`
+* *Getter:* `float getWaterDrag() const`
+* *Setter:* `void setWaterAngularDrag(float waterAngularDrag)`
+* *Getter:* `float getWaterAngularDrag() const`
+
+How the body floats in a [Water](water.md). `buoyancy` compares the water's density to the
+body's: `1` is neutral, more floats and less sinks. `0` (the default) ignores the water.
+`waterDrag` is how much the water slows the body down, and `waterAngularDrag` how much it
+slows its rotation.
+
+Every fixed step, a **dynamic** body with a `buoyancy` above `0` whose centre of mass is
+inside a water's area is pushed up by the part of its shape below the wave surface there,
+and tilted by the wave normal, so it bobs and rolls with the waves. No script or
+[applyBuoyancyImpulse](#applybuoyancyimpulse) call is needed. Static and kinematic bodies
+are not affected, and waters with their own [buoyancy](water.md#buoyancy-buoyancydepth)
+off float nothing.
+
+Like [gravityFactor](#gravityfactor), the values are stored on the body component, so they
+can be set before [load](#load). In the editor they are the **Buoyancy** section of the
+Body3D component (shown for dynamic bodies). See
+[Physics — Buoyancy](../../manual/physics.md#buoyancy).
+
+=== "C++"
+
+    ```cpp
+    Body3D body = crate.getBody3D();
+    body.createBoxShape(1.0f, 1.0f, 1.0f);
+    body.setType(BodyType::DYNAMIC);
+    body.setBuoyancy(1.4f);   // floats, about 70% under
+    body.load();
+    ```
+
+=== "Lua"
+
+    ```lua
+    local body = crate:getBody3D()
+    body:createBoxShape(1, 1, 1)
+    body.type = BodyType.DYNAMIC
+    body.buoyancy = 1.4
+    body:load()
+    ```
+
+---
+
+### friction / restitution
+
+* *Setters:* `void setFriction(float)` / `void setRestitution(float)`
+* *Getters:* `float getFriction() const` / `float getRestitution() const`
+
+Surface material properties shared across all shapes on this body. Friction `[0, ∞)` controls sliding resistance; restitution `[0, 1]` controls bounciness.
+
+---
+
+### position / rotation
+
+* *Setters:* `void setPosition(Vector3)` / `void setRotation(Quaternion)`
+* *Getters:* `Vector3 getPosition() const` / `Quaternion getRotation() const`
+
+The body's own pose in **world space**, read from and written straight to the simulation, and the only way to place a body from `onFixedUpdate`. Setting either also updates the entity [Object](object.md) transform so rendering follows and the next step does not undo the move. Both wake the body.
+
+Use these for teleports — respawns, checkpoints, portals. For continuous movement prefer [linearVelocity](#linearvelocity-angularvelocity) or [applyForce](#applyforce), which let the solver resolve collisions instead of pushing bodies through walls.
+
+!!! note "Parented bodies"
+
+    The world pose is converted to the entity's local space using the parent's transform as
+    of the last variable-timestep sync. Moving a body's **parent** and teleporting the body
+    in the same callback therefore places it relative to the parent's *previous* pose — do
+    one or the other per frame. Bodies with no parent, the common case, are exact.
+
+=== "C++"
+
+    ```cpp
+    Body3D body = object.getBody3D();
+
+    body.setPosition(Vector3(0, 10, 0));   // respawn
+    body.setLinearVelocity(Vector3::ZERO); // stop residual motion
+    ```
+
+=== "Lua"
+
+    ```lua
+    local body = object:getBody3D()
+
+    body.position = Vector3(0, 10, 0)
+    body.linearVelocity = Vector3(0, 0, 0)
+    ```
+
+!!! warning "Do not use Object::setPosition from onFixedUpdate"
+
+    Writing an entity's [Object](object.md) transform only reaches the body between fixed
+    steps. Inside `onFixedUpdate` the physics system syncs the body from the transform
+    *before* stepping and writes the stepped pose back *after*, so a transform written
+    there is discarded unless you also call [updateTransform](object.md#updatetransform)
+    to refresh the world transform the sync reads. Prefer `Body3D::setPosition` /
+    `setRotation`: one call, and it writes the simulation directly.
+    `Object::setPosition` is fine from `onUpdate` and outside the update callbacks.
+
+---
+
+### linearVelocity / angularVelocity
+
+* *Setters:* `void setLinearVelocity(Vector3)` / `void setAngularVelocity(Vector3)`
+* *Getters:* `Vector3 getLinearVelocity() const` / `Vector3 getAngularVelocity() const`
+
+Current velocity vectors. Linear velocity is in world units/second; angular velocity is in radians/second around each world axis.
+
+---
+
+### sensor
+
+* *Setter:* `void setIsSensor(bool sensor)`
+* *Getter:* `bool isSensor() const`
+* *Lua property:* `body.sensor`
+
+When `true`, the body acts as a trigger volume: overlapping bodies generate contact events but no physical impulse is applied.
+
+The flag is stored on the body component, not only on the live simulation body, so it can be set **before** `load()` and survives a body reload (a shape change, a body type change, or reopening the scene). In the editor it is the **Sensor** checkbox of the Body3D component, saved with the scene and applied in exported projects.
+
+=== "C++"
+
+    ```cpp
+    Body3D trigger = checkpoint.getBody3D();
+    trigger.createBoxShape(2, 2, 2);
+    trigger.setIsSensor(true);   // before load()
+    trigger.load();
+    ```
+
+=== "Lua"
+
+    ```lua
+    local trigger = checkpoint:getBody3D()
+    trigger:createBoxShape(2, 2, 2)
+    trigger.sensor = true
+    trigger:load()
+    ```
+
+!!! note "Which bodies a sensor detects"
+
+    A `STATIC` sensor is the cheapest option, but it only detects **awake** dynamic and
+    kinematic bodies — the contact is lost as soon as the other body falls asleep. Making
+    the sensor dynamic or kinematic (and activating it) also detects sleeping bodies, and
+    such a sensor never sleeps on its own. Keep dynamic and kinematic sensors on a
+    category/mask that excludes static bodies and other sensors to avoid broad-phase work.
+
+---
+
+### collideKinematicVsNonDynamic
+
+* *Setter:* `void setCollideKinematicVsNonDynamic(bool)`
+* *Getter:* `bool isCollideKinematicVsNonDynamic() const`
+
+When `true`, this kinematic body generates collision reports against static and other kinematic bodies (normally skipped for performance).
+
+---
+
+### categoryBitsFilter / maskBitsFilter
+
+Collision layer filtering bitmasks. A collision occurs only when `(a.category & b.mask) != 0`.
+
+---
+
+### collisionGroupID
+
+Group index for disabling self-collision within a group (e.g. ragdoll bones).
+
+## Method details
+
+### load
+
+* `void load()`
+
+Registers the body and all its shapes with the Jolt physics world. Must be called after defining shapes. Re-call if shapes change at runtime.
+
+---
+
+### createBoxShape
+
+* `int createBoxShape(float width, float height, float depth)`
+* `int createBoxShape(Vector3 position, Quaternion rotation, float width, float height, float depth)` *(with local offset)*
+
+Creates a solid box collider. Returns the shape index. The offset overload positions the shape relative to the entity origin.
+
+---
+
+### createSphereShape
+
+* `int createSphereShape(float radius)`
+* `int createSphereShape(Vector3 position, Quaternion rotation, float radius)` *(with local offset)*
+
+Creates a sphere collider. Spheres are the cheapest shape to simulate.
+
+---
+
+### createCapsuleShape
+
+* `int createCapsuleShape(float halfHeight, float radius)`
+* `int createCapsuleShape(Vector3 position, Quaternion rotation, float halfHeight, float radius)`
+
+Creates a vertical capsule (hemisphere-capped cylinder). Standard character controller shape.
+
+=== "C++"
+
+    ```cpp
+    Body3D body = player.getBody3D();
+    body.createCapsuleShape(0.9f, 0.3f);   // 1.8 m tall, 0.3 m radius
+    body.setType(BodyType::DYNAMIC);
+    body.setAllowedDOFs2DPlane();           // constrain to XZ plane
+    body.load();
+    ```
+
+=== "Lua"
+
+    ```lua
+    local body = player:getBody3D()
+    body:createCapsuleShape(0.9, 0.3)
+    body.type = BodyType.DYNAMIC
+    body:setAllowedDOFs2DPlane()
+    body:load()
+    ```
+
+---
+
+### createTaperedCapsuleShape
+
+* `int createTaperedCapsuleShape(float halfHeight, float topRadius, float bottomRadius)`
+* `int createTaperedCapsuleShape(Vector3 position, Quaternion rotation, float halfHeight, float topRadius, float bottomRadius)`
+
+Capsule with different radii at each end. Useful for cones, bullets, and stylised characters.
+
+---
+
+### createCylinderShape
+
+* `int createCylinderShape(float halfHeight, float radius)`
+* `int createCylinderShape(Vector3 position, Quaternion rotation, float halfHeight, float radius)`
+
+Upright cylinder collider. Less stable than capsules on uneven ground; prefer capsules for characters.
+
+---
+
+### createConvexHullShape
+
+* `int createConvexHullShape()`
+* `int createConvexHullShape(std::vector<Vector3> vertices)`
+* `int createConvexHullShape(Vector3 position, Quaternion rotation, std::vector<Vector3> vertices)`
+
+Creates a convex hull from the mesh vertices (no-argument form) or from explicit vertices. Must be convex; Jolt computes the hull automatically.
+
+---
+
+### createMeshShape
+
+* `int createMeshShape()`
+* `int createMeshShape(std::vector<Vector3> vertices, std::vector<uint16_t> indices)`
+* `int createMeshShape(Vector3 position, Quaternion rotation, std::vector<Vector3> vertices, std::vector<uint16_t> indices)`
+
+Creates a static triangle-mesh collider. **Mesh shapes can only be STATIC.** Use convex hull for dynamic objects.
+
+---
+
+### createHeightFieldShape
+
+* `int createHeightFieldShape()`
+* `int createHeightFieldShape(unsigned int samplesSize)`
+
+Creates a height-field collider sized to the terrain mesh in the entity. Used with the [Terrain](terrain.md) class. `samplesSize` controls the resolution grid.
+
+---
+
+### activate / deactivate
+
+* `void activate()` — Wakes the body if it is sleeping.
+* `void deactivate()` — Forces the body to sleep immediately.
+
+---
+
+### setAllowedDOFsAll / setAllowedDOFs2DPlane / setAllowedDOFs
+
+Constrain which degrees of freedom the body can move in.
+
+* **setAllowedDOFsAll** — All 6 DOF (default).
+* **setAllowedDOFs2DPlane** — Restricts to translation on X/Z and rotation on Y. Use for top-down or side-view games.
+* **setAllowedDOFs(translationX, translationY, translationZ, rotationX, rotationY, rotationZ)** — Fine-grained control per axis.
+
+Locking all three rotation axes is the usual way to keep a character upright; drive its
+facing with [rotation](#position-rotation) instead of letting the solver spin it.
+
+Like [gravityFactor](#gravityfactor), the mask is stored on the body component, so it
+survives a body reload and is saved with the scene and applied in exported projects. Leaving
+every axis locked is invalid in Jolt — use a static body to freeze one completely.
+
+---
+
+### setMass / setOverrideMassAndInertia
+
+* `void setMass(float mass)` — Overrides the auto-computed mass.
+* `void setOverrideMassAndInertia(Vector3 solidBoxSize, float solidBoxDensity)` — Computes mass and inertia for a solid box of the given size and density (kg/m³), then applies those values.
+
+The solid-box override is stored on the body component, so it can be set **before**
+[load](#load) and survives a body reload; on a loaded dynamic body it takes effect at once.
+In the editor it is **Override Mass** on the Body3D component, with **Solid Box Size** and
+**Solid Box Density** (1000 kg/m³ by default, about the density of water), saved with the
+scene and applied in exported projects.
+
+---
+
+### setShapeDensity
+
+* `void setShapeDensity(float density)` *(all shapes)*
+* `void setShapeDensity(size_t index, float density)` *(specific shape)*
+
+Sets the density (kg/m³) used to compute mass. Call after adding shapes and before [load](#load), or call [load](#load) again after runtime changes.
+
+---
+
+### setLinearVelocityClamped / setAngularVelocityClamped
+
+Velocity setters that clamp the new value to the body's configured speed limits (set in Jolt body settings). Safer for kinematic controllers.
+
+---
+
+### getPointVelocity
+
+* `Vector3 getPointVelocity(Vector3 point) const`
+
+Returns the velocity of a world-space point on the body, including the contribution of angular velocity. Use for precise impact and dragging calculations.
+
+---
+
+### applyForce
+
+* `void applyForce(const Vector3& force)`
+* `void applyForce(const Vector3& force, const Vector3& point)`
+
+Applies a force in Newtons each simulation step. The single-argument overload applies force at the center of mass (no torque). The two-argument overload applies force at a world-space point, potentially generating torque.
+
+---
+
+### applyTorque
+
+* `void applyTorque(const Vector3& torque)`
+
+Applies a torque (Nm) to rotate the body. The vector direction defines the rotation axis (right-hand rule).
+
+---
+
+### applyImpulse
+
+* `void applyImpulse(const Vector3& impulse)`
+* `void applyImpulse(const Vector3& impulse, const Vector3& point)`
+
+Instantaneous velocity change. Prefer impulses over forces for one-shot events (jumps, explosions, hits).
+
+---
+
+### applyAngularImpulse
+
+* `void applyAngularImpulse(const Vector3& angularImpulse)`
+
+Instantaneous angular velocity change. Useful for spinning objects on impact.
+
+---
+
+### applyBuoyancyImpulse
+
+* `bool applyBuoyancyImpulse(Vector3 surfacePosition, Vector3 surfaceNormal, float buoyancy, float linearDrag, float angularDrag, Vector3 fluidVelocity, Vector3 gravity, float deltaTime)`
+
+Simulates buoyancy for a body partially submerged in a fluid. Returns `true` if the body intersects the water plane. Call once per physics step with the water plane data. A body in a [Water](water.md) gets this every fixed step from its [buoyancy](#buoyancy) settings, so call it yourself only for fluids that are not a Water component.
+
+---
+
+### getAttachedObject
+
+* `Object getAttachedObject()`
+
+Returns the [Object](object.md) that owns this body.
+
+---
+
+### getCenterOfMassPosition
+
+* `Vector3 getCenterOfMassPosition()`
+
+Returns the world-space position of the center of mass, which may differ from the entity origin if shapes are offset.
