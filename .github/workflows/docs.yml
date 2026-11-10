@@ -40,7 +40,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build all documentation versions
-        run: scripts/build-versions.sh site
+        run: bash scripts/build-versions.sh site
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
