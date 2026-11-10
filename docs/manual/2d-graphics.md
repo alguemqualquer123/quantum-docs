@@ -1,10 +1,10 @@
 ---
-description: Working with 2D graphics in Doriax — sprites, tilemaps, polygons, 2D lighting and shadows.
+description: Working with 2D graphics in Quantum — sprites, tilemaps, polygons, 2D lighting and shadows.
 ---
 
 # 2D Graphics
 
-Doriax has full support for 2D game development with sprites, tilemaps, primitive
+Quantum has full support for 2D game development with sprites, tilemaps, primitive
 shapes, and dedicated 2D lighting with shadows, backed by the same ECS used for 3D.
 
 ![A 2D level built from tilemaps, with the terrain tilemap selected](../assets/screenshots/editor-2d-tilemap.png)
@@ -34,14 +34,14 @@ simplest way to draw something on screen.
 === "C++"
 
     ```cpp
-    #include "Doriax.h"
-    using namespace doriax;
+    #include "Quantum.h"
+    using namespace quantum;
     #include "Polygon.h"
 
     Scene scene;
     Polygon triangle(&scene);
 
-    DORIAX_INIT void init() {
+    QUANTUM_INIT void init() {
         triangle.addVertex(0, -100);
         triangle.addVertex(-50, 50);
         triangle.addVertex(50, 50);
@@ -219,7 +219,7 @@ For how the technique works under the hood, see
 ## Screen scaling
 
 For 2D games it is important to decide how the canvas scales to different screen sizes
-and aspect ratios. Doriax provides scaling modes so your game looks correct across
+and aspect ratios. Quantum provides scaling modes so your game looks correct across
 devices and window sizes — configure the canvas size and scaling behavior through the
 `Engine` API.
 

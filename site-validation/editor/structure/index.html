@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Structure Panel — Quantum Engine Docs</title>
+  <meta name="description" content="How the Quantum Structure panel represents scenes, child scenes, entities, hierarchy, and non-transform entities.">
+  <meta property="og:title" content="Structure Panel — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/editor/structure/">
+
+  <link rel="icon" type="image/png" href="../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/quantum.css">
+  <link rel="stylesheet" href="../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="structure-panel">Structure Panel<a class="headerlink" href="#structure-panel" title="Link to this section">&para;</a></h1>
+<p>The Structure panel is the editor's tree view for scenes and entities. It is also the
+clearest way to understand Quantum's ECS model: everything shown under a scene is an
+entity, but only entities with a <code>Transform</code> participate in the spatial hierarchy.</p>
+<p><img alt="The Structure panel: a child scene first, then entities without a Transform, then the hierarchy" src="../../assets/screenshots/structure-panel.png" /></p>
+<h2 id="scene-root">Scene root<a class="headerlink" href="#scene-root" title="Link to this section">&para;</a></h2>
+<p>The top node is the selected scene. Child scenes are shown before entities. If a child
+scene is expanded inline, its entities are shown under that child scene node.</p>
+<h2 id="child-scenes">Child scenes<a class="headerlink" href="#child-scenes" title="Link to this section">&para;</a></h2>
+<p>A scene can reference other scenes as <strong>child scenes</strong> so they load and run together as
+one <a href="../../manual/scenes-and-entities/#scene-stacks">scene stack</a>. Child scene nodes appear
+above the parent's entities, tinted soft teal to set them apart.</p>
+<p><strong>Add a child scene</strong> in one of two ways:</p>
+<ul>
+<li>Right-click the scene root and choose <strong>Add child scene → <em>SceneName</em></strong> (the submenu
+  lists every other scene that is not already attached and does not already contain
+  this one).</li>
+<li>Drag a <code>.scene</code> file from the <a href="../resources/">Resources Browser</a> onto the scene root.</li>
+</ul>
+<p>A scene can't end up inside itself, directly or through other child scenes. An add that
+would create such a cycle is refused with an error in the Output panel. So is an undo or
+redo that would bring one back after another scene changed, and the history then stays
+where it is.</p>
+<p><strong>Right-click a child scene node</strong> for its menu:</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Start active</strong></td>
+<td>Toggles whether the child scene is added to the engine automatically when the parent loads. On (the default) means it runs immediately; off means it is built with the parent but hidden, ready for <code>SceneManager.addChildScene</code> to show it with no loading cost. A scene does not have to be a child scene to be added at runtime — being one is what makes it <em>preloaded</em>.</td>
+</tr>
+<tr>
+<td><strong>Remove child scene</strong></td>
+<td>Detaches the reference (it does not delete the scene file).</td>
+</tr>
+</tbody>
+</table>
+<p>Each child scene row also shows a small <strong>play</strong> or <strong>pause</strong> mark next to the name:
+play means <strong>Start active</strong> is on; pause means it starts inactive. Hover the mark for a
+tooltip. Click the <strong>eye icon</strong> on a child scene node to load it <em>inline</em> — its entities
+appear nested under the node so you can view and edit them in the parent's context. This
+is an editing convenience and does not affect runtime behavior.</p>
+<p>The entities shown inline still belong to the child scene. Dragging one only creates a
+reference to it: drop it on a script's entity property in Properties, or on a script open
+in the <a href="../code-editor/#drag-entities-into-your-code">Code Editor</a>. Drop targets that
+would change the parent scene refuse it, with the tooltip <em>Entity belongs to another
+scene</em>. That covers reparenting it in this tree, saving it as a bundle in the Resources
+Browser, and assigning it to a component field such as a joint's bodies. To make those
+changes, open the child scene itself.</p>
+<p><strong>Order matters:</strong> scenes render as layers, with the main scene at the bottom and each
+child scene drawn on top of the ones listed above it — so the last child scene is the
+topmost layer. The order follows the order you added the child scenes; to change it,
+remove them and add them back in the sequence you want (top-most last). See
+<a href="../../manual/scenes-and-entities/#child-scenes">Child scenes</a> in the manual for the full
+runtime model.</p>
+<h2 id="empty-entity-vs-empty-object">Empty entity vs empty object<a class="headerlink" href="#empty-entity-vs-empty-object" title="Link to this section">&para;</a></h2>
+<p><img alt="The create menu, with the Basic shape submenu open" src="../../assets/screenshots/structure-create-menu.png" /></p>
+<p>Open the create menu with the <strong>+</strong> button at the top of the panel (<strong>Create entity</strong>;
+the same menu starts a new 3D, 2D, or UI scene), by right-clicking empty space in the
+panel, or with <strong>Create child</strong> in an entity's right-click menu, which creates the new
+entity under it.</p>
+<p>The create menu has two intentionally different entries:</p>
+<table>
+<thead>
+<tr>
+<th>Entry</th>
+<th>Components added</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Empty entity</td>
+<td>None</td>
+<td>A pure entity ID. Use it for logic, global scripts, non-spatial data, or components that do not need a transform.</td>
+</tr>
+<tr>
+<td>Empty object</td>
+<td><code>Transform</code></td>
+<td>A spatial entity. It can be positioned, parented, rendered, and shown in the hierarchy.</td>
+</tr>
+</tbody>
+</table>
+<p>This distinction matters because the entity itself owns nothing. Components decide what
+the ID can do.</p>
+<p>The rest of the create menu adds ready-configured entities (camera, light, sky, fog,
+sound, <strong>mirror</strong>, <strong>reflection probe</strong>, <strong>water</strong>), basic shapes, 2D and UI objects,
+physics bodies, and more — each one is just an entity with the right components already attached.</p>
+<p>The <strong>2D</strong> submenu includes <strong>2D Light</strong> and <strong>2D Occluder</strong> for the 2D lighting
+system — see <a href="../../manual/2d-graphics/#2d-lighting">2D Graphics — 2D lighting</a>.</p>
+<h3 id="basic-shapes">Basic shapes<a class="headerlink" href="#basic-shapes" title="Link to this section">&para;</a></h3>
+<p><strong>Basic shape</strong> creates a mesh entity with procedural geometry: Box, Plane, <strong>Wall</strong>,
+Sphere, Cylinder, Capsule, and Torus. A <strong>Plane</strong> lies flat (normal points up, <code>+Y</code>); a
+<strong>Wall</strong> stands upright facing the camera (normal points <code>+Z</code>) — handy for walls,
+backdrops, and mirror surfaces. You can change a mesh's geometry later from the
+<strong>Create Shape</strong> dropdown in <a href="../properties/">Properties</a>.</p>
+<h3 id="mirror">Mirror<a class="headerlink" href="#mirror" title="Link to this section">&para;</a></h3>
+<p><strong>Mirror</strong> is a one-click convenience entry: it creates a Wall with a
+<a href="../properties/#mirror-component">Mirror component</a> already attached, giving an upright
+planar-reflection surface with no camera or texture setup. See
+<a href="../../manual/rendering-pipeline/#mirrors-and-planar-reflections">Rendering Pipeline — Mirrors</a>.</p>
+<h3 id="reflection-probe">Reflection Probe<a class="headerlink" href="#reflection-probe" title="Link to this section">&para;</a></h3>
+<p><strong>Reflection Probe</strong> creates an entity with a Transform and a
+<a href="../properties/#reflection-probe-component">Reflection Probe component</a>: a box-shaped
+volume that gives the meshes inside it a local reflection environment instead of the
+global sky. Size the box to the room it represents in
+<a href="../properties/#reflection-probe-component">Properties</a>. See
+<a href="../../manual/rendering-pipeline/#reflection-probes">Rendering Pipeline — Reflection probes</a>.</p>
+<h3 id="water">Water<a class="headerlink" href="#water" title="Link to this section">&para;</a></h3>
+<p><strong>Water</strong> creates an entity with a Transform and a
+<a href="../properties/#water-component">Water component</a>: a 50 × 50 animated water surface at the
+entity's height, with waves, ripples, refraction, and shore foam on by default. Move the
+entity to set the water level, and adjust its size and waves in
+<a href="../properties/#water-component">Properties</a>. See
+<a href="../../manual/rendering-pipeline/#water">Rendering Pipeline — Water</a>.</p>
+<h3 id="water-exclusion">Water Exclusion<a class="headerlink" href="#water-exclusion" title="Link to this section">&para;</a></h3>
+<p><strong>Water Exclusion</strong> creates an entity with a Transform and a
+<a href="../properties/#water-exclusion-component">Water Exclusion component</a> set to a 1 × 1 × 1 box:
+a volume the water stays out of, for a cabin, a cave, or a diving bell. To keep the water out
+of a boat, add the component to the boat itself instead; its default <strong>Hull</strong> shape wraps the
+boat's mesh.</p>
+<h2 id="hierarchical-area">Hierarchical area<a class="headerlink" href="#hierarchical-area" title="Link to this section">&para;</a></h2>
+<p>Entities with <code>Transform</code> appear in the hierarchy area. Their parent-child relation is
+stored in <code>Transform::parent</code>, and their order is managed by the scene registry. Moving
+a parent updates child world transforms through that parent chain.</p>
+<p>Common entities in this area include objects, sprites, models, cameras, lights, 3D
+sounds, physics bodies, UI widgets, points, lines, terrain, and mesh polygons.</p>
+<h3 id="tree-marks-and-collapse">Tree marks and collapse<a class="headerlink" href="#tree-marks-and-collapse" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Mark</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clone icon</td>
+<td>The entity has an <a href="../properties/#instanced-mesh">Instanced Mesh</a> with one or more instances (tooltip shows the count)</td>
+</tr>
+<tr>
+<td>Play / pause</td>
+<td>Child scene <strong>Start active</strong> on / off (see <a href="#child-scenes">Child scenes</a>)</td>
+</tr>
+</tbody>
+</table>
+<p>Imported <strong>Model</strong> entities with child nodes start <strong>collapsed</strong> once their children
+finish loading, so multi-mesh GLTFs and full node trees do not flood the tree. Bones also
+start collapsed. Expand a row when you need to edit children.</p>
+<p>When a parent is collapsed in Structure, clicking its hidden children in the
+<a href="../scene-view/#selection">Scene view</a> selects the nearest expanded ancestor instead —
+so picking in the viewport matches what you can see in the tree. Expand the model (or
+other parent) if you need to select a specific child mesh or node.</p>
+<p>GLTF files with animation clips, or more than one skin, import the <strong>full node tree</strong>
+under the Model (helpers, joints, and mesh nodes). Static multi-mesh files still create
+one child mesh entity per mesh node. See
+<a href="../../manual/3d-graphics/#gltf-node-hierarchy">3D Graphics — GLTF node hierarchy</a>.</p>
+<h3 id="organizing-the-parts-of-a-model">Organizing the parts of a model<a class="headerlink" href="#organizing-the-parts-of-a-model" title="Link to this section">&para;</a></h3>
+<p>The child mesh entities of a multi-mesh GLTF belong to their Model, but you can arrange
+them inside it. Parts that can move are drawn in the normal text colour, and hovering
+one shows <em>Drag to organize the parts of this model</em>. Parts that stay put are greyed
+out, and their tooltip says why.</p>
+<p>What you can move:</p>
+<ul>
+<li>Every part of a <strong>static</strong> model (no animation clips, at most one skin, not merged).</li>
+<li>The <strong>skinned</strong> parts of an animated model. A skinned mesh is placed by its joints, so
+  moving the part changes only the tree, never the geometry.</li>
+<li>A <strong>rigid</strong> part the file does not animate — not directly and not through a parent
+  node — such as a loose prop exported next to a character.</li>
+<li>A plain entity (an <strong>Empty object</strong>) holding parts. Drag it into the model, then drag
+  parts under it to group them; while it holds parts it counts as part of the model.</li>
+</ul>
+<p>What stays where the file put it, with the tooltip reason:</p>
+<table>
+<thead>
+<tr>
+<th>Tooltip</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Joints cannot be reparented</em></td>
+<td>The joint's world transform feeds skinning, and its keyframes are relative to its parent. Bones can still receive drops.</td>
+</tr>
+<tr>
+<td><em>Model nodes cannot be reparented</em></td>
+<td>Transform-only helper nodes of a full node-tree import.</td>
+</tr>
+<tr>
+<td><em>Animated parts cannot be reparented</em></td>
+<td>The part has its own translation, rotation, or scale keyframes, which are relative to the file's parent.</td>
+</tr>
+<tr>
+<td><em>Parts inheriting animation cannot be reparented</em></td>
+<td>A rigid part under an animated node moves with that node; pulling it out would stop its animation.</td>
+</tr>
+<tr>
+<td><em>Parts holding joints cannot be reparented</em></td>
+<td>The part has joints below it in the file.</td>
+</tr>
+</tbody>
+</table>
+<p>Where you can put a movable part:</p>
+<ul>
+<li>Under another part, or under a group entity inside the model.</li>
+<li>On a <strong>bone</strong> or any other node of the model — the way to hang a prop on a hand. Bones
+  also accept plain entities (lights, cameras, empties, other models), so you can attach
+  anything to a joint by dropping it there.</li>
+<li>On the Model row to put it back under the root, or between siblings to reorder.</li>
+</ul>
+<p>Reparenting keeps the world placement, so a drop never moves geometry; position the part
+afterwards with the gizmo if it should sit somewhere else. The file is not touched: the
+arrangement is saved with the scene, and reopening the scene or re-assigning the same
+model file keeps it (see
+<a href="../../manual/3d-graphics/#reloading-a-rearranged-model">3D Graphics — Reloading a rearranged model</a>).</p>
+<p>Parts always stay inside their model — a drop on the scene root, on an entity outside
+the model, or inside a nested model is refused. Parts and the groups holding them are
+also deleted and duplicated only together with the whole model, so <strong>Delete</strong> and
+<strong>Duplicate</strong> act on the Model row instead.</p>
+<p>Right-click the Model and choose <strong>Reset mesh parenting</strong> to move every part back under
+the node the file gives it (the model root for a static model) in one undoable step. A
+part that is locked away from its file node — after a re-export changed the file, for
+example — can always be dropped back on that node even though it cannot go anywhere
+else.</p>
+<h3 id="merge-static-model">Merge static model<a class="headerlink" href="#merge-static-model" title="Link to this section">&para;</a></h3>
+<p>Multi-node GLTF models normally keep geometry on child entities (the full node tree when
+the file is animated or has several skins, otherwise one child mesh per mesh node).
+Instanced Mesh (and other same-entity mesh features) only draw geometry that lives on the
+root entity, so those models need a flatten step first.</p>
+<p>Right-click a Model entity in Structure:</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Reset mesh parenting</strong></td>
+<td>Moves every mesh part back under the node the file gives it (available while parts are <a href="#organizing-the-parts-of-a-model">rearranged</a>). Undoable.</td>
+</tr>
+<tr>
+<td><strong>Merge static model</strong></td>
+<td>Bakes child mesh transforms into the root <code>MeshComponent</code>, removes the child mesh entities, and sets the model's <code>mergeStaticMeshes</code> flag. Undoable.</td>
+</tr>
+<tr>
+<td><strong>Restore model mesh children</strong></td>
+<td>Reloads the model with the hierarchy restored (available after a merge).</td>
+</tr>
+</tbody>
+</table>
+<p>Merge is only available for static multi-mesh models. It is disabled (with a tooltip)
+when the model is skinned, animated, has morph targets, has fewer than two mesh nodes,
+or would exceed the root submesh limit. It is also disabled while the parts are
+rearranged — choose <strong>Reset mesh parenting</strong> first. See
+<a href="../../manual/3d-graphics/#merging-static-model-meshes">3D Graphics — Merging static model meshes</a>.</p>
+<h2 id="non-hierarchical-area">Non-hierarchical area<a class="headerlink" href="#non-hierarchical-area" title="Link to this section">&para;</a></h2>
+<p>Entities without <code>Transform</code> appear separately before the transform hierarchy. They are
+valid scene entities, but they do not have a spatial parent or local/world transform.</p>
+<p>Typical non-transform entities include:</p>
+<table>
+<thead>
+<tr>
+<th>Entity type</th>
+<th>Why it may not need <code>Transform</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Empty entity</td>
+<td>Logic-only entity or script host</td>
+</tr>
+<tr>
+<td>Sound source</td>
+<td>Non-spatial audio</td>
+</tr>
+<tr>
+<td>Sky/Fog</td>
+<td>Scene environment data</td>
+</tr>
+<tr>
+<td>Joints</td>
+<td>Constraint data linking physics bodies</td>
+</tr>
+<tr>
+<td>Actions/animations</td>
+<td>Time-based behavior targeting another entity</td>
+</tr>
+<tr>
+<td>Particles action</td>
+<td>Playback behavior targeting another entity</td>
+</tr>
+</tbody>
+</table>
+<p>An entity can be selected and inspected even if it is not in the transform hierarchy.
+Add a <code>Transform</code> if it should become spatial or parentable.</p>
+<h2 id="search">Search<a class="headerlink" href="#search" title="Link to this section">&para;</a></h2>
+<p>Type in the field at the top of the panel to filter the tree by entity name. Matching
+ignores case unless you turn on <strong>Match Case</strong> from the magnifier button next to the
+field. Matching rows stay visible together with their ancestors, so you can see where
+each one sits.</p>
+<p><img alt="Filtering the Structure panel by name" src="../../assets/screenshots/structure-search.png" /></p>
+<h2 id="renaming">Renaming<a class="headerlink" href="#renaming" title="Link to this section">&para;</a></h2>
+<p>Right-click an entity or the scene root and edit the <strong>Name</strong> field at the top of its
+menu, or select the row and press <strong>F2</strong> to edit the name in the
+<a href="../properties/#selecting-an-entity">Properties window</a>. A child scene node keeps its
+name read-only here; open the child scene to rename it.</p>
+<p><img alt="An entity's right-click menu, with the Name field at the top" src="../../assets/screenshots/structure-context-menu.png" /></p>
+<h2 id="drag-and-drop-rules">Drag and drop rules<a class="headerlink" href="#drag-and-drop-rules" title="Link to this section">&para;</a></h2>
+<p>Reparenting is a transform operation. Dragging an entity under another entity only
+makes sense when the moved entity has <code>Transform</code>. Non-transform entities can still be
+reordered in their separate area or associated virtually with a target, such as an
+action targeting a transformed entity.</p>
+<p>Entities the editor generates for a component — bones, skeletons, imported animations,
+the label of a button, and so on — are greyed out and can only be reordered among their
+siblings. The mesh parts of a model are the exception: the ones the file does not
+animate can be regrouped anywhere inside their own model, bones included (see
+<a href="#organizing-the-parts-of-a-model">Organizing the parts of a model</a>).</p>
+<p>Drag and drop also crosses window boundaries:</p>
+<table>
+<thead>
+<tr>
+<th>Drag</th>
+<th>Drop</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Entity (or selection) from Structure</td>
+<td>Resources Browser</td>
+<td>Saves the hierarchy as a <code>.bundle</code> file and replaces it with a bundle instance</td>
+</tr>
+<tr>
+<td>Entity from Structure</td>
+<td>Entity-reference field in Properties</td>
+<td>Assigns the entity to that field (<a href="../properties/#entity-references">which fields accept another scene's entity</a>)</td>
+</tr>
+<tr>
+<td>Entity from Structure</td>
+<td>Script file in the Code Editor</td>
+<td>Inserts an entity reference property (<a href="../code-editor/#drag-entities-into-your-code">details</a>)</td>
+</tr>
+<tr>
+<td>Action entity from Structure</td>
+<td><a href="../animation/#action-frames">Animation Timeline</a> tracks</td>
+<td>Adds an action frame at the dropped track and time</td>
+</tr>
+<tr>
+<td><code>.bundle</code> file from Resources</td>
+<td>Scene root or an entity with <code>Transform</code></td>
+<td>Creates a bundle instance there</td>
+</tr>
+<tr>
+<td><code>.scene</code> file from Resources</td>
+<td>Scene root</td>
+<td>Adds it as a child scene</td>
+</tr>
+</tbody>
+</table>
+<p>Of these targets, an entity shown inline under a child scene node is accepted only by a
+script entity property and the Code Editor. See <a href="#child-scenes">Child scenes</a>.</p>
+<h2 id="bundles-in-the-tree">Bundles in the tree<a class="headerlink" href="#bundles-in-the-tree" title="Link to this section">&para;</a></h2>
+<p>Right-click any entity outside a bundle and choose <strong>Save as Bundle</strong> to turn its
+hierarchy into a new <code>.bundle</code> file (saved in the folder the Resources Browser is
+showing) — the same operation as dragging it onto the Resources Browser.</p>
+<p>A bundle instance appears as a root node with its member entities nested under it.
+Editing members edits the bundle (and every other instance); right-click menus on
+bundle nodes let you <strong>Insert into bundle</strong>, <strong>Remove from bundle</strong>, or move outside
+entities into an existing bundle with <strong>Insert to Bundle</strong>. See <a href="../bundles/">Bundles</a>
+for the complete workflow.</p>
+<h2 id="while-playing">While playing<a class="headerlink" href="#while-playing" title="Link to this section">&para;</a></h2>
+<p>Entities the running game creates (objects a script spawns, models it loads, bundles it
+instantiates) are listed too, drawn in green. Each one sits under its parent, or at the
+scene root when that parent is not listed, such as the editor's view camera in a scene
+without a camera of its own. Entities without a <code>Transform</code> go in the
+<a href="#non-hierarchical-area">non-hierarchical area</a> as usual.</p>
+<p>These rows are for inspecting, not editing, because <strong>Stop</strong> destroys the entities
+behind them:</p>
+<ul>
+<li>Selecting one shows its components in <a href="../properties/#selecting-an-entity">Properties</a>,
+  all read-only.</li>
+<li>It cannot be renamed, deleted, duplicated, dragged, given children, set as the main
+  camera, or saved into a bundle.</li>
+<li>It can be picked in the <a href="../scene-view/#selection">Scene view</a> only while the camera is
+  <a href="../scene-view/#detached-camera">detached</a>; otherwise select it here.</li>
+</ul>
+<p>The list refreshes twice a second, so a new entity can take up to half a second to
+appear. One the game destroys disappears at once and leaves the selection, and <strong>Stop</strong>
+removes the rest.</p>
+<p>Terrain <a href="../../manual/terrain/#foliage">foliage</a> chunks are engine data and are never
+listed. Only the scene you pressed Play on lists runtime entities; a child scene expanded
+inline keeps showing its authored entities.</p>
+<h2 id="practical-model">Practical model<a class="headerlink" href="#practical-model" title="Link to this section">&para;</a></h2>
+<p>Use the Structure panel as a quick diagnostic:</p>
+<ul>
+<li>Entity appears in the tree hierarchy: it has <code>Transform</code>.</li>
+<li>Entity appears above the hierarchy: it has no <code>Transform</code>.</li>
+<li>Entity cannot be parented: add <code>Transform</code> or choose Empty object instead.</li>
+<li>Visual entity is missing from the hierarchy: check whether <code>Transform</code> was removed.</li>
+<li>Entity drawn in green while playing: the game created it. It is read-only and
+  disappears at <strong>Stop</strong>.</li>
+</ul>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../editor-settings/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Editor Settings</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../scene-view/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Scene View</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/editor/structure.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#structure-panel" class="dx-toc-link" data-level="1">Structure Panel</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#scene-root" class="dx-toc-link" data-level="2">Scene root</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#child-scenes" class="dx-toc-link" data-level="2">Child scenes</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#empty-entity-vs-empty-object" class="dx-toc-link" data-level="2">Empty entity vs empty object</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#basic-shapes" class="dx-toc-link" data-level="3">Basic shapes</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#mirror" class="dx-toc-link" data-level="3">Mirror</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#reflection-probe" class="dx-toc-link" data-level="3">Reflection Probe</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#water" class="dx-toc-link" data-level="3">Water</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#water-exclusion" class="dx-toc-link" data-level="3">Water Exclusion</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#hierarchical-area" class="dx-toc-link" data-level="2">Hierarchical area</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#tree-marks-and-collapse" class="dx-toc-link" data-level="3">Tree marks and collapse</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#organizing-the-parts-of-a-model" class="dx-toc-link" data-level="3">Organizing the parts of a model</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#merge-static-model" class="dx-toc-link" data-level="3">Merge static model</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#non-hierarchical-area" class="dx-toc-link" data-level="2">Non-hierarchical area</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#search" class="dx-toc-link" data-level="2">Search</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#renaming" class="dx-toc-link" data-level="2">Renaming</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#drag-and-drop-rules" class="dx-toc-link" data-level="2">Drag and drop rules</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#bundles-in-the-tree" class="dx-toc-link" data-level="2">Bundles in the tree</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#while-playing" class="dx-toc-link" data-level="2">While playing</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#practical-model" class="dx-toc-link" data-level="2">Practical model</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../versions.json";
+    window.QUANTUM_PAGE_URL = "editor/structure/";
+  </script>
+  <script src="../../js/quantum.js" defer></script>
+</body>
+</html>

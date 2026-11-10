@@ -17,8 +17,8 @@ description: Input API reference — keyboard, mouse, touch, and gamepad polling
 === "C++"
 
     ```cpp
-    #include "Doriax.h"
-    using namespace doriax;
+    #include "Quantum.h"
+    using namespace quantum;
 
     // Inside an update callback:
     if (Input::isKeyPressed(D_KEY_SPACE)) {

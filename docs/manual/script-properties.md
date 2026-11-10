@@ -1,5 +1,5 @@
 ---
-description: Expose C++ and Lua script values to the Doriax Properties window with DPROPERTY and Lua properties.
+description: Expose C++ and Lua script values to the Quantum Properties window with DPROPERTY and Lua properties.
 ---
 
 # Script Properties
@@ -41,13 +41,13 @@ DPROPERTY("Speed")
 float speed = 5.0f;
 
 DPROPERTY("Target Position")
-doriax::Vector3 targetPosition = doriax::Vector3(0, 0, 0);
+quantum::Vector3 targetPosition = quantum::Vector3(0, 0, 0);
 
 DPROPERTY("Mesh Color", Color4)
-doriax::Vector4 meshColor = doriax::Vector4(1, 1, 1, 1);
+quantum::Vector4 meshColor = quantum::Vector4(1, 1, 1, 1);
 
 DPROPERTY("Follow Target")
-doriax::Object* followTarget = nullptr;
+quantum::Object* followTarget = nullptr;
 ```
 
 ### Syntax forms
@@ -79,9 +79,9 @@ Type memberName = defaultValue;
 | `int`, `int32_t`, `uint32_t`, `short`, `long` | Int | Integer field |
 | `float`, `double` | Float | Float field |
 | `std::string`, `string` | String | Text field |
-| `Vector2`, `doriax::Vector2` | Vector2 | X/Y fields |
-| `Vector3`, `doriax::Vector3` | Vector3 | X/Y/Z fields |
-| `Vector4`, `doriax::Vector4` | Vector4 | X/Y/Z/W fields |
+| `Vector2`, `quantum::Vector2` | Vector2 | X/Y fields |
+| `Vector3`, `quantum::Vector3` | Vector3 | X/Y/Z fields |
+| `Vector4`, `quantum::Vector4` | Vector4 | X/Y/Z/W fields |
 | `Vector3` + `Color`/`Color3` hint | Color3 | RGB color picker |
 | `Vector4` + `Color`/`Color4` hint | Color4 | RGBA color picker |
 | Pointer (`Object*`, `Mesh*`, `Camera*`, etc.) | EntityReference | Entity picker |
@@ -125,13 +125,13 @@ DPROPERTY("Name")
 std::string name = "Player";
 
 DPROPERTY("Offset")
-doriax::Vector2 offset = doriax::Vector2(1, 2);
+quantum::Vector2 offset = quantum::Vector2(1, 2);
 
 DPROPERTY("Target")
-doriax::Vector3 target = doriax::Vector3(0, 3, 0);
+quantum::Vector3 target = quantum::Vector3(0, 3, 0);
 
 DPROPERTY("Tint", Color4)
-doriax::Vector4 tint = doriax::Vector4(1, 1, 1, 1);
+quantum::Vector4 tint = quantum::Vector4(1, 1, 1, 1);
 ```
 
 Non-null pointer defaults are not supported. Use `nullptr` and assign the target in the
@@ -225,7 +225,7 @@ the name is already taken.
 
     ```cpp
     DPROPERTY("Main Camera")
-    doriax::Camera* mainCamera = nullptr;
+    quantum::Camera* mainCamera = nullptr;
     ```
 
 !!! note "Drop on the header, not the source"
@@ -276,7 +276,7 @@ Values are stored in a `std::variant` (`ScriptPropertyValue`).
 | Code between `DPROPERTY` and member | Put the macro directly above the member |
 | Function call as default | Use literals only (`5.0f`, `"text"`, `Vector3(...)`) |
 | `nullptr` default on a non-pointer member | Ignored with a warning, use a literal of the member's type |
-| Missing `doriax::` prefix | Add namespace or `using namespace doriax` in header |
+| Missing `quantum::` prefix | Add namespace or `using namespace quantum` in header |
 | Expecting serialized C++ pointer | Entity references store `{entity, sceneId}` |
 | Lua property name mismatch | `name` must match `self.<name>` used in code |
 | Changed property type | Properties may reset value; rename if you need a fresh field |

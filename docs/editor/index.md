@@ -1,10 +1,10 @@
 ---
-description: Overview of the Doriax editor — panels, workflows, play mode, and navigation.
+description: Overview of the Quantum editor — panels, workflows, play mode, and navigation.
 ---
 
 # Editor Overview
 
-The Doriax editor is the primary authoring environment for your projects. It brings
+The Quantum editor is the primary authoring environment for your projects. It brings
 together scene editing, resource management, scripting, animation, play mode, and
 export tooling in one unified window so you can build, test, and ship games without
 leaving the editor.
@@ -25,6 +25,7 @@ The editor window is divided into a set of resizable panels:
 | **Animation Timeline** | Keyframe editor for object animation, sprite frames, and bones |
 | **Code Editor** | Integrated Lua and C++ editor with API completion and an event menu |
 | **AI Chat** | The built-in AI assistant, docked as a tab beside Properties. Its keys are in [Editor Settings → AI](editor-settings.md#ai), and outside agents reach its tools through the [MCP server](mcp-server.md) |
+| **Network Play** | Launch two independent server/client runtime windows for local multiplayer testing; see [Network Play](network-play.md) |
 | **Output panel** | Build logs, play-mode diagnostics, and export messages, persisted to [`editor.log`](../about/faq.md#where-can-i-find-the-editor-crash-log) for crash reports |
 | **Footer** | The [Git branch](version-control.md#git-in-the-editor) and Play / Pause / Stop on the left; FPS, frame time, draw calls, and triangles on the right |
 
@@ -37,7 +38,7 @@ The editor window is divided into a set of resizable panels:
 | **View** | Show or hide each panel, Detachable Windows, Reset Layout |
 | **Project** | [Project Settings](project-settings.md), Manage Scenes, Bundles, Empty Project Trash |
 | **Scene** | New Scene (3D / 2D / UI), Run, Pause, Resume, Stop, [Detach Camera](scene-view.md#detached-camera), Remove Scene from Project |
-| **Help** | Documentation (**F1**), Keyboard Shortcuts, Report an Issue, About Doriax |
+| **Help** | Documentation (**F1**), Keyboard Shortcuts, Report an Issue, About Quantum |
 
 ![The View menu toggles each panel](../assets/screenshots/menu-view.png)
 
@@ -65,6 +66,7 @@ offering to save it if it has unsaved changes.
 | Animate objects and characters | Animation Timeline |
 | Test gameplay | Play / Pause / Stop controls |
 | Prepare builds | Export Window |
+| Validate a project headlessly | Command-Line Tools, asset doctor, script lint, and release smoke |
 
 ## Scene types
 
@@ -95,6 +97,15 @@ web memory limits, native graphics), test with a proper exported build. The foot
 shows FPS, frame time, draw calls, and triangles while the viewport is drawing; the
 [`benchmark`](command-line.md#benchmark-measure-scene-fps) command records the same
 counters with VSync forced off.
+
+For two-player networking, use **Scene → Network Play**. It launches the saved
+project in separate server and client windows and keeps their PIDs and exit states
+visible without changing the authored scene. The panel also provides safe cleanup
+and protects the session configuration while a child is running.
+
+If the editor is interrupted during startup, use [Stability & Recovery](stability-and-recovery.md)
+before opening or saving a project again. The recovery marker, safe mode, layout
+reset, and crash sidecar are deliberately separate from scene serialization.
 
 ## Undo and redo
 
@@ -153,3 +164,5 @@ shortcut never steals a keystroke from an input.
 - [Export Window](export.md)
 - [Command-Line Tools](command-line.md)
 - [MCP Server](mcp-server.md)
+- [Network Play](network-play.md)
+- [Stability & Recovery](stability-and-recovery.md)

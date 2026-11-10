@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tileset Slicer — Quantum Engine Docs</title>
+  <meta name="description" content="Using the Tileset Slicer tool in Quantum to define tile regions for tilemaps.">
+  <meta property="og:title" content="Tileset Slicer — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/editor/tileset-slicer/">
+
+  <link rel="icon" type="image/png" href="../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/quantum.css">
+  <link rel="stylesheet" href="../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="tileset-slicer">Tileset Slicer<a class="headerlink" href="#tileset-slicer" title="Link to this section">&para;</a></h1>
+<p>The <strong>Tileset Slicer</strong> tool divides a tilemap's texture into uniformly-sized tile rects.
+Each rect gets a name and a numeric ID — its index in the tilemap's rect list. Those IDs
+are the values you store in <code>TileData</code> cells and reference from <code>Tilemap</code> objects in
+script.</p>
+<p><img alt="The Tileset Slicer cutting a tileset into 81 tile rects" src="../../assets/screenshots/tileset-slicer.png" /></p>
+<h2 id="opening-the-tileset-slicer">Opening the Tileset Slicer<a class="headerlink" href="#opening-the-tileset-slicer" title="Link to this section">&para;</a></h2>
+<p>Select an entity with a <strong>Tilemap</strong> component. In the <a href="../properties/">Properties window</a>,
+click <strong>Slicer Tool</strong> in the component's <strong>Tile Rects</strong> section. The slicer cuts the
+tilemap's texture; when the tilemap uses several textures, pick the one to slice at the
+top of the dialog.</p>
+<h2 id="setting-up-the-grid">Setting up the grid<a class="headerlink" href="#setting-up-the-grid" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Grid (Columns x Rows)</strong> / <strong>Cell Size (W x H)</strong></td>
+<td>Slice by tile count or by tile size in pixels</td>
+</tr>
+<tr>
+<td><strong>Columns</strong> / <strong>Rows</strong></td>
+<td>Number of tiles across and down; the tile size is derived from the texture size</td>
+</tr>
+<tr>
+<td><strong>Cell Width</strong> / <strong>Cell Height</strong></td>
+<td>Pixel size of one tile; the number of columns and rows is derived</td>
+</tr>
+<tr>
+<td><strong>Offset X / Y</strong></td>
+<td>Pixel inset of the first tile</td>
+</tr>
+<tr>
+<td><strong>Padding X / Y</strong></td>
+<td>Pixel gap between tiles, for tilesets with gutters</td>
+</tr>
+<tr>
+<td><strong>Prefix</strong></td>
+<td>Rect name, followed by its number: <code>tile_0</code>, <code>tile_1</code>, …</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>Preview</strong> shows how many rects the grid produces, and <strong>Rect Details</strong> lists each
+one in pixels. Click <strong>Apply</strong> to replace the rects of the sliced texture; rects that
+belong to the tilemap's other textures are kept, and the new ones follow them, numbered
+left to right, top to bottom. The change is one undoable step.</p>
+<h2 id="tile-ids">Tile IDs<a class="headerlink" href="#tile-ids" title="Link to this section">&para;</a></h2>
+<p>Tile IDs are plain integers. In a tilemap with a single texture, the tile at column 0,
+row 0 is ID <code>0</code>; column 1, row 0 is ID <code>1</code>; and so on. Use these IDs when filling
+<code>TileData</code> in script.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">-- Create a tilemap, assign a tileset texture, and place tiles</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">tilemap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Tilemap</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nv">tilemap</span><span class="p">:</span><span class="nf">setTexture</span><span class="p">(</span><span class="s2">&quot;world/tileset.png&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1">-- Define texture regions (rects), then place tiles that reference them</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nv">tilemap</span><span class="p">:</span><span class="nf">addRect</span><span class="p">(</span><span class="nf">Rect</span><span class="p">(</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">))</span><span class="w">                 </span><span class="c1">-- rect ID 0</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nv">tilemap</span><span class="p">:</span><span class="nf">addRect</span><span class="p">(</span><span class="nf">Rect</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">))</span><span class="w">                 </span><span class="c1">-- rect ID 1</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nv">tilemap</span><span class="p">:</span><span class="nf">addTile</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nf">Vector2</span><span class="p">(</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span><span class="w">           </span><span class="c1">-- rect ID, position, width, height</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nv">tilemap</span><span class="p">:</span><span class="nf">addTile</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nf">Vector2</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1">-- ... or paint with the rect IDs generated by the slicer directly</span>
+</code></pre></div>
+<h2 id="painting-tiles-in-the-editor">Painting tiles in the editor<a class="headerlink" href="#painting-tiles-in-the-editor" title="Link to this section">&para;</a></h2>
+<p>After slicing, the TilemapComponent's <strong>Tile Rects</strong> list shows a preview of each rect.
+To place tiles:</p>
+<ol>
+<li>Select the <strong>Tilemap</strong> entity.</li>
+<li>In the <strong>Properties window</strong>, find the rect in the <strong>Tile Rects</strong> list.</li>
+<li>Drag its preview into the viewport to place a tile there.</li>
+</ol>
+<p><img alt="Tile rect previews in the Tilemap component, ready to drag into the scene" src="../../assets/screenshots/properties-tilemap.png" /></p>
+<p>When arranging placed tiles in the <a href="../scene-view/">Scene View</a>, enable <strong>Snap tile</strong>
+in the viewport gear menu so drops and gizmo moves snap to each tile's width and
+height — useful for packing tiles flush without tuning the global grid.</p>
+<h2 id="collision-tiles">Collision tiles<a class="headerlink" href="#collision-tiles" title="Link to this section">&para;</a></h2>
+<p>Tiles carry no collision data. Give the level's solid areas their own entity with a
+<strong>2D Physics Body</strong> — for example <strong>Chain</strong> or <strong>Polygon</strong> shapes that follow the
+ground — and keep the tilemap purely visual. See <a href="../../manual/physics/">Physics</a>.</p>
+<h2 id="tips">Tips<a class="headerlink" href="#tips" title="Link to this section">&para;</a></h2>
+<ul>
+<li>Use power-of-two tile sizes (16×16, 32×32, 64×64) for consistent UV mapping.</li>
+<li>Keep the tileset image as one file even if the game uses multiple tile themes —
+  tile ID ranges can be managed logically in data.</li>
+<li>For sprite animation and character frames, use the <a href="../sprite-slicer/">Sprite Slicer</a>
+  instead.</li>
+<li>Export-friendly naming: use lowercase filenames and avoid spaces so tile resource
+  paths stay consistent across platforms.</li>
+</ul>
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Link to this section">&para;</a></h2>
+<ul>
+<li><a href="../sprite-slicer/">Sprite Slicer</a></li>
+<li><a href="../scene-view/#placing-and-grouping-tiles">Scene View</a></li>
+<li><a href="../../reference/classes/tilemap/">Tilemap</a></li>
+<li><a href="../../reference/classes/tiledata/">TileData</a></li>
+<li><a href="../../reference/classes/tilerectdata/">TileRectData</a></li>
+<li><a href="../../manual/2d-graphics/">2D Graphics</a></li>
+</ul>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../sprite-slicer/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Sprite Slicer</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../terrain-editor/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Terrain Editor</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/editor/tileset-slicer.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#tileset-slicer" class="dx-toc-link" data-level="1">Tileset Slicer</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#opening-the-tileset-slicer" class="dx-toc-link" data-level="2">Opening the Tileset Slicer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setting-up-the-grid" class="dx-toc-link" data-level="2">Setting up the grid</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#tile-ids" class="dx-toc-link" data-level="2">Tile IDs</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#painting-tiles-in-the-editor" class="dx-toc-link" data-level="2">Painting tiles in the editor</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#collision-tiles" class="dx-toc-link" data-level="2">Collision tiles</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#tips" class="dx-toc-link" data-level="2">Tips</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#see-also" class="dx-toc-link" data-level="2">See also</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../versions.json";
+    window.QUANTUM_PAGE_URL = "editor/tileset-slicer/";
+  </script>
+  <script src="../../js/quantum.js" defer></script>
+</body>
+</html>

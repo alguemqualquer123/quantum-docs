@@ -1,10 +1,10 @@
 ---
-description: How to download the Doriax editor or build it from source on your platform.
+description: How to download the Quantum editor or build it from source on your platform.
 ---
 
 # Installation
 
-There are two ways to get Doriax Engine: download a prebuilt editor, or build it from
+There are two ways to get Quantum Engine: download a prebuilt editor, or build it from
 source.
 
 ## Download a prebuilt editor
@@ -12,7 +12,7 @@ source.
 The fastest way to start is to grab a prebuilt build of the editor from the official
 website:
 
-[Download Doriax Engine](https://doriax.org/#download){ .dx-btn .dx-btn-primary }
+[Download Quantum Engine](https://alguemqualquer123.github.io/quantum-docs/#download){ .dx-btn .dx-btn-primary }
 
 Builds are available for:
 
@@ -29,8 +29,8 @@ branch.
     The `main` builds are made from the newest commit and are **not stable releases**.
     Expect bugs, incomplete features, and breaking changes. Use them at your own risk.
 
-The Windows download contains two executables: run `doriax-editor.exe` to open the
-editor, and use `doriax-editor-cmd.exe` for scripting and CI. See
+The Windows download contains two executables: run `quantum-editor.exe` to open the
+editor, and use `quantum-editor-cmd.exe` for scripting and CI. See
 [Command-Line Tools](../editor/command-line.md).
 
 The Linux download is an **AppImage**: a single file to run directly, with nothing to
@@ -38,33 +38,33 @@ install. From the release page it arrives without its executable bit, since no p
 survives an HTTP download, so mark it executable once:
 
 ```bash
-chmod +x Doriax-*-linux-x86_64.AppImage
+chmod +x Quantum-*-linux-x86_64.AppImage
 ```
 
 The main-branch build is a zip instead, which does carry the bit — unzip it and run. The
 release also offers the same build as a plain zip of loose binaries.
 
-!!! tip "Adding Doriax to your application menu"
+!!! tip "Adding Quantum to your application menu"
     An AppImage is a single self-contained file, so nothing registers it with your desktop
     on its own — which is why it has no menu entry or icon until you integrate it. Tools
     such as [Gear Lever](https://github.com/mijorus/gearlever) or `appimaged` read the
     desktop entry and icons bundled inside the AppImage and register them for you.
 
-The macOS download is a disk image holding `Doriax.app`. Open the `.dmg` and drag the app
+The macOS download is a disk image holding `Quantum.app`. Open the `.dmg` and drag the app
 onto the **Applications** shortcut inside it.
 
 Beside the disk image, macOS is also offered as a plain zip of loose binaries —
-`doriax-editor` next to `libdoriax.dylib` and the `engine/` runtime, with no `.app`
+`quantum-editor` next to `libquantum.dylib` and the `engine/` runtime, with no `.app`
 bundle. It is the same build, for cases where a bundle is inconvenient (a CI checkout, a
 tool that expects the binary directly). A zip that came through GitHub Actions drops the
 executable bit, so mark it once if the binary refuses to run:
 
 ```bash
-chmod +x doriax-editor
+chmod +x quantum-editor
 ```
 
 !!! warning "macOS blocks the first launch"
-    Doriax is signed, but not notarized by Apple — notarization requires a paid Apple
+    Quantum is signed, but not notarized by Apple — notarization requires a paid Apple
     Developer membership. macOS therefore reports that it cannot verify the app the first
     time you open it.
 
@@ -78,19 +78,19 @@ chmod +x doriax-editor
     is set by the browser rather than by macOS. This downloads the latest release:
 
     ```bash
-    curl -LO "$(curl -s https://api.github.com/repos/doriaxengine/doriax/releases/latest | grep -o 'https://[^"]*macos-universal\.dmg')"
+    curl -LO "$(curl -s https://api.github.com/repos/alguemqualquer123/quantum/releases/latest | grep -o 'https://[^"]*macos-universal\.dmg')"
     ```
 
 ## Build from source
 
-Doriax is built with **CMake**. The root project builds the desktop editor target
-`doriax-editor`.
+Quantum is built with **CMake**. The root project builds the desktop editor target
+`quantum-editor`.
 
 ### Quick build
 
 ```bash
-git clone https://github.com/doriaxengine/doriax.git
-cd doriax
+git clone https://github.com/alguemqualquer123/quantum.git
+cd quantum
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build --config Release
 ```

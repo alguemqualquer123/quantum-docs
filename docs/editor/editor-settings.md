@@ -69,7 +69,7 @@ warns that builds still use the stored kit until you press OK.
 
 !!! note "The compiler is stored per project, and remembered for new ones"
     Each project keeps its own kit, so a project that needs MSVC and one that needs
-    MinGW can coexist. The kit is saved beside the project in `.doriax/user/build.yaml`,
+    MinGW can coexist. The kit is saved beside the project in `.quantum/user/build.yaml`,
     which is not committed, so a teammate opening the same project keeps their own
     toolchain. The kit you last chose also becomes the default for projects opened
     afterwards that have none, so in practice you set it once.

@@ -1,29 +1,29 @@
 ---
-description: Run Doriax exports, shader generation, and scene benchmarks from the command line.
+description: Run Quantum exports, shader generation, and scene benchmarks from the command line.
 ---
 
 # Command-Line Tools
 
-The `doriax-editor` executable doubles as a **command-line tool**. `export` and `shaders`
+The `quantum-editor` executable doubles as a **command-line tool**. `export` and `shaders`
 are headless: they run and exit without opening a window, which is what build servers
 and CI want. `benchmark` opens a window, times a scene, prints JSON, and exits.
 
 ```bash
-doriax-editor export    --project <path> --out <dir> [options]
-doriax-editor shaders   --out <dir> --shader <spec> [options]
-doriax-editor benchmark --project <path> [--scene <scene>] [options]
+quantum-editor export    --project <path> --out <dir> [options]
+quantum-editor shaders   --out <dir> --shader <spec> [options]
+quantum-editor benchmark --project <path> [--scene <scene>] [options]
 ```
 
-Running `doriax-editor` with **no arguments** launches the normal graphical editor.
+Running `quantum-editor` with **no arguments** launches the normal graphical editor.
 `--help`, `-h` or `help` print the top-level usage. Anything else is reported as an
 unrecognized argument and exits with code `2`, so a mistyped subcommand fails instead of
 opening a window.
 
 !!! note "Windows: two executables"
-    Windows builds ship both. `doriax-editor.exe` is a GUI application — it re-attaches
+    Windows builds ship both. `quantum-editor.exe` is a GUI application — it re-attaches
     to the parent console so subcommand output still appears in your terminal, but `cmd`
     and PowerShell do not wait for a GUI application, so the prompt returns before the
-    command finishes and its exit code never reaches you. `doriax-editor-cmd.exe` is the
+    command finishes and its exit code never reaches you. `quantum-editor-cmd.exe` is the
     same program linked as a console application: use it for scripting and CI. Both
     accept the same subcommands, and both open the editor when given no arguments.
 
@@ -31,17 +31,17 @@ On Linux and macOS there is a single binary. `export` and `shaders` run before t
 backend starts, so they work on headless machines. `benchmark` still opens a window.
 
 !!! note "macOS: the binary is inside the app bundle"
-    The editor ships as `Doriax.app`, so the command-line entry point is
-    `Doriax.app/Contents/MacOS/Doriax`:
+    The editor ships as `Quantum.app`, so the command-line entry point is
+    `Quantum.app/Contents/MacOS/Quantum`:
 
     ```bash
-    /Applications/Doriax.app/Contents/MacOS/Doriax export \
+    /Applications/Quantum.app/Contents/MacOS/Quantum export \
       --project ./MyGame --out ./build/MyGame
     ```
 
     Alias it or add that directory to your `PATH` if you use it often. The
     [loose-binary zip](../getting-started/installation.md#download-a-prebuilt-editor) has
-    no bundle, so there the entry point is just `./doriax-editor`.
+    no bundle, so there the entry point is just `./quantum-editor`.
 
 ## `export` — build a project to a target
 
@@ -51,7 +51,7 @@ self-contained, buildable project directory — the same output as the
 [Export Window](export.md), but scriptable.
 
 ```bash
-doriax-editor export --project ./MyGame --out ./build/MyGame --backend vulkan
+quantum-editor export --project ./MyGame --out ./build/MyGame --backend vulkan
 ```
 
 ### Options
@@ -104,7 +104,7 @@ Android export.
 Useful for discovering a start-scene ID before exporting:
 
 ```bash
-doriax-editor export --project ./MyGame --list-scenes
+quantum-editor export --project ./MyGame --list-scenes
 # 1   MainMenu   scenes/main_menu.scene
 # 2   Level01    scenes/level_01.scene
 ```
@@ -123,11 +123,11 @@ Use it to compare scene settings — mesh LOD, depth prepass, foliage shadows �
 same machine without clicking through Play.
 
 ```bash
-doriax-editor benchmark --project ./MyGame --scene Level01 --out ./bench.json
+quantum-editor benchmark --project ./MyGame --scene Level01 --out ./bench.json
 ```
 
-On Windows call `doriax-editor-cmd` so the shell waits for the exit code. On macOS the
-entry point is `Doriax.app/Contents/MacOS/Doriax`, same as the other subcommands.
+On Windows call `quantum-editor-cmd` so the shell waits for the exit code. On macOS the
+entry point is `Quantum.app/Contents/MacOS/Quantum`, same as the other subcommands.
 
 ### Options
 
@@ -181,7 +181,7 @@ Compiles shader variants directly to an output directory, without exporting a wh
 project. Use it to pre-bake a shader cache or produce shader data for custom tooling.
 
 ```bash
-doriax-editor shaders --out ./shaders --shader mesh:Uv1,Nor --backend opengles
+quantum-editor shaders --out ./shaders --shader mesh:Uv1,Nor --backend opengles
 ```
 
 ### Options
@@ -219,8 +219,8 @@ Pass `--backend` multiple times, or give a single list separated by `,`, `+`, `|
 `;`:
 
 ```bash
-doriax-editor export -p ./MyGame -o ./build --backend vulkan --backend opengl
-doriax-editor export -p ./MyGame -o ./build --backend "vulkan,opengl,opengles"
+quantum-editor export -p ./MyGame -o ./build --backend vulkan --backend opengl
+quantum-editor export -p ./MyGame -o ./build --backend "vulkan,opengl,opengles"
 ```
 
 ## Shader specs
@@ -244,7 +244,7 @@ variant of a type (e.g. `--shader depth`).
 
 ```bash
 # Base mesh shader plus a UV+normal variant, for WebGL 2 and Direct3D 11
-doriax-editor shaders --out ./shaders \
+quantum-editor shaders --out ./shaders \
   --shader mesh \
   --shader mesh:Uv1,Nor \
   --backend opengles --backend d3d11
@@ -261,14 +261,14 @@ doriax-editor shaders --out ./shaders \
 ## Use in CI/CD
 
 Because the commands are headless and return meaningful exit codes, they drop straight
-into a pipeline. On Windows runners call `doriax-editor-cmd`: the default PowerShell
+into a pipeline. On Windows runners call `quantum-editor-cmd`: the default PowerShell
 shell does not wait for the GUI binary, so the step can pass even when the export
 failed. Example GitHub Actions step:
 
 ```yaml
 - name: Export game (Vulkan + WebGL 2)
   run: |
-    doriax-editor export \
+    quantum-editor export \
       --project ./MyGame \
       --out ./build/MyGame \
       --backend "vulkan,opengles"

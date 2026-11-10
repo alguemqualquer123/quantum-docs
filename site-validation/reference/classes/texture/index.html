@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Texture — Quantum Engine Docs</title>
+  <meta name="description" content="Texture API reference (C++ and Lua).">
+  <meta property="og:title" content="Texture — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/reference/classes/texture/">
+
+  <link rel="icon" type="image/png" href="../../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../../css/quantum.css">
+  <link rel="stylesheet" href="../../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="texture">Texture<a class="headerlink" href="#texture" title="Link to this section">&para;</a></h1>
+<p><strong>C++ type:</strong> <code>Texture</code></p>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Link to this section">&para;</a></h2>
+<p>Represents a GPU texture resource. <code>Texture</code> supports 2D textures, cube maps, and framebuffer textures, covering the full range from loading a simple PNG file to driving a render-to-texture pipeline.</p>
+<p>A <code>Texture</code> object is a lightweight handle; the actual GPU resource is managed internally by the texture pool and shared between objects that reference the same file path. Textures are loaded lazily — the GPU upload happens the first time the texture is needed for rendering.</p>
+<p><code>Texture</code> is most commonly used as a field in <a href="../material/">Material</a> or passed to <code>Mesh::setTexture()</code>.</p>
+<h3 id="properties">Properties<a class="headerlink" href="#properties" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Default</th>
+<th>Langs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#texturefilter">TextureFilter</a></td>
+<td><a href="#minfilter-magfilter">minFilter</a></td>
+<td><code>LINEAR</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td><a href="#texturefilter">TextureFilter</a></td>
+<td><a href="#minfilter-magfilter">magFilter</a></td>
+<td><code>LINEAR</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td><a href="#texturewrap">TextureWrap</a></td>
+<td><a href="#wrapu-wrapv">wrapU</a></td>
+<td><code>REPEAT</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td><a href="#texturewrap">TextureWrap</a></td>
+<td><a href="#wrapu-wrapv">wrapV</a></td>
+<td><code>REPEAT</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#svgscale">svgScale</a></td>
+<td><code>1.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td><a href="#texturealphaborder">TextureAlphaBorder</a></td>
+<td><a href="#alphaborder">alphaBorder</a></td>
+<td><code>AUTO</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#releasedataafterload">releaseDataAfterLoad</a></td>
+<td><code>true</code></td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Langs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void</td>
+<td><a href="#setpath">setPath</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setdata">setData</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setid">setId</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setcubemap">setCubeMap</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setcubepaths">setCubePaths</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setcubedatas">setCubeDatas</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setframebuffer">setFramebuffer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td><a href="../textureloadresult/">TextureLoadResult</a></td>
+<td><a href="#load">load</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#destroy">destroy</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>std::string</td>
+<td><a href="#getpath">getPath</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>std::string</td>
+<td><a href="#getid">getId</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>unsigned int</td>
+<td><a href="#getwidth-getheight">getWidth</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>unsigned int</td>
+<td><a href="#getwidth-getheight">getHeight</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#istransparent">isTransparent</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#iscubemap">isCubeMap</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#empty">empty</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#isframebuffer">isFramebuffer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#isframebufferoutdated">isFramebufferOutdated</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#releasedata">releaseData</a></td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<h2 id="enumerations">Enumerations<a class="headerlink" href="#enumerations" title="Link to this section">&para;</a></h2>
+<h3 id="texturefilter">TextureFilter<a class="headerlink" href="#texturefilter" title="Link to this section">&para;</a></h3>
+<p>Filtering modes applied when the texture is sampled at a scale different from its native resolution.</p>
+<ul>
+<li><strong>NEAREST</strong> — No interpolation (nearest-neighbour). Produces a pixelated look; useful for pixel art.</li>
+<li><strong>LINEAR</strong> — Bilinear interpolation between the four nearest texels.</li>
+<li><strong>NEAREST_MIPMAP_NEAREST</strong> — Nearest-neighbour within the nearest mipmap level.</li>
+<li><strong>NEAREST_MIPMAP_LINEAR</strong> — Nearest-neighbour, with linear interpolation between mipmap levels.</li>
+<li><strong>LINEAR_MIPMAP_NEAREST</strong> — Bilinear within the nearest mipmap level.</li>
+<li><strong>LINEAR_MIPMAP_LINEAR</strong> — Trilinear filtering (bilinear + mipmap interpolation). Best quality for 3D surfaces.</li>
+</ul>
+<hr />
+<h3 id="texturewrap">TextureWrap<a class="headerlink" href="#texturewrap" title="Link to this section">&para;</a></h3>
+<p>Controls what happens when UV coordinates fall outside the <code>[0, 1]</code> range.</p>
+<ul>
+<li><strong>REPEAT</strong> — The texture tiles continuously. Default for most use cases.</li>
+<li><strong>MIRRORED_REPEAT</strong> — The texture tiles but mirrors on every repeat, producing a seamless look.</li>
+<li><strong>CLAMP_TO_EDGE</strong> — UV values are clamped; the edge pixel is stretched.</li>
+<li><strong>CLAMP_TO_BORDER</strong> — UV values outside <code>[0, 1]</code> sample a fixed border colour.</li>
+</ul>
+<hr />
+<h3 id="texturealphaborder">TextureAlphaBorder<a class="headerlink" href="#texturealphaborder" title="Link to this section">&para;</a></h3>
+<p>Whether an image loaded from a file gets its <a href="#alphaborder">alpha border</a> fixed.</p>
+<ul>
+<li><strong>AUTO</strong> — Fixed on sprites, tilemaps, polygons, UI and particles, kept everywhere else.</li>
+<li><strong>FIX</strong> — Always fixed.</li>
+<li><strong>KEEP</strong> — Loaded as the file stores it.</li>
+</ul>
+<hr />
+<h2 id="property-details">Property details<a class="headerlink" href="#property-details" title="Link to this section">&para;</a></h2>
+<h3 id="minfilter-magfilter">minFilter / magFilter<a class="headerlink" href="#minfilter-magfilter" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setMinFilter</strong>(<a href="#texturefilter">TextureFilter</a> filter)</li>
+<li><em>Getter</em>: <a href="#texturefilter">TextureFilter</a> <strong>getMinFilter</strong>() const</li>
+<li><em>Setter</em>: void <strong>setMagFilter</strong>(<a href="#texturefilter">TextureFilter</a> filter)</li>
+<li><em>Getter</em>: <a href="#texturefilter">TextureFilter</a> <strong>getMagFilter</strong>() const</li>
+</ul>
+<p><code>minFilter</code> applies when the texture is rendered smaller than its native resolution (minification). <code>magFilter</code> applies when it is rendered larger (magnification). Only <code>NEAREST</code> and <code>LINEAR</code> are valid values for <code>magFilter</code>.</p>
+<hr />
+<h3 id="wrapu-wrapv">wrapU / wrapV<a class="headerlink" href="#wrapu-wrapv" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setWrapU</strong>(<a href="#texturewrap">TextureWrap</a> wrapU)</li>
+<li><em>Getter</em>: <a href="#texturewrap">TextureWrap</a> <strong>getWrapU</strong>() const</li>
+<li><em>Setter</em>: void <strong>setWrapV</strong>(<a href="#texturewrap">TextureWrap</a> wrapV)</li>
+<li><em>Getter</em>: <a href="#texturewrap">TextureWrap</a> <strong>getWrapV</strong>() const</li>
+</ul>
+<p>Wrapping mode along the horizontal (U) and vertical (V) texture coordinates.</p>
+<hr />
+<h3 id="svgscale">svgScale<a class="headerlink" href="#svgscale" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setSvgScale</strong>(float scale)</li>
+<li><em>Getter</em>: float <strong>getSvgScale</strong>() const</li>
+</ul>
+<p>Rasterization scale for <code>.svg</code> path sources (<code>2.0</code> = twice the intrinsic resolution). Has no
+effect on raster images or framebuffer textures. Invalid values (zero or negative) snap back
+to <code>1.0</code>.</p>
+<p>The scale is part of the texture's identity: the same SVG file at two different scales
+produces two independent GPU textures, so different slots can share one file at different
+resolutions. Changing the scale on an SVG source releases the current GPU texture and
+reloads at the new resolution.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Texture</span><span class="w"> </span><span class="n">icon</span><span class="p">(</span><span class="s">&quot;ui/icon.svg&quot;</span><span class="p">);</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">icon</span><span class="p">.</span><span class="n">setSvgScale</span><span class="p">(</span><span class="mf">4.0f</span><span class="p">);</span><span class="w">  </span><span class="c1">// a 24x24 SVG rasterizes as 96x96</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">icon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Texture</span><span class="p">(</span><span class="s2">&quot;ui/icon.svg&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">icon</span><span class="p">.</span><span class="py">svgScale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="w">  </span><span class="c1">-- a 24x24 SVG rasterizes as 96x96</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="alphaborder">alphaBorder<a class="headerlink" href="#alphaborder" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setAlphaBorder</strong>(<a href="#texturealphaborder">TextureAlphaBorder</a> alphaBorder)</li>
+<li><em>Getter</em>: <a href="#texturealphaborder">TextureAlphaBorder</a> <strong>getAlphaBorder</strong>() const</li>
+</ul>
+<p>Linear filtering also reads the color of fully transparent pixels next to visible ones, which image editors often save as black, and shows it as a grey or dark outline around the image. With the fix, those pixels take the color of their visible neighbors when the file loads, up to 4 pixels out. Alpha and visible pixels do not change.</p>
+<p><code>AUTO</code> fixes it where the image is drawn with transparency (sprites, tilemaps, polygons, UI and particles) and keeps the file as is elsewhere. That protects 3D materials drawn opaque, whose alpha is ignored and whose transparent pixels are visible, and data maps that store other values in their channels. Set <code>FIX</code> for a 3D texture that is alpha tested or blended, such as foliage.</p>
+<p>Like <a href="#svgscale">svgScale</a>, the fix is part of the texture's identity: the same file fixed and kept is two GPU textures. It only applies to textures loaded from a file.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Texture</span><span class="w"> </span><span class="n">leaves</span><span class="p">(</span><span class="s">&quot;models/leaves.png&quot;</span><span class="p">);</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">leaves</span><span class="p">.</span><span class="n">setAlphaBorder</span><span class="p">(</span><span class="n">TextureAlphaBorder</span><span class="o">::</span><span class="n">FIX</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">leaves</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Texture</span><span class="p">(</span><span class="s2">&quot;models/leaves.png&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">leaves</span><span class="p">.</span><span class="py">alphaBorder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">TextureAlphaBorder</span><span class="p">.</span><span class="py">FIX</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="releasedataafterload">releaseDataAfterLoad<a class="headerlink" href="#releasedataafterload" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setReleaseDataAfterLoad</strong>(bool release)</li>
+<li><em>Getter</em>: bool <strong>isReleaseDataAfterLoad</strong>() const</li>
+</ul>
+<p>Frees the CPU-side pixel data as soon as the texture reaches the GPU. <code>true</code> by default, but textures built from a <a href="../texturedata/">TextureData</a> keep their pixels: the <code>Texture(id, data)</code> constructor, <a href="#setdata">setData</a> and <a href="#setcubedatas">setCubeDatas</a> all clear the flag, as does <a href="#setframebuffer">setFramebuffer</a>. See <a href="#releasedata">releaseData</a> to free the pixels on demand.</p>
+<hr />
+<h2 id="method-details">Method details<a class="headerlink" href="#method-details" title="Link to this section">&para;</a></h2>
+<h3 id="setpath">setPath<a class="headerlink" href="#setpath" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setPath</strong>(const std::string&amp; path)</li>
+</ul>
+<p>Sets the file path for a 2D texture. The file is not loaded immediately; loading is deferred to the first time the texture is needed for rendering.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">C++</label><label for="__tabbed_3_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">Texture</span><span class="w"> </span><span class="n">tex</span><span class="p">;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">tex</span><span class="p">.</span><span class="n">setPath</span><span class="p">(</span><span class="s">&quot;textures/wall.png&quot;</span><span class="p">);</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">material</span><span class="p">.</span><span class="n">baseColorTexture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tex</span><span class="p">;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">tex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Texture</span><span class="p">()</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nv">tex</span><span class="p">:</span><span class="nf">setPath</span><span class="p">(</span><span class="s2">&quot;textures/wall.png&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nv">Log</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="s2">&quot;Texture path: &quot;</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="nv">tex</span><span class="p">:</span><span class="nf">getPath</span><span class="p">())</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><code>Material</code> fields are read-only in Lua. To assign this path to a mesh, use
+<code>mesh:setTexture(tex:getPath())</code>.</p>
+<p>Alternatively, pass the path directly to the constructor: <code>Texture("textures/wall.png")</code>.</p>
+<p>Setting a new path resets <a href="#svgscale">svgScale</a> to <code>1.0</code>. The legacy form
+<code>"icon.svg?svgScale=4"</code> is still accepted: the suffix is absorbed into the <code>svgScale</code>
+property and <code>getPath()</code> returns the clean file path.</p>
+<hr />
+<h3 id="setdata">setData<a class="headerlink" href="#setdata" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setData</strong>(const std::string&amp; id, TextureData data)</li>
+</ul>
+<p>Creates a texture from in-memory pixel data (<a href="../texturedata/">TextureData</a>). The <code>id</code> is an arbitrary string used as a cache key; using the same id for identical pixel data avoids uploading duplicates.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">C++</label><label for="__tabbed_4_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">TextureData</span><span class="w"> </span><span class="n">td</span><span class="p">;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">td</span><span class="p">.</span><span class="n">loadTextureFromFile</span><span class="p">(</span><span class="s">&quot;textures/icon.png&quot;</span><span class="p">);</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">Texture</span><span class="w"> </span><span class="n">tex</span><span class="p">;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">tex</span><span class="p">.</span><span class="n">setData</span><span class="p">(</span><span class="s">&quot;icon&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">td</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">td</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">TextureData</span><span class="p">()</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">td</span><span class="p">:</span><span class="nf">loadTextureFromFile</span><span class="p">(</span><span class="s2">&quot;textures/icon.png&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="kd">local</span><span class="w"> </span><span class="nv">tex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Texture</span><span class="p">()</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nv">tex</span><span class="p">:</span><span class="nf">setData</span><span class="p">(</span><span class="s2">&quot;icon&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">td</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="setid">setId<a class="headerlink" href="#setid" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setId</strong>(const std::string&amp; id)</li>
+</ul>
+<p>Manually assigns a cache key without providing pixel data. Useful for referencing a texture that is already in the pool from another code path.</p>
+<hr />
+<h3 id="setcubemap">setCubeMap<a class="headerlink" href="#setcubemap" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setCubeMap</strong>(const std::string&amp; path)</li>
+</ul>
+<p>Convenience overload that treats <code>path</code> as a directory containing six face images in the conventional naming format (<code>front</code>, <code>back</code>, <code>left</code>, <code>right</code>, <code>up</code>, <code>down</code>). Exact naming depends on the engine's convention.</p>
+<hr />
+<h3 id="setcubepaths">setCubePaths<a class="headerlink" href="#setcubepaths" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setCubePaths</strong>(const std::string&amp; front, const std::string&amp; back, const std::string&amp; left, const std::string&amp; right, const std::string&amp; up, const std::string&amp; down)</li>
+</ul>
+<p>Loads a cube map from six individual image files. Typically used for skyboxes or environment reflections.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">C++</label><label for="__tabbed_5_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">Texture</span><span class="w"> </span><span class="n">sky</span><span class="p">;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">sky</span><span class="p">.</span><span class="n">setCubePaths</span><span class="p">(</span><span class="s">&quot;sky/px.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sky/nx.png&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">                 </span><span class="s">&quot;sky/ny.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sky/py.png&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">                 </span><span class="s">&quot;sky/pz.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sky/nz.png&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">sky</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Texture</span><span class="p">()</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nv">sky</span><span class="p">:</span><span class="nf">setCubePaths</span><span class="p">(</span><span class="s2">&quot;sky/px.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sky/nx.png&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">                 </span><span class="s2">&quot;sky/ny.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sky/py.png&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">                 </span><span class="s2">&quot;sky/pz.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sky/nz.png&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="setcubedatas">setCubeDatas<a class="headerlink" href="#setcubedatas" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setCubeDatas</strong>(const std::string&amp; id, TextureData front, TextureData back, TextureData left, TextureData right, TextureData up, TextureData down)</li>
+</ul>
+<p>Creates a cube-map texture from six in-memory <a href="../texturedata/">TextureData</a> faces. The <code>id</code> is used as a pool cache key.</p>
+<hr />
+<h3 id="setframebuffer">setFramebuffer<a class="headerlink" href="#setframebuffer" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setFramebuffer</strong>(<a href="../framebuffer/">Framebuffer</a>* framebuffer)</li>
+</ul>
+<p>Points the texture at a render target so it can be sampled like any other texture. Also clears <a href="#releasedataafterload">releaseDataAfterLoad</a>, unlike the <code>Texture(Framebuffer*)</code> constructor, which leaves it set.</p>
+<hr />
+<h3 id="load">load<a class="headerlink" href="#load" title="Link to this section">&para;</a></h3>
+<ul>
+<li><a href="../textureloadresult/">TextureLoadResult</a> <strong>load</strong>()</li>
+</ul>
+<p>Forces an immediate CPU-side load of the texture data from disk. This is normally not required because loading is deferred, but you can call it to pre-warm assets during a loading screen.</p>
+<hr />
+<h3 id="destroy">destroy<a class="headerlink" href="#destroy" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>destroy</strong>()</li>
+</ul>
+<p>Releases the GPU resource and removes the texture from the pool. After calling this, the texture object is empty.</p>
+<hr />
+<h3 id="getpath">getPath<a class="headerlink" href="#getpath" title="Link to this section">&para;</a></h3>
+<ul>
+<li>std::string <strong>getPath</strong>(size_t index = 0) const</li>
+</ul>
+<p>Returns the file path associated with this texture. For cube maps, <code>index</code> selects the face (0 = front, 1 = back, 2 = left, 3 = right, 4 = up, 5 = down).</p>
+<hr />
+<h3 id="getid">getId<a class="headerlink" href="#getid" title="Link to this section">&para;</a></h3>
+<ul>
+<li>std::string <strong>getId</strong>() const</li>
+</ul>
+<p>Returns the internal cache key used to identify this texture in the pool. For an SVG source
+with a non-default <a href="#svgscale">svgScale</a>, the id encodes the scale (<code>"icon.svg?svgScale=4"</code>)
+because each scale is a separate pool entry; use <a href="#getpath">getPath</a> when you need the plain
+file path.</p>
+<hr />
+<h3 id="getwidth-getheight">getWidth / getHeight<a class="headerlink" href="#getwidth-getheight" title="Link to this section">&para;</a></h3>
+<ul>
+<li>unsigned int <strong>getWidth</strong>() const</li>
+<li>unsigned int <strong>getHeight</strong>() const</li>
+</ul>
+<p>Returns the pixel dimensions of the loaded texture. Returns <code>0</code> if the texture has not been loaded yet.</p>
+<hr />
+<h3 id="istransparent">isTransparent<a class="headerlink" href="#istransparent" title="Link to this section">&para;</a></h3>
+<ul>
+<li>bool <strong>isTransparent</strong>() const</li>
+</ul>
+<p>Returns <code>true</code> if the texture image contains pixels with alpha below <code>1.0</code>. Used internally by the engine to determine whether the owning mesh should be rendered in the transparent pass.</p>
+<hr />
+<h3 id="iscubemap">isCubeMap<a class="headerlink" href="#iscubemap" title="Link to this section">&para;</a></h3>
+<ul>
+<li>bool <strong>isCubeMap</strong>() const</li>
+</ul>
+<p>Returns <code>true</code> if this texture is a cube map (six faces).</p>
+<hr />
+<h3 id="empty">empty<a class="headerlink" href="#empty" title="Link to this section">&para;</a></h3>
+<ul>
+<li>bool <strong>empty</strong>() const</li>
+</ul>
+<p>Returns <code>true</code> if no path, data, or framebuffer has been assigned to this texture.</p>
+<hr />
+<h3 id="isframebufferoutdated">isFramebufferOutdated<a class="headerlink" href="#isframebufferoutdated" title="Link to this section">&para;</a></h3>
+<ul>
+<li>bool <strong>isFramebufferOutdated</strong>() const</li>
+</ul>
+<p>Returns <code>true</code> when the render target has been resized or recreated since the texture last bound it, so the caller knows to rebind.</p>
+<hr />
+<h3 id="isframebuffer">isFramebuffer<a class="headerlink" href="#isframebuffer" title="Link to this section">&para;</a></h3>
+<ul>
+<li>bool <strong>isFramebuffer</strong>() const</li>
+</ul>
+<p>Returns <code>true</code> if this texture was created from a <a href="../framebuffer/">Framebuffer</a> (render-to-texture).</p>
+<hr />
+<h3 id="releasedata">releaseData<a class="headerlink" href="#releasedata" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>releaseData</strong>()</li>
+</ul>
+<p>Frees the CPU-side pixel data after it has been uploaded to the GPU. Reduces memory usage on platforms with limited RAM. The texture remains valid for rendering.</p>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <span></span>
+  <span></span>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/reference/classes/texture.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#texture" class="dx-toc-link" data-level="1">Texture</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#description" class="dx-toc-link" data-level="2">Description</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#properties" class="dx-toc-link" data-level="3">Properties</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#methods" class="dx-toc-link" data-level="3">Methods</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#enumerations" class="dx-toc-link" data-level="2">Enumerations</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#texturefilter" class="dx-toc-link" data-level="3">TextureFilter</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#texturewrap" class="dx-toc-link" data-level="3">TextureWrap</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#texturealphaborder" class="dx-toc-link" data-level="3">TextureAlphaBorder</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#property-details" class="dx-toc-link" data-level="2">Property details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#minfilter-magfilter" class="dx-toc-link" data-level="3">minFilter / magFilter</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#wrapu-wrapv" class="dx-toc-link" data-level="3">wrapU / wrapV</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#svgscale" class="dx-toc-link" data-level="3">svgScale</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#alphaborder" class="dx-toc-link" data-level="3">alphaBorder</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#releasedataafterload" class="dx-toc-link" data-level="3">releaseDataAfterLoad</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#method-details" class="dx-toc-link" data-level="2">Method details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#setpath" class="dx-toc-link" data-level="3">setPath</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setdata" class="dx-toc-link" data-level="3">setData</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setid" class="dx-toc-link" data-level="3">setId</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setcubemap" class="dx-toc-link" data-level="3">setCubeMap</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setcubepaths" class="dx-toc-link" data-level="3">setCubePaths</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setcubedatas" class="dx-toc-link" data-level="3">setCubeDatas</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setframebuffer" class="dx-toc-link" data-level="3">setFramebuffer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#load" class="dx-toc-link" data-level="3">load</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#destroy" class="dx-toc-link" data-level="3">destroy</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getpath" class="dx-toc-link" data-level="3">getPath</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getid" class="dx-toc-link" data-level="3">getId</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getwidth-getheight" class="dx-toc-link" data-level="3">getWidth / getHeight</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#istransparent" class="dx-toc-link" data-level="3">isTransparent</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#iscubemap" class="dx-toc-link" data-level="3">isCubeMap</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#empty" class="dx-toc-link" data-level="3">empty</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#isframebufferoutdated" class="dx-toc-link" data-level="3">isFramebufferOutdated</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#isframebuffer" class="dx-toc-link" data-level="3">isFramebuffer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#releasedata" class="dx-toc-link" data-level="3">releaseData</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../../versions.json";
+    window.QUANTUM_PAGE_URL = "reference/classes/texture/";
+  </script>
+  <script src="../../../js/quantum.js" defer></script>
+</body>
+</html>

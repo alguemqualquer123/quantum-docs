@@ -1,10 +1,10 @@
 ---
-description: CMake options, generated artifacts, backends, and build configuration reference for Doriax.
+description: CMake options, generated artifacts, backends, and build configuration reference for Quantum.
 ---
 
 # Build Options
 
-Doriax uses CMake for desktop editor/runtime builds and platform tooling for mobile,
+Quantum uses CMake for desktop editor/runtime builds and platform tooling for mobile,
 Apple, and web exports.
 
 ## Common requirements
@@ -12,7 +12,7 @@ Apple, and web exports.
 | Requirement | Notes |
 | --- | --- |
 | CMake | 3.20 or newer |
-| C++ compiler | MSVC, GCC, Clang, or equivalent, capable of the selected `DORIAX_CXX_STANDARD` (C++17 by default) |
+| C++ compiler | MSVC, GCC, Clang, or equivalent, capable of the selected `QUANTUM_CXX_STANDARD` (C++17 by default) |
 | Python 3 | Used by code generation scripts |
 | Platform SDK | Required for Android, iOS, macOS, and web builds |
 
@@ -20,24 +20,24 @@ Apple, and web exports.
 
 ```bash
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build --config Release --target doriax-editor
+cmake --build build --config Release --target quantum-editor
 cmake --install build --config Release --strip
 ```
 
-`DORIAX_CXX_STANDARD` applies here too, building the editor and engine with it. It is
+`QUANTUM_CXX_STANDARD` applies here too, building the editor and engine with it. It is
 independent of the standard a project selects: the editor compiles script plugins with
 the project's value regardless of how the editor itself was built.
 
-Leave `DORIAX_PHYSICS_2D` and `DORIAX_PHYSICS_3D` on for the editor: it authors every
+Leave `QUANTUM_PHYSICS_2D` and `QUANTUM_PHYSICS_3D` on for the editor: it authors every
 component, and Play links against its engine library, so the editor needs both backends.
 They are meant for runtime builds.
 
-On Windows the build also provides `doriax-editor-cmd`, the same editor linked as a
+On Windows the build also provides `quantum-editor-cmd`, the same editor linked as a
 console application for automation and terminal output. It is excluded from the default
 build, so request it by name:
 
 ```bash
-cmake --build build --config Release --target doriax-editor-cmd
+cmake --build build --config Release --target quantum-editor-cmd
 ```
 
 See [Command-Line Tools](../editor/command-line.md).
@@ -60,7 +60,7 @@ cmake --build build --config Debug
 
 | Option | Effect |
 | --- | --- |
-| `DORIAX_SHARED` | Build the engine as a shared library when enabled |
+| `QUANTUM_SHARED` | Build the engine as a shared library when enabled |
 | `ENABLE_OPT` | Enable SPIR-V optimizer support when available |
 | `EMSCRIPTEN_THREAD_SUPPORT` | Enable pthread support for Emscripten builds |
 
@@ -68,19 +68,19 @@ cmake --build build --config Debug
 
 | Option | Default | Effect |
 | --- | --- | --- |
-| `DORIAX_VSYNC_ENABLED` | `ON` | Synchronize supported desktop presentation backends to the display refresh rate. Set to `OFF` to request an uncapped build. macOS Metal remains synchronized. |
-| `DORIAX_WINDOW_WIDTH` | `960` | Initial window width in pixels for desktop builds |
-| `DORIAX_WINDOW_HEIGHT` | `540` | Initial window height in pixels for desktop builds |
-| `DORIAX_WINDOW_MODE` | `0` | Initial window state: `0` windowed, `1` maximized, `2` fullscreen. The Sokol app backend has no maximized support and treats `1` as windowed. |
-| `DORIAX_WINDOW_RESIZABLE` | `ON` | Allow resizing the window. Ignored by the Sokol app backend, whose windows are always resizable. |
-| `DORIAX_WINDOW_TITLE` | `"Doriax"` | Window title-bar text |
-| `DORIAX_CXX_STANDARD` | `17` | C++ standard for the engine and the game target. Accepts `17`, `20` or `23` only — configuration fails on any other value. |
-| `DORIAX_PHYSICS_2D` | `ON` | Build and link Box2D. `OFF` leaves out 2D bodies, joints and their Lua API. When on, the engine target also defines the `DORIAX_PHYSICS_2D` macro for the game. |
-| `DORIAX_PHYSICS_3D` | `ON` | Build and link Jolt. `OFF` leaves out 3D bodies, joints and their Lua API. When on, the engine target also defines the `DORIAX_PHYSICS_3D` macro for the game. |
-| `DORIAX_ADMOB` | `ON` | iOS only: link Google Mobile Ads and compile the AdMob adapter, defining the `DORIAX_ADMOB` macro. `OFF` leaves [`AdMob`](classes/admob.md) unavailable. |
-| `DORIAX_STOREKIT` | `ON` | iOS only: compile the StoreKit 2 adapter, a Swift source that needs Swift 6.1 (Xcode 16.3 or later), defining the `DORIAX_STOREKIT` macro. `OFF` leaves [`InAppPurchase`](classes/inapppurchase.md) unavailable on iOS. |
-| `DORIAX_WEB_PORTAL` | `none` | Web only: the game portal SDK built in for [`WebPortal`](classes/webportal.md): `none`, `crazygames`, `poki`, `gamedistribution`, `yandex` or `youtube`. Any other value fails configuration. A portal also defines `DORIAX_WEB_PORTAL_<NAME>`, like `DORIAX_WEB_PORTAL_POKI`. |
-| `DORIAX_WEB_PORTAL_GAME_ID` | `""` | Web only: the game ID of portals that need one, which is GameDistribution. |
+| `QUANTUM_VSYNC_ENABLED` | `ON` | Synchronize supported desktop presentation backends to the display refresh rate. Set to `OFF` to request an uncapped build. macOS Metal remains synchronized. |
+| `QUANTUM_WINDOW_WIDTH` | `960` | Initial window width in pixels for desktop builds |
+| `QUANTUM_WINDOW_HEIGHT` | `540` | Initial window height in pixels for desktop builds |
+| `QUANTUM_WINDOW_MODE` | `0` | Initial window state: `0` windowed, `1` maximized, `2` fullscreen. The Sokol app backend has no maximized support and treats `1` as windowed. |
+| `QUANTUM_WINDOW_RESIZABLE` | `ON` | Allow resizing the window. Ignored by the Sokol app backend, whose windows are always resizable. |
+| `QUANTUM_WINDOW_TITLE` | `"Quantum"` | Window title-bar text |
+| `QUANTUM_CXX_STANDARD` | `17` | C++ standard for the engine and the game target. Accepts `17`, `20` or `23` only — configuration fails on any other value. |
+| `QUANTUM_PHYSICS_2D` | `ON` | Build and link Box2D. `OFF` leaves out 2D bodies, joints and their Lua API. When on, the engine target also defines the `QUANTUM_PHYSICS_2D` macro for the game. |
+| `QUANTUM_PHYSICS_3D` | `ON` | Build and link Jolt. `OFF` leaves out 3D bodies, joints and their Lua API. When on, the engine target also defines the `QUANTUM_PHYSICS_3D` macro for the game. |
+| `QUANTUM_ADMOB` | `ON` | iOS only: link Google Mobile Ads and compile the AdMob adapter, defining the `QUANTUM_ADMOB` macro. `OFF` leaves [`AdMob`](classes/admob.md) unavailable. |
+| `QUANTUM_STOREKIT` | `ON` | iOS only: compile the StoreKit 2 adapter, a Swift source that needs Swift 6.1 (Xcode 16.3 or later), defining the `QUANTUM_STOREKIT` macro. `OFF` leaves [`InAppPurchase`](classes/inapppurchase.md) unavailable on iOS. |
+| `QUANTUM_WEB_PORTAL` | `none` | Web only: the game portal SDK built in for [`WebPortal`](classes/webportal.md): `none`, `crazygames`, `poki`, `gamedistribution`, `yandex` or `youtube`. Any other value fails configuration. A portal also defines `QUANTUM_WEB_PORTAL_<NAME>`, like `QUANTUM_WEB_PORTAL_POKI`. |
+| `QUANTUM_WEB_PORTAL_GAME_ID` | `""` | Web only: the game ID of portals that need one, which is GameDistribution. |
 
 The editor writes these options into exported CMake projects from **Project
 Settings** (VSync, the Window settings, the C++ standard, the physics backends, iOS
@@ -90,10 +90,10 @@ configured standalone runtime, override them at configure time:
 ```bash
 cmake -S engine -B build-runtime \
   -DPROJECT_ROOT=/path/to/project \
-  -DDORIAX_VSYNC_ENABLED=OFF \
-  -DDORIAX_WINDOW_MODE=2 \
-  -DDORIAX_WINDOW_TITLE="My Game" \
-  -DDORIAX_CXX_STANDARD=23
+  -DQUANTUM_VSYNC_ENABLED=OFF \
+  -DQUANTUM_WINDOW_MODE=2 \
+  -DQUANTUM_WINDOW_TITLE="My Game" \
+  -DQUANTUM_CXX_STANDARD=23
 ```
 
 Vulkan treats `OFF` as a request for Immediate presentation, with Mailbox and then FIFO

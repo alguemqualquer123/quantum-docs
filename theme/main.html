@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="{{ base_url }}/css/doriax.css">
+  <link rel="stylesheet" href="{{ base_url }}/css/quantum.css">
   <link rel="stylesheet" href="{{ base_url }}/css/highlight.css">
 
   {%- if config.extra.analytics and config.extra.analytics.property %}
@@ -77,11 +77,11 @@
   </div>
 
   <script>
-    window.DORIAX_BASE_URL = "{{ base_url }}";
-    window.DORIAX_VERSION = {{ config.extra.version | string | tojson }};
-    window.DORIAX_VERSIONS_URL = "{{ base_url }}{{ config.extra.version_root }}/versions.json";
-    window.DORIAX_PAGE_URL = {{ (page.url if page else '') | tojson }};
+    window.QUANTUM_BASE_URL = "{{ base_url }}";
+    window.QUANTUM_VERSION = {{ config.extra.version | string | tojson }};
+    window.QUANTUM_VERSIONS_URL = "{{ base_url }}{{ config.extra.version_root }}/versions.json";
+    window.QUANTUM_PAGE_URL = {{ (page.url if page else '') | tojson }};
   </script>
-  <script src="{{ base_url }}/js/doriax.js" defer></script>
+  <script src="{{ base_url }}/js/quantum.js" defer></script>
 </body>
 </html>

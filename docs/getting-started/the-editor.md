@@ -1,14 +1,14 @@
 ---
-description: A tour of the Doriax editor — scene editing, Properties window, animation, code editor, and play mode.
+description: A tour of the Quantum editor — scene editing, Properties window, animation, code editor, and play mode.
 ---
 
 # The Editor
 
-Doriax ships with a complete visual editor built for creators. Design scenes, write
+Quantum ships with a complete visual editor built for creators. Design scenes, write
 code, animate characters, manage resources, and test your game from one unified
 environment.
 
-![Doriax editor with a 3D pirate adventure scene](../assets/screenshots/editor-pirate-adventure.png)
+![Quantum editor with a 3D pirate adventure scene](../assets/screenshots/editor-pirate-adventure.png)
 
 ## Core panels
 

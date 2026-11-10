@@ -13,8 +13,8 @@ A `Scene` is the root container for all objects, systems, and resources in a pro
 === "C++"
 
     ```cpp
-    #include "Doriax.h"
-    using namespace doriax;
+    #include "Quantum.h"
+    using namespace quantum;
 
     Scene scene;
 

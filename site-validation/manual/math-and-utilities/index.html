@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math & Utilities — Quantum Engine Docs</title>
+  <meta name="description" content="Math types, geometry helpers, logging, angle/color utilities, and utility classes in Quantum.">
+  <meta property="og:title" content="Math & Utilities — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/manual/math-and-utilities/">
+
+  <link rel="icon" type="image/png" href="../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/quantum.css">
+  <link rel="stylesheet" href="../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="math-utilities">Math &amp; Utilities<a class="headerlink" href="#math-utilities" title="Link to this section">&para;</a></h1>
+<p>Quantum includes a complete set of math and utility types that are shared across
+rendering, physics, animation, input, and gameplay code. Understanding these types helps
+you write efficient, readable Quantum scripts.</p>
+<h2 id="vector-types">Vector types<a class="headerlink" href="#vector-types" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Dimensions</th>
+<th>Typical uses</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../reference/classes/vector2/"><code>Vector2</code></a></td>
+<td>2D (x, y)</td>
+<td>Positions, sizes, velocities, UV coordinates</td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/vector3/"><code>Vector3</code></a></td>
+<td>3D (x, y, z)</td>
+<td>Positions, directions, scales, normals</td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/vector4/"><code>Vector4</code></a></td>
+<td>4D (x, y, z, w)</td>
+<td>Colors (RGBA), homogeneous coordinates, packed data</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">-- Create vectors</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">local</span><span class="w"> </span><span class="nv">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">local</span><span class="w"> </span><span class="nv">dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kd">local</span><span class="w"> </span><span class="nv">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1">-- Arithmetic</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="kd">local</span><span class="w"> </span><span class="nv">newPos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">pos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">dir</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">3.0</span><span class="w">   </span><span class="c1">-- 3.0 * dir works too</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="kd">local</span><span class="w"> </span><span class="nv">dist</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">pos</span><span class="p">:</span><span class="nf">length</span><span class="p">()</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="kd">local</span><span class="w"> </span><span class="nv">unit</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">dir</span><span class="p">:</span><span class="nf">normalized</span><span class="p">()</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="kd">local</span><span class="w"> </span><span class="nv">dot</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nv">pos</span><span class="p">:</span><span class="nf">dotProduct</span><span class="p">(</span><span class="nv">dir</span><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1">-- Step toward a point without passing it, or blend toward it</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="kd">local</span><span class="w"> </span><span class="nv">stepped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">pos</span><span class="p">:</span><span class="nf">moveTowards</span><span class="p">(</span><span class="nv">target</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">Engine</span><span class="p">.</span><span class="py">deltatime</span><span class="p">)</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="kd">local</span><span class="w"> </span><span class="nv">halfway</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">pos</span><span class="p">:</span><span class="nf">lerp</span><span class="p">(</span><span class="nv">target</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
+</code></pre></div>
+<p>All three vector types have <code>moveTowards</code> and <code>lerp</code>. <code>moveTowards</code> moves at a fixed speed
+and stops exactly on the target, which suits movement driven by <code>deltatime</code>. <code>lerp</code> covers a
+fraction of the remaining distance, so it slows down near the target.</p>
+<h3 id="common-static-constants">Common static constants<a class="headerlink" href="#common-static-constants" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Vector3.ZERO</code></td>
+<td>(0, 0, 0)</td>
+</tr>
+<tr>
+<td><code>Vector3.UNIT_SCALE</code></td>
+<td>(1, 1, 1)</td>
+</tr>
+<tr>
+<td><code>Vector3.UNIT_X</code></td>
+<td>(1, 0, 0)</td>
+</tr>
+<tr>
+<td><code>Vector3.UNIT_Y</code></td>
+<td>(0, 1, 0)</td>
+</tr>
+<tr>
+<td><code>Vector3.UNIT_Z</code></td>
+<td>(0, 0, 1)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="changing-one-component-of-a-property">Changing one component of a property<a class="headerlink" href="#changing-one-component-of-a-property" title="Link to this section">&para;</a></h3>
+<p>Properties such as <code>position</code>, <code>scale</code>, <code>rotation</code>, <code>color</code> or <code>linearVelocity</code> return a
+copy of the value. Changing a component of that copy does not reach the object, so
+<code>self.object.position.y = 2</code> runs without error but leaves the object where it was.
+Assign the whole value instead:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">object</span><span class="p">.</span><span class="py">position</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">pos</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">                    </span><span class="c1">-- only the copy changes</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">self</span><span class="p">.</span><span class="py">object</span><span class="p">.</span><span class="py">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">pos</span><span class="w">   </span><span class="c1">-- now the object moves</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1">-- the same, building a new vector</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nv">self</span><span class="p">.</span><span class="py">object</span><span class="p">.</span><span class="py">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="nv">pos</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nv">pos</span><span class="p">.</span><span class="py">z</span><span class="p">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1">-- or with a setter that takes the components</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="nv">self</span><span class="p">.</span><span class="py">object</span><span class="p">:</span><span class="nf">setPosition</span><span class="p">(</span><span class="nv">pos</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nv">pos</span><span class="p">.</span><span class="py">z</span><span class="p">)</span>
+</code></pre></div>
+<p>Not every property has such a setter: <code>setScale</code> takes one uniform factor, and bodies
+have none for <code>position</code> or <code>linearVelocity</code>.</p>
+<p>The same holds for methods that change a vector in place, such as <code>normalize()</code>, for
+values returned by methods like <code>object:getWorldPosition()</code>, and for list properties such
+as <code>scene.postProcessPasses</code>: they act on a copy. <a href="../../editor/code-editor/">Code Editor</a>
+completion marks properties that return a copy, e.g. <code>Object.position -&gt; Vector3 (copy)</code>.</p>
+<p>Component fields are the exception: Lua gets the field itself, not a copy, so
+<code>image:getUIComponent().color.x = 1</code> changes the component. Some fields also need their
+<code>needUpdate…</code> flag set; see <a href="../entity-component-system/#writing-components-directly">Writing components directly</a>.</p>
+<h2 id="quaternion">Quaternion<a class="headerlink" href="#quaternion" title="Link to this section">&para;</a></h2>
+<p><a href="../../reference/classes/quaternion/"><code>Quaternion</code></a> represents 3D rotation. Prefer
+quaternions over Euler angles for rotation interpolation and composition.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">-- Create from Euler angles (ZYX order; degrees if useDegrees is enabled)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">local</span><span class="w"> </span><span class="nv">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Quaternion</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1">-- Interpolate (interpolation factor comes first)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kd">local</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Quaternion</span><span class="p">.</span><span class="nf">slerp</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="nv">q1</span><span class="p">,</span><span class="w"> </span><span class="nv">q2</span><span class="p">)</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1">-- Rotate a direction</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="kd">local</span><span class="w"> </span><span class="nv">rotated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">q</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">  </span><span class="c1">-- same as q:xAxis()</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1">-- Face a target with the local +Z axis</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="nv">obj</span><span class="p">.</span><span class="py">rotation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Quaternion</span><span class="p">.</span><span class="nf">lookRotation</span><span class="p">(</span><span class="nv">target</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">obj</span><span class="p">.</span><span class="py">position</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="matrix-types">Matrix types<a class="headerlink" href="#matrix-types" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../reference/classes/matrix3/"><code>Matrix3</code></a></td>
+<td>3×3 transforms, normal matrix</td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/matrix4/"><code>Matrix4</code></a></td>
+<td>4×4 transforms, projection, view matrix</td>
+</tr>
+</tbody>
+</table>
+<p>Matrices are used internally by the renderer and physics, but you can construct them
+for custom transforms or pass them to shader uniforms.</p>
+<h2 id="rect">Rect<a class="headerlink" href="#rect" title="Link to this section">&para;</a></h2>
+<p><a href="../../reference/classes/rect/"><code>Rect</code></a> stores a 2D rectangle as (x, y, width, height).
+Use it for UI bounds, sprite atlas frames, and screen-space regions.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Rect</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span><span class="w">   </span><span class="c1">-- x=64, y=0, w=32, h=32</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">local</span><span class="w"> </span><span class="nv">contains</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">frame</span><span class="p">:</span><span class="nf">contains</span><span class="p">(</span><span class="nf">Vector2</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="bounds-and-spatial-queries">Bounds and spatial queries<a class="headerlink" href="#bounds-and-spatial-queries" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../reference/classes/aabb/"><code>AABB</code></a></td>
+<td>Axis-aligned bounding box — fast broad-phase tests, frustum culling</td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/obb/"><code>OBB</code></a></td>
+<td>Oriented bounding box — rotated objects that AABB over-approximates</td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/sphere/"><code>Sphere</code></a></td>
+<td>Sphere bounds — broad-phase tests, shadow radius, audio range</td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/ray/"><code>Ray</code></a></td>
+<td>Ray from origin in a direction — picking, raycasts, line-of-sight</td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/plane/"><code>Plane</code></a></td>
+<td>Infinite plane defined by normal and distance — frustum planes, clip tests</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">-- Cast a ray through the cursor and test it against the scene&#39;s 3D physics bodies</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">local</span><span class="w"> </span><span class="nv">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Input</span><span class="p">.</span><span class="nf">getMousePosition</span><span class="p">()</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kd">local</span><span class="w"> </span><span class="nv">ray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">camera</span><span class="p">:</span><span class="nf">screenToRay</span><span class="p">(</span><span class="nv">pos</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">pos</span><span class="p">.</span><span class="py">y</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="kd">local</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">ray</span><span class="p">:</span><span class="nf">intersects</span><span class="p">(</span><span class="nv">scene</span><span class="p">,</span><span class="w"> </span><span class="nv">RayFilter</span><span class="p">.</span><span class="py">BODY_3D</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="kr">if</span><span class="w"> </span><span class="nv">result</span><span class="p">.</span><span class="py">hit</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hit entity:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">result</span><span class="p">.</span><span class="py">body</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;at distance&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">result</span><span class="p">.</span><span class="py">distance</span><span class="p">)</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="kr">end</span>
+</code></pre></div>
+<p><code>intersects</code> also accepts individual <code>AABB</code>, <code>OBB</code>, <code>Plane</code>, <code>Body2D</code>, and <code>Body3D</code>
+targets, and <code>RayFilter.BOUNDS</code> tests every mesh's bounding box without any physics. Pass an entity or a list of entities to skip those bodies so the ray continues
+through them (<code>ray:intersects(scene, RayFilter.BODY_3D, self.entity)</code>). The returned
+<code>RayReturn</code> carries <code>hit</code>, <code>distance</code>, <code>point</code>, <code>normal</code>, <code>body</code> (the entity), and
+<code>shapeIndex</code>.</p>
+<h2 id="angles">Angles<a class="headerlink" href="#angles" title="Link to this section">&para;</a></h2>
+<p>The <a href="../../reference/classes/angle/"><code>Angle</code></a> utility class provides explicit
+degree/radian conversions. The engine can be configured to use degrees everywhere with
+<code>Engine::setUseDegrees(true)</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">-- Convert explicitly regardless of engine setting</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">local</span><span class="w"> </span><span class="nv">rad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Angle</span><span class="p">.</span><span class="nf">degToRad</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kd">local</span><span class="w"> </span><span class="nv">deg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Angle</span><span class="p">.</span><span class="nf">radToDeg</span><span class="p">(</span><span class="nb">math.pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="color-utilities">Color utilities<a class="headerlink" href="#color-utilities" title="Link to this section">&para;</a></h2>
+<p>The static <a href="../../reference/classes/color/"><code>Color</code></a> class provides sRGB ↔ linear
+conversions. Rendering expects linear color space internally.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">-- Convert from sRGB to linear for the renderer</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">local</span><span class="w"> </span><span class="nv">linearRed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Color</span><span class="p">.</span><span class="nf">sRGBToLinear</span><span class="p">(</span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1">-- And back for display values</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="kd">local</span><span class="w"> </span><span class="nv">srgb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Color</span><span class="p">.</span><span class="nf">linearTosRGB</span><span class="p">(</span><span class="nv">linearRed</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="logging">Logging<a class="headerlink" href="#logging" title="Link to this section">&para;</a></h2>
+<p><a href="../../reference/classes/log/"><code>Log</code></a> provides formatted console output at different
+severity levels.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Lua</label><label for="__tabbed_1_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">-- The Lua functions take a single string; use .. for formatting</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">Log</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="s2">&quot;Scene loaded&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nv">Log</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="s2">&quot;Player position: &quot;</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nv">obj</span><span class="p">.</span><span class="py">position</span><span class="p">))</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="nv">Log</span><span class="p">.</span><span class="nf">warn</span><span class="p">(</span><span class="s2">&quot;Optional resource missing: &quot;</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="nv">path</span><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nv">Log</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="s2">&quot;Physics body creation failed&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">// The C++ functions accept printf-style format arguments</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">Log</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Scene loaded&quot;</span><span class="p">);</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">Log</span><span class="o">::</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Player position: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">position</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">c_str</span><span class="p">());</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">Log</span><span class="o">::</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;Optional resource missing: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">Log</span><span class="o">::</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;Physics body creation failed&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Use <code>Log::debug</code> for development-only output. Release builds can strip debug logs by
+setting the appropriate log level.</p>
+<h2 id="object-utility">Object utility<a class="headerlink" href="#object-utility" title="Link to this section">&para;</a></h2>
+<p>The <a href="../../reference/classes/object/"><code>Object</code></a> class wraps an entity handle and
+provides transform, visibility, parenting, and basic physics convenience APIs. Use it
+when you need to access transform data from a script without knowing the specific
+object type.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">Mover</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nv">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;speed&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">displayName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Speed&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;float&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">50.0</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">}</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="kr">function</span><span class="w"> </span><span class="nc">Mover</span><span class="p">:</span><span class="nf">init</span><span class="p">()</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="nf">RegisterEngineEvent</span><span class="p">(</span><span class="nv">self</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;onUpdate&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="kr">end</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="kr">function</span><span class="w"> </span><span class="nc">Mover</span><span class="p">:</span><span class="nf">onUpdate</span><span class="p">()</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Object</span><span class="p">(</span><span class="nv">self</span><span class="p">.</span><span class="py">scene</span><span class="p">,</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">entity</span><span class="p">)</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Engine</span><span class="p">.</span><span class="py">deltatime</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">    </span><span class="nv">obj</span><span class="p">.</span><span class="py">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">obj</span><span class="p">.</span><span class="py">position</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">speed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">dt</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="kr">end</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="kr">return</span><span class="w"> </span><span class="nv">Mover</span>
+</code></pre></div>
+<h2 id="base64">Base64<a class="headerlink" href="#base64" title="Link to this section">&para;</a></h2>
+<p>The <a href="../../reference/classes/base64/"><code>Base64</code></a> utility class encodes and decodes binary
+data as base64 strings. Useful for embedding small binary data in JSON or YAML, or for
+network/save serialization. <strong>C++ only</strong> — <code>encode</code> / <code>decode</code> are not exposed to Lua yet.</p>
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Link to this section">&para;</a></h2>
+<ul>
+<li><a href="../../reference/classes/vector2/">Vector2</a>, <a href="../../reference/classes/vector3/">Vector3</a>, <a href="../../reference/classes/vector4/">Vector4</a></li>
+<li><a href="../../reference/classes/quaternion/">Quaternion</a></li>
+<li><a href="../../reference/classes/rect/">Rect</a></li>
+<li><a href="../../reference/classes/aabb/">AABB</a>, <a href="../../reference/classes/obb/">OBB</a>, <a href="../../reference/classes/ray/">Ray</a></li>
+<li><a href="../../reference/classes/log/">Log</a></li>
+<li><a href="../../reference/classes/color/">Color</a>, <a href="../../reference/classes/angle/">Angle</a></li>
+</ul>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../audio/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Audio</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../threading-and-async-loading/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Threading & Async Loading</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/manual/math-and-utilities.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#math-utilities" class="dx-toc-link" data-level="1">Math &amp; Utilities</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#vector-types" class="dx-toc-link" data-level="2">Vector types</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#common-static-constants" class="dx-toc-link" data-level="3">Common static constants</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#changing-one-component-of-a-property" class="dx-toc-link" data-level="3">Changing one component of a property</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#quaternion" class="dx-toc-link" data-level="2">Quaternion</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#matrix-types" class="dx-toc-link" data-level="2">Matrix types</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#rect" class="dx-toc-link" data-level="2">Rect</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#bounds-and-spatial-queries" class="dx-toc-link" data-level="2">Bounds and spatial queries</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#angles" class="dx-toc-link" data-level="2">Angles</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#color-utilities" class="dx-toc-link" data-level="2">Color utilities</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#logging" class="dx-toc-link" data-level="2">Logging</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#object-utility" class="dx-toc-link" data-level="2">Object utility</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#base64" class="dx-toc-link" data-level="2">Base64</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#see-also" class="dx-toc-link" data-level="2">See also</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../versions.json";
+    window.QUANTUM_PAGE_URL = "manual/math-and-utilities/";
+  </script>
+  <script src="../../js/quantum.js" defer></script>
+</body>
+</html>

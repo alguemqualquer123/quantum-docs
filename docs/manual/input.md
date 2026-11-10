@@ -1,10 +1,10 @@
 ---
-description: Keyboard, mouse, touch, gamepad, modifier input, and UI event handling in Doriax.
+description: Keyboard, mouse, touch, gamepad, modifier input, and UI event handling in Quantum.
 ---
 
 # Input
 
-Doriax exposes all input through the static `Input` class. It covers keyboard, mouse,
+Quantum exposes all input through the static `Input` class. It covers keyboard, mouse,
 touch, gamepad, and modifier state for desktop, mobile, and web targets. All polling APIs
 are safe to call from any script or system update.
 
@@ -133,9 +133,9 @@ A single mouse mode covers both cursor visibility and movement. `HIDDEN` only hi
 === "C++"
 
     ```cpp
-    class PlayerLook : public doriax::ScriptBase {
+    class PlayerLook : public quantum::ScriptBase {
     public:
-        PlayerLook(doriax::Scene* scene, doriax::Entity entity)
+        PlayerLook(quantum::Scene* scene, quantum::Entity entity)
             : ScriptBase(scene, entity) {
             Engine::setMouseMode(MouseMode::CAPTURED);
             REGISTER_ENGINE_EVENT(onMouseMove);
@@ -343,9 +343,9 @@ events instead of polling:
 === "C++"
 
     ```cpp
-    class Controller : public doriax::ScriptBase {
+    class Controller : public quantum::ScriptBase {
     public:
-        Controller(doriax::Scene* scene, doriax::Entity entity)
+        Controller(quantum::Scene* scene, quantum::Entity entity)
             : ScriptBase(scene, entity) {
             REGISTER_ENGINE_EVENT(onGamepadConnect);
             REGISTER_ENGINE_EVENT(onGamepadButtonDown);

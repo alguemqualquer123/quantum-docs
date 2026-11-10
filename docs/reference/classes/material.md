@@ -81,7 +81,7 @@ texture is rendered:
 
 | Mode | Behaviour |
 | --- | --- |
-| `MaterialAlphaMode::AUTO` | Legacy Doriax behaviour. `autoTransparency` selects the transparent pass when the texture or base-colour factor contains transparency. The submesh's **Texture Shadow** option remains a manual cutout control. |
+| `MaterialAlphaMode::AUTO` | Legacy Quantum behaviour. `autoTransparency` selects the transparent pass when the texture or base-colour factor contains transparency. The submesh's **Texture Shadow** option remains a manual cutout control. |
 | `MaterialAlphaMode::ALPHA_OPAQUE` | Ignores material alpha and renders every surviving fragment fully opaque. |
 | `MaterialAlphaMode::MASK` | Discards fragments whose combined alpha is below `alphaCutoff`; surviving fragments are fully opaque. |
 | `MaterialAlphaMode::BLEND` | Preserves alpha for conventional transparency and selects the transparent pass when `autoTransparency` is enabled. Depth testing stays on; depth writes are disabled in the colour pass. |
@@ -126,7 +126,7 @@ An additive linear-space RGB glow colour. The surface emits light of this colour
 
 Light let through a thin surface when a light is behind it, `0`–`1` (values are clamped). Each light adds its intensity times the base colour, this factor, how directly the light shines through, and the same shadow term as direct lighting, so a leaf glows only where the sun actually reaches its back. `0` (the default) disables it; keep it there on opaque geometry. Unlit materials ignore it.
 
-Imported glTF materials read it from the material extra `doriax_foliage_transmission`; in the editor it is the **Leaf Transmission** row of the Material and is kept as a submesh override.
+Imported glTF materials read it from the material extra `quantum_foliage_transmission`; in the editor it is the **Leaf Transmission** row of the Material and is kept as a submesh override.
 
 === "C++"
     ```cpp

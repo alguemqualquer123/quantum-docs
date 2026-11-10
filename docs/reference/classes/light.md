@@ -9,7 +9,7 @@ description: Light API reference (C++ and Lua).
 
 ## Description
 
-Represents a light source in a 3D scene. Doriax supports three light types — directional, point, and spot — all sharing the same `Light` class. The light type determines which properties have effect: a directional light uses `direction` and an unlimited `range`, a point light radiates in all directions with a finite `range`, and a spot light uses `direction` with either cone angles or an optional projected mask.
+Represents a light source in a 3D scene. Quantum supports three light types — directional, point, and spot — all sharing the same `Light` class. The light type determines which properties have effect: a directional light uses `direction` and an unlimited `range`, a point light radiates in all directions with a finite `range`, and a spot light uses `direction` with either cone angles or an optional projected mask.
 
 Shadows are opt-in per-light and render via a shadow map. Cascaded shadow maps (CSM) are available for directional lights to spread shadow quality across a large view distance.
 

@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input — Quantum Engine Docs</title>
+  <meta name="description" content="Input API reference — keyboard, mouse, touch, and gamepad polling, modifiers, and key/button constants.">
+  <meta property="og:title" content="Input — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/reference/classes/input/">
+
+  <link rel="icon" type="image/png" href="../../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../../css/quantum.css">
+  <link rel="stylesheet" href="../../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="input">Input<a class="headerlink" href="#input" title="Link to this section">&para;</a></h1>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Link to this section">&para;</a></h2>
+<p><code>Input</code> is a static polling class that provides the current keyboard, mouse, touch, and gamepad state at any point during a frame. Use it inside <code>onUpdate</code> or <code>onFixedUpdate</code> to check whether a key or button is held down. For event-based input (press/release and controller connect/disconnect notifications), subscribe to the <a href="../engine/">Engine</a> callback events instead.</p>
+<div class="admonition note">
+<p class="admonition-title">Constant naming differs by language</p>
+<p>Key, mouse-button, gamepad, and modifier constants are C++ preprocessor macros prefixed
+<code>D_</code> (e.g. <code>D_KEY_SPACE</code>, <code>D_MOUSE_BUTTON_LEFT</code>, <code>D_GAMEPAD_BUTTON_A</code>). In Lua they are
+static properties on the <code>Input</code> class with the <code>D_</code> prefix dropped (e.g.
+<code>Input.KEY_SPACE</code>, <code>Input.MOUSE_BUTTON_LEFT</code>, <code>Input.GAMEPAD_BUTTON_A</code>).</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Quantum.h&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">quantum</span><span class="p">;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">// Inside an update callback:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="o">::</span><span class="n">isKeyPressed</span><span class="p">(</span><span class="n">D_KEY_SPACE</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">player</span><span class="p">.</span><span class="n">jump</span><span class="p">();</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">-- Inside update:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kr">if</span><span class="w"> </span><span class="nv">Input</span><span class="p">.</span><span class="nf">isKeyPressed</span><span class="p">(</span><span class="nv">Input</span><span class="p">.</span><span class="py">KEY_SPACE</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nv">player</span><span class="p">:</span><span class="nf">jump</span><span class="p">()</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Returns</th>
+<th>Name</th>
+<th>Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>static bool</td>
+<td><a href="#iskeypressed">isKeyPressed</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#ismousepressed">isMousePressed</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#istouch">isTouch</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#ismouseentered">isMouseEntered</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static Vector2</td>
+<td><a href="#getmouseposition">getMousePosition</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static Vector2</td>
+<td><a href="#getmousescroll">getMouseScroll</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static Vector2</td>
+<td><a href="#gettouchposition">getTouchPosition</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static std::vector\&lt;Touch&gt;</td>
+<td><a href="#gettouches">getTouches</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static size_t</td>
+<td><a href="#numtouches">numTouches</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#isgamepadconnected">isGamepadConnected</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static std::string</td>
+<td><a href="#getgamepadname">getGamepadName</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#isgamepadbuttonpressed">isGamepadButtonPressed</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static float</td>
+<td><a href="#getgamepadaxis">getGamepadAxis</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static std::vector\&lt;Gamepad&gt;</td>
+<td><a href="#getgamepads">getGamepads</a></td>
+<td>C++</td>
+</tr>
+<tr>
+<td>static size_t</td>
+<td><a href="#numgamepads">numGamepads</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static int</td>
+<td><a href="#getgamepadid">getGamepadId</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static int</td>
+<td><a href="#getmodifiers">getModifiers</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static size_t</td>
+<td><a href="#findtouchindex">findTouchIndex</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static size_t</td>
+<td><a href="#findgamepadindex">findGamepadIndex</a></td>
+<td>C++</td>
+</tr>
+</tbody>
+</table>
+<h2 id="keys">Keys<a class="headerlink" href="#keys" title="Link to this section">&para;</a></h2>
+<p>Key constants are preprocessor <code>#define</code> values in C++ (prefix <code>D_KEY_</code>) and static properties on <code>Input</code> in Lua (prefix <code>Input.KEY_</code>). The table below lists the C++ form; for Lua, replace <code>D_KEY_</code> with <code>Input.KEY_</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>D_KEY_SPACE</code></td>
+<td>32</td>
+<td>Space bar</td>
+</tr>
+<tr>
+<td><code>D_KEY_A</code> … <code>D_KEY_Z</code></td>
+<td>65–90</td>
+<td>Letter keys</td>
+</tr>
+<tr>
+<td><code>D_KEY_0</code> … <code>D_KEY_9</code></td>
+<td>48–57</td>
+<td>Number row</td>
+</tr>
+<tr>
+<td><code>D_KEY_ESCAPE</code></td>
+<td>256</td>
+<td>Escape</td>
+</tr>
+<tr>
+<td><code>D_KEY_ENTER</code></td>
+<td>257</td>
+<td>Enter / Return</td>
+</tr>
+<tr>
+<td><code>D_KEY_TAB</code></td>
+<td>258</td>
+<td>Tab</td>
+</tr>
+<tr>
+<td><code>D_KEY_BACKSPACE</code></td>
+<td>259</td>
+<td>Backspace</td>
+</tr>
+<tr>
+<td><code>D_KEY_INSERT</code></td>
+<td>260</td>
+<td>Insert</td>
+</tr>
+<tr>
+<td><code>D_KEY_DELETE</code></td>
+<td>261</td>
+<td>Delete</td>
+</tr>
+<tr>
+<td><code>D_KEY_RIGHT</code></td>
+<td>262</td>
+<td>Arrow right</td>
+</tr>
+<tr>
+<td><code>D_KEY_LEFT</code></td>
+<td>263</td>
+<td>Arrow left</td>
+</tr>
+<tr>
+<td><code>D_KEY_DOWN</code></td>
+<td>264</td>
+<td>Arrow down</td>
+</tr>
+<tr>
+<td><code>D_KEY_UP</code></td>
+<td>265</td>
+<td>Arrow up</td>
+</tr>
+<tr>
+<td><code>D_KEY_PAGE_UP</code></td>
+<td>266</td>
+<td>Page Up</td>
+</tr>
+<tr>
+<td><code>D_KEY_PAGE_DOWN</code></td>
+<td>267</td>
+<td>Page Down</td>
+</tr>
+<tr>
+<td><code>D_KEY_HOME</code></td>
+<td>268</td>
+<td>Home</td>
+</tr>
+<tr>
+<td><code>D_KEY_END</code></td>
+<td>269</td>
+<td>End</td>
+</tr>
+<tr>
+<td><code>D_KEY_CAPS_LOCK</code></td>
+<td>280</td>
+<td>Caps Lock</td>
+</tr>
+<tr>
+<td><code>D_KEY_F1</code> … <code>D_KEY_F25</code></td>
+<td>290–314</td>
+<td>Function keys</td>
+</tr>
+<tr>
+<td><code>D_KEY_KP_0</code> … <code>D_KEY_KP_9</code></td>
+<td>320–329</td>
+<td>Numpad digits</td>
+</tr>
+<tr>
+<td><code>D_KEY_KP_ENTER</code></td>
+<td>335</td>
+<td>Numpad Enter</td>
+</tr>
+<tr>
+<td><code>D_KEY_LEFT_SHIFT</code></td>
+<td>340</td>
+<td>Left Shift</td>
+</tr>
+<tr>
+<td><code>D_KEY_LEFT_CONTROL</code></td>
+<td>341</td>
+<td>Left Ctrl</td>
+</tr>
+<tr>
+<td><code>D_KEY_LEFT_ALT</code></td>
+<td>342</td>
+<td>Left Alt</td>
+</tr>
+<tr>
+<td><code>D_KEY_LEFT_SUPER</code></td>
+<td>343</td>
+<td>Left Super (Win/Cmd)</td>
+</tr>
+<tr>
+<td><code>D_KEY_RIGHT_SHIFT</code></td>
+<td>344</td>
+<td>Right Shift</td>
+</tr>
+<tr>
+<td><code>D_KEY_RIGHT_CONTROL</code></td>
+<td>345</td>
+<td>Right Ctrl</td>
+</tr>
+<tr>
+<td><code>D_KEY_RIGHT_ALT</code></td>
+<td>346</td>
+<td>Right Alt</td>
+</tr>
+<tr>
+<td><code>D_KEY_RIGHT_SUPER</code></td>
+<td>347</td>
+<td>Right Super</td>
+</tr>
+<tr>
+<td><code>D_KEY_MENU</code></td>
+<td>348</td>
+<td>Menu key</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mouse-buttons">Mouse buttons<a class="headerlink" href="#mouse-buttons" title="Link to this section">&para;</a></h2>
+<p>In Lua, replace the <code>D_MOUSE_BUTTON_</code> prefix with <code>Input.MOUSE_BUTTON_</code>.</p>
+<table>
+<thead>
+<tr>
+<th>C++ constant</th>
+<th>Lua property</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>D_MOUSE_BUTTON_LEFT</code></td>
+<td><code>Input.MOUSE_BUTTON_LEFT</code></td>
+<td>0</td>
+<td>Left button</td>
+</tr>
+<tr>
+<td><code>D_MOUSE_BUTTON_RIGHT</code></td>
+<td><code>Input.MOUSE_BUTTON_RIGHT</code></td>
+<td>1</td>
+<td>Right button</td>
+</tr>
+<tr>
+<td><code>D_MOUSE_BUTTON_MIDDLE</code></td>
+<td><code>Input.MOUSE_BUTTON_MIDDLE</code></td>
+<td>2</td>
+<td>Middle button</td>
+</tr>
+<tr>
+<td><code>D_MOUSE_BUTTON_1</code> … <code>D_MOUSE_BUTTON_8</code></td>
+<td><code>Input.MOUSE_BUTTON_1</code> … <code>Input.MOUSE_BUTTON_8</code></td>
+<td>0–7</td>
+<td>All buttons</td>
+</tr>
+</tbody>
+</table>
+<h2 id="modifiers">Modifiers<a class="headerlink" href="#modifiers" title="Link to this section">&para;</a></h2>
+<p>Modifier bits returned by <a href="#getmodifiers">getModifiers</a> and passed to key/mouse callbacks. In Lua, replace the <code>D_MODIFIER_</code> prefix with <code>Input.MODIFIER_</code>.</p>
+<table>
+<thead>
+<tr>
+<th>C++ constant</th>
+<th>Lua property</th>
+<th>Bit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>D_MODIFIER_SHIFT</code></td>
+<td><code>Input.MODIFIER_SHIFT</code></td>
+<td><code>0x0001</code></td>
+<td>Shift key held</td>
+</tr>
+<tr>
+<td><code>D_MODIFIER_CONTROL</code></td>
+<td><code>Input.MODIFIER_CONTROL</code></td>
+<td><code>0x0002</code></td>
+<td>Ctrl key held</td>
+</tr>
+<tr>
+<td><code>D_MODIFIER_ALT</code></td>
+<td><code>Input.MODIFIER_ALT</code></td>
+<td><code>0x0004</code></td>
+<td>Alt key held</td>
+</tr>
+<tr>
+<td><code>D_MODIFIER_SUPER</code></td>
+<td><code>Input.MODIFIER_SUPER</code></td>
+<td><code>0x0008</code></td>
+<td>Super (Win/Cmd) held</td>
+</tr>
+<tr>
+<td><code>D_MODIFIER_CAPS_LOCK</code></td>
+<td><code>Input.MODIFIER_CAPS_LOCK</code></td>
+<td><code>0x0010</code></td>
+<td>Caps Lock active</td>
+</tr>
+<tr>
+<td><code>D_MODIFIER_NUM_LOCK</code></td>
+<td><code>Input.MODIFIER_NUM_LOCK</code></td>
+<td><code>0x0020</code></td>
+<td>Num Lock active</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gamepad-buttons">Gamepad buttons<a class="headerlink" href="#gamepad-buttons" title="Link to this section">&para;</a></h2>
+<p>Button indices follow the standard Xbox-style layout. In Lua, replace the <code>D_GAMEPAD_BUTTON_</code> prefix with <code>Input.GAMEPAD_BUTTON_</code>. The PlayStation-style aliases are the same underlying values.</p>
+<table>
+<thead>
+<tr>
+<th>C++ constant</th>
+<th>Lua property</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>D_GAMEPAD_BUTTON_A</code></td>
+<td><code>Input.GAMEPAD_BUTTON_A</code></td>
+<td>0</td>
+<td>A (alias <code>CROSS</code>)</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_BUTTON_B</code></td>
+<td><code>Input.GAMEPAD_BUTTON_B</code></td>
+<td>1</td>
+<td>B (alias <code>CIRCLE</code>)</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_BUTTON_X</code></td>
+<td><code>Input.GAMEPAD_BUTTON_X</code></td>
+<td>2</td>
+<td>X (alias <code>SQUARE</code>)</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_BUTTON_Y</code></td>
+<td><code>Input.GAMEPAD_BUTTON_Y</code></td>
+<td>3</td>
+<td>Y (alias <code>TRIANGLE</code>)</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_BUTTON_LEFT_BUMPER</code></td>
+<td><code>Input.GAMEPAD_BUTTON_LEFT_BUMPER</code></td>
+<td>4</td>
+<td>Left bumper / L1</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_BUTTON_RIGHT_BUMPER</code></td>
+<td><code>Input.GAMEPAD_BUTTON_RIGHT_BUMPER</code></td>
+<td>5</td>
+<td>Right bumper / R1</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_BUTTON_BACK</code></td>
+<td><code>Input.GAMEPAD_BUTTON_BACK</code></td>
+<td>6</td>
+<td>View / Back / Share</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_BUTTON_START</code></td>
+<td><code>Input.GAMEPAD_BUTTON_START</code></td>
+<td>7</td>
+<td>Menu / Start / Options</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_BUTTON_GUIDE</code></td>
+<td><code>Input.GAMEPAD_BUTTON_GUIDE</code></td>
+<td>8</td>
+<td>Guide / PS button</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_BUTTON_LEFT_THUMB</code></td>
+<td><code>Input.GAMEPAD_BUTTON_LEFT_THUMB</code></td>
+<td>9</td>
+<td>Left stick click / L3</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_BUTTON_RIGHT_THUMB</code></td>
+<td><code>Input.GAMEPAD_BUTTON_RIGHT_THUMB</code></td>
+<td>10</td>
+<td>Right stick click / R3</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_BUTTON_DPAD_UP</code></td>
+<td><code>Input.GAMEPAD_BUTTON_DPAD_UP</code></td>
+<td>11</td>
+<td>D-pad up</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_BUTTON_DPAD_RIGHT</code></td>
+<td><code>Input.GAMEPAD_BUTTON_DPAD_RIGHT</code></td>
+<td>12</td>
+<td>D-pad right</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_BUTTON_DPAD_DOWN</code></td>
+<td><code>Input.GAMEPAD_BUTTON_DPAD_DOWN</code></td>
+<td>13</td>
+<td>D-pad down</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_BUTTON_DPAD_LEFT</code></td>
+<td><code>Input.GAMEPAD_BUTTON_DPAD_LEFT</code></td>
+<td>14</td>
+<td>D-pad left</td>
+</tr>
+</tbody>
+</table>
+<p>The aliases <code>D_GAMEPAD_BUTTON_CROSS</code>, <code>CIRCLE</code>, <code>SQUARE</code>, and <code>TRIANGLE</code> (Lua <code>Input.GAMEPAD_BUTTON_CROSS</code>, …) resolve to <code>A</code>, <code>B</code>, <code>X</code>, and <code>Y</code> respectively.</p>
+<h2 id="gamepad-axes">Gamepad axes<a class="headerlink" href="#gamepad-axes" title="Link to this section">&para;</a></h2>
+<p>Axis values range from <code>-1.0</code> to <code>1.0</code>. Sticks are <strong>down-positive</strong> on the Y axis (up is <code>-1</code>), and triggers <strong>rest at <code>-1</code></strong>, reaching <code>+1</code> when fully pressed. In Lua, replace the <code>D_GAMEPAD_AXIS_</code> prefix with <code>Input.GAMEPAD_AXIS_</code>.</p>
+<table>
+<thead>
+<tr>
+<th>C++ constant</th>
+<th>Lua property</th>
+<th>Value</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>D_GAMEPAD_AXIS_LEFT_X</code></td>
+<td><code>Input.GAMEPAD_AXIS_LEFT_X</code></td>
+<td>0</td>
+<td>Left stick X: <code>-1</code> left … <code>+1</code> right</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_AXIS_LEFT_Y</code></td>
+<td><code>Input.GAMEPAD_AXIS_LEFT_Y</code></td>
+<td>1</td>
+<td>Left stick Y: <code>-1</code> up … <code>+1</code> down</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_AXIS_RIGHT_X</code></td>
+<td><code>Input.GAMEPAD_AXIS_RIGHT_X</code></td>
+<td>2</td>
+<td>Right stick X: <code>-1</code> left … <code>+1</code> right</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_AXIS_RIGHT_Y</code></td>
+<td><code>Input.GAMEPAD_AXIS_RIGHT_Y</code></td>
+<td>3</td>
+<td>Right stick Y: <code>-1</code> up … <code>+1</code> down</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_AXIS_LEFT_TRIGGER</code></td>
+<td><code>Input.GAMEPAD_AXIS_LEFT_TRIGGER</code></td>
+<td>4</td>
+<td>Left trigger: <code>-1</code> released … <code>+1</code> pressed</td>
+</tr>
+<tr>
+<td><code>D_GAMEPAD_AXIS_RIGHT_TRIGGER</code></td>
+<td><code>Input.GAMEPAD_AXIS_RIGHT_TRIGGER</code></td>
+<td>5</td>
+<td>Right trigger: <code>-1</code> released … <code>+1</code> pressed</td>
+</tr>
+</tbody>
+</table>
+<h2 id="method-details">Method details<a class="headerlink" href="#method-details" title="Link to this section">&para;</a></h2>
+<h3 id="iskeypressed">isKeyPressed<a class="headerlink" href="#iskeypressed" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static bool isKeyPressed(int key)</code></li>
+</ul>
+<p>Returns <code>true</code> while the given key is held down. Use <code>D_KEY_*</code> constants in C++ and <code>Input.KEY_*</code> in Lua for the key code.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="o">::</span><span class="n">isKeyPressed</span><span class="p">(</span><span class="n">D_KEY_W</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">player</span><span class="p">.</span><span class="n">moveForward</span><span class="p">(</span><span class="n">Engine</span><span class="o">::</span><span class="n">getDeltatime</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">speed</span><span class="p">);</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kr">if</span><span class="w"> </span><span class="nv">Input</span><span class="p">.</span><span class="nf">isKeyPressed</span><span class="p">(</span><span class="nv">Input</span><span class="p">.</span><span class="py">KEY_W</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nv">player</span><span class="p">:</span><span class="nf">moveForward</span><span class="p">(</span><span class="nv">Engine</span><span class="p">.</span><span class="py">deltatime</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">speed</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="ismousepressed">isMousePressed<a class="headerlink" href="#ismousepressed" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static bool isMousePressed(int button)</code></li>
+</ul>
+<p>Returns <code>true</code> while the given mouse button is held down. Use <code>D_MOUSE_BUTTON_*</code> constants in C++ and <code>Input.MOUSE_BUTTON_*</code> in Lua.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">C++</label><label for="__tabbed_3_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="o">::</span><span class="n">isMousePressed</span><span class="p">(</span><span class="n">D_MOUSE_BUTTON_LEFT</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="c1">// drag logic</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kr">if</span><span class="w"> </span><span class="nv">Input</span><span class="p">.</span><span class="nf">isMousePressed</span><span class="p">(</span><span class="nv">Input</span><span class="p">.</span><span class="py">MOUSE_BUTTON_LEFT</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="c1">-- drag logic</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="istouch">isTouch<a class="headerlink" href="#istouch" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static bool isTouch()</code></li>
+</ul>
+<p>Returns <code>true</code> if there is at least one active touch contact.</p>
+<hr />
+<h3 id="ismouseentered">isMouseEntered<a class="headerlink" href="#ismouseentered" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static bool isMouseEntered()</code></li>
+</ul>
+<p>Returns <code>true</code> while the mouse cursor is inside the canvas boundary.</p>
+<hr />
+<h3 id="getmouseposition">getMousePosition<a class="headerlink" href="#getmouseposition" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static Vector2 getMousePosition()</code></li>
+</ul>
+<p>Current cursor position in canvas coordinates. Updated every frame; use for hover detection in <code>onUpdate</code>.</p>
+<p>This value can also be set manually with <a href="../engine/#setmouseposition">Engine.setMousePosition</a>. When <a href="../engine/#mousemode_1">Engine.mouseMode</a> is <code>CAPTURED</code>, the position is a virtual canvas-space position accumulated from relative mouse movement and may move outside the normal canvas range.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">C++</label><label for="__tabbed_4_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">Vector2</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Input</span><span class="o">::</span><span class="n">getMousePosition</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Input</span><span class="p">.</span><span class="nf">getMousePosition</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="getmousescroll">getMouseScroll<a class="headerlink" href="#getmousescroll" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static Vector2 getMouseScroll()</code></li>
+</ul>
+<p>Accumulated scroll wheel delta since the last frame, in <code>(xoffset, yoffset)</code>. Reset each frame.</p>
+<hr />
+<h3 id="gettouchposition">getTouchPosition<a class="headerlink" href="#gettouchposition" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static Vector2 getTouchPosition(int pointer)</code></li>
+</ul>
+<p>Returns the current position of the touch contact identified by <code>pointer</code>. Use <a href="#findtouchindex">findTouchIndex</a> to convert a pointer ID to an array index if needed.</p>
+<hr />
+<h3 id="gettouches">getTouches<a class="headerlink" href="#gettouches" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static std::vector&lt;Touch&gt; getTouches()</code></li>
+</ul>
+<p>Returns all active touch contacts. Each <code>Touch</code> has <code>int pointer</code> and <code>Vector2 position</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">C++</label><label for="__tabbed_5_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">touch</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Input</span><span class="o">::</span><span class="n">getTouches</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="n">drawCircle</span><span class="p">(</span><span class="n">touch</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">touch</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="mf">10.0f</span><span class="p">);</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">touches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Input</span><span class="p">.</span><span class="nf">getTouches</span><span class="p">()</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kr">for</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">#</span><span class="nv">touches</span><span class="w"> </span><span class="kr">do</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nf">drawCircle</span><span class="p">(</span><span class="nv">touches</span><span class="p">[</span><span class="nv">i</span><span class="p">].</span><span class="nv">position</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">touches</span><span class="p">[</span><span class="nv">i</span><span class="p">].</span><span class="nv">position</span><span class="p">.</span><span class="py">y</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="numtouches">numTouches<a class="headerlink" href="#numtouches" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static size_t numTouches()</code></li>
+</ul>
+<p>Returns the count of currently active touch contacts.</p>
+<hr />
+<h3 id="isgamepadconnected">isGamepadConnected<a class="headerlink" href="#isgamepadconnected" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static bool isGamepadConnected(int id)</code></li>
+</ul>
+<p>Returns <code>true</code> while a controller with the given id is connected. Ids are assigned per platform and are <strong>sparse</strong> — enumerate connected controllers with <a href="#getgamepadid">getGamepadId</a>, not by assuming ids <code>0..numGamepads()-1</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">C++</label><label for="__tabbed_6_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="o">::</span><span class="n">isGamepadConnected</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="c1">// controller 0 is present</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kr">if</span><span class="w"> </span><span class="nv">Input</span><span class="p">.</span><span class="nf">isGamepadConnected</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="c1">-- controller 0 is present</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="getgamepadname">getGamepadName<a class="headerlink" href="#getgamepadname" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static std::string getGamepadName(int id)</code></li>
+</ul>
+<p>Returns the human-readable name of the controller with the given id, or an empty string if it is not connected.</p>
+<hr />
+<h3 id="isgamepadbuttonpressed">isGamepadButtonPressed<a class="headerlink" href="#isgamepadbuttonpressed" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static bool isGamepadButtonPressed(int id, int button)</code></li>
+</ul>
+<p>Returns <code>true</code> while the given button is held down on controller <code>id</code>. Use <code>D_GAMEPAD_BUTTON_*</code> constants in C++ and <code>Input.GAMEPAD_BUTTON_*</code> in Lua. Returns <code>false</code> for an unknown controller.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">C++</label><label for="__tabbed_7_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="o">::</span><span class="n">isGamepadButtonPressed</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">D_GAMEPAD_BUTTON_A</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="n">player</span><span class="p">.</span><span class="n">jump</span><span class="p">();</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kr">if</span><span class="w"> </span><span class="nv">Input</span><span class="p">.</span><span class="nf">isGamepadButtonPressed</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">Input</span><span class="p">.</span><span class="py">GAMEPAD_BUTTON_A</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="nv">player</span><span class="p">:</span><span class="nf">jump</span><span class="p">()</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="getgamepadaxis">getGamepadAxis<a class="headerlink" href="#getgamepadaxis" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static float getGamepadAxis(int id, int axis)</code></li>
+</ul>
+<p>Returns the current value of an analog axis on controller <code>id</code>, in the range <code>-1.0</code>…<code>1.0</code>. Use <code>D_GAMEPAD_AXIS_*</code> constants in C++ and <code>Input.GAMEPAD_AXIS_*</code> in Lua. Returns <code>0.0</code> for an unknown controller.</p>
+<p>Sticks are down-positive on the Y axis (up is <code>-1</code>). <strong>Triggers rest at <code>-1</code></strong> and reach <code>+1</code> when fully pressed — a released trigger reads <code>-1</code> from the moment the controller connects, not <code>0</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">C++</label><label for="__tabbed_8_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Input</span><span class="o">::</span><span class="n">getGamepadAxis</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">D_GAMEPAD_AXIS_LEFT_X</span><span class="p">);</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fabsf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.15f</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// dead zone</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="n">player</span><span class="p">.</span><span class="n">strafe</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Input</span><span class="p">.</span><span class="nf">getGamepadAxis</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">Input</span><span class="p">.</span><span class="py">GAMEPAD_AXIS_LEFT_X</span><span class="p">)</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="kr">if</span><span class="w"> </span><span class="nb">math.abs</span><span class="p">(</span><span class="nv">x</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.15</span><span class="w"> </span><span class="kr">then</span><span class="w">  </span><span class="c1">-- dead zone</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="nv">player</span><span class="p">:</span><span class="nf">strafe</span><span class="p">(</span><span class="nv">x</span><span class="p">)</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="getgamepads">getGamepads<a class="headerlink" href="#getgamepads" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static std::vector&lt;Gamepad&gt; getGamepads()</code></li>
+<li>C++ only</li>
+</ul>
+<p>Returns all connected controllers. Each <code>Gamepad</code> holds an <code>int id</code>, a <code>std::string name</code>, and the current button and axis state. In Lua, iterate with <a href="#numgamepads">numGamepads</a> and <a href="#getgamepadid">getGamepadId</a> instead.</p>
+<hr />
+<h3 id="numgamepads">numGamepads<a class="headerlink" href="#numgamepads" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static size_t numGamepads()</code></li>
+</ul>
+<p>Returns the count of currently connected controllers. This is a count, <strong>not</strong> the highest id — combine it with <a href="#getgamepadid">getGamepadId</a> to iterate.</p>
+<hr />
+<h3 id="getgamepadid">getGamepadId<a class="headerlink" href="#getgamepadid" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static int getGamepadId(size_t index)</code></li>
+</ul>
+<p>Returns the real id of the <code>index</code>-th connected controller, or <code>-1</code> if <code>index</code> is out of range. Because gamepad ids are sparse (they can have gaps after a disconnect), this is the correct way to enumerate connected controllers:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">C++</label><label for="__tabbed_9_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">Input</span><span class="o">::</span><span class="n">numGamepads</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Input</span><span class="o">::</span><span class="n">getGamepadId</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="c1">// poll controller `id`</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kr">for</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">Input</span><span class="p">.</span><span class="nf">numGamepads</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kr">do</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Input</span><span class="p">.</span><span class="nf">getGamepadId</span><span class="p">(</span><span class="nv">i</span><span class="p">)</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="c1">-- poll controller `id`</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="getmodifiers">getModifiers<a class="headerlink" href="#getmodifiers" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static int getModifiers()</code></li>
+</ul>
+<p>Returns the current modifier key bitmask. Check individual modifiers with bitwise AND.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">C++</label><label for="__tabbed_10_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">mods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Input</span><span class="o">::</span><span class="n">getModifiers</span><span class="p">();</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mods</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">D_MODIFIER_SHIFT</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="c1">// Shift is held</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">mods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Input</span><span class="p">.</span><span class="nf">getModifiers</span><span class="p">()</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nv">mods</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nv">Input</span><span class="p">.</span><span class="py">MODIFIER_SHIFT</span><span class="p">)</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">    </span><span class="c1">-- Shift is held</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="findtouchindex">findTouchIndex<a class="headerlink" href="#findtouchindex" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static size_t findTouchIndex(int pointer)</code></li>
+</ul>
+<p>Returns the index into the <a href="#gettouches">getTouches</a> array for the given pointer ID. Returns <code>SIZE_MAX</code> if not found.</p>
+<hr />
+<h3 id="findgamepadindex">findGamepadIndex<a class="headerlink" href="#findgamepadindex" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static size_t findGamepadIndex(int id)</code></li>
+<li>C++ only</li>
+</ul>
+<p>Returns the internal index of the controller with the given id, or <code>SIZE_MAX</code> if it is not connected. Most code should use <a href="#isgamepadconnected">isGamepadConnected</a> and <a href="#getgamepadid">getGamepadId</a> instead.</p>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../postprocesspass/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">PostProcessPass</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../log/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Log</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/reference/classes/input.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#input" class="dx-toc-link" data-level="1">Input</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#description" class="dx-toc-link" data-level="2">Description</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#methods" class="dx-toc-link" data-level="3">Methods</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#keys" class="dx-toc-link" data-level="2">Keys</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#mouse-buttons" class="dx-toc-link" data-level="2">Mouse buttons</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#modifiers" class="dx-toc-link" data-level="2">Modifiers</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#gamepad-buttons" class="dx-toc-link" data-level="2">Gamepad buttons</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#gamepad-axes" class="dx-toc-link" data-level="2">Gamepad axes</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#method-details" class="dx-toc-link" data-level="2">Method details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#iskeypressed" class="dx-toc-link" data-level="3">isKeyPressed</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ismousepressed" class="dx-toc-link" data-level="3">isMousePressed</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#istouch" class="dx-toc-link" data-level="3">isTouch</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ismouseentered" class="dx-toc-link" data-level="3">isMouseEntered</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getmouseposition" class="dx-toc-link" data-level="3">getMousePosition</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getmousescroll" class="dx-toc-link" data-level="3">getMouseScroll</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#gettouchposition" class="dx-toc-link" data-level="3">getTouchPosition</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#gettouches" class="dx-toc-link" data-level="3">getTouches</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#numtouches" class="dx-toc-link" data-level="3">numTouches</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#isgamepadconnected" class="dx-toc-link" data-level="3">isGamepadConnected</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getgamepadname" class="dx-toc-link" data-level="3">getGamepadName</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#isgamepadbuttonpressed" class="dx-toc-link" data-level="3">isGamepadButtonPressed</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getgamepadaxis" class="dx-toc-link" data-level="3">getGamepadAxis</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getgamepads" class="dx-toc-link" data-level="3">getGamepads</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#numgamepads" class="dx-toc-link" data-level="3">numGamepads</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getgamepadid" class="dx-toc-link" data-level="3">getGamepadId</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getmodifiers" class="dx-toc-link" data-level="3">getModifiers</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#findtouchindex" class="dx-toc-link" data-level="3">findTouchIndex</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#findgamepadindex" class="dx-toc-link" data-level="3">findGamepadIndex</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../../versions.json";
+    window.QUANTUM_PAGE_URL = "reference/classes/input/";
+  </script>
+  <script src="../../../js/quantum.js" defer></script>
+</body>
+</html>

@@ -83,7 +83,7 @@ for how the surface is cut.
 
 A hull is convex, so a boat with a dip in its outline, like a catamaran, takes one volume
 per hull, each on its own mesh. Building a hull needs 3D physics, which projects have
-unless they turn `DORIAX_PHYSICS_3D` off (see [Build Options](../build-options.md#enginelibrary-options)).
+unless they turn `QUANTUM_PHYSICS_3D` off (see [Build Options](../build-options.md#enginelibrary-options)).
 
 ---
 

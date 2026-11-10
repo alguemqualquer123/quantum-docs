@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation Timeline — Quantum Engine Docs</title>
+  <meta name="description" content="Using the animation timeline, sprite animation, skeletal animation, and keyframe tracks in the Quantum editor.">
+  <meta property="og:title" content="Animation Timeline — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/editor/animation/">
+
+  <link rel="icon" type="image/png" href="../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/quantum.css">
+  <link rel="stylesheet" href="../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="animation-timeline">Animation Timeline<a class="headerlink" href="#animation-timeline" title="Link to this section">&para;</a></h1>
+<p>The <strong>Animation Timeline</strong> edits time-based changes and previews them in the scene. It
+works with entity transforms, sprite frame sequences, skeletal animation clips, morph
+targets, and runtime action components — all driven by the <code>ActionSystem</code> at runtime.</p>
+<p><img alt="The Animation Timeline playing a skeletal clip, one track per bone" src="../../assets/screenshots/editor-animation.png" /></p>
+<h2 id="timeline-concepts">Timeline concepts<a class="headerlink" href="#timeline-concepts" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Playhead</strong></td>
+<td>Current time or frame being previewed</td>
+</tr>
+<tr>
+<td><strong>Track</strong></td>
+<td>A single animated property channel (e.g. position X, sprite frame, alpha)</td>
+</tr>
+<tr>
+<td><strong>Keyframe</strong></td>
+<td>A value recorded at a specific time on a track</td>
+</tr>
+<tr>
+<td><strong>Clip</strong></td>
+<td>A named time range containing one or more tracks</td>
+</tr>
+<tr>
+<td><strong>Interpolation</strong></td>
+<td>How values are calculated between keyframes (linear, step, ease, etc.)</td>
+</tr>
+<tr>
+<td><strong>Snap</strong></td>
+<td>Grid interval used when placing or moving keyframes</td>
+</tr>
+<tr>
+<td><strong>Loop</strong></td>
+<td>Whether the clip repeats when it reaches the end</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-track-types">Supported track types<a class="headerlink" href="#supported-track-types" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Track type</th>
+<th>What it controls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Transform</strong></td>
+<td>Position, rotation, scale (translate, rotate, scale tracks)</td>
+</tr>
+<tr>
+<td><strong>Color / Alpha</strong></td>
+<td>Color tint and opacity</td>
+</tr>
+<tr>
+<td><strong>Sprite frame</strong></td>
+<td>Active frame index for a <code>Sprite</code> atlas</td>
+</tr>
+<tr>
+<td><strong>Skeletal clip</strong></td>
+<td>Bone transforms from an imported GLTF animation</td>
+</tr>
+<tr>
+<td><strong>Morph weights</strong></td>
+<td>Blend shape weights for facial or deformation animation</td>
+</tr>
+<tr>
+<td><strong>Particle playback</strong></td>
+<td>Play/stop state of a <code>Particles</code> action</td>
+</tr>
+</tbody>
+</table>
+<h2 id="action-frames">Action frames<a class="headerlink" href="#action-frames" title="Link to this section">&para;</a></h2>
+<p>An animation is a list of <strong>action frames</strong>. Each frame schedules an action entity to
+run at a <strong>start time</strong> on a <strong>track</strong> (a timeline lane, used only for visual
+organization — overlapping frames are re-laned automatically).</p>
+<p>Add frames with the <strong>+ Add Action</strong> button (which creates a new action entity of the
+chosen type), or <strong>drag an action entity from the Structure panel onto the tracks
+area</strong> — a ghost block previews the target track, the grid-snapped start time, and the
+frame length before you drop. Invalid drops are rejected with an explanatory tooltip:
+entities without an <code>ActionComponent</code>, entities from another scene, and anything that
+would make an animation contain itself, directly or through nested animations.</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Select a frame</td>
+<td>Click the block (details appear in the toolbar)</td>
+</tr>
+<tr>
+<td>Move a frame</td>
+<td>Drag the block; dragging vertically changes track</td>
+</tr>
+<tr>
+<td>Resize a frame</td>
+<td>Drag the block's left or right edge</td>
+</tr>
+<tr>
+<td>Scroll tracks vertically</td>
+<td>When the track stack exceeds the viewport, use its vertical scrollbar or the mouse wheel</td>
+</tr>
+<tr>
+<td>Zoom the timeline</td>
+<td>Use the mouse wheel over the visible time ruler</td>
+</tr>
+<tr>
+<td>Scroll a long timeline</td>
+<td>When blocks, the authored duration, or the playhead exceed the viewport, use the horizontal scrollbar; its range includes trailing space</td>
+</tr>
+<tr>
+<td>Open the action</td>
+<td>Double-click the block to select the action entity</td>
+</tr>
+<tr>
+<td>Remove a frame</td>
+<td><strong>Properties → AnimationComponent → Actions</strong> → trash button</td>
+</tr>
+</tbody>
+</table>
+<p>Frame moving and resizing remain available while a timeline preview is paused. After
+the edit, the preview is evaluated again at the current playhead time. Timeline
+editing remains locked during active animation playback and scene play mode. If
+playback or preview shutdown interrupts an active timeline drag, the pending edit is
+finalized as its normal undo step before the timeline locks.</p>
+<h3 id="automatic-duration">Automatic duration<a class="headerlink" href="#automatic-duration" title="Link to this section">&para;</a></h3>
+<p>A frame whose duration is <code>0</code> is <strong>auto</strong>: it follows the action's own length — a
+<code>SpriteAnimation</code> lasts as long as its frame sequence, a <code>TimedAction</code> uses its
+duration, a nested <code>Animation</code> its own total length. Frames created in the editor
+default to auto, so configuring the action later updates the timeline block
+automatically.</p>
+<p>Resizing a block in the timeline converts it to an <strong>explicit</strong> duration. To switch
+back and forth, use the checkbox next to <strong>Duration</strong> in the Properties window
+(<strong>AnimationComponent → Actions</strong>): checking it stores <code>0</code> (auto) and displays the
+resolved duration read-only; unchecking freezes the current resolved value as an
+editable number.</p>
+<h2 id="creating-a-clip">Creating a clip<a class="headerlink" href="#creating-a-clip" title="Link to this section">&para;</a></h2>
+<ol>
+<li>In the <strong>Structure panel</strong>, create an <strong>Animation</strong> entity (<strong>Create entity →
+   Animation → Animation</strong>). Creating it as a child of the entity to animate sets
+   that entity as the animation's target; otherwise set <strong>Target</strong> in the
+   Properties window (<strong>ActionComponent → Target</strong>).</li>
+<li>Open the <strong>Animation Timeline</strong> and pick the animation in the clip selector.</li>
+<li>Right-click empty track space at the first key time and choose <strong>Key Position</strong>,
+   <strong>Key Rotation</strong>, <strong>Key Scale</strong>, or <strong>Key Transform</strong>. Missing transform tracks
+   are created automatically as auto-duration action frames.</li>
+<li>Scrub to another time, pose the target in the scene view or Properties, and
+   click the camera <strong>Snapshot</strong> button. Repeat for each pose.</li>
+<li>Press <strong>Play</strong> in the timeline to preview the clip.</li>
+</ol>
+<p>You can also create action frames manually with <strong>+ Add Action</strong> or by dragging action
+entities from the Structure panel.</p>
+<h2 id="keying-transforms">Keying transforms<a class="headerlink" href="#keying-transforms" title="Link to this section">&para;</a></h2>
+<p>Transform keying has two complementary controls: <strong>Snapshot</strong> for the complete pose at
+the playhead, and right-click keying for one block or selected channels.</p>
+<p>A track with <strong>Relative</strong> checked stores offsets, not the pose: its keys hold the
+target's offset from where it was when the preview started (see
+<a href="../../manual/animation/#relative-tracks">Relative tracks</a>). Keyed outside a preview, the
+offset is zero.</p>
+<h3 id="snapshot">Snapshot<a class="headerlink" href="#snapshot" title="Link to this section">&para;</a></h3>
+<p>The camera <strong>Snapshot</strong> button next to <strong>Stop</strong> stores the current position, rotation,
+and scale values of every transform keyframe track reached by the playhead. All writes
+are grouped into <strong>one undo step</strong>.</p>
+<p>A track is included when its action frame starts at or before the playhead:</p>
+<ul>
+<li>An <strong>auto-duration</strong> frame (<code>duration &lt;= 0</code>) remains keyable after its current last
+  key. Adding the key extends the action and grows its block.</li>
+<li>An <strong>explicit-duration</strong> frame is included only while the playhead is inside its
+  fixed span, including the end. Snapshot does not extend it.</li>
+<li>Keys use time local to their own frame (<code>playhead time - frame start</code>), so moving a
+  block along the timeline does not change where its keys belong.</li>
+</ul>
+<p>Snapshot only keys tracks already present in the animation. If no eligible transform
+track is under the playhead, the button is disabled and its tooltip says <strong>No keyframe
+tracks under the playhead to snapshot</strong>. Use empty-area right-click keying when you
+want to create missing tracks.</p>
+<p>Scrubbing starts a paused preview, and Snapshot remains available in that state. It is
+disabled during active animation playback and scene play mode. The button tooltip
+shows the exact snapshot time or explains why the action is disabled. Snapshot does
+not reset the displayed pose, and its keys remain after you stop previewing.</p>
+<h3 id="right-click-keying">Right-click keying<a class="headerlink" href="#right-click-keying" title="Link to this section">&para;</a></h3>
+<p>Right-click while the scene is stopped and animation playback is paused:</p>
+<table>
+<thead>
+<tr>
+<th>Where</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A transform-track block</td>
+<td>Inserts that block's position, rotation, or scale value at the clicked block-local time</td>
+</tr>
+<tr>
+<td>Empty track space</td>
+<td>Keys the animation target's position, rotation, scale, or complete transform</td>
+</tr>
+</tbody>
+</table>
+<p>Block keying always targets the <strong>clicked action</strong>, even when same-channel blocks
+overlap. Its clicked time must be inside an explicit-duration block's real span; the
+menu disables insertion when the block's minimum visual width extends beyond that
+span.</p>
+<p>Empty-area keying reuses the latest matching block active at the clicked time. It can
+extend auto-duration blocks, but it will not write past an explicit block's end. When
+the requested channel does not exist yet, it creates the track and an auto-duration
+action frame. <strong>Key Transform</strong>, including any track creation, is one undo step;
+single-channel keying is one undo step as well.</p>
+<h3 id="authoring-past-the-current-end">Authoring past the current end<a class="headerlink" href="#authoring-past-the-current-end" title="Link to this section">&para;</a></h3>
+<p>The playhead and time field can move beyond the current clip duration (up to one hour),
+so auto-duration tracks can grow. Preview evaluation still stops at the clip's current
+end, however: until you extend it, the object holds its <strong>end pose</strong> at the later
+authoring time. The Snapshot tooltip and right-click menu warn when this happens.</p>
+<p>This held pose is useful for pose-to-pose authoring, but it is not a newly evaluated
+future pose. After scrubbing past the end, adjust the target before keying if you want
+different values there.</p>
+<p>Keyframes appear as small <strong>diamonds</strong> along the bottom of track blocks.</p>
+<h2 id="editing-keyframes">Editing keyframes<a class="headerlink" href="#editing-keyframes" title="Link to this section">&para;</a></h2>
+<p>Keyframes of track actions show as diamonds on their timeline blocks. Click a diamond
+to select it; the selected key is highlighted. Drag it horizontally to change its
+track-local time using the current timeline snap interval. A key cannot cross its
+neighbors or move outside an explicit-duration block, and the completed drag is one
+undo step. Auto-duration blocks grow when their last key moves later.</p>
+<p>Values, interpolation, and deletion are edited in the <strong>Properties</strong> window with the
+track entity selected (double-click its block to select it):</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Move a keyframe in time</td>
+<td>Drag its timeline diamond horizontally, or edit its <strong>KeyframeTracks</strong> time entry</td>
+</tr>
+<tr>
+<td>Change a keyed value</td>
+<td>Edit the entry in the track component's values list</td>
+</tr>
+<tr>
+<td>Change interpolation</td>
+<td>Under <strong>KeyframeTracks → Easing</strong>, click <strong>Add Ease</strong>, expand the list, and pick a curve (<code>Ease 0 - 1</code>, …)</td>
+</tr>
+<tr>
+<td>Remove explicit easing</td>
+<td>Expand <strong>Easing</strong> and use the trash button beside the entry; later entries shift to the preceding segments</td>
+</tr>
+<tr>
+<td>Delete a keyframe</td>
+<td>Trash button next to the time entry (easings and cubic tangents stay aligned)</td>
+</tr>
+<tr>
+<td>Move position keys visually</td>
+<td>Drag the path handles in the <a href="../scene-view/#editing-movement-paths-translatetracks">scene view</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="sprite-animation">Sprite animation<a class="headerlink" href="#sprite-animation" title="Link to this section">&para;</a></h2>
+<p>For 2D frame animation, add a <strong>Sprite Frame</strong> track and set keyframes to specific
+frame names or indices from the sliced sprite sheet. Keep frame intervals consistent
+for smooth playback.</p>
+<p>The runtime equivalent is <code>SpriteAnimation</code>. Identify a sprite animation by its
+<strong>entity name</strong> (Structure panel) — <code>SpriteAnimationComponent</code> has no separate Name
+field. See the <a href="../sprite-slicer/">Sprite Slicer</a> page for how to prepare a sprite sheet.</p>
+<h2 id="skeletal-animation">Skeletal animation<a class="headerlink" href="#skeletal-animation" title="Link to this section">&para;</a></h2>
+<p>GLTF models can include one or more named skeletal animation clips. Files with clips, or
+more than one skin, import the <strong>full node tree</strong> under the Model, so transform-only nodes
+animate as well as joints. The timeline editor lets you preview and blend these clips on
+the <strong>Model</strong> entity. Use the <strong>Bone</strong> view to inspect and edit individual joint
+transforms.</p>
+<p>The animation selector uses each animation entity's name. Imported clips start with the
+name authored in the GLTF; you can rename the entity in the Structure panel. Runtime
+<code>Model:findAnimation</code> and <code>Model:playAnimation</code> string lookups use that same entity name.</p>
+<p><img alt="A character's skeleton drawn in the viewport, with its bones in the Structure panel" src="../../assets/screenshots/editor-bones.png" /></p>
+<p>At runtime, look up a clip by name on the <code>Model</code> object:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Lua</label><label for="__tabbed_1_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Model</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">model</span><span class="p">:</span><span class="nf">loadGLTF</span><span class="p">(</span><span class="s2">&quot;characters/hero.gltf&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">local</span><span class="w"> </span><span class="nv">walk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">model</span><span class="p">:</span><span class="nf">findAnimation</span><span class="p">(</span><span class="s2">&quot;Walk&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nv">walk</span><span class="p">:</span><span class="nf">start</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Model</span><span class="w"> </span><span class="nf">hero</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">hero</span><span class="p">.</span><span class="n">loadGLTF</span><span class="p">(</span><span class="s">&quot;characters/hero.gltf&quot;</span><span class="p">);</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">Animation</span><span class="w"> </span><span class="n">walk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hero</span><span class="p">.</span><span class="n">findAnimation</span><span class="p">(</span><span class="s">&quot;Walk&quot;</span><span class="p">);</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">walk</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="previewing-crossfades-between-clips">Previewing crossfades between clips<a class="headerlink" href="#previewing-crossfades-between-clips" title="Link to this section">&para;</a></h3>
+<p>At runtime you usually switch clips with a <strong>crossfade</strong> so the character eases from one
+motion into the next instead of snapping (see
+<a href="../../manual/animation/#smooth-transitions-crossfading">Smooth transitions</a>). You can
+preview that blend directly in the timeline:</p>
+<ol>
+<li>Select an animation clip and press <strong>Play</strong> to preview it.</li>
+<li>In the toolbar, pick a clip in the <strong>Blend to</strong> dropdown.</li>
+<li>Click the <strong>⇄</strong> button. The playing clip fades out while the chosen clip fades in,
+   using the target clip's <strong>Fade time</strong>, and the viewport shows the blended result.</li>
+</ol>
+<p>Each clip carries a <strong>Fade time</strong> (<code>defaultFadeTime</code>) — the default crossfade duration
+used when <a href="../../reference/classes/model/#playanimation-stopanimations"><code>Model:playAnimation</code></a>
+is called without an explicit time. Edit it in the <strong>Properties</strong> window under
+<strong>AnimationComponent → Fade time</strong> (~0.2–0.3s reads well for locomotion, ~0.1s for a
+quick hit or death). Scrubbing the playhead exits the transition and returns to the
+single selected clip.</p>
+<div class="admonition tip">
+<p class="admonition-title">Use looping clips to see the blend</p>
+<p>The blend reads best when you crossfade <em>from</em> a looping clip (idle, run). Blending
+from a one-shot clip that has already finished will snap, because a finished clip no
+longer contributes to the pose.</p>
+</div>
+<h2 id="runtime-action-system">Runtime action system<a class="headerlink" href="#runtime-action-system" title="Link to this section">&para;</a></h2>
+<p>For scripted one-shot and looping motion that does not need a full authored timeline,
+the runtime action system provides lightweight action types:</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PositionAction</code></td>
+<td>Animate entity position</td>
+</tr>
+<tr>
+<td><code>RotationAction</code></td>
+<td>Animate entity rotation</td>
+</tr>
+<tr>
+<td><code>ScaleAction</code></td>
+<td>Animate entity scale</td>
+</tr>
+<tr>
+<td><code>ColorAction</code></td>
+<td>Animate material or UI color</td>
+</tr>
+<tr>
+<td><code>AlphaAction</code></td>
+<td>Animate opacity</td>
+</tr>
+<tr>
+<td><code>TimedAction</code></td>
+<td>Trigger a callback after a delay or on each loop iteration</td>
+</tr>
+<tr>
+<td><code>SpriteAnimation</code></td>
+<td>Cycle through sprite frames</td>
+</tr>
+<tr>
+<td><code>Animation</code></td>
+<td>Play a skeletal or keyframe clip</td>
+</tr>
+<tr>
+<td><code>Particles</code></td>
+<td>Drive particle playback</td>
+</tr>
+<tr>
+<td><code>TranslateTracks</code> / <code>RotateTracks</code> / <code>ScaleTracks</code> / <code>MorphTracks</code></td>
+<td>Multi-keyframe tracks with per-segment easing</td>
+</tr>
+</tbody>
+</table>
+<p>All actions support easing curves. See <a href="../../reference/classes/timedaction/">TimedAction</a>
+for the full list of <code>EaseType</code> values.</p>
+<p>In the <strong>Properties</strong> window, <strong>Play on start</strong> starts an action or animation with the
+scene (checking it sets its <strong>State</strong> to Running), and <strong>Start offset</strong> or <strong>Random
+start</strong> keep copies out of sync. Timed actions
+have <strong>Loop</strong> and <strong>Ping-pong</strong>, a rotation action can <strong>Spin</strong> by any <strong>Angle</strong>, and
+keyframe tracks have <strong>Loop</strong> and <strong>Relative</strong>, so each of them can also run on its own,
+without an animation. See <a href="../../manual/animation/#runtime-actions">Runtime actions</a>.</p>
+<h2 id="easing-curves">Easing curves<a class="headerlink" href="#easing-curves" title="Link to this section">&para;</a></h2>
+<p>Timed actions (<code>PositionAction</code>, <code>RotationAction</code>, …) have a single <strong>Ease</strong> property in
+the <strong>Properties</strong> window (<code>setFunctionType()</code> in code). Keyframe tracks ease <strong>per
+segment</strong> through a collapsible, sparse <strong>Easing</strong> list. <strong>Add Ease</strong> appends the next
+explicit segment entry, up to one entry per pair of consecutive keys; expand the list
+to edit or remove its <code>Ease 0 - 1</code>, <code>Ease 1 - 2</code>, … rows. Missing trailing entries are
+linear. Removing an entry shifts later entries to the preceding segments. GLTF-imported
+clips match their authored sampler mode: <code>LINEAR</code> clips leave easing unset, <code>STEP</code>
+clips import with every segment set to <code>Step</code>, and <code>CUBICSPLINE</code> clips interpolate from
+imported tangents instead — see
+<a href="../../manual/animation/#per-segment-easing">Per-segment easing</a> and
+<a href="../../manual/animation/#interpolation-modes">Interpolation modes</a>. Common choices:</p>
+<table>
+<thead>
+<tr>
+<th>Curve</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LINEAR</code></td>
+<td>Constant-speed motion, debug</td>
+</tr>
+<tr>
+<td><code>STEP</code></td>
+<td>Held poses — stop-motion and stepped, pose-to-pose motion</td>
+</tr>
+<tr>
+<td><code>QUAD_IN_OUT</code></td>
+<td>UI transitions and camera moves</td>
+</tr>
+<tr>
+<td><code>BOUNCE_OUT</code></td>
+<td>Playful jumps and pop-in effects</td>
+</tr>
+<tr>
+<td><code>BACK_IN</code></td>
+<td>Anticipation before a jump</td>
+</tr>
+<tr>
+<td><code>ELASTIC_OUT</code></td>
+<td>Springing UI elements</td>
+</tr>
+</tbody>
+</table>
+<h2 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Link to this section">&para;</a></h2>
+<ul>
+<li>Name clips clearly and consistently (<code>idle</code>, <code>walk</code>, <code>run</code>, <code>jump</code>, <code>attack</code>).</li>
+<li>Keep looping and one-shot animations in separate clips.</li>
+<li>Use consistent frame intervals for sprite animations.</li>
+<li>Prefer skeletal animation for character movement; use keyframe tracks for camera
+  and scene-wide effects.</li>
+<li>Use morph targets sparingly on performance-sensitive targets.</li>
+<li>Test in play mode after changing script-driven animation timing.</li>
+</ul>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../terrain-editor/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Terrain Editor</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../code-editor/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Code Editor</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/editor/animation.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#animation-timeline" class="dx-toc-link" data-level="1">Animation Timeline</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#timeline-concepts" class="dx-toc-link" data-level="2">Timeline concepts</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#supported-track-types" class="dx-toc-link" data-level="2">Supported track types</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#action-frames" class="dx-toc-link" data-level="2">Action frames</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#automatic-duration" class="dx-toc-link" data-level="3">Automatic duration</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#creating-a-clip" class="dx-toc-link" data-level="2">Creating a clip</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#keying-transforms" class="dx-toc-link" data-level="2">Keying transforms</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#snapshot" class="dx-toc-link" data-level="3">Snapshot</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#right-click-keying" class="dx-toc-link" data-level="3">Right-click keying</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#authoring-past-the-current-end" class="dx-toc-link" data-level="3">Authoring past the current end</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#editing-keyframes" class="dx-toc-link" data-level="2">Editing keyframes</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#sprite-animation" class="dx-toc-link" data-level="2">Sprite animation</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#skeletal-animation" class="dx-toc-link" data-level="2">Skeletal animation</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#previewing-crossfades-between-clips" class="dx-toc-link" data-level="3">Previewing crossfades between clips</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#runtime-action-system" class="dx-toc-link" data-level="2">Runtime action system</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#easing-curves" class="dx-toc-link" data-level="2">Easing curves</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#best-practices" class="dx-toc-link" data-level="2">Best practices</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../versions.json";
+    window.QUANTUM_PAGE_URL = "editor/animation/";
+  </script>
+  <script src="../../js/quantum.js" defer></script>
+</body>
+</html>

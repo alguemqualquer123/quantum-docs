@@ -1,10 +1,10 @@
 ---
-description: Sound playback, 3D audio, global volume, pooling, and audio workflow in Doriax.
+description: Sound playback, 3D audio, global volume, pooling, and audio workflow in Quantum.
 ---
 
 # Audio
 
-Doriax uses **SoLoud** for audio playback and exposes sound behavior through the
+Quantum uses **SoLoud** for audio playback and exposes sound behavior through the
 `Sound` object class, `SoundComponent`, `SoundPool`, and `AudioSystem`. Audio entities
 are regular ECS entities — you position them in the world just like any other object,
 and the audio system reads their Transform to compute spatial attenuation.

@@ -11,7 +11,7 @@ description: Model API reference (C++ and Lua).
 
 Loads and displays 3D model files in a scene. `Model` extends [Mesh](mesh.md) and adds support for loading OBJ and GLTF files (including binary GLB), and FBX files through the glTF conversion the editor makes of them, including skeletal animation (via `Animation` / `Bone`), blend-shape morph targets, and PBR materials.
 
-A single GLTF file can contain multiple meshes, materials, textures, skins, and animations; Doriax imports them into the scene hierarchy and makes each accessible through the API. Files with animation clips, or more than one skin, import the **full glTF node tree** so joints, mesh nodes, and transform-only helpers keep the parentage authored in the file. Use [getAnimation()](#getanimation-findanimation) and [getBone()](#getbone) to drive skeletal playback, and [setMorphWeight()](#getmorphweight-setmorphweight) to control blend shapes. See [3D Graphics — GLTF node hierarchy](../../manual/3d-graphics.md#gltf-node-hierarchy).
+A single GLTF file can contain multiple meshes, materials, textures, skins, and animations; Quantum imports them into the scene hierarchy and makes each accessible through the API. Files with animation clips, or more than one skin, import the **full glTF node tree** so joints, mesh nodes, and transform-only helpers keep the parentage authored in the file. Use [getAnimation()](#getanimation-findanimation) and [getBone()](#getbone) to drive skeletal playback, and [setMorphWeight()](#getmorphweight-setmorphweight) to control blend shapes. See [3D Graphics — GLTF node hierarchy](../../manual/3d-graphics.md#gltf-node-hierarchy).
 
 The Model entity has a `MeshComponent` only when the geometry loads into it (a single mesh, an OBJ, or a merged model). When the meshes go to child entities it keeps just `Transform` and `ModelComponent`, and the inherited [Mesh](mesh.md) methods act on those parts: setters change every part, getters read the first one, and a submesh index counts across the parts the way the merged model numbers its submeshes. `getAABB()` covers all the parts in the model's space and `getWorldAABB()` in the world. Settings made before the model has any geometry are held on a `MeshComponent` of the model's own until the load passes them to the meshes it builds.
 
@@ -69,7 +69,7 @@ pin. See [3D Graphics — Editing an imported model's submeshes](../../manual/3d
 
 * bool **loadModel**(const std::string& filename)
 
-Loads a 3D model file from disk. Doriax automatically detects the format based on file extension:
+Loads a 3D model file from disk. Quantum automatically detects the format based on file extension:
 
 * `.obj` — Wavefront OBJ
 * `.gltf` / `.glb` — GL Transmission Format (GLTF 2.0 / binary GLB)

@@ -1,5 +1,5 @@
 ---
-description: Viewport navigation, gizmos, cameras, and scene editing tools in the Doriax editor.
+description: Viewport navigation, gizmos, cameras, and scene editing tools in the Quantum editor.
 ---
 
 # Scene View
@@ -41,7 +41,7 @@ to move in world space instead of local space.
 ## Viewport settings
 
 Open the **gear** button on the scene view toolbar to toggle display and snap options
-for the current scene. They are saved per user in `.doriax/user/workspace.yaml`, not in
+for the current scene. They are saved per user in `.quantum/user/workspace.yaml`, not in
 the scene file. They are grouped into **Overlays**, **Rendering**, **Grid & snapping**,
 and **Editor camera** sections.
 
@@ -253,7 +253,7 @@ and [Editor VSync](project-workflow.md#editor-vsync).
 The editor footer on the right shows FPS, frame time, draw calls, and triangles for the
 last drawn frame — the same counters `Engine::getFrameStats()` returns. For a scripted
 capture with VSync forced off, use
-[`doriax-editor benchmark`](command-line.md#benchmark-measure-scene-fps).
+[`quantum-editor benchmark`](command-line.md#benchmark-measure-scene-fps).
 
 ### Touch simulation
 
@@ -262,7 +262,7 @@ The **phone** button after the play controls makes Play behave like a touch devi
 and the left mouse button acts as one finger: pressing starts a touch, dragging moves it,
 and releasing ends it. As on a phone, the game gets touch events instead of mouse events,
 so there is no hover, right click, or scroll. The keyboard still works. The setting is
-saved per user in `.doriax/user/workspace.yaml` and can only be changed while nothing is
+saved per user in `.quantum/user/workspace.yaml` and can only be changed while nothing is
 playing.
 
 ### Detached camera

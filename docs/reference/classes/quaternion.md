@@ -10,7 +10,7 @@ description: Quaternion API reference (C++ and Lua).
 
 Represents a rotation in 3D space using the quaternion formalism. Quaternions avoid gimbal lock, support smooth slerp interpolation, and are more numerically stable than Euler-angle representations for concatenated rotations.
 
-In Doriax, all [Object](object.md) rotations are stored as quaternions. Euler angles, axis-angle, and matrix forms can be converted to/from quaternions using the provided constructors and instance methods.
+In Quantum, all [Object](object.md) rotations are stored as quaternions. Euler angles, axis-angle, and matrix forms can be converted to/from quaternions using the provided constructors and instance methods.
 
 !!! note "Lua components are writable"
     Lua can read and assign `w`, `x`, `y`, and `z` directly. `obj.rotation` returns a
@@ -66,7 +66,7 @@ Controls the order in which Euler-angle rotations are applied when constructing 
 * **XYZ** — Roll, then Pitch, then Yaw
 * **XZY**, **YXZ**, **YZX**, **ZXY**, **ZYX** — Other standard combinations
 
-The most common order in Doriax is **ZYX** — that is the default used by
+The most common order in Quantum is **ZYX** — that is the default used by
 `Quaternion(xAngle, yAngle, zAngle)` and `Object::setRotation(x, y, z)`.
 
 ---

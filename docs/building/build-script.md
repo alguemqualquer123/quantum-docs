@@ -1,12 +1,12 @@
 ---
-description: Configure and build an exported Doriax project with one command using the doriax.py build script.
+description: Configure and build an exported Quantum project with one command using the quantum.py build script.
 ---
 
-# Build Script (doriax.py)
+# Build Script (quantum.py)
 
-`doriax.py` runs the CMake configure and build steps for a Doriax project in one command.
+`quantum.py` runs the CMake configure and build steps for a Quantum project in one command.
 Every [Source Code export](../editor/export.md#source-code-mode) puts it in the export
-root, next to `CMakeLists.txt`. The engine repository has it at `engine/doriax.py`,
+root, next to `CMakeLists.txt`. The engine repository has it at `engine/quantum.py`,
 where it builds `engine/project` by default.
 
 !!! tip "Desktop and Web exports are already built"
@@ -26,10 +26,10 @@ where it builds `engine/project` by default.
 From the export folder:
 
 ```bash
-python3 doriax.py              # Release build for this computer
-python3 doriax.py --debug      # Debug build
-python3 doriax.py -g vulkan    # choose the graphics backend
-python3 doriax.py -p web       # Emscripten build
+python3 quantum.py              # Release build for this computer
+python3 quantum.py --debug      # Debug build
+python3 quantum.py -g vulkan    # choose the graphics backend
+python3 quantum.py -p web       # Emscripten build
 ```
 
 On Windows, run it with `python` or `py`.
@@ -66,7 +66,7 @@ see [Building for Android](android.md).
 | `-o`, `--output` | `build/<platform>` | Build directory |
 | `-a`, `--appname` | From `CMakeLists.txt` | Executable name (`APP_NAME`) |
 | `-s`, `--project` | `project/` | Project root (`PROJECT_ROOT`) |
-| `-e`, `--doriax` | Script folder | Engine root with the engine `CMakeLists.txt` |
+| `-e`, `--quantum` | Script folder | Engine root with the engine `CMakeLists.txt` |
 | `--no-cpp-init` / `--no-lua-init` | | Define `NO_CPP_INIT` / `NO_LUA_INIT`, see [Scripting entry options](../reference/build-options.md#scripting-entry-options) |
 | `--em-shell-file` | | Emscripten `--shell-file` template for `web` |
 

@@ -1,12 +1,12 @@
 ---
-description: Math types, geometry helpers, logging, angle/color utilities, and utility classes in Doriax.
+description: Math types, geometry helpers, logging, angle/color utilities, and utility classes in Quantum.
 ---
 
 # Math & Utilities
 
-Doriax includes a complete set of math and utility types that are shared across
+Quantum includes a complete set of math and utility types that are shared across
 rendering, physics, animation, input, and gameplay code. Understanding these types helps
-you write efficient, readable Doriax scripts.
+you write efficient, readable Quantum scripts.
 
 ## Vector types
 

@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Export Window — Quantum Engine Docs</title>
+  <meta name="description" content="Export modes (Source Code, Desktop, Web), settings, generated files, shader compilation, and platform builds in the Quantum editor.">
+  <meta property="og:title" content="Export Window — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/editor/export/">
+
+  <link rel="icon" type="image/png" href="../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/quantum.css">
+  <link rel="stylesheet" href="../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="export-window">Export Window<a class="headerlink" href="#export-window" title="Link to this section">&para;</a></h1>
+<p>The <strong>Export Window</strong> turns a Quantum project into something you can ship. It collects
+generated scene and bundle C++, resources, scripts, engine runtime files, and compiled
+shaders — and, depending on the mode, also compiles the result into a ready-to-run
+build.</p>
+<p><img alt="The Export Project window: Source Code, Desktop, and Web modes" src="../../assets/screenshots/export-modes.png" /></p>
+<h2 id="from-editor-data-to-runtime-code">From editor data to runtime code<a class="headerlink" href="#from-editor-data-to-runtime-code" title="Link to this section">&para;</a></h2>
+<p>The engine runtime is independent of the editor. Export generates C++ that uses the
+public runtime API; the resulting game builds and runs without the editor or its
+internal project model.</p>
+<table>
+<thead>
+<tr>
+<th>Project input</th>
+<th>Exported form</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.scene</code> files</td>
+<td>C++ factory functions that create entities and configure their components</td>
+</tr>
+<tr>
+<td><code>.bundle</code> files included in the build</td>
+<td>C++ factory functions for reusable entity hierarchies</td>
+</tr>
+<tr>
+<td>User C++ scripts</td>
+<td>Source files copied unchanged and compiled alongside generated code, with separate generated script bindings</td>
+</tr>
+<tr>
+<td>Lua scripts</td>
+<td>Runtime resources loaded by the engine's Lua binding</td>
+</tr>
+<tr>
+<td>Textures, models, audio, and other assets</td>
+<td>Runtime resources copied or packaged for the target</td>
+</tr>
+<tr>
+<td>FBX models</td>
+<td>Their glTF conversion, shipped as <code>&lt;name&gt;.fbx.glb</code> beside the FBX's path (see <a href="#fbx-models">FBX models</a>)</td>
+</tr>
+</tbody>
+</table>
+<p>Scene and bundle setup therefore runs as compiled code, without parsing the editor's
+YAML scene and bundle files at runtime. Lua and external assets remain resources;
+export does not convert them all into C++.</p>
+<p><strong>Source Code</strong> export lets you inspect and build this code with standard toolchains.
+<strong>Desktop</strong> and <strong>Web</strong> compile it into the final application. Editor Play mode has a
+separate build workflow; use export for distribution.</p>
+<div class="admonition note">
+<p class="admonition-title">Asset directory contents</p>
+<p>Files inside the assets directory ship as they are, except FBX models, which ship as
+their glTF conversion. When that directory is left at
+the project root, that includes the <code>.scene</code>, <code>.bundle</code>, and <code>project.yaml</code> files.
+The game never reads them, so point the assets directory at a dedicated folder to
+keep authoring files out of the build.</p>
+</div>
+<h2 id="opening-the-export-window">Opening the Export Window<a class="headerlink" href="#opening-the-export-window" title="Link to this section">&para;</a></h2>
+<p>Choose <strong>File → Export Project...</strong> from the menu bar, or press the <strong>Export</strong> button in
+the toolbar.</p>
+<h2 id="export-modes">Export modes<a class="headerlink" href="#export-modes" title="Link to this section">&para;</a></h2>
+<p>The window opens with three modes to choose from:</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Output</th>
+<th>Use it when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Source Code</strong></td>
+<td>A self-contained buildable C++ project (engine source included) for Android, iOS, Web, Windows, macOS, and Linux</td>
+<td>You want full control of the build, target mobile platforms, or integrate with CI</td>
+</tr>
+<tr>
+<td><strong>Desktop</strong></td>
+<td>A ready-to-run native executable for the machine you are on (Linux, Windows, or macOS)</td>
+<td>You want a playable desktop build without touching a compiler</td>
+</tr>
+<tr>
+<td><strong>Web</strong></td>
+<td>HTML + JavaScript + WebAssembly via <a href="https://emscripten.org/">Emscripten</a></td>
+<td>You want a browser build without running <code>emcmake</code> yourself</td>
+</tr>
+</tbody>
+</table>
+<p>Selecting a mode opens its settings screen; the <strong>Back</strong> button returns to the mode
+selection.</p>
+<p><strong>Desktop</strong> and <strong>Web</strong> run the Source Code pipeline internally: they generate the full
+project into a build cache inside your project (<code>.quantum/export/desktop</code> or
+<code>.quantum/export/web</code>), compile it there, and copy only the final artifacts to your
+chosen destination folder.</p>
+<h2 id="common-settings">Common settings<a class="headerlink" href="#common-settings" title="Link to this section">&para;</a></h2>
+<p>All modes share these settings:</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Target / Destination Directory</strong></td>
+<td>Where the output goes. Source Code requires an empty directory; Desktop and Web overwrite existing files in the destination</td>
+</tr>
+<tr>
+<td><strong>Start Scene</strong></td>
+<td>Scene loaded when the exported game launches</td>
+</tr>
+<tr>
+<td><strong>Shaders</strong></td>
+<td>The shader variants compiled into the build (pre-filled from your scenes; add or remove entries as needed)</td>
+</tr>
+</tbody>
+</table>
+<p>The output folder is remembered <strong>per project and per export mode</strong>, so switching from
+Desktop to Source Code brings back the folder you last used for that mode rather than
+overwriting one with the other. A project that has never been exported starts from the
+<strong>Default Export Directory</strong> in <a href="../editor-settings/#general">Editor Settings</a>, when one
+is set. Both are machine-local: they live in the project's <code>.quantum/user/build.yaml</code>,
+which is not committed, not in <code>project.yaml</code>.</p>
+<p><strong>Start Scene</strong> is the same setting as <a href="../project-settings/#project">Project Settings →
+General</a>; changing it here changes it for the project.</p>
+<p>The assets and Lua folders that ship with the build come from
+<a href="../project-workflow/#assets-and-lua-directories">Project Settings</a>, not from this window:
+stored references are relative to those directories, so exporting a different one would
+break every path in the scenes.</p>
+<p>The experimental <strong>Native Resource Pack</strong> choice also comes from <strong>Project Settings →
+Directories</strong>. It is off by default; see <a href="#native-resource-pack">Native resource pack</a>
+for its output and runtime restrictions.</p>
+<h3 id="application-identity-and-platform-settings">Application identity and platform settings<a class="headerlink" href="#application-identity-and-platform-settings" title="Link to this section">&para;</a></h3>
+<p>The Export Window does not ask for the application's name, identifier, version or icons:
+those come from <a href="../project-settings/">Project Settings</a>, so every export mode and the
+command line produce the same identity. What the exporter writes with them depends on
+the target:</p>
+<table>
+<thead>
+<tr>
+<th>Written into</th>
+<th>From</th>
+<th>Applies to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Web page title, favicon, HTML shell, <code>&lt;head&gt;</code> include, and the game portal SDK</td>
+<td><a href="../project-settings/#web">Web settings</a></td>
+<td>Web mode and Source Code</td>
+</tr>
+<tr>
+<td><code>.desktop</code> launcher (<code>Name</code>, <code>Comment</code>, <code>Categories</code>) and <code>app_icon.png</code></td>
+<td><a href="../project-settings/#linux">Linux settings</a> and the window icon</td>
+<td>Linux builds from any mode</td>
+</tr>
+<tr>
+<td>Executable icon and <code>VERSIONINFO</code> resource (<code>app_icon.rc</code>)</td>
+<td><a href="../project-settings/#windows">Windows settings</a> and the window icon</td>
+<td>Windows builds from any mode</td>
+</tr>
+<tr>
+<td><code>Info.plist</code>, bundle identifier, <code>AppIcon</code> asset set, and on iOS the Google Mobile Ads frameworks and the StoreKit adapter</td>
+<td><a href="../project-settings/#macos">macOS</a> and <a href="../project-settings/#ios">iOS</a> settings</td>
+<td>Source Code exports (the generated Xcode workspaces)</td>
+</tr>
+<tr>
+<td><code>build.gradle</code> (including the AdMob and Play Billing libraries), <code>AndroidManifest.xml</code>, <code>strings.xml</code>, <code>styles.xml</code>, launcher icons</td>
+<td><a href="../project-settings/#android">Android settings</a></td>
+<td>Source Code exports (the generated Android Studio workspace)</td>
+</tr>
+</tbody>
+</table>
+<p>The executable and CMake target are still named after the <strong>project name</strong>, not the
+application name, so renaming the application does not rename the binary.</p>
+<h3 id="shaders">Shaders<a class="headerlink" href="#shaders" title="Link to this section">&para;</a></h3>
+<p>The shader list is populated automatically from every saved scene, including a live scan
+of the currently open scenes — so a component added since the last save (for example a
+shadow-casting 2D light) is already accounted for. Each entry shows where it came from:</p>
+<table>
+<thead>
+<tr>
+<th>Icon</th>
+<th>Entry</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cubes</td>
+<td>Normal</td>
+<td>Collected from the project scenes</td>
+</tr>
+<tr>
+<td>Plus</td>
+<td>Addition</td>
+<td>Added by hand with <strong>Add</strong></td>
+</tr>
+<tr>
+<td>Trash</td>
+<td><em>(Excluded)</em>, greyed out</td>
+<td>Removed by hand, kept in the list so it can be restored</td>
+</tr>
+</tbody>
+</table>
+<p>Use <strong>Add</strong> if your game enables a feature only at runtime from scripts (say, turning on
+SSR) so its shaders ship too. <strong>Delete</strong> on a collected shader does not remove the row —
+it marks it <em>(Excluded)</em> and greys it out, so you can always see what a build is leaving
+out and why the list is shorter than the scenes suggest. Selecting an excluded entry
+turns the button into <strong>Restore</strong>, and <strong>Reset Shader Overrides</strong> clears every manual
+addition and exclusion at once.</p>
+<p>Additions and exclusions are saved in <code>project.yaml</code> under <code>export</code>, and they are
+<strong>shared by all three export modes</strong> — a shader you exclude for a Desktop test build is
+excluded from the Source Code export too. Forked shaders are stored by their
+project-relative path rather than by a session id, so the list survives reopening the
+project.</p>
+<h2 id="source-code-mode">Source Code mode<a class="headerlink" href="#source-code-mode" title="Link to this section">&para;</a></h2>
+<p>Exactly the classic export: choose the <strong>graphic backends</strong> to include (OpenGL, OpenGL ES
+3, Direct3D 11, Metal for macOS and iOS, Vulkan) — this decides which shader formats are
+compiled in — and get a buildable CMake project in the target directory.</p>
+<p><img alt="Source Code export with the shader list and the platform presets" src="../../assets/screenshots/export-source-code.png" /></p>
+<p>The source builds for every supported operating system regardless of this choice; only the
+shaders are affected, so include every backend the project may eventually be built with.
+See <a href="#shader-compilation">Shader compilation</a> for which target needs which backend.</p>
+<h3 id="choosing-the-backends">Choosing the backends<a class="headerlink" href="#choosing-the-backends" title="Link to this section">&para;</a></h3>
+<p>The <strong>Graphic Backends</strong> section has two tabs over the same selection:</p>
+<table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>Use it to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform Presets</strong></td>
+<td>Tick the platforms you intend to ship — Windows, Linux, macOS, iOS, Android, Web — and let the editor select the backends each one needs</td>
+</tr>
+<tr>
+<td><strong>Custom Backends</strong></td>
+<td>Tick individual backends, with the shader language of each shown in its tooltip</td>
+</tr>
+</tbody>
+</table>
+<p>Switching tabs keeps the current selection, and the line under the tabs always spells out
+which backends the export will include. The two work together rather than overriding each
+other: a backend you tick by hand is kept even when a preset also covers it, and turning
+a platform off only clears the backends that preset added.</p>
+<p>A project that has never configured this opens on <strong>Platform Presets</strong> with the platform
+you are running on already ticked; once a selection is saved, the window reopens on
+<strong>Custom Backends</strong> showing it. The selection is stored in <code>project.yaml</code> under
+<code>export.sourceCode.graphicBackends</code>, so it travels with the project.</p>
+<table>
+<thead>
+<tr>
+<th>Preset</th>
+<th>Selects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Windows</strong></td>
+<td>OpenGL, Vulkan, Direct3D 11</td>
+</tr>
+<tr>
+<td><strong>Linux</strong></td>
+<td>OpenGL, Vulkan</td>
+</tr>
+<tr>
+<td><strong>macOS</strong></td>
+<td>Metal (macOS), OpenGL</td>
+</tr>
+<tr>
+<td><strong>iOS</strong></td>
+<td>Metal (iOS)</td>
+</tr>
+<tr>
+<td><strong>Android</strong></td>
+<td>OpenGL ES 3</td>
+</tr>
+<tr>
+<td><strong>Web</strong></td>
+<td>OpenGL ES 3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="generated-output-structure">Generated output structure<a class="headerlink" href="#generated-output-structure" title="Link to this section">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>output/
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── CMakeLists.txt       ← build system entry point
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── quantum.py            ← configure and build script
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── core/  libs/  platform/  renders/  workspaces/
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│                        ← engine runtime source (copied from the editor&#39;s SDK)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>├── shaders/             ← compiled shader headers for the selected backends
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>└── project/
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    ├── main.cpp         ← generated startup entry point
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    ├── *.cpp            ← generated scene and bundle factory sources
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    ├── assets/          ← contents of the project&#39;s assets directory
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    │                    ← (or resources.pak only, when packing is enabled)
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    ├── lua/             ← contents of the project&#39;s Lua directory
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    │                    ← (empty directory kept when packing is enabled)
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    └── scripts/         ← your registered C++ scripts
+</code></pre></div>
+<p>Those three trees are filtered rather than mirrored, which matters when the assets and Lua
+directories are left at their default <code>&lt;Project root&gt;</code> and all three come from the same
+folder:</p>
+<ul>
+<li><strong>C++ sources and headers</strong> only ever reach <code>scripts/</code>, at their path relative to the
+  project root — a script kept in <code>scripts/CharacterController.cpp</code> therefore exports as
+  <code>project/scripts/scripts/CharacterController.cpp</code>, which is the path the generated
+  <code>scene_scripts.cpp</code> includes it by.</li>
+<li><strong>Lua sources</strong> only reach <code>lua/</code>, the root <code>lua://</code> and <code>require</code> resolve against; they
+  are not copied to <code>assets/</code> as well. A Lua file outside the Lua directory has no other
+  home, so it still ships as an asset.</li>
+<li><strong>Data files</strong> a script may read through either prefix (<code>.json</code>, <code>.txt</code>, <code>.csv</code>, <code>.dat</code>
+  and similar) are copied to both trees.</li>
+</ul>
+<p>A folder appears in the export only when a file lands in it, so a folder holding nothing
+but scripts leaves no empty directory behind. The exception is a packed Source Code
+export, which keeps an empty <code>project/lua/</code> directory for the generated Xcode workspace.</p>
+<p>Build it afterwards with the appropriate <a href="#platform-toolchains">platform toolchain</a>, or
+run <code>python3 quantum.py</code> in the export folder to configure and build it in one step. See
+<a href="../../building/build-script/">Build Script</a>.</p>
+<h2 id="native-resource-pack">Native resource pack<a class="headerlink" href="#native-resource-pack" title="Link to this section">&para;</a></h2>
+<p>Enable <strong>Project → Project Settings → Directories → Native Resource Pack</strong> to combine
+the exported <code>assets/</code> and <code>lua/</code> trees into one <code>resources.pak</code>. This experimental,
+project-wide option is intended for ready-to-run <strong>Desktop</strong> exports and Android builds
+made from <strong>Source Code</strong> output. It has no effect on <strong>Web</strong> mode, which continues to
+produce Emscripten's <code>.data</code> bundle.</p>
+<p>The resulting layout depends on the export mode:</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Resource output when packing is enabled</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Desktop</strong></td>
+<td><code>resources.pak</code> beside the executable; loose <code>assets/</code> and <code>lua/</code> directories are removed</td>
+</tr>
+<tr>
+<td><strong>Source Code</strong></td>
+<td><code>project/assets/resources.pak</code>; the loose contents are removed, while the empty <code>project/lua/</code> directory is retained for generated Xcode workspace compatibility</td>
+</tr>
+<tr>
+<td><strong>Web</strong></td>
+<td>Unchanged; Emscripten emits its normal <code>.data</code> bundle</td>
+</tr>
+</tbody>
+</table>
+<p>The pack preserves the usual logical names. High-level loaders, Lua <code>require()</code>, script
+entries, and <code>Data::open()</code> can read plain asset-relative paths, <code>asset://</code> paths, and
+<code>lua://</code> paths transparently; external buffers and images referenced by GLTF models work
+the same way. Absolute paths, <code>data://</code>, and other schemes continue to resolve outside
+the pack. Editor Play mode is unaffected: it always reads the project's loose source
+files.</p>
+<div class="admonition warning">
+<p class="admonition-title">Experimental limitations</p>
+<ul>
+<li><code>File</code> opens real filesystem files and cannot open a packed entry. Use <code>Data</code> (or
+  an engine resource loader) for read-only packaged resources. This also means each
+  opened entry is read into memory rather than exposed as a streaming file handle.
+  <code>FileData.newFile()</code> follows the same rule: a packed path returns an in-memory
+  <code>Data</code> object even when a file handle was requested.</li>
+<li>A pack must remain below <strong>2 GiB</strong>. Export stops with an error if the combined
+  header and resource data exceed that limit.</li>
+<li>Packing only obfuscates the bytes; it does <strong>not</strong> encrypt or securely protect
+  shipped assets.</li>
+<li><code>resources.pak</code> and <code>resources.pak.tmp</code> are reserved, case-insensitive names at
+  the top level of the configured assets directory. Rename any file or directory
+  with either name before exporting, even when packing is disabled.</li>
+</ul>
+</div>
+<p>If you disable the option and export again, the exporter removes a stale pack and ships
+the loose resource directories again. Command-line exports honor the saved project
+setting; there is no separate CLI switch.</p>
+<h2 id="fbx-models">FBX models<a class="headerlink" href="#fbx-models" title="Link to this section">&para;</a></h2>
+<p>A game never reads FBX. Export ships the glTF conversion of every FBX in the assets
+directory beside it, as <code>&lt;name&gt;.fbx.glb</code>, and the engine loads that file wherever the
+<code>.fbx</code> path is used. The <code>.fbx</code> itself is not exported. See
+<a href="../../manual/3d-graphics/#fbx-models">3D Graphics — FBX models</a>.</p>
+<p>Conversions that are missing or out of date, such as on a fresh clone or after an FBX or
+one of its textures changed, are made during the export, so a clean checkout exports
+without opening the editor first. Models in open scenes are reloaded before their scenes
+are saved for the export.</p>
+<p>A scene that is not open keeps the model parts it was saved with, and only the editor can
+rebuild them for a changed file. Each scene therefore records which version of an FBX its
+models came from, and export stops when that no longer matches the file on disk: open the
+scene, let its models reload, save it, and export again. A changed texture does not count.</p>
+<p>Export also stops when an FBX cannot be converted, or when an asset already has the path a
+conversion ships as (<code>hero.fbx.glb</code> beside <code>hero.fbx</code>). A texture that a conversion links
+but that is now missing is reported as a warning, and the model is exported without it.</p>
+<h2 id="desktop-mode">Desktop mode<a class="headerlink" href="#desktop-mode" title="Link to this section">&para;</a></h2>
+<p>Builds a native executable for the operating system the editor is running on, using
+CMake and the <strong>compiler kit configured in <a href="../editor-settings/#desktop">Editor
+Settings</a></strong> (or the system default toolchain when none is
+selected).</p>
+<p><img alt="Desktop export with its graphic backend, compiler, and build jobs" src="../../assets/screenshots/export-desktop.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Compiler</strong></td>
+<td>Read-only. Shows the kit this project builds with; change it in <strong>Edit → Editor Settings → Desktop</strong></td>
+</tr>
+<tr>
+<td><strong>Build Jobs</strong></td>
+<td>How many compiler processes run in parallel. Shared with Play-mode script builds — see <a href="../../manual/cpp-build-setup/#parallel-builds">Parallel builds</a></td>
+</tr>
+<tr>
+<td><strong>Graphic Backend</strong></td>
+<td>The API the executable is built against, and the only shader format compiled</td>
+</tr>
+</tbody>
+</table>
+<p>Both the compiler and the job count are machine-local: they are stored per project in
+<code>.quantum/user/build.yaml</code>, not in <code>project.yaml</code>, so a teammate on another machine keeps
+their own toolchain.</p>
+<p>Choose the <strong>Graphic Backend</strong> before exporting. The available choices follow the host
+operating system:</p>
+<table>
+<thead>
+<tr>
+<th>Host</th>
+<th>Backends</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Linux</strong></td>
+<td>OpenGL <em>(default)</em>, Vulkan</td>
+</tr>
+<tr>
+<td><strong>Windows</strong></td>
+<td>OpenGL <em>(default)</em>, Vulkan, Direct3D 11</td>
+</tr>
+<tr>
+<td><strong>macOS</strong></td>
+<td>Metal <em>(default)</em>, OpenGL</td>
+</tr>
+</tbody>
+</table>
+<p>The exporter passes the selection to CMake and compiles only the shader format needed
+by that backend. Vulkan builds require the Vulkan development files or SDK to be
+available to the compiler. macOS has no Vulkan option because its only driver, MoltenVK,
+is missing an extension the renderer needs — see
+<a href="../../building/macos/#vulkan-backend">Vulkan backend</a>.</p>
+<p>The destination folder receives:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>destination/
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── MyProject            ← the executable (MyProject.exe on Windows)
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── assets/              ← runtime resources (default)
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├── lua/                 ← runtime Lua scripts (default)
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>├── resources.pak        ← replaces assets/ and lua/ when packing is enabled
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>├── app_icon.png         ← (Linux, with a project icon set)
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>└── MyProject.desktop    ← (Linux launcher entry)
+</code></pre></div>
+<p>Run the executable from that folder — it resolves the loose <code>assets/</code> and <code>lua/</code>
+directories, or <code>resources.pak</code>, relative to its working directory.</p>
+<h3 id="application-icon">Application icon<a class="headerlink" href="#application-icon" title="Link to this section">&para;</a></h3>
+<p>Set a <strong>project icon</strong> in <strong>Project Settings → Window → Icon</strong> (square PNG, 256×256 or
+larger recommended) and desktop exports use it automatically:</p>
+<ul>
+<li><strong>Windows</strong> — embedded into the executable (Explorer, taskbar, and window icon),
+  alongside the version resource built from the <a href="../project-settings/#windows">Windows
+  settings</a>.</li>
+<li><strong>Linux (X11)</strong> — window and taskbar icon at runtime. Executable files on Linux
+  cannot carry icons, so the export also ships <code>app_icon.png</code> and a ready-made
+  <code>.desktop</code> launcher entry, whose name, comment and categories come from the <a href="../project-settings/#linux">Linux
+  settings</a>; install it with
+  <code>cp MyProject.desktop ~/.local/share/applications/</code> to get the icon in menus and
+  docks — and on <strong>Wayland</strong>, where windows only receive icons through that entry.</li>
+<li><strong>macOS</strong> — dock icon at runtime.</li>
+</ul>
+<p>Apple bundles and Android launchers use their own icon settings on the <a href="../project-settings/#platforms">Platforms
+tab</a> instead, because they need asset catalogs and
+adaptive layers rather than a single PNG.</p>
+<div class="admonition note">
+<p class="admonition-title">Requirements</p>
+<p>Desktop mode needs <strong>CMake</strong> and a C++ compiler installed. The window warns you with
+install instructions when either is missing. Point the window at your installs in
+<strong>Edit → Editor Settings → Desktop</strong> if they are not on <code>PATH</code>. On macOS the <strong>Xcode
+generator</strong> is not supported for this mode (it produces an app bundle instead of a
+plain executable); use the default toolchain.</p>
+</div>
+<h2 id="web-mode">Web mode<a class="headerlink" href="#web-mode" title="Link to this section">&para;</a></h2>
+<p>Builds the project with Emscripten and copies <code>MyProject.html</code>, <code>.js</code>, <code>.wasm</code>, and
+<code>.data</code> (the packed assets) to the destination. The Web graphic backend is fixed to
+<strong>WebGL 2 (OpenGL ES 3)</strong>.</p>
+<p>The editor locates the Emscripten SDK automatically from the <code>EMSDK</code> environment
+variable or <code>emcmake</code> on <code>PATH</code>. If neither is set, point at your <code>emsdk</code> folder once in
+<strong>Edit → <a href="../editor-settings/#web">Editor Settings</a> → Web</strong> — the path is remembered
+across projects, and the dialog reports whether the SDK was found. The Export Window
+shows the same status and warns before starting a build it cannot run.</p>
+<p>The generated page is customized from the <a href="../project-settings/#web">Web settings</a>: page
+title, favicon, an optional custom HTML shell, extra <code>&lt;head&gt;</code> markup, canvas resizing,
+and hiding Emscripten's default UI. The <strong>Game Portal</strong> setting builds in the SDK of one
+web game portal, for the <a href="../../reference/classes/webportal/"><code>WebPortal</code></a> class; export
+once per portal. See <a href="../../manual/monetization/#web-portals">Monetization → Web portals</a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Testing the build</p>
+<p>Browsers do not load WebAssembly from <code>file://</code>. Serve the destination folder with
+any local web server, for example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python3<span class="w"> </span>-m<span class="w"> </span>http.server<span class="w"> </span>--directory<span class="w"> </span>/path/to/destination
+</code></pre></div>
+</div>
+<p>See <a href="../../building/html5/">Building for HTML5</a> for Emscripten installation and advanced
+options such as thread support.</p>
+<h2 id="build-progress-and-cancellation">Build progress and cancellation<a class="headerlink" href="#build-progress-and-cancellation" title="Link to this section">&para;</a></h2>
+<p>While exporting, the window shows each phase, a progress bar (driven by the compiler's
+own progress output during Desktop/Web builds), and the last build log line. The full
+log streams to the <strong>Output</strong> panel. <strong>Cancel</strong> stops the export and terminates the
+running compiler processes.</p>
+<h2 id="the-build-cache">The build cache<a class="headerlink" href="#the-build-cache" title="Link to this section">&para;</a></h2>
+<p>Desktop and Web modes keep their generated project and CMake build tree inside your
+project under <code>.quantum/export/desktop</code> and <code>.quantum/export/web</code>. The first export
+compiles the whole engine and takes a while; subsequent exports only rebuild what
+changed — typically just your scenes and scripts, finishing in seconds.</p>
+<ul>
+<li>Changing the graphics backend, compiler kit, generator, or Emscripten SDK wipes the
+  cache's build tree automatically (CMake cannot switch these settings in place).</li>
+<li>The cache is safe to delete at any time; the next export simply starts from scratch.</li>
+<li>Keep <code>.quantum/</code> out of version control.</li>
+</ul>
+<h2 id="export-phases">Export phases<a class="headerlink" href="#export-phases" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scene factory generation</td>
+<td>Generates a C++ factory function for each scene from its YAML</td>
+</tr>
+<tr>
+<td>Bundle factory generation</td>
+<td>Generates C++ factory functions for each bundle</td>
+</tr>
+<tr>
+<td>Asset packaging</td>
+<td>Copies and organizes resource files, ships FBX models as their glTF conversion, then optionally combines native assets and Lua files into <code>resources.pak</code></td>
+</tr>
+<tr>
+<td>Startup code generation</td>
+<td>Generates <code>main.cpp</code> / entry point with scene registration</td>
+</tr>
+<tr>
+<td>Engine template copy</td>
+<td>Copies the runtime engine source and CMake/build files</td>
+</tr>
+<tr>
+<td>Shader compilation</td>
+<td>Translates shaders for the selected graphics backends</td>
+</tr>
+<tr>
+<td>Configure &amp; build <em>(Desktop/Web)</em></td>
+<td>Runs CMake and the compiler on the build cache</td>
+</tr>
+<tr>
+<td>Collect artifacts <em>(Desktop/Web)</em></td>
+<td>Copies the executable or web files to the destination</td>
+</tr>
+</tbody>
+</table>
+<h2 id="generated-scene-data">Generated scene data<a class="headerlink" href="#generated-scene-data" title="Link to this section">&para;</a></h2>
+<p>Meshes backed by a model file keep their geometry in the exported asset and load it at
+runtime. Terrain meshes with a configured heightmap also rebuild their runtime buffers
+from <code>TerrainComponent</code> settings and the exported heightmap. Other meshes without a
+runtime geometry source, including geometry created directly in the editor, embed their
+vertex and index buffers in the generated scene or bundle C++ as read-only static data.
+The scene factory copies those bytes into the runtime buffers without placing the full
+geometry blob on the thread stack.</p>
+<p>Generated factories also construct large fixed-capacity components, such as mesh,
+tilemap, and 3D physics body data, in temporary heap storage before inserting them into
+the ECS. This prevents those payloads from inflating the scene factory's stack frame.</p>
+<h3 id="scene-stacks">Scene stacks<a class="headerlink" href="#scene-stacks" title="Link to this section">&para;</a></h3>
+<p><code>main.cpp</code> gives every scene two functions and registers them together, as
+<code>SceneManager::registerScene(id, name, load_&lt;name&gt;, add_&lt;name&gt;, {start-active scene ids})</code>.
+Both begin the same way: for the scene and every child scene it involves, a <code>new Scene()</code>
+registered with <code>SceneManager::setScenePtr</code>, the scene factory, then <code>initScripts</code> —
+skipping any that already exist. <code>load_&lt;name&gt;()</code> goes on to call <code>Engine::setScene</code> and
+<code>Engine::addSceneLayer</code> for the start-active scenes and to tear down every scene the new
+stack does not involve; <code>add_&lt;name&gt;()</code> stops after creating, and
+<a href="../../reference/classes/scenemanager/#addchildscene-removechildscene"><code>SceneManager::addChildScene</code></a>
+puts the scenes on screen. A scene is not torn down while a stack that involves it is
+running, which is what keeps a stack a script adds from its <code>init</code> alive across the load.</p>
+<h3 id="bundle-instances">Bundle instances<a class="headerlink" href="#bundle-instances" title="Link to this section">&para;</a></h3>
+<p>Each bundle becomes <code>bundle_&lt;name&gt;.h</code> and <code>bundle_&lt;name&gt;.cpp</code> with two entry points:
+<code>create_bundle_&lt;name&gt;(scene, root)</code>, the factory <code>main.cpp</code> registers with
+<code>BundleManager</code>, and <code>build_bundle_&lt;name&gt;(scene, root, members)</code>, the same factory
+appending every entity it creates to <code>members</code> — its own entities first, then each
+nested bundle's. A scene factory calls <code>create_bundle_&lt;name&gt;</code> for an instance nothing
+else refers to, and <code>build_bundle_&lt;name&gt;</code> when it needs the members: per-instance
+overrides, scene entities kept under a member, and component or script references into
+the instance are emitted against that vector instead of an entity id, because member ids
+are only assigned when the factory runs. Scene entities keep the ids they have in the
+editor; bundle members do not.</p>
+<p>Large inline meshes still increase the generated source size, executable size, and C++
+compile time. Prefer a GLTF or OBJ asset for multi-megabyte geometry that does not need
+to be stored directly in the scene.</p>
+<h2 id="shader-compilation">Shader compilation<a class="headerlink" href="#shader-compilation" title="Link to this section">&para;</a></h2>
+<p>The shader builder translates shader source per graphics API, never per operating system.
+Desktop mode compiles only the format its <strong>Graphic Backend</strong> selection needs, Web uses
+WebGL 2, and Source Code mode compiles one format per backend you ticked:</p>
+<table>
+<thead>
+<tr>
+<th>Backend</th>
+<th>Shader language</th>
+<th>File suffix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenGL</td>
+<td>GLSL 4.10</td>
+<td><code>glsl410</code></td>
+</tr>
+<tr>
+<td>OpenGL ES 3</td>
+<td>GLSL ES 3.00 (also WebGL 2)</td>
+<td><code>glsl300es</code></td>
+</tr>
+<tr>
+<td>Direct3D 11</td>
+<td>HLSL 5</td>
+<td><code>hlsl5</code></td>
+</tr>
+<tr>
+<td>Metal (macOS)</td>
+<td>MSL 2.1</td>
+<td><code>msl21macos</code></td>
+</tr>
+<tr>
+<td>Metal (iOS)</td>
+<td>MSL 2.1</td>
+<td><code>msl21ios</code></td>
+</tr>
+<tr>
+<td>Vulkan</td>
+<td>SPIR-V 1.0</td>
+<td><code>spirv10</code></td>
+</tr>
+</tbody>
+</table>
+<p>Metal is the one backend split by operating system, because the cross-compiler emits
+different MSL for macOS and iOS.</p>
+<h3 id="choosing-backends">Choosing backends<a class="headerlink" href="#choosing-backends" title="Link to this section">&para;</a></h3>
+<p>The runtime loads only the format matching the backend it was compiled with, so pick the
+backends by how the exported source will be built:</p>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th>Backends to include</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linux</td>
+<td>OpenGL, Vulkan</td>
+</tr>
+<tr>
+<td>Windows</td>
+<td>OpenGL, Direct3D 11, Vulkan</td>
+</tr>
+<tr>
+<td>macOS</td>
+<td>Metal (macOS), OpenGL</td>
+</tr>
+<tr>
+<td>iOS</td>
+<td>Metal (iOS)</td>
+</tr>
+<tr>
+<td>Android</td>
+<td>OpenGL ES 3</td>
+</tr>
+<tr>
+<td>Web</td>
+<td>OpenGL ES 3</td>
+</tr>
+</tbody>
+</table>
+<p>This is exactly the mapping the <a href="#choosing-the-backends">Platform Presets</a> tab applies,
+so ticking your target platforms there is the same as reading this table.</p>
+<p>Including a backend you never build with only costs export time and file size. Leaving one
+out that you do build with makes the game report the shaders as missing at startup, with
+the <code>quantum-editor shaders</code> command needed to generate them.</p>
+<p>If shader compilation fails, the Output panel reports the shader name, stage, backend,
+and the compiler error. Fix the shader source and re-export.</p>
+<p>Custom (forked) shaders are compiled and shipped through this same pipeline, embedded into
+the build alongside the built-in ones. See <a href="../custom-shaders/#export-and-runtime">Custom Shaders — Export and runtime</a>.</p>
+<h2 id="platform-toolchains">Platform toolchains<a class="headerlink" href="#platform-toolchains" title="Link to this section">&para;</a></h2>
+<p>Source Code exports are built afterwards with the appropriate native toolchain:</p>
+<table>
+<thead>
+<tr>
+<th>Target platform</th>
+<th>Toolchain</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Windows</strong></td>
+<td>CMake + MSVC or MinGW</td>
+<td>Requires CMake 3.16+, Windows SDK</td>
+</tr>
+<tr>
+<td><strong>Linux</strong></td>
+<td>CMake + GCC or Clang</td>
+<td>Requires X11 or Wayland dev libraries</td>
+</tr>
+<tr>
+<td><strong>macOS</strong></td>
+<td>CMake + Xcode or CLang</td>
+<td>Requires Xcode command-line tools</td>
+</tr>
+<tr>
+<td><strong>Android</strong></td>
+<td>Gradle + Android NDK</td>
+<td>Requires Android Studio or SDK command-line tools</td>
+</tr>
+<tr>
+<td><strong>iOS</strong></td>
+<td>Xcode workspace</td>
+<td>Requires a Mac with Xcode</td>
+</tr>
+<tr>
+<td><strong>HTML5 / Web</strong></td>
+<td>Emscripten</td>
+<td>Requires <code>emcmake cmake</code></td>
+</tr>
+</tbody>
+</table>
+<p>Desktop and Web modes run the Linux/Windows/macOS and Emscripten toolchains for you.</p>
+<h2 id="vsync-in-desktop-exports">VSync in desktop exports<a class="headerlink" href="#vsync-in-desktop-exports" title="Link to this section">&para;</a></h2>
+<p>The project-level <strong>VSync</strong> option is written into exported desktop CMake projects.
+With VSync disabled, Linux GLFW, Windows/Linux Sokol OpenGL, and Windows Direct3D 11
+builds use swap interval <code>0</code>. Vulkan builds prefer Immediate presentation, use Mailbox
+when Immediate is unavailable, and fall back to the always-supported FIFO mode when
+required by the driver or surface.</p>
+<p>macOS Metal currently has no uncapped application-loop path in Quantum. Metal exports
+therefore remain synchronized and emit a CMake warning when project VSync is disabled.
+See <a href="../project-workflow/#vsync">Project Workflow — VSync</a> for the full behavior table.</p>
+<p>A minimized Windows, Linux, or macOS build stops drawing but keeps updating 60 times a
+second, so scripts, physics, and sounds go on. On macOS this also applies to a window that
+is fully covered or on another Space, and App Nap can make a silent game update less
+often. Until the window comes back, <a href="../../reference/classes/engine/#ondraw"><code>onDraw</code></a> is
+skipped and gamepads are released and not read.</p>
+<h2 id="window-settings-in-desktop-exports">Window settings in desktop exports<a class="headerlink" href="#window-settings-in-desktop-exports" title="Link to this section">&para;</a></h2>
+<p>The project-level <strong>Window</strong> settings (mode, size, resizable, title) are written into
+exported desktop CMake projects the same way. Linux GLFW builds honor all of them.
+Windows and macOS Sokol builds honor the size, title, and fullscreen mode, but have no
+maximized or non-resizable window support. Web, Android, and iOS exports ignore window
+settings entirely — the game always fills the browser canvas or the device screen. See
+<a href="../project-workflow/#window">Project Workflow — Window</a> for the full behavior table.</p>
+<h2 id="exporting-from-the-command-line">Exporting from the command line<a class="headerlink" href="#exporting-from-the-command-line" title="Link to this section">&para;</a></h2>
+<p>The Source Code pipeline is available headlessly through the <code>quantum-editor</code> CLI, which
+is ideal for build servers and CI/CD:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>quantum-editor<span class="w"> </span><span class="nb">export</span><span class="w"> </span>--project<span class="w"> </span>./MyGame<span class="w"> </span>--out<span class="w"> </span>./build/MyGame<span class="w"> </span>--backend<span class="w"> </span><span class="s2">&quot;vulkan,opengles&quot;</span>
+</code></pre></div>
+<p>See <a href="../command-line/">Command-Line Tools</a> for the full <code>export</code> and <code>shaders</code> reference.</p>
+<h2 id="build-options">Build options<a class="headerlink" href="#build-options" title="Link to this section">&para;</a></h2>
+<p>See <a href="../../reference/build-options/">Build Options</a> for a full list of CMake flags and
+compile-time defines you can set to control engine features in the export. Source Code
+export also writes engine capacity macros (<code>MAX_SUBMESHES</code>, <code>MAX_BONES</code>, and others)
+from the largest values used in your scenes and bundles — see
+<a href="../../reference/build-options/#engine-capacity-macros">Engine capacity macros</a>.</p>
+<h2 id="tips">Tips<a class="headerlink" href="#tips" title="Link to this section">&para;</a></h2>
+<ul>
+<li>Keep export destinations and the <code>.quantum/</code> folder out of version control.</li>
+<li>Test exported builds on actual devices — some graphics, input, and memory behaviors
+  differ between the editor's desktop preview and the target platform.</li>
+<li>If a shader is reported missing at runtime, re-export (the scene shader list refreshes
+  automatically) or add the named shader manually with <strong>Add</strong> in the Shaders section.</li>
+</ul>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../custom-shaders/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Custom Shaders</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../command-line/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Command-Line Tools</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/editor/export.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#export-window" class="dx-toc-link" data-level="1">Export Window</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#from-editor-data-to-runtime-code" class="dx-toc-link" data-level="2">From editor data to runtime code</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#opening-the-export-window" class="dx-toc-link" data-level="2">Opening the Export Window</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#export-modes" class="dx-toc-link" data-level="2">Export modes</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#common-settings" class="dx-toc-link" data-level="2">Common settings</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#application-identity-and-platform-settings" class="dx-toc-link" data-level="3">Application identity and platform settings</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#shaders" class="dx-toc-link" data-level="3">Shaders</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#source-code-mode" class="dx-toc-link" data-level="2">Source Code mode</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#choosing-the-backends" class="dx-toc-link" data-level="3">Choosing the backends</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#generated-output-structure" class="dx-toc-link" data-level="3">Generated output structure</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#native-resource-pack" class="dx-toc-link" data-level="2">Native resource pack</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#fbx-models" class="dx-toc-link" data-level="2">FBX models</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#desktop-mode" class="dx-toc-link" data-level="2">Desktop mode</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#application-icon" class="dx-toc-link" data-level="3">Application icon</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#web-mode" class="dx-toc-link" data-level="2">Web mode</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#build-progress-and-cancellation" class="dx-toc-link" data-level="2">Build progress and cancellation</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#the-build-cache" class="dx-toc-link" data-level="2">The build cache</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#export-phases" class="dx-toc-link" data-level="2">Export phases</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#generated-scene-data" class="dx-toc-link" data-level="2">Generated scene data</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#scene-stacks" class="dx-toc-link" data-level="3">Scene stacks</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#bundle-instances" class="dx-toc-link" data-level="3">Bundle instances</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#shader-compilation" class="dx-toc-link" data-level="2">Shader compilation</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#choosing-backends" class="dx-toc-link" data-level="3">Choosing backends</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#platform-toolchains" class="dx-toc-link" data-level="2">Platform toolchains</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#vsync-in-desktop-exports" class="dx-toc-link" data-level="2">VSync in desktop exports</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#window-settings-in-desktop-exports" class="dx-toc-link" data-level="2">Window settings in desktop exports</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#exporting-from-the-command-line" class="dx-toc-link" data-level="2">Exporting from the command line</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#build-options" class="dx-toc-link" data-level="2">Build options</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#tips" class="dx-toc-link" data-level="2">Tips</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../versions.json";
+    window.QUANTUM_PAGE_URL = "editor/export/";
+  </script>
+  <script src="../../js/quantum.js" defer></script>
+</body>
+</html>

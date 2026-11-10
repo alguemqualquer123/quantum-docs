@@ -13,8 +13,8 @@ description: Sprite API reference — 2D images, texture atlas frames, pivot, an
 === "C++"
 
     ```cpp
-    #include "Doriax.h"
-    using namespace doriax;
+    #include "Quantum.h"
+    using namespace quantum;
 
     Sprite sprite(&scene);
     sprite.setTexture("sprites/character.png");

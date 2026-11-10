@@ -1,5 +1,5 @@
 ---
-description: Build Doriax from source on macOS.
+description: Build Quantum from source on macOS.
 ---
 
 # Building for macOS
@@ -18,8 +18,8 @@ brew install cmake ninja
 ## 2. Clone the repository
 
 ```bash
-git clone https://github.com/doriaxengine/doriax.git
-cd doriax
+git clone https://github.com/alguemqualquer123/quantum.git
+cd quantum
 ```
 
 ## 3. Configure and build
@@ -28,12 +28,12 @@ Using Ninja (single-config):
 
 ```bash
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -G "Ninja"
-cmake --build build --config Release --target doriax-editor
+cmake --build build --config Release --target quantum-editor
 ```
 
-The build produces `build/Doriax.app`. The executable inside it is
-`Doriax.app/Contents/MacOS/Doriax`, the engine runtime sits beside it as
-`libdoriax.dylib`, and the engine SDK is copied to `Contents/Resources/engine`.
+The build produces `build/Quantum.app`. The executable inside it is
+`Quantum.app/Contents/MacOS/Quantum`, the engine runtime sits beside it as
+`libquantum.dylib`, and the engine SDK is copied to `Contents/Resources/engine`.
 
 !!! note "Why the SDK is in `Contents/Resources`"
     `codesign` treats everything under `Contents/MacOS` as code and refuses to sign a
@@ -46,11 +46,11 @@ The build produces `build/Doriax.app`. The executable inside it is
 
     ```bash
     cmake -S . -B build -G "Xcode"
-    cmake --build build --config Release --target doriax-editor
+    cmake --build build --config Release --target quantum-editor
     ```
 
     Xcode is a **multi-config** generator, so the bundle is placed under a configuration
-    subdirectory such as `build/Release/Doriax.app`.
+    subdirectory such as `build/Release/Quantum.app`.
 
 ## Runtime project build
 
@@ -63,14 +63,14 @@ cmake -S engine -B build-runtime \
   -DPROJECT_ROOT=/path/to/project \
   -DCMAKE_BUILD_TYPE=Release \
   -G "Ninja"
-cmake --build build-runtime --config Release --target doriax-project
+cmake --build build-runtime --config Release --target quantum-project
 ```
 
 For Xcode:
 
 ```bash
 cmake -S engine -B build-xcode -DPROJECT_ROOT=/path/to/project -G "Xcode"
-cmake --build build-xcode --config Release --target doriax-project
+cmake --build build-xcode --config Release --target quantum-project
 ```
 
 The Xcode app bundle gets the project's `assets/` and `lua/` folders in
@@ -99,7 +99,7 @@ cmake -S engine -B build-vulkan \
   -DGRAPHIC_BACKEND=vulkan \
   -DCMAKE_BUILD_TYPE=Release \
   -G "Ninja"
-cmake --build build-vulkan --config Release --target doriax-project
+cmake --build build-vulkan --config Release --target quantum-project
 ```
 
 If `VULKAN_SDK` is not set, the build looks for the SDK where its installer unpacks it

@@ -8,7 +8,7 @@ description: AABB API reference (C++ and Lua).
 
 ## Description
 
-An **Axis-Aligned Bounding Box** defined by a minimum and maximum [Vector3](vector3.md) corner. All edges are parallel to the world axes, making AABB overlap tests extremely fast. AABBs are used throughout Doriax for mesh bounds queries, frustum culling, and physics broad-phase.
+An **Axis-Aligned Bounding Box** defined by a minimum and maximum [Vector3](vector3.md) corner. All edges are parallel to the world axes, making AABB overlap tests extremely fast. AABBs are used throughout Quantum for mesh bounds queries, frustum culling, and physics broad-phase.
 
 For rotated bounding volumes use [OBB](obb.md).
 

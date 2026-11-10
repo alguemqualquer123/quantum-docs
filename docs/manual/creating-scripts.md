@@ -1,5 +1,5 @@
 ---
-description: Create Lua and C++ scripts in Doriax, attach them to entities, and understand script lifecycle.
+description: Create Lua and C++ scripts in Quantum, attach them to entities, and understand script lifecycle.
 ---
 
 # Creating Scripts
@@ -8,7 +8,7 @@ Scripts attach behavior to entities through `ScriptComponent`. A script does not
 the entity. It receives the entity ID and scene pointer, then reads or changes the
 components attached to that entity.
 
-This page covers the full workflow from the Doriax editor through runtime initialization,
+This page covers the full workflow from the Quantum editor through runtime initialization,
 export, and cleanup.
 
 ## Mental model
@@ -130,7 +130,7 @@ to construct:
 
 ```cpp
 // Subclass generated on a Camera entity
-class FreeLook : public doriax::Camera {
+class FreeLook : public quantum::Camera {
     void onUpdate() {
         setPosition(getPosition() + offset);   // Object method, called on this
         setView(target);                        // Camera-specific method, called on this
@@ -162,7 +162,7 @@ The class inherits from `ScriptBase`, which holds nothing but `getScene()` and
 wrapper yourself:
 
 ```cpp
-class ScoreTracker : public doriax::ScriptBase {
+class ScoreTracker : public quantum::ScriptBase {
     void onUpdate() {
         Object self(getScene(), getEntity());   // wrap the entity explicitly
         self.setPosition(...);
@@ -201,7 +201,7 @@ about ergonomics and intent — pick the base that matches what the script is *a
 
 ## Lua script format
 
-A Lua script file **must return a table**. The table is the script prototype; Doriax
+A Lua script file **must return a table**. The table is the script prototype; Quantum
 creates a per-entity instance at runtime.
 
 ### Minimal template
@@ -362,12 +362,12 @@ Pointer/entity properties (`EntityReference`) are resolved:
 
 - If the target entity has a matching enabled Lua script, the reference becomes that
   Lua script instance.
-- Otherwise Doriax pushes a typed wrapper (`Object`, `Mesh`, `Camera`, `EntityHandle`,
+- Otherwise Quantum pushes a typed wrapper (`Object`, `Mesh`, `Camera`, `EntityHandle`,
   etc.) based on `ptrTypeName`.
 
 ### Pass 3 — Call `init()`
 
-If the instance has an `init` function, Doriax calls `self:init()`.
+If the instance has an `init` function, Quantum calls `self:init()`.
 
 Register events inside `init()` so `self` and resolved references are ready.
 
@@ -395,12 +395,12 @@ methods directly on `this` — see
 #include "Object.h"
 #include "ScriptProperty.h"
 
-class PlayerMover : public doriax::Object {
+class PlayerMover : public quantum::Object {
 public:
     DPROPERTY("Speed")
     float speed = 5.0f;
 
-    PlayerMover(doriax::Scene* scene, doriax::Entity entity);
+    PlayerMover(quantum::Scene* scene, quantum::Entity entity);
     ~PlayerMover();
 
     void onUpdate();
@@ -412,7 +412,7 @@ public:
 ```cpp
 #include "PlayerMover.h"
 
-using namespace doriax;
+using namespace quantum;
 
 PlayerMover::PlayerMover(Scene* scene, Entity entity) : Object(scene, entity) {
     REGISTER_ENGINE_EVENT(onUpdate);
@@ -445,12 +445,12 @@ reach the entity by constructing a wrapper explicitly.
 #include "ScriptBase.h"
 #include "ScriptProperty.h"
 
-class ScoreTracker : public doriax::ScriptBase {
+class ScoreTracker : public quantum::ScriptBase {
 public:
     DPROPERTY("Score")
     int score = 0;
 
-    ScoreTracker(doriax::Scene* scene, doriax::Entity entity);
+    ScoreTracker(quantum::Scene* scene, quantum::Entity entity);
     ~ScoreTracker();
 
     void onUpdate();

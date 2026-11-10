@@ -1,10 +1,10 @@
 ---
-description: Engine, physics, UI, action, component, and monetization service events in Doriax, including C++ macros and Lua registration helpers.
+description: Engine, physics, UI, action, component, and monetization service events in Quantum, including C++ macros and Lua registration helpers.
 ---
 
 # Events
 
-Doriax events use `FunctionSubscribe<Ret(Args...)>`, a multicast delegate that stores
+Quantum events use `FunctionSubscribe<Ret(Args...)>`, a multicast delegate that stores
 callbacks with string tags. Adding a callback with an existing tag **replaces** the
 previous one, which prevents duplicate subscriptions from the same source.
 
@@ -53,7 +53,7 @@ Defined in `engine/core/util/FunctionSubscribe.h`.
 | `call(args...)` / `operator()` | Invoke all enabled callbacks |
 | `setEnabled(bool)` | Enable or disable the entire event without removing subscribers |
 
-With `DORIAX_CRASH_GUARD` enabled, failing subscribers are removed automatically and
+With `QUANTUM_CRASH_GUARD` enabled, failing subscribers are removed automatically and
 optionally reported through a global crash handler. A C++ exception that escapes a
 subscriber counts as a failure too, and the report carries its message. Copies of an
 event share their subscribers, so a failing one stops running in all of them.
@@ -64,7 +64,7 @@ event share their subscribers, so a failing one stops running in all of them.
 
 | Event | Signature | Use |
 | --- | --- | --- |
-| `onInit` | `void()` | User init via `DORIAX_INIT` macro (access through `getOnInit()`) |
+| `onInit` | `void()` | User init via `QUANTUM_INIT` macro (access through `getOnInit()`) |
 | `onViewLoaded` | `void()` | View/surface ready |
 | `onViewChanged` | `void()` | Canvas/view changed; Lua name: `onCanvasChanged` |
 | `onViewDestroyed` | `void()` | View destroyed |
@@ -171,17 +171,17 @@ Matching `UNREGISTER_*` macros remove subscriptions in destructors.
 ### Example: full C++ script
 
 ```cpp
-class DoorTrigger : public doriax::ScriptBase {
+class DoorTrigger : public quantum::ScriptBase {
 public:
-    DoorTrigger(doriax::Scene* scene, doriax::Entity entity);
+    DoorTrigger(quantum::Scene* scene, quantum::Entity entity);
     ~DoorTrigger();
 
     void onUpdate();
     void onClick(float x, float y);
-    void onBeginContact(doriax::Body2D bodyA, unsigned long shapeA, doriax::Body2D bodyB, unsigned long shapeB);
+    void onBeginContact(quantum::Body2D bodyA, unsigned long shapeA, quantum::Body2D bodyB, unsigned long shapeB);
 
 private:
-    doriax::PhysicsSystem* physics = nullptr;
+    quantum::PhysicsSystem* physics = nullptr;
 };
 
 DoorTrigger::DoorTrigger(Scene* scene, Entity entity) : ScriptBase(scene, entity) {
@@ -211,7 +211,7 @@ DoorTrigger::~DoorTrigger() {
 | `RegisterEvent(self, event, methodName [, tag])` | Script table, event object, method name | Subscribes `self:methodName(...)` to any exposed `FunctionSubscribe` |
 | `RegisterEngineEvent(self, methodName [, tag])` | Script table, engine event name | Looks up `Engine.<methodName>` and subscribes |
 
-If `tag` is omitted, Doriax builds:
+If `tag` is omitted, Quantum builds:
 `ClassName_instancePointer_methodName`
 
 ### Engine event (Lua)

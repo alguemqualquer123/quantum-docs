@@ -1,19 +1,19 @@
 ---
-description: Frequently asked questions about Doriax Engine — license, platforms, scripting, and project status.
+description: Frequently asked questions about Quantum Engine — license, platforms, scripting, and project status.
 ---
 
 # Frequently Asked Questions
 
-## What is Doriax Engine?
+## What is Quantum Engine?
 
-Doriax is a free, open-source 2D/3D game engine with an integrated desktop editor. You
-author scenes visually, script in **Lua** or **C++**, and export buildable native
-projects for desktop, mobile, and web. It is the continuation of **Supernova Engine**
-under a new identity, keeping its ECS-based, data-oriented runtime.
+Quantum is a free, open-source C++17 2D/3D game engine with an integrated desktop
+editor, maintained by SR VINIX. You author scenes visually, script in **Lua** or
+**C++**, and export buildable native projects for desktop, mobile, and web while
+keeping the ECS-based, data-oriented runtime transparent and extensible.
 
 ## How much does it cost? Can I sell my game?
 
-Doriax is released under the **MIT License** — free for personal and commercial use,
+Quantum is released under the **MIT License** — free for personal and commercial use,
 with no royalties, revenue share, or seat licenses. Bundled third-party libraries keep
 their own (compatible) open-source licenses. See [License & Credits](license.md).
 
@@ -51,26 +51,25 @@ You then build it with the platform's standard toolchain — see
 [Exporting a Project](../tutorials/exporting-a-project.md) and
 [Command-Line Tools](../editor/command-line.md) for automating this in CI.
 
-## Is Doriax production-ready?
+## Is Quantum production-ready?
 
-Doriax is under active development. The downloadable editor builds track the `main`
+Quantum is under active development. The downloadable editor builds track the `main`
 branch and are **not stable releases** — expect breaking changes while the engine and
-documentation are refreshed under the Doriax name. Pin a commit for serious projects and
+documentation are refreshed under the Quantum name. Pin a commit for serious projects and
 follow the repository for release tags.
 
-## How does Doriax differ from Godot, Unity, or Unreal?
+## How does Quantum differ from Godot, Unity, or Unreal?
 
-Doriax aims to be **lightweight and code-transparent**: a small MIT-licensed C++ runtime
+Quantum aims to be **lightweight and code-transparent**: a small MIT-licensed C++ runtime
 with an ECS core, where exporting gives you a native project you fully own and can read,
 modify, and build yourself. It does not try to match the breadth of larger engines'
 tooling; it focuses on a compact feature set — 2D, 3D, UI, physics (Box2D / Jolt), audio
 (SoLoud), particles, terrain, and skeletal animation — with both Lua and C++ as
 first-class languages.
 
-## Does Doriax use engine-specific asset formats?
+## Does Quantum use engine-specific asset formats?
 
-No. Doriax has no equivalent of Godot's `.scn`/`.res` or Unity's imported assets, and no
-import step that rewrites your files. The runtime opens standard formats directly —
+Quantum avoids an opaque editor database. The runtime opens standard formats directly —
 `.glb`/`.gltf`/`.obj` for models, PNG/JPG/TGA/BMP/HDR/PSD/SVG for textures,
 OGG/WAV/MP3/FLAC for audio, and TTF/OTF/TTC for fonts. The file your content tool produces
 is the file the game loads.
@@ -78,9 +77,10 @@ is the file the game loads.
 The exception is FBX: the editor converts it to a standard binary glTF, which the game
 loads in its place. The `.fbx` itself is left as it is.
 
-A native export can optionally combine those original bytes into one `resources.pak`.
-That is packaging and light obfuscation, not a converted engine format — see
-[Native resource pack](../editor/export.md#native-resource-pack).
+A native export can optionally combine those original bytes into a DXPK2 resource
+pack with a SHA-256 digest per entry. That is packaging and integrity verification,
+not a converted engine format — see the [asset pipeline](../manual/asset-pipeline.md)
+and [Native resource pack](../editor/export.md#native-resource-pack).
 
 Scenes, bundles, and materials are the exception. They are authored as YAML for the editor
 and converted at export into C++ that is compiled into your game, rather than shipped as
@@ -108,40 +108,42 @@ or downloaded content, drive it with runtime media loading plus bundles composed
 
 ## Where do my old Supernova projects stand?
 
-Supernova `0.5.5` was the last release of the legacy engine. The runtime API carried
-over largely intact (with renames such as `SPROPERTY` → `DPROPERTY` and the `doriax`
-namespace), but projects should migrate to the Doriax editor workflow. Some internal
-folders may still mention the previous name during the transition.
+Legacy Supernova projects should be migrated to the Quantum editor workflow. The
+runtime API carried over in places, but projects should not assume old generated
+files, namespaces, or build settings remain compatible. Keep a copy of the original
+project and regenerate its project metadata before opening it in the current editor.
 
 ## Where can I find the editor crash log?
 
-The desktop editor writes timestamped Output-panel messages to `editor.log`. If the
-editor exits because of a fatal signal or an unhandled exception, it also appends the
-editor version, executable path, reason, and a backtrace. Include this file when
-reporting a crash.
+The desktop editor writes Output-panel messages to `editor.log`. If the editor exits
+because of a fatal signal or an unhandled exception, it writes a separate
+`editor.log.crash` sidecar and rotates up to four older crash reports. Include the
+live log and the newest crash sidecar when reporting a crash.
 
 The log is beside the active `settings.yaml`. An editor started from an installed
 desktop launcher normally uses:
 
 | Platform | Log path |
 | --- | --- |
-| Windows | `%APPDATA%\Doriax\editor.log` |
-| macOS | `~/Library/Application Support/Doriax/editor.log` |
-| Linux | `$XDG_CONFIG_HOME/doriax/editor.log`, or `~/.config/doriax/editor.log` when `XDG_CONFIG_HOME` is unset |
+| Windows | `%APPDATA%\Quantum\editor.log` |
+| macOS | `~/Library/Application Support/Quantum/editor.log` |
+| Linux | `$XDG_CONFIG_HOME/quantum/editor.log`, or `~/.config/quantum/editor.log` when `XDG_CONFIG_HOME` is unset |
 
 When you run the editor from source or another writable working directory, it may keep
 both `settings.yaml` and `editor.log` in that directory instead. The definitive rule is
 that the two files are together.
 
-The editor appends several sessions to the log. At startup, a log larger than 2 MiB is
-moved to `editor.log.1` before a new `editor.log` is created. If both files exist after
-a crash, include both so the earlier session is not lost.
+At startup, the editor keeps the crash path bounded and uses a session marker to
+offer safe mode after an interrupted boot. If the editor cannot start, try
+`quantum-editor.exe --safe-mode` or `--reset-layout`; use
+[Stability & Recovery](../editor/stability-and-recovery.md) for the complete recovery
+workflow.
 
 ## Where can I get help or report bugs?
 
-- **Discord** — [discord.gg/yXXDyJf3gT](https://discord.gg/yXXDyJf3gT) for questions and
+- **Discord** — [discord.gg/gSHUVHXNwP](https://discord.gg/gSHUVHXNwP) for questions and
   discussion.
-- **GitHub** — [github.com/doriaxengine/doriax](https://github.com/doriaxengine/doriax)
+- **GitHub** — [github.com/alguemqualquer123/quantum](https://github.com/alguemqualquer123/quantum)
   for issues and contributions. For editor crashes, attach the
   [`editor.log`](#where-can-i-find-the-editor-crash-log) described above.
 

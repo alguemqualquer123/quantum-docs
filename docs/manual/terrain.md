@@ -1,10 +1,10 @@
 ---
-description: Heightmap terrain in Doriax — LOD clipmap rendering, PBR detail layers, foliage scattering, sculpting and painting in the editor, and the runtime Terrain API.
+description: Heightmap terrain in Quantum — LOD clipmap rendering, PBR detail layers, foliage scattering, sculpting and painting in the editor, and the runtime Terrain API.
 ---
 
 # Terrain
 
-Doriax renders large outdoor landscapes with a heightmap-based `Terrain` object. The
+Quantum renders large outdoor landscapes with a heightmap-based `Terrain` object. The
 terrain is a continuous-LOD quadtree, so the polygon count on screen stays roughly
 constant regardless of terrain size, with detail concentrated near the camera.
 

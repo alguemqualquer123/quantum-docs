@@ -15,8 +15,8 @@ Each target platform provides its own concrete `System` subclass; the engine inj
 === "C++"
 
     ```cpp
-    #include "Doriax.h"
-    using namespace doriax;
+    #include "Quantum.h"
+    using namespace quantum;
 
     int screenW = System::instance().getScreenWidth();
     int screenH = System::instance().getScreenHeight();
@@ -314,7 +314,7 @@ Returns the directory holding compiled `.sdat` shader binaries, and the root for
 
 * `virtual std::string getImportPath()`
 
-Returns the directory holding the glTF conversions of FBX models: the project's `.doriax/imported` folder in the editor. It is empty in an exported build, where each conversion sits beside its FBX's path as `<name>.fbx.glb`. See [3D Graphics — FBX models](../../manual/3d-graphics.md#fbx-models).
+Returns the directory holding the glTF conversions of FBX models: the project's `.quantum/imported` folder in the editor. It is empty in an exported build, where each conversion sits beside its FBX's path as `<name>.fbx.glb`. See [3D Graphics — FBX models](../../manual/3d-graphics.md#fbx-models).
 
 ---
 

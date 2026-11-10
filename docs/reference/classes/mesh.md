@@ -13,8 +13,8 @@ description: Mesh API reference — geometry, materials, shadows, transparency, 
 === "C++"
 
     ```cpp
-    #include "Doriax.h"
-    using namespace doriax;
+    #include "Quantum.h"
+    using namespace quantum;
 
     Mesh mesh(&scene);
     mesh.setTexture("textures/crate.png");

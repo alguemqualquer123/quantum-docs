@@ -22,7 +22,7 @@ REPO_ROOT="$(git -C "$(dirname "${BASH_SOURCE[0]}")" rev-parse --show-toplevel)"
 cd "$REPO_ROOT"
 
 OUT="$(realpath -m "${1:-site}")"
-SITE_URL="${DOCS_SITE_URL_BASE:-https://docs.doriax.org}"
+SITE_URL="${DOCS_SITE_URL_BASE:-https://alguemqualquer123.github.io/quantum-docs}"
 SITE_URL="${SITE_URL%/}"
 SHARED_THEME="${DOCS_SHARED_THEME:-1}"
 

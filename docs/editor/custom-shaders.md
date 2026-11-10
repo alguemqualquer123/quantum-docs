@@ -1,10 +1,10 @@
 ---
-description: Fork, edit, and customize the built-in shaders for Mesh (colour and depth), UI, Points, Lines, Sky, and Water (surface and underwater) — per component or as scene-wide defaults — feed them custom uniforms from the editor or from scripts, and add custom post-process passes, directly in the Doriax editor.
+description: Fork, edit, and customize the built-in shaders for Mesh (colour and depth), UI, Points, Lines, Sky, and Water (surface and underwater) — per component or as scene-wide defaults — feed them custom uniforms from the editor or from scripts, and add custom post-process passes, directly in the Quantum editor.
 ---
 
 # Custom Shaders
 
-Doriax ships built-in shaders for each renderable type (Mesh, UI, Points, Lines, Sky,
+Quantum ships built-in shaders for each renderable type (Mesh, UI, Points, Lines, Sky,
 Water).
 The editor lets you **fork** any of them into your project, edit the GLSL in the
 [Code Editor](code-editor.md), and see the result in the viewport — without leaving the

@@ -1,0 +1,2647 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engine — Quantum Engine Docs</title>
+  <meta name="description" content="Engine API reference — canvas, scenes, timing, input events, and platform state.">
+  <meta property="og:title" content="Engine — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/reference/classes/engine/">
+
+  <link rel="icon" type="image/png" href="../../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../../css/quantum.css">
+  <link rel="stylesheet" href="../../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="engine">Engine<a class="headerlink" href="#engine" title="Link to this section">&para;</a></h1>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Link to this section">&para;</a></h2>
+<p>Control engine properties and define defaults used across the whole project. <code>Engine</code> is entirely static — never instantiated. It manages the scene stack, canvas size and scaling, the update loop, platform queries, and all frame/input callback events.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Quantum.h&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">quantum</span><span class="p">;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">Scene</span><span class="w"> </span><span class="n">scene</span><span class="p">;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">QUANTUM_INIT</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="n">Engine</span><span class="o">::</span><span class="n">setCanvasSize</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">480</span><span class="p">);</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="n">Engine</span><span class="o">::</span><span class="n">setScalingMode</span><span class="p">(</span><span class="n">Scaling</span><span class="o">::</span><span class="n">FITWIDTH</span><span class="p">);</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="n">Engine</span><span class="o">::</span><span class="n">setScene</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Scene</span><span class="p">()</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">Engine</span><span class="p">.</span><span class="nf">setCanvasSize</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">480</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">Engine</span><span class="p">.</span><span class="py">scalingMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Scaling</span><span class="p">.</span><span class="py">FITWIDTH</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">Engine</span><span class="p">.</span><span class="nf">setScene</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="properties">Properties<a class="headerlink" href="#properties" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Default</th>
+<th>Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>static <a href="#scaling">Scaling</a></td>
+<td><a href="#scalingmode">scalingMode</a></td>
+<td><code>FITWIDTH</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static <a href="#texturestrategy">TextureStrategy</a></td>
+<td><a href="#texturestrategy_1">textureStrategy</a></td>
+<td><code>NONE</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#callmouseintouchevent">callMouseInTouchEvent</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#calltouchinmouseevent">callTouchInMouseEvent</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#usedegrees">useDegrees</a></td>
+<td><code>true</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#alloweventsoutcanvas">allowEventsOutCanvas</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#ignoreeventshandledbyui">ignoreEventsHandledByUI</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static float</td>
+<td><a href="#updatetime">updateTime</a></td>
+<td><code>0.03</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static double</td>
+<td><a href="#interpolationalpha">interpolationAlpha</a></td>
+<td>—</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static int</td>
+<td><a href="#canvaswidth-canvasheight">canvasWidth</a></td>
+<td>—</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static int</td>
+<td><a href="#canvaswidth-canvasheight">canvasHeight</a></td>
+<td>—</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static int</td>
+<td><a href="#preferredcanvaswidth-preferredcanvasheight">preferredCanvasWidth</a></td>
+<td>—</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static int</td>
+<td><a href="#preferredcanvaswidth-preferredcanvasheight">preferredCanvasHeight</a></td>
+<td>—</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static Rect</td>
+<td><a href="#viewrect">viewRect</a></td>
+<td>—</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static float</td>
+<td><a href="#deltatime">deltatime</a></td>
+<td>—</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static float</td>
+<td><a href="#maxdeltatime">maxDeltatime</a></td>
+<td><code>0.25</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static float</td>
+<td><a href="#framerate">framerate</a></td>
+<td>—</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static <a href="#framestats">FrameStats</a></td>
+<td><a href="#framestats">frameStats</a></td>
+<td>—</td>
+<td>C++</td>
+</tr>
+<tr>
+<td>static double</td>
+<td><a href="#systemtime">systemTime</a></td>
+<td>—</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static <a href="#platform">Platform</a></td>
+<td><a href="#platform_1">platform</a></td>
+<td>—</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static <a href="#graphicbackend">GraphicBackend</a></td>
+<td><a href="#graphicbackend_1">graphicBackend</a></td>
+<td>—</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#opengl">openGL</a></td>
+<td>—</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#asyncloading">asyncLoading</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static <a href="#cursortype">CursorType</a></td>
+<td><a href="#mousecursor">mouseCursor</a></td>
+<td><code>ARROW</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static <a href="#mousemode">MouseMode</a></td>
+<td><a href="#mousemode_1">mouseMode</a></td>
+<td><code>NORMAL</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static Framebuffer*</td>
+<td><a href="#framebuffer">framebuffer</a></td>
+<td>—</td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Returns</th>
+<th>Name</th>
+<th>Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>static void</td>
+<td><a href="#setscene">setScene</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static Scene*</td>
+<td><a href="#getscene">getScene</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#addscenelayer">addSceneLayer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#executesceneonce">executeSceneOnce</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#removescene">removeScene</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#removeallscenelayers">removeAllSceneLayers</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#removeallscenes">removeAllScenes</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#isscenerunning">isSceneRunning</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#hasscenestoexecuteonce">hasScenesToExecuteOnce</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static Scene*</td>
+<td><a href="#getmainscene">getMainScene</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static Scene*</td>
+<td><a href="#getlastscene">getLastScene</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#pausegameevents">pauseGameEvents</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#setcanvassize">setCanvasSize</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static Rect</td>
+<td><a href="#getviewrect">getViewRect</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#setmouseposition">setMousePosition</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#setupdatetimems">setUpdateTimeMS</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#isuieventreceived">isUIEventReceived</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#isviewloaded">isViewLoaded</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static const FrameStats&amp;</td>
+<td><a href="#framestats">getFrameStats</a></td>
+<td>C++</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#setmaxresourceloadingthreads">setMaxResourceLoadingThreads</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static size_t</td>
+<td><a href="#getqueuedresourcecount">getQueuedResourceCount</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#clearpools">clearPools</a></td>
+<td>C++</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#clearunusedpools">clearUnusedPools</a></td>
+<td>C++</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#clearallsubscriptions">clearAllSubscriptions</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#clearcomponentsubscriptions">clearComponentSubscriptions</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#startasyncthread-committhreadqueue-endasyncthread-isasyncthread">startAsyncThread</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#startasyncthread-committhreadqueue-endasyncthread-isasyncthread">commitThreadQueue</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#startasyncthread-committhreadqueue-endasyncthread-isasyncthread">endAsyncThread</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#startasyncthread-committhreadqueue-endasyncthread-isasyncthread">isAsyncThread</a></td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<h3 id="callback-events">Callback events<a class="headerlink" href="#callback-events" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Callback</th>
+<th>Name</th>
+<th>Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void()</td>
+<td><a href="#onviewloaded">onViewLoaded</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void()</td>
+<td><a href="#oncanvaschanged">onCanvasChanged</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void()</td>
+<td><a href="#onviewdestroyed">onViewDestroyed</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void()</td>
+<td><a href="#ondraw">onDraw</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void()</td>
+<td><a href="#onupdate">onUpdate</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void()</td>
+<td><a href="#onfixedupdate">onFixedUpdate</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void()</td>
+<td><a href="#onpostupdate">onPostUpdate</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void()</td>
+<td><a href="#onpause">onPause</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void()</td>
+<td><a href="#onresume">onResume</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void()</td>
+<td><a href="#onshutdown">onShutdown</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void()</td>
+<td><a href="#onsceneloaded">onSceneLoaded</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(int,float,float)</td>
+<td><a href="#ontouchstart">onTouchStart</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(int,float,float)</td>
+<td><a href="#ontouchend">onTouchEnd</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(int,float,float)</td>
+<td><a href="#ontouchmove">onTouchMove</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(int,float,float)</td>
+<td><a href="#ontouchcancel">onTouchCancel</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(int,float,float,int)</td>
+<td><a href="#onmousedown">onMouseDown</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(int,float,float,int)</td>
+<td><a href="#onmouseup">onMouseUp</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(float,float,int)</td>
+<td><a href="#onmousemove">onMouseMove</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(float,float,int)</td>
+<td><a href="#onmousescroll">onMouseScroll</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void()</td>
+<td><a href="#onmouseenter">onMouseEnter</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void()</td>
+<td><a href="#onmouseleave">onMouseLeave</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(int,bool,int)</td>
+<td><a href="#onkeydown">onKeyDown</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(int,bool,int)</td>
+<td><a href="#onkeyup">onKeyUp</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(wchar_t)</td>
+<td><a href="#oncharinput">onCharInput</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(int)</td>
+<td><a href="#ongamepadconnect">onGamepadConnect</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(int)</td>
+<td><a href="#ongamepaddisconnect">onGamepadDisconnect</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(int,int)</td>
+<td><a href="#ongamepadbuttondown">onGamepadButtonDown</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(int,int)</td>
+<td><a href="#ongamepadbuttonup">onGamepadButtonUp</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(int,int,float)</td>
+<td><a href="#ongamepadaxismove">onGamepadAxisMove</a></td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<h2 id="enumerations">Enumerations<a class="headerlink" href="#enumerations" title="Link to this section">&para;</a></h2>
+<h3 id="scaling">Scaling<a class="headerlink" href="#scaling" title="Link to this section">&para;</a></h3>
+<ul>
+<li><strong>FITWIDTH</strong> — Keeps canvas width fixed; height floats to match aspect ratio.</li>
+<li><strong>FITHEIGHT</strong> — Keeps canvas height fixed; width floats.</li>
+<li><strong>LETTERBOX</strong> — Keeps both dimensions; empty bars appear on screen edges.</li>
+<li><strong>CROP</strong> — Keeps both dimensions; parts of the canvas may be cropped off screen.</li>
+<li><strong>STRETCH</strong> — Stretches to fill the screen; objects may deform.</li>
+<li><strong>NATIVE</strong> — Uses the native window resolution as-is.</li>
+</ul>
+<hr />
+<h3 id="texturestrategy">TextureStrategy<a class="headerlink" href="#texturestrategy" title="Link to this section">&para;</a></h3>
+<ul>
+<li><strong>FIT</strong> — Pads non-power-of-two textures to the next power of two, without scaling them.</li>
+<li><strong>RESIZE</strong> — Scales textures to the next power of two. The resampling blurs the edges of atlas tiles, which can show as seams in tilemaps.</li>
+<li><strong>NONE</strong> — Keeps textures at their size. Every supported backend handles non-power-of-two textures.</li>
+</ul>
+<hr />
+<h3 id="platform">Platform<a class="headerlink" href="#platform" title="Link to this section">&para;</a></h3>
+<ul>
+<li><strong>MacOS</strong> — Running on macOS.</li>
+<li><strong>iOS</strong> — Running on iOS.</li>
+<li><strong>Web</strong> — Running in WebGL/HTML5.</li>
+<li><strong>Android</strong> — Running on Android.</li>
+<li><strong>Linux</strong> — Running on Linux.</li>
+<li><strong>Windows</strong> — Running on Windows.</li>
+</ul>
+<hr />
+<h3 id="graphicbackend">GraphicBackend<a class="headerlink" href="#graphicbackend" title="Link to this section">&para;</a></h3>
+<ul>
+<li><strong>GLCORE</strong> — OpenGL Core (desktop).</li>
+<li><strong>GLES3</strong> — OpenGL ES 3 (mobile/web).</li>
+<li><strong>D3D11</strong> — Direct3D 11 (Windows).</li>
+<li><strong>METAL</strong> — Metal (Apple platforms).</li>
+<li><strong>WGPU</strong> — WebGPU.</li>
+<li><strong>VULKAN</strong> — Vulkan (Linux and Windows; macOS builds through MoltenVK).</li>
+</ul>
+<hr />
+<h3 id="cursortype">CursorType<a class="headerlink" href="#cursortype" title="Link to this section">&para;</a></h3>
+<p><code>ARROW</code>, <code>IBEAM</code>, <code>CROSSHAIR</code>, <code>POINTING_HAND</code>, <code>RESIZE_EW</code>, <code>RESIZE_NS</code>, <code>RESIZE_NWSE</code>, <code>RESIZE_NESW</code>, <code>RESIZE_ALL</code>, <code>NOT_ALLOWED</code></p>
+<hr />
+<h3 id="mousemode">MouseMode<a class="headerlink" href="#mousemode" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Cursor</th>
+<th>Movement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NORMAL</code></td>
+<td>visible</td>
+<td>moves freely (default)</td>
+</tr>
+<tr>
+<td><code>HIDDEN</code></td>
+<td>hidden</td>
+<td>moves freely; absolute position still reported</td>
+</tr>
+<tr>
+<td><code>CAPTURED</code></td>
+<td>hidden</td>
+<td>locked to the window; relative motion only (mouse-look)</td>
+</tr>
+<tr>
+<td><code>CONFINED</code></td>
+<td>visible</td>
+<td>cannot leave the window bounds</td>
+</tr>
+</tbody>
+</table>
+<h2 id="property-details">Property details<a class="headerlink" href="#property-details" title="Link to this section">&para;</a></h2>
+<h3 id="scalingmode">scalingMode<a class="headerlink" href="#scalingmode" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>static void setScalingMode(Scaling scalingMode)</code></li>
+<li><em>Getter:</em> <code>static Scaling getScalingMode()</code></li>
+</ul>
+<p>Controls how the logical canvas is mapped to the physical window. See <a href="#scaling">Scaling</a> for each mode.</p>
+<hr />
+<h3 id="texturestrategy_1">textureStrategy<a class="headerlink" href="#texturestrategy_1" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>static void setTextureStrategy(TextureStrategy textureStrategy)</code></li>
+<li><em>Getter:</em> <code>static TextureStrategy getTextureStrategy()</code></li>
+</ul>
+<p>Controls automatic resizing of non-power-of-two textures on hardware that requires it. It applies to textures loaded after it is set.</p>
+<hr />
+<h3 id="callmouseintouchevent">callMouseInTouchEvent<a class="headerlink" href="#callmouseintouchevent" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>static void setCallMouseInTouchEvent(bool callMouseInTouchEvent)</code></li>
+<li><em>Getter:</em> <code>static bool isCallMouseInTouchEvent()</code></li>
+</ul>
+<p>When <code>true</code>, receiving a touch event also fires the equivalent mouse event. Useful for cross-platform testing.</p>
+<hr />
+<h3 id="calltouchinmouseevent">callTouchInMouseEvent<a class="headerlink" href="#calltouchinmouseevent" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>static void setCallTouchInMouseEvent(bool callTouchInMouseEvent)</code></li>
+<li><em>Getter:</em> <code>static bool isCallTouchInMouseEvent()</code></li>
+</ul>
+<p>When <code>true</code>, receiving a mouse event also fires the equivalent touch event.</p>
+<hr />
+<h3 id="usedegrees">useDegrees<a class="headerlink" href="#usedegrees" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>static void setUseDegrees(bool useDegrees)</code></li>
+<li><em>Getter:</em> <code>static bool isUseDegrees()</code></li>
+</ul>
+<p>When <code>true</code> (default), angle parameters in the API expect degrees. Set to <code>false</code> to use radians throughout.</p>
+<hr />
+<h3 id="alloweventsoutcanvas">allowEventsOutCanvas<a class="headerlink" href="#alloweventsoutcanvas" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>static void setAllowEventsOutCanvas(bool allowEventsOutCanvas)</code></li>
+<li><em>Getter:</em> <code>static bool isAllowEventsOutCanvas()</code></li>
+</ul>
+<p>When <code>true</code>, mouse move and scroll events are delivered even when the cursor is outside the canvas bounds.</p>
+<hr />
+<h3 id="ignoreeventshandledbyui">ignoreEventsHandledByUI<a class="headerlink" href="#ignoreeventshandledbyui" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>static void setIgnoreEventsHandledByUI(bool ignoreEventsHandledByUI)</code></li>
+<li><em>Getter:</em> <code>static bool isIgnoreEventsHandledByUI()</code></li>
+</ul>
+<p>When <code>true</code>, gameplay input callbacks are skipped for events already consumed by a UI widget.</p>
+<hr />
+<h3 id="updatetime">updateTime<a class="headerlink" href="#updatetime" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>static void setUpdateTime(float updateTime)</code></li>
+<li><em>Getter:</em> <code>static float getUpdateTime()</code></li>
+</ul>
+<p>Fixed-update interval in <strong>seconds</strong>. Used by <code>onFixedUpdate</code> and the physics simulation step. Also accepted in milliseconds via <a href="#setupdatetimems">setUpdateTimeMS</a>.</p>
+<hr />
+<h3 id="interpolationalpha">interpolationAlpha<a class="headerlink" href="#interpolationalpha" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Getter:</em> <code>static double getInterpolationAlpha()</code></li>
+</ul>
+<p>Value in <code>[0, 1)</code> representing how far the current rendered frame is between the previous and next fixed-update steps. Physics bodies are already drawn with it (see <a href="../physicssystem/#properties">PhysicsSystem interpolation</a>); use it to interpolate anything else you move from <code>onFixedUpdate</code>.</p>
+<hr />
+<h3 id="canvaswidth-canvasheight">canvasWidth / canvasHeight<a class="headerlink" href="#canvaswidth-canvasheight" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Getter:</em> <code>static int getCanvasWidth()</code> / <code>static int getCanvasHeight()</code></li>
+</ul>
+<p>Logical canvas dimensions after scaling is applied. These may differ from <a href="#preferredcanvaswidth-preferredcanvasheight">preferredCanvasWidth</a> when a non-NATIVE scaling mode is active.</p>
+<hr />
+<h3 id="preferredcanvaswidth-preferredcanvasheight">preferredCanvasWidth / preferredCanvasHeight<a class="headerlink" href="#preferredcanvaswidth-preferredcanvasheight" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Getter:</em> <code>static int getPreferredCanvasWidth()</code> / <code>static int getPreferredCanvasHeight()</code></li>
+</ul>
+<p>The dimensions originally passed to <a href="#setcanvassize">setCanvasSize</a>, unaffected by scaling.</p>
+<hr />
+<h3 id="viewrect">viewRect<a class="headerlink" href="#viewrect" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Getter:</em> <code>static Rect getViewRect()</code></li>
+</ul>
+<p>Viewport rectangle computed from canvas size, screen size, and scaling mode.</p>
+<hr />
+<h3 id="deltatime">deltatime<a class="headerlink" href="#deltatime" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Getter:</em> <code>static float getDeltatime()</code></li>
+</ul>
+<p>Time elapsed in <strong>seconds</strong> since the last draw frame. Multiply movement speeds by <code>deltatime</code> inside <code>onUpdate</code> to make motion frame-rate independent.</p>
+<p>The value is <strong>clamped</strong> to <a href="#maxdeltatime">maxDeltatime</a>. After a long stall — the first frame of a scene (which includes load time), a debugger break, or an alt-tab — the real elapsed time can be several seconds. Returning that unclamped would teleport anything driven by <code>deltatime</code> in a single step (and could trigger a physics "spiral of death"). Clamping makes the simulation skip the lost time instead. This matches Unity's <code>Time.deltaTime</code> / <code>Time.maximumDeltaTime</code> and Godot's max-step behaviour.</p>
+<blockquote>
+<p><strong>Tip:</strong> Even with clamping, prefer <a href="../vector3/#movetowards"><code>moveTowards</code></a> over <code>direction * speed * deltatime</code> for "move to a target" logic. It clamps the step to the remaining distance, so it can never overshoot, whatever the frame time.</p>
+</blockquote>
+<hr />
+<h3 id="maxdeltatime">maxDeltatime<a class="headerlink" href="#maxdeltatime" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Getter:</em> <code>static float getMaxDeltatime()</code></li>
+<li><em>Setter:</em> <code>static void setMaxDeltatime(float seconds)</code></li>
+<li><em>Default:</em> <code>0.25</code></li>
+</ul>
+<p>Upper bound, in <strong>seconds</strong>, for the value returned by <a href="#deltatime">deltatime</a> and used by the update loop. Lower it for stricter clamping; raise it to allow larger single steps. Must be greater than <code>0</code>. Equivalent to Unity's <code>Time.maximumDeltaTime</code>.</p>
+<hr />
+<h3 id="framerate">framerate<a class="headerlink" href="#framerate" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Getter:</em> <code>static float getFramerate()</code></li>
+</ul>
+<p>Current frames-per-second estimate. Computed from the <strong>raw</strong> (unclamped) frame time, so it stays accurate even on stalled frames where <a href="#deltatime">deltatime</a> is clamped.</p>
+<hr />
+<h3 id="framestats">frameStats<a class="headerlink" href="#framestats" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Getter:</em> <code>static const FrameStats&amp; getFrameStats()</code></li>
+</ul>
+<p>Draw counters for the last completed <code>systemDraw</code>: GPU submissions, not CPU work. C++ only — Lua can read <a href="#framerate">framerate</a> but not these fields.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>drawCalls</code></td>
+<td><code>uint32_t</code></td>
+<td><code>draw</code> submissions issued that frame</td>
+</tr>
+<tr>
+<td><code>instances</code></td>
+<td><code>uint32_t</code></td>
+<td>Sum of the instance counts passed to those draws</td>
+</tr>
+<tr>
+<td><code>triangles</code></td>
+<td><code>uint64_t</code></td>
+<td>Triangle estimate from the primitive type and the index/vertex count, multiplied by the instance count (<code>1</code> when the draw is not instanced)</td>
+</tr>
+</tbody>
+</table>
+<p>The editor footer shows <code>drawCalls</code> and <code>triangles</code> next to FPS. The
+<a href="../../../editor/command-line/#benchmark-measure-scene-fps"><code>benchmark</code></a> command averages
+the same counters over a measured run.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">const</span><span class="w"> </span><span class="n">Engine</span><span class="o">::</span><span class="n">FrameStats</span><span class="o">&amp;</span><span class="w"> </span><span class="n">stats</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Engine</span><span class="o">::</span><span class="n">getFrameStats</span><span class="p">();</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">Log</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;draws %u  tris %llu&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">stats</span><span class="p">.</span><span class="n">drawCalls</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">          </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="p">)</span><span class="n">stats</span><span class="p">.</span><span class="n">triangles</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="systemtime">systemTime<a class="headerlink" href="#systemtime" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Getter:</em> <code>static double getSystemTime()</code></li>
+</ul>
+<p>Monotonic wall-clock time in <strong>seconds</strong>, independent of scene pausing and update loop throttling.</p>
+<hr />
+<h3 id="platform_1">platform<a class="headerlink" href="#platform_1" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Getter:</em> <code>static Platform getPlatform()</code></li>
+</ul>
+<p>Returns the <a href="#platform">Platform</a> the engine is currently running on.</p>
+<hr />
+<h3 id="graphicbackend_1">graphicBackend<a class="headerlink" href="#graphicbackend_1" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Getter:</em> <code>static GraphicBackend getGraphicBackend()</code></li>
+</ul>
+<p>Returns the active <a href="#graphicbackend">GraphicBackend</a>.</p>
+<hr />
+<h3 id="opengl">openGL<a class="headerlink" href="#opengl" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Getter:</em> <code>static bool isOpenGL()</code></li>
+</ul>
+<p>Returns <code>true</code> when any OpenGL backend (GLCORE, GLES3) is active.</p>
+<hr />
+<h3 id="asyncloading">asyncLoading<a class="headerlink" href="#asyncloading" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>static void setAsyncLoading(bool enable)</code></li>
+<li><em>Getter:</em> <code>static bool isAsyncLoading()</code></li>
+</ul>
+<p>Enable background resource loading. When active, GPU resource creation must be committed on the main thread via <a href="#startasyncthread-committhreadqueue-endasyncthread-isasyncthread">commitThreadQueue</a>.</p>
+<p>The editor always loads asynchronously, Play included, while an exported game starts with it off. Turn it on from a script so both behave the same and a <a href="../scenemanager/#setloadingscene-getloadingsceneid">loading screen</a> keeps animating.</p>
+<hr />
+<h3 id="mousecursor">mouseCursor<a class="headerlink" href="#mousecursor" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>static void setMouseCursor(CursorType type)</code></li>
+<li><em>Getter:</em> <code>static CursorType getMouseCursor()</code></li>
+</ul>
+<p>Changes the OS mouse cursor shape. See <a href="#cursortype">CursorType</a>.</p>
+<hr />
+<h3 id="mousemode_1">mouseMode<a class="headerlink" href="#mousemode_1" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>static void setMouseMode(MouseMode mode)</code></li>
+<li><em>Getter:</em> <code>static MouseMode getMouseMode()</code></li>
+</ul>
+<p>Sets how the mouse cursor behaves — a single state that covers both its visibility and whether it is free, locked, or confined. See <a href="#mousemode">MouseMode</a> for every value.</p>
+<p>Use <code>CAPTURED</code> for first-person cameras, free-look controls, and any interaction that uses mouse deltas instead of an absolute pointer: the pointer is hidden and locked to the window, so it cannot escape while moving. While captured, mouse move events keep firing even when the virtual mouse position moves outside the canvas bounds. Use <code>CONFINED</code> to keep a visible cursor from leaving the window without switching to relative motion.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Lua</label><label for="__tabbed_3_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">Engine</span><span class="p">.</span><span class="py">mouseMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">MouseMode</span><span class="p">.</span><span class="py">CAPTURED</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">Engine</span><span class="o">::</span><span class="n">setMouseMode</span><span class="p">(</span><span class="n">MouseMode</span><span class="o">::</span><span class="n">CAPTURED</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>CONFINED</code> needs cursor confinement from the platform (desktop GLFW 3.4+); where it isn't available it falls back to <code>NORMAL</code>. Browser builds implement <code>CAPTURED</code> with the Pointer Lock API, so it may only take effect after a user gesture such as a click.</p>
+</div>
+<hr />
+<h3 id="framebuffer">framebuffer<a class="headerlink" href="#framebuffer" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>static void setFramebuffer(Framebuffer* framebuffer)</code></li>
+<li><em>Getter:</em> <code>static Framebuffer* getFramebuffer()</code></li>
+</ul>
+<p>Off-screen render target for the full frame output. When set, the engine renders to this framebuffer instead of the window surface.</p>
+<h2 id="method-details">Method details<a class="headerlink" href="#method-details" title="Link to this section">&para;</a></h2>
+<h3 id="setscene">setScene<a class="headerlink" href="#setscene" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static void setScene(Scene* scene)</code></li>
+</ul>
+<p>Sets the main scene. Pass <code>nullptr</code> (C++) or <code>nil</code> (Lua) to clear the main scene.</p>
+<hr />
+<h3 id="getscene">getScene<a class="headerlink" href="#getscene" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static Scene* getScene()</code></li>
+</ul>
+<p>Returns the current main scene, or <code>nullptr</code>/<code>nil</code> if none is set.</p>
+<hr />
+<h3 id="addscenelayer">addSceneLayer<a class="headerlink" href="#addscenelayer" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static void addSceneLayer(Scene* scene)</code></li>
+</ul>
+<p>Renders an additional scene as a layer on top of the main scene. Commonly used for HUDs, overlays, or pause menus.</p>
+<hr />
+<h3 id="executesceneonce">executeSceneOnce<a class="headerlink" href="#executesceneonce" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static void executeSceneOnce(Scene* scene)</code></li>
+</ul>
+<p>Adds a scene that runs for a single draw, then is automatically removed. Useful for
+rendering a scene to a texture on demand, such as a thumbnail or a preview image.
+Passing <code>nullptr</code> has no effect.</p>
+<p>The scene keeps drawing on every frame until its resources finish loading, so with
+asynchronous loading it may take several frames before it is removed. Use
+<a href="#hasscenestoexecuteonce">hasScenesToExecuteOnce</a> to tell whether any are still pending.</p>
+<hr />
+<h3 id="removescene">removeScene<a class="headerlink" href="#removescene" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static void removeScene(Scene* scene)</code></li>
+</ul>
+<p>Removes a specific scene from the active scene stack. If it was queued with
+<a href="#executesceneonce">executeSceneOnce</a>, the pending one-shot execution is cancelled so
+the scene can be destroyed safely after this method returns.</p>
+<hr />
+<h3 id="removeallscenelayers">removeAllSceneLayers<a class="headerlink" href="#removeallscenelayers" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static void removeAllSceneLayers(bool removeOneTimeScenes)</code></li>
+</ul>
+<p>Removes all layered scenes. When <code>removeOneTimeScenes</code> is <code>true</code>, one-time scenes added via <a href="#executesceneonce">executeSceneOnce</a> are also removed.</p>
+<hr />
+<h3 id="removeallscenes">removeAllScenes<a class="headerlink" href="#removeallscenes" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static void removeAllScenes()</code></li>
+</ul>
+<p>Removes all scenes, including the main scene and all layers.</p>
+<hr />
+<h3 id="isscenerunning">isSceneRunning<a class="headerlink" href="#isscenerunning" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static bool isSceneRunning(Scene* scene)</code></li>
+</ul>
+<p>Returns <code>true</code> if the given scene is currently in the active scene stack.</p>
+<hr />
+<h3 id="hasscenestoexecuteonce">hasScenesToExecuteOnce<a class="headerlink" href="#hasscenestoexecuteonce" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static bool hasScenesToExecuteOnce()</code></li>
+</ul>
+<p>Returns <code>true</code> while any scene queued with <a href="#executesceneonce">executeSceneOnce</a> is still
+waiting to be drawn. Useful when the draw loop only runs on demand: a renderer that skips
+idle frames must keep drawing while this is <code>true</code>, or the queued scenes never render.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">C++</label><label for="__tabbed_4_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">Engine</span><span class="o">::</span><span class="n">executeSceneOnce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">previewScene</span><span class="p">);</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Engine</span><span class="o">::</span><span class="n">hasScenesToExecuteOnce</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="c1">// Keep the draw loop running this frame.</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">Engine</span><span class="p">.</span><span class="nf">executeSceneOnce</span><span class="p">(</span><span class="nv">previewScene</span><span class="p">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kr">if</span><span class="w"> </span><span class="nv">Engine</span><span class="p">.</span><span class="nf">hasScenesToExecuteOnce</span><span class="p">()</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="c1">-- Keep the draw loop running this frame.</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="getmainscene">getMainScene<a class="headerlink" href="#getmainscene" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static Scene* getMainScene()</code></li>
+</ul>
+<p>Returns the scene set with <a href="#setscene">setScene</a>.</p>
+<hr />
+<h3 id="getlastscene">getLastScene<a class="headerlink" href="#getlastscene" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static Scene* getLastScene()</code></li>
+</ul>
+<p>Returns the top-most scene in the stack (the most recently added layer, or the main scene if no layers exist).</p>
+<hr />
+<h3 id="pausegameevents">pauseGameEvents<a class="headerlink" href="#pausegameevents" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static void pauseGameEvents(bool pause)</code></li>
+</ul>
+<p>Pauses delivery of gameplay events (onUpdate, onFixedUpdate, input callbacks) without stopping the render loop. The editor uses this when the project is not in play mode.</p>
+<hr />
+<h3 id="setcanvassize">setCanvasSize<a class="headerlink" href="#setcanvassize" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static void setCanvasSize(int canvasWidth, int canvasHeight)</code></li>
+</ul>
+<p>Sets the preferred logical canvas dimensions. The actual <a href="#canvaswidth-canvasheight">canvasWidth</a>/<a href="#canvaswidth-canvasheight">canvasHeight</a> reported at runtime may differ depending on the active <a href="#scalingmode">scalingMode</a>.</p>
+<hr />
+<h3 id="getviewrect">getViewRect<a class="headerlink" href="#getviewrect" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static Rect getViewRect()</code></li>
+</ul>
+<p>Returns the viewport rectangle calculated from canvas size, window size, and scaling mode.</p>
+<hr />
+<h3 id="setmouseposition">setMousePosition<a class="headerlink" href="#setmouseposition" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static void setMousePosition(float x, float y)</code></li>
+</ul>
+<p>Sets the mouse position in logical canvas coordinates and updates <code>Input.getMousePosition()</code>.</p>
+<p>On desktop GLFW builds this also moves the OS cursor. On platforms that do not expose cursor warping, the engine still updates its internal input position, and the next real mouse event may replace it with the platform-reported position.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Lua</label><label for="__tabbed_5_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">Engine</span><span class="p">.</span><span class="nf">setMousePosition</span><span class="p">(</span><span class="nv">Engine</span><span class="p">.</span><span class="py">canvasWidth</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="nv">Engine</span><span class="p">.</span><span class="py">canvasHeight</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">Engine</span><span class="o">::</span><span class="n">setMousePosition</span><span class="p">(</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="n">Engine</span><span class="o">::</span><span class="n">getCanvasWidth</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">,</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="n">Engine</span><span class="o">::</span><span class="n">getCanvasHeight</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.5f</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="setupdatetimems">setUpdateTimeMS<a class="headerlink" href="#setupdatetimems" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static void setUpdateTimeMS(unsigned int updateTimeMS)</code></li>
+</ul>
+<p>Same as <a href="#updatetime">updateTime</a> but accepts the interval in <strong>milliseconds</strong>.</p>
+<hr />
+<h3 id="isuieventreceived">isUIEventReceived<a class="headerlink" href="#isuieventreceived" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static bool isUIEventReceived()</code></li>
+</ul>
+<p>Returns <code>true</code> if any UI widget consumed a pointer event during the current frame. Use with <a href="#ignoreeventshandledbyui">ignoreEventsHandledByUI</a> to prevent gameplay from reacting to UI clicks.</p>
+<hr />
+<h3 id="isviewloaded">isViewLoaded<a class="headerlink" href="#isviewloaded" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static bool isViewLoaded()</code></li>
+</ul>
+<p>Returns <code>true</code> after the graphics surface is ready (after <a href="#onviewloaded">onViewLoaded</a> fires).</p>
+<hr />
+<h3 id="clearallsubscriptions">clearAllSubscriptions<a class="headerlink" href="#clearallsubscriptions" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static void clearAllSubscriptions(bool includeLifecycle)</code></li>
+</ul>
+<p>Removes all registered callbacks from all engine events. When <code>includeLifecycle</code> is <code>false</code>, lifecycle events such as <code>onViewLoaded</code> are preserved.</p>
+<hr />
+<h3 id="clearcomponentsubscriptions">clearComponentSubscriptions<a class="headerlink" href="#clearcomponentsubscriptions" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static void clearComponentSubscriptions(Scene* scene)</code></li>
+</ul>
+<p>Removes the callbacks registered on a scene's components — <a href="../button/">Button</a> <code>onPress</code>,
+<a href="../uicomponent/">UI</a> pointer and focus events, panel, scrollbar, text edit, sound, and action
+events. <a href="#clearallsubscriptions">clearAllSubscriptions</a> covers the engine's own events; this one
+covers the per-component events.</p>
+<p>Callbacks a script adds directly, as in
+<code>getComponent&lt;ButtonComponent&gt;().onPress.add("pressed", ...)</code>, stay on the component after the
+script is gone, so call this before the code behind them is unloaded — the editor does it when a
+scene stops and the project library is released.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Lua</label><label for="__tabbed_6_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">Engine</span><span class="p">.</span><span class="nf">clearComponentSubscriptions</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">Engine</span><span class="o">::</span><span class="n">clearComponentSubscriptions</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="setmaxresourceloadingthreads">setMaxResourceLoadingThreads<a class="headerlink" href="#setmaxresourceloadingthreads" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static void setMaxResourceLoadingThreads(size_t maxThreads)</code></li>
+</ul>
+<p>Sets the maximum number of worker threads used for background asset loading.</p>
+<hr />
+<h3 id="getqueuedresourcecount">getQueuedResourceCount<a class="headerlink" href="#getqueuedresourcecount" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static size_t getQueuedResourceCount()</code></li>
+</ul>
+<p>Returns the number of resources still waiting to be loaded on background threads.</p>
+<hr />
+<h3 id="clearpools">clearPools<a class="headerlink" href="#clearpools" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static void clearPools()</code></li>
+<li>C++ only</li>
+</ul>
+<p>Fully clears the texture, texture-data, model, shader, sound, and font caches. This
+also destroys pooled GPU textures and shaders, including entries that are still
+referenced elsewhere. Use it for engine or graphics-view teardown, not routine level
+unloading.</p>
+<p>Before clearing during a project or runtime-context switch, stop work that can still
+write into the pools, such as pending asynchronous model loads.</p>
+<hr />
+<h3 id="clearunusedpools">clearUnusedPools<a class="headerlink" href="#clearunusedpools" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static void clearUnusedPools()</code></li>
+<li>C++ only</li>
+</ul>
+<p>Removes cache entries that are no longer referenced outside their pool while keeping
+resources that active scenes or engine objects still own. Pending sound and decoded
+texture-data work is allowed to finish before those caches are swept. Shader
+missing/failed state and custom-shader registrations are also reset.</p>
+<p>This is the safer cleanup option after destroying a scene or switching projects.</p>
+<hr />
+<h3 id="startasyncthread-committhreadqueue-endasyncthread-isasyncthread">startAsyncThread / commitThreadQueue / endAsyncThread / isAsyncThread<a class="headerlink" href="#startasyncthread-committhreadqueue-endasyncthread-isasyncthread" title="Link to this section">&para;</a></h3>
+<p>Used to safely create GPU resources from background threads:</p>
+<ol>
+<li>Call <code>startAsyncThread()</code> at the beginning of the worker function.</li>
+<li>Create textures, meshes, etc.</li>
+<li>Call <code>commitThreadQueue()</code> periodically (or at the end) to flush pending GPU uploads on the main thread.</li>
+<li>Call <code>endAsyncThread()</code> when the worker is finished.</li>
+</ol>
+<p><code>AsyncThreadScope</code> (C++ RAII) wraps start/end automatically.</p>
+<h2 id="callback-event-details">Callback event details<a class="headerlink" href="#callback-event-details" title="Link to this section">&para;</a></h2>
+<h3 id="onviewloaded">onViewLoaded<a class="headerlink" href="#onviewloaded" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void()&gt; onViewLoaded</code></li>
+</ul>
+<p>Called once when the graphics backend surface is ready for rendering.</p>
+<hr />
+<h3 id="oncanvaschanged">onCanvasChanged<a class="headerlink" href="#oncanvaschanged" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void()&gt; onCanvasChanged</code></li>
+<li>Callback: <code>void()</code></li>
+</ul>
+<p>Called when the canvas or window size changes. Re-query <a href="#canvaswidth-canvasheight">canvasWidth</a>/<a href="#canvaswidth-canvasheight">canvasHeight</a> or reposition UI elements here.</p>
+<hr />
+<h3 id="onviewdestroyed">onViewDestroyed<a class="headerlink" href="#onviewdestroyed" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void()&gt; onViewDestroyed</code></li>
+<li>Callback: <code>void()</code></li>
+</ul>
+<p>Called when the graphics surface is being destroyed (e.g. app going to background on mobile).</p>
+<hr />
+<h3 id="ondraw">onDraw<a class="headerlink" href="#ondraw" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void()&gt; onDraw</code></li>
+<li>Callback: <code>void()</code></li>
+</ul>
+<p>Called every frame after the updates, right before the scenes are drawn. A minimized
+Windows, Linux, or macOS game keeps updating without drawing and skips it, as does a macOS
+game whose window can't be seen, so keep game logic in <a href="#onupdate">onUpdate</a>.</p>
+<hr />
+<h3 id="onupdate">onUpdate<a class="headerlink" href="#onupdate" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void()&gt; onUpdate</code></li>
+<li>Callback: <code>void()</code></li>
+</ul>
+<p>Called every frame for variable-step gameplay logic. Multiply movement by <a href="#deltatime">deltatime</a> to ensure frame-rate independence.</p>
+<hr />
+<h3 id="onfixedupdate">onFixedUpdate<a class="headerlink" href="#onfixedupdate" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void()&gt; onFixedUpdate</code></li>
+<li>Callback: <code>void()</code></li>
+</ul>
+<p>Called at a fixed interval defined by <a href="#updatetime">updateTime</a>. Use for physics, deterministic simulation, and anything that must not depend on frame rate.</p>
+<hr />
+<h3 id="onpostupdate">onPostUpdate<a class="headerlink" href="#onpostupdate" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void()&gt; onPostUpdate</code></li>
+<li>Callback: <code>void()</code></li>
+</ul>
+<p>Called after the regular update and fixed-update passes each frame. Useful for late-stage logic such as camera follow that must run after all objects have moved.</p>
+<hr />
+<h3 id="onpause">onPause<a class="headerlink" href="#onpause" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void()&gt; onPause</code></li>
+<li>Callback: <code>void()</code></li>
+</ul>
+<p>Called when the system suspends the application (e.g. phone call received, app moved to background). It also fires while a full-screen ad covers the game and while a web portal pauses it; see <a href="../../../manual/monetization/#ads-pause-the-game">Ads pause the game</a>.</p>
+<hr />
+<h3 id="onresume">onResume<a class="headerlink" href="#onresume" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void()&gt; onResume</code></li>
+<li>Callback: <code>void()</code></li>
+</ul>
+<p>Called when the application returns to the foreground after a pause, including after each full-screen ad.</p>
+<hr />
+<h3 id="onshutdown">onShutdown<a class="headerlink" href="#onshutdown" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void()&gt; onShutdown</code></li>
+<li>Callback: <code>void()</code></li>
+</ul>
+<p>Called when the application is closing. Use to flush saves or clean up persistent state.</p>
+<hr />
+<h3 id="onsceneloaded">onSceneLoaded<a class="headerlink" href="#onsceneloaded" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void()&gt; onSceneLoaded</code></li>
+<li>Callback: <code>void()</code></li>
+</ul>
+<p>Called once a scene stack loaded by <a href="../scenemanager/#loadscene"><code>SceneManager::loadScene</code></a>
+has loaded its resources, and once for the start scene, both in exported games and in the
+editor's Play. It fires before the <a href="../scenemanager/#setloadingscene-getloadingsceneid">loading scene</a>
+closes, so a level can place its player and camera behind it. <code>SceneManager::isLoading()</code>
+is still <code>true</code> here, and a loading scene can <a href="../scenemanager/#holdloading-releaseloading">hold</a>
+the load to fade out. <code>addChildScene</code> does not fire it.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Lua</label><label for="__tabbed_7_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kr">function</span><span class="w"> </span><span class="nc">Level</span><span class="p">:</span><span class="nf">init</span><span class="p">()</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="nf">RegisterEngineEvent</span><span class="p">(</span><span class="nv">self</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;onSceneLoaded&quot;</span><span class="p">)</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kr">end</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="kr">function</span><span class="w"> </span><span class="nc">Level</span><span class="p">:</span><span class="nf">onSceneLoaded</span><span class="p">()</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="nv">self</span><span class="p">:</span><span class="nf">startLevel</span><span class="p">()</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">Level</span><span class="o">::</span><span class="n">Level</span><span class="p">(</span><span class="n">Scene</span><span class="o">*</span><span class="w"> </span><span class="n">scene</span><span class="p">,</span><span class="w"> </span><span class="n">Entity</span><span class="w"> </span><span class="n">entity</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">ScriptBase</span><span class="p">(</span><span class="n">scene</span><span class="p">,</span><span class="w"> </span><span class="n">entity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="n">REGISTER_ENGINE_EVENT</span><span class="p">(</span><span class="n">onSceneLoaded</span><span class="p">);</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">}</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="n">Level</span><span class="o">::~</span><span class="n">Level</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="n">UNREGISTER_ENGINE_EVENT</span><span class="p">(</span><span class="n">onSceneLoaded</span><span class="p">);</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="p">}</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="kt">void</span><span class="w"> </span><span class="n">Level</span><span class="o">::</span><span class="n">onSceneLoaded</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">    </span><span class="n">startLevel</span><span class="p">();</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="ontouchstart">onTouchStart<a class="headerlink" href="#ontouchstart" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void(int,float,float)&gt; onTouchStart</code></li>
+<li>Callback: <code>void(int pointer, float x, float y)</code><ul>
+<li><strong>pointer</strong> — Touch identifier for multitouch tracking.</li>
+<li><strong>x</strong> — Horizontal position in canvas coordinates.</li>
+<li><strong>y</strong> — Vertical position in canvas coordinates.</li>
+</ul>
+</li>
+</ul>
+<p>Called when a new touch contact begins.</p>
+<hr />
+<h3 id="ontouchend">onTouchEnd<a class="headerlink" href="#ontouchend" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void(int,float,float)&gt; onTouchEnd</code></li>
+<li>Callback: <code>void(int pointer, float x, float y)</code><ul>
+<li><strong>pointer</strong> — Touch identifier.</li>
+<li><strong>x</strong> — Final horizontal position in canvas coordinates.</li>
+<li><strong>y</strong> — Final vertical position in canvas coordinates.</li>
+</ul>
+</li>
+</ul>
+<p>Called when a touch contact is lifted.</p>
+<hr />
+<h3 id="ontouchmove">onTouchMove<a class="headerlink" href="#ontouchmove" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void(int,float,float)&gt; onTouchMove</code></li>
+<li>Callback: <code>void(int pointer, float x, float y)</code><ul>
+<li><strong>pointer</strong> — Touch identifier.</li>
+<li><strong>x</strong> — Updated horizontal position.</li>
+<li><strong>y</strong> — Updated vertical position.</li>
+</ul>
+</li>
+</ul>
+<p>Called whenever a touch contact moves.</p>
+<hr />
+<h3 id="ontouchcancel">onTouchCancel<a class="headerlink" href="#ontouchcancel" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void(int,float,float)&gt; onTouchCancel</code></li>
+<li>Callback: <code>void(int pointer, float x, float y)</code><ul>
+<li><strong>pointer</strong> — Identifier of the canceled touch.</li>
+<li><strong>x</strong> — Last recorded horizontal position in logical canvas coordinates.</li>
+<li><strong>y</strong> — Last recorded vertical position in logical canvas coordinates.</li>
+</ul>
+</li>
+</ul>
+<p>Called when a tracked touch is interrupted, after it has been removed from <code>Input</code>.
+A per-pointer cancellation preserves other active touches. A full cancellation
+removes all tracked touches before emitting this callback once per touch. There is
+no separate global callback, and a full cancellation with no tracked touches emits
+nothing. Canceling an unknown or already removed identifier also emits nothing.
+Use <code>Input::numTouches()</code> (<code>Input.numTouches()</code> in Lua) to check whether any fingers
+remain; it is zero during every full-cancel callback.</p>
+<p>Use this alongside <a href="#ontouchend"><code>onTouchEnd</code></a> to clear actions associated with a
+finger. Cancellation does not call UI pointer-up, <code>onClick</code>, or <code>onTouchEnd</code>.
+Notifications follow <code>pauseGameEvents</code>, but do not depend on whether UI consumed
+the original touch or whether its position is inside the canvas.</p>
+<p>C++ scripts subscribe with <code>REGISTER_ENGINE_EVENT(onTouchCancel)</code> and
+unsubscribe with <code>UNREGISTER_ENGINE_EVENT(onTouchCancel)</code>. Lua scripts use
+<code>RegisterEngineEvent(self, "onTouchCancel")</code> with a handler named
+<code>function Player:onTouchCancel(pointer, x, y)</code>.</p>
+<hr />
+<h3 id="onmousedown">onMouseDown<a class="headerlink" href="#onmousedown" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void(int,float,float,int)&gt; onMouseDown</code></li>
+<li>Callback: <code>void(int button, float x, float y, int mods)</code><ul>
+<li><strong>button</strong> — Mouse button index; see <a href="../input/#mouse-buttons">Input</a> constants.</li>
+<li><strong>x</strong> — Horizontal position in canvas coordinates.</li>
+<li><strong>y</strong> — Vertical position in canvas coordinates.</li>
+<li><strong>mods</strong> — Modifier key bitmask; see <a href="../input/#modifiers">Input</a>.</li>
+</ul>
+</li>
+</ul>
+<p>Called when a mouse button is pressed.</p>
+<hr />
+<h3 id="onmouseup">onMouseUp<a class="headerlink" href="#onmouseup" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void(int,float,float,int)&gt; onMouseUp</code></li>
+<li>Callback: <code>void(int button, float x, float y, int mods)</code><ul>
+<li><strong>button</strong> — Mouse button index.</li>
+<li><strong>x</strong> — Horizontal position.</li>
+<li><strong>y</strong> — Vertical position.</li>
+<li><strong>mods</strong> — Modifier key bitmask.</li>
+</ul>
+</li>
+</ul>
+<p>Called when a mouse button is released.</p>
+<hr />
+<h3 id="onmousemove">onMouseMove<a class="headerlink" href="#onmousemove" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void(float,float,int)&gt; onMouseMove</code></li>
+<li>Callback: <code>void(float x, float y, int mods)</code><ul>
+<li><strong>x</strong> — Horizontal position in canvas coordinates.</li>
+<li><strong>y</strong> — Vertical position in canvas coordinates.</li>
+<li><strong>mods</strong> — Modifier key bitmask.</li>
+</ul>
+</li>
+</ul>
+<p>Called when the mouse cursor moves. Also called outside the canvas when <a href="#alloweventsoutcanvas">allowEventsOutCanvas</a> is <code>true</code>.</p>
+<p>When <a href="#mousemode_1">mouseMode</a> is <code>CAPTURED</code>, this event keeps firing from relative mouse movement, and <code>x</code>/<code>y</code> can represent a virtual position outside the normal canvas range.</p>
+<hr />
+<h3 id="onmousescroll">onMouseScroll<a class="headerlink" href="#onmousescroll" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void(float,float,int)&gt; onMouseScroll</code></li>
+<li>Callback: <code>void(float xoffset, float yoffset, int mods)</code><ul>
+<li><strong>xoffset</strong> — Horizontal scroll amount.</li>
+<li><strong>yoffset</strong> — Vertical scroll amount (positive = scroll up).</li>
+<li><strong>mods</strong> — Modifier key bitmask.</li>
+</ul>
+</li>
+</ul>
+<p>Called when the mouse scroll wheel changes.</p>
+<hr />
+<h3 id="onmouseenter">onMouseEnter<a class="headerlink" href="#onmouseenter" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void()&gt; onMouseEnter</code></li>
+<li>Callback: <code>void()</code></li>
+</ul>
+<p>Called when the mouse cursor enters the canvas boundary.</p>
+<hr />
+<h3 id="onmouseleave">onMouseLeave<a class="headerlink" href="#onmouseleave" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void()&gt; onMouseLeave</code></li>
+<li>Callback: <code>void()</code></li>
+</ul>
+<p>Called when the mouse cursor leaves the canvas boundary.</p>
+<hr />
+<h3 id="onkeydown">onKeyDown<a class="headerlink" href="#onkeydown" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void(int,bool,int)&gt; onKeyDown</code></li>
+<li>Callback: <code>void(int key, bool repeat, int mods)</code><ul>
+<li><strong>key</strong> — Key code; see <a href="../input/#keys">Input</a> constants (<code>D_KEY_*</code> in C++, <code>Input.KEY_*</code> in Lua).</li>
+<li><strong>repeat</strong> — <code>true</code> if the key is being held and this is a repeat event.</li>
+<li><strong>mods</strong> — Modifier key bitmask.</li>
+</ul>
+</li>
+</ul>
+<p>Called when any keyboard key is pressed.</p>
+<hr />
+<h3 id="onkeyup">onKeyUp<a class="headerlink" href="#onkeyup" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void(int,bool,int)&gt; onKeyUp</code></li>
+<li>Callback: <code>void(int key, bool repeat, int mods)</code><ul>
+<li><strong>key</strong> — Key code.</li>
+<li><strong>repeat</strong> — Always <code>false</code> on key-up.</li>
+<li><strong>mods</strong> — Modifier key bitmask.</li>
+</ul>
+</li>
+</ul>
+<p>Called when any keyboard key is released.</p>
+<hr />
+<h3 id="oncharinput">onCharInput<a class="headerlink" href="#oncharinput" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void(wchar_t)&gt; onCharInput</code></li>
+<li>Callback: <code>void(wchar_t codepoint)</code><ul>
+<li><strong>codepoint</strong> — Unicode code point of the typed character, including composed/accented characters.</li>
+</ul>
+</li>
+</ul>
+<p>Called for text input. Prefer this over <a href="#onkeydown">onKeyDown</a> when implementing text fields.</p>
+<hr />
+<h3 id="ongamepadconnect">onGamepadConnect<a class="headerlink" href="#ongamepadconnect" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void(int)&gt; onGamepadConnect</code></li>
+<li>Callback: <code>void(int gamepad)</code><ul>
+<li><strong>gamepad</strong> — Id of the controller that connected.</li>
+</ul>
+</li>
+</ul>
+<p>Called when a controller is connected (and once for each controller already connected at startup). Query its name with <a href="../input/#getgamepadname">Input.getGamepadName</a>.</p>
+<hr />
+<h3 id="ongamepaddisconnect">onGamepadDisconnect<a class="headerlink" href="#ongamepaddisconnect" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void(int)&gt; onGamepadDisconnect</code></li>
+<li>Callback: <code>void(int gamepad)</code><ul>
+<li><strong>gamepad</strong> — Id of the controller that disconnected.</li>
+</ul>
+</li>
+</ul>
+<p>Called when a controller is disconnected. After this fires, <a href="../input/#isgamepadconnected">Input.isGamepadConnected</a> returns <code>false</code> for that id.</p>
+<hr />
+<h3 id="ongamepadbuttondown">onGamepadButtonDown<a class="headerlink" href="#ongamepadbuttondown" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void(int,int)&gt; onGamepadButtonDown</code></li>
+<li>Callback: <code>void(int gamepad, int button)</code><ul>
+<li><strong>gamepad</strong> — Id of the controller.</li>
+<li><strong>button</strong> — Button index; see <a href="../input/#gamepad-buttons">Input</a> constants (<code>D_GAMEPAD_BUTTON_*</code> in C++, <code>Input.GAMEPAD_BUTTON_*</code> in Lua).</li>
+</ul>
+</li>
+</ul>
+<p>Called when a controller button is pressed.</p>
+<hr />
+<h3 id="ongamepadbuttonup">onGamepadButtonUp<a class="headerlink" href="#ongamepadbuttonup" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void(int,int)&gt; onGamepadButtonUp</code></li>
+<li>Callback: <code>void(int gamepad, int button)</code><ul>
+<li><strong>gamepad</strong> — Id of the controller.</li>
+<li><strong>button</strong> — Button index.</li>
+</ul>
+</li>
+</ul>
+<p>Called when a controller button is released.</p>
+<hr />
+<h3 id="ongamepadaxismove">onGamepadAxisMove<a class="headerlink" href="#ongamepadaxismove" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>static FunctionSubscribe&lt;void(int,int,float)&gt; onGamepadAxisMove</code></li>
+<li>Callback: <code>void(int gamepad, int axis, float value)</code><ul>
+<li><strong>gamepad</strong> — Id of the controller.</li>
+<li><strong>axis</strong> — Axis index; see <a href="../input/#gamepad-axes">Input</a> constants (<code>D_GAMEPAD_AXIS_*</code> in C++, <code>Input.GAMEPAD_AXIS_*</code> in Lua).</li>
+<li><strong>value</strong> — Axis value in <code>-1.0</code>…<code>1.0</code>. Sticks are down-positive on the Y axis; triggers rest at <code>-1</code> and reach <code>+1</code> when fully pressed.</li>
+</ul>
+</li>
+</ul>
+<p>Called when an analog axis (stick or trigger) changes. For always-on movement, polling <a href="../input/#getgamepadaxis">Input.getGamepadAxis</a> in <code>onUpdate</code> is usually simpler than tracking this event.</p>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../../build-options/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Build Options</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../scene/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Scene</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/reference/classes/engine.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#engine" class="dx-toc-link" data-level="1">Engine</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#description" class="dx-toc-link" data-level="2">Description</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#properties" class="dx-toc-link" data-level="3">Properties</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#methods" class="dx-toc-link" data-level="3">Methods</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#callback-events" class="dx-toc-link" data-level="3">Callback events</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#enumerations" class="dx-toc-link" data-level="2">Enumerations</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#scaling" class="dx-toc-link" data-level="3">Scaling</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#texturestrategy" class="dx-toc-link" data-level="3">TextureStrategy</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#platform" class="dx-toc-link" data-level="3">Platform</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#graphicbackend" class="dx-toc-link" data-level="3">GraphicBackend</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#cursortype" class="dx-toc-link" data-level="3">CursorType</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#mousemode" class="dx-toc-link" data-level="3">MouseMode</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#property-details" class="dx-toc-link" data-level="2">Property details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#scalingmode" class="dx-toc-link" data-level="3">scalingMode</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#texturestrategy_1" class="dx-toc-link" data-level="3">textureStrategy</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#callmouseintouchevent" class="dx-toc-link" data-level="3">callMouseInTouchEvent</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#calltouchinmouseevent" class="dx-toc-link" data-level="3">callTouchInMouseEvent</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#usedegrees" class="dx-toc-link" data-level="3">useDegrees</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#alloweventsoutcanvas" class="dx-toc-link" data-level="3">allowEventsOutCanvas</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ignoreeventshandledbyui" class="dx-toc-link" data-level="3">ignoreEventsHandledByUI</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#updatetime" class="dx-toc-link" data-level="3">updateTime</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#interpolationalpha" class="dx-toc-link" data-level="3">interpolationAlpha</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#canvaswidth-canvasheight" class="dx-toc-link" data-level="3">canvasWidth / canvasHeight</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#preferredcanvaswidth-preferredcanvasheight" class="dx-toc-link" data-level="3">preferredCanvasWidth / preferredCanvasHeight</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#viewrect" class="dx-toc-link" data-level="3">viewRect</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#deltatime" class="dx-toc-link" data-level="3">deltatime</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#maxdeltatime" class="dx-toc-link" data-level="3">maxDeltatime</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#framerate" class="dx-toc-link" data-level="3">framerate</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#framestats" class="dx-toc-link" data-level="3">frameStats</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#systemtime" class="dx-toc-link" data-level="3">systemTime</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#platform_1" class="dx-toc-link" data-level="3">platform</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#graphicbackend_1" class="dx-toc-link" data-level="3">graphicBackend</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#opengl" class="dx-toc-link" data-level="3">openGL</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#asyncloading" class="dx-toc-link" data-level="3">asyncLoading</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#mousecursor" class="dx-toc-link" data-level="3">mouseCursor</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#mousemode_1" class="dx-toc-link" data-level="3">mouseMode</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#framebuffer" class="dx-toc-link" data-level="3">framebuffer</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#method-details" class="dx-toc-link" data-level="2">Method details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#setscene" class="dx-toc-link" data-level="3">setScene</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getscene" class="dx-toc-link" data-level="3">getScene</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#addscenelayer" class="dx-toc-link" data-level="3">addSceneLayer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#executesceneonce" class="dx-toc-link" data-level="3">executeSceneOnce</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#removescene" class="dx-toc-link" data-level="3">removeScene</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#removeallscenelayers" class="dx-toc-link" data-level="3">removeAllSceneLayers</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#removeallscenes" class="dx-toc-link" data-level="3">removeAllScenes</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#isscenerunning" class="dx-toc-link" data-level="3">isSceneRunning</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#hasscenestoexecuteonce" class="dx-toc-link" data-level="3">hasScenesToExecuteOnce</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getmainscene" class="dx-toc-link" data-level="3">getMainScene</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getlastscene" class="dx-toc-link" data-level="3">getLastScene</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#pausegameevents" class="dx-toc-link" data-level="3">pauseGameEvents</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setcanvassize" class="dx-toc-link" data-level="3">setCanvasSize</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getviewrect" class="dx-toc-link" data-level="3">getViewRect</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setmouseposition" class="dx-toc-link" data-level="3">setMousePosition</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setupdatetimems" class="dx-toc-link" data-level="3">setUpdateTimeMS</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#isuieventreceived" class="dx-toc-link" data-level="3">isUIEventReceived</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#isviewloaded" class="dx-toc-link" data-level="3">isViewLoaded</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#clearallsubscriptions" class="dx-toc-link" data-level="3">clearAllSubscriptions</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#clearcomponentsubscriptions" class="dx-toc-link" data-level="3">clearComponentSubscriptions</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setmaxresourceloadingthreads" class="dx-toc-link" data-level="3">setMaxResourceLoadingThreads</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getqueuedresourcecount" class="dx-toc-link" data-level="3">getQueuedResourceCount</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#clearpools" class="dx-toc-link" data-level="3">clearPools</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#clearunusedpools" class="dx-toc-link" data-level="3">clearUnusedPools</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#startasyncthread-committhreadqueue-endasyncthread-isasyncthread" class="dx-toc-link" data-level="3">startAsyncThread / commitThreadQueue / endAsyncThread / isAsyncThread</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#callback-event-details" class="dx-toc-link" data-level="2">Callback event details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#onviewloaded" class="dx-toc-link" data-level="3">onViewLoaded</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#oncanvaschanged" class="dx-toc-link" data-level="3">onCanvasChanged</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#onviewdestroyed" class="dx-toc-link" data-level="3">onViewDestroyed</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ondraw" class="dx-toc-link" data-level="3">onDraw</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#onupdate" class="dx-toc-link" data-level="3">onUpdate</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#onfixedupdate" class="dx-toc-link" data-level="3">onFixedUpdate</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#onpostupdate" class="dx-toc-link" data-level="3">onPostUpdate</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#onpause" class="dx-toc-link" data-level="3">onPause</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#onresume" class="dx-toc-link" data-level="3">onResume</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#onshutdown" class="dx-toc-link" data-level="3">onShutdown</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#onsceneloaded" class="dx-toc-link" data-level="3">onSceneLoaded</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ontouchstart" class="dx-toc-link" data-level="3">onTouchStart</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ontouchend" class="dx-toc-link" data-level="3">onTouchEnd</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ontouchmove" class="dx-toc-link" data-level="3">onTouchMove</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ontouchcancel" class="dx-toc-link" data-level="3">onTouchCancel</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#onmousedown" class="dx-toc-link" data-level="3">onMouseDown</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#onmouseup" class="dx-toc-link" data-level="3">onMouseUp</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#onmousemove" class="dx-toc-link" data-level="3">onMouseMove</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#onmousescroll" class="dx-toc-link" data-level="3">onMouseScroll</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#onmouseenter" class="dx-toc-link" data-level="3">onMouseEnter</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#onmouseleave" class="dx-toc-link" data-level="3">onMouseLeave</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#onkeydown" class="dx-toc-link" data-level="3">onKeyDown</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#onkeyup" class="dx-toc-link" data-level="3">onKeyUp</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#oncharinput" class="dx-toc-link" data-level="3">onCharInput</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ongamepadconnect" class="dx-toc-link" data-level="3">onGamepadConnect</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ongamepaddisconnect" class="dx-toc-link" data-level="3">onGamepadDisconnect</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ongamepadbuttondown" class="dx-toc-link" data-level="3">onGamepadButtonDown</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ongamepadbuttonup" class="dx-toc-link" data-level="3">onGamepadButtonUp</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ongamepadaxismove" class="dx-toc-link" data-level="3">onGamepadAxisMove</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../../versions.json";
+    window.QUANTUM_PAGE_URL = "reference/classes/engine/";
+  </script>
+  <script src="../../../js/quantum.js" defer></script>
+</body>
+</html>

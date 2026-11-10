@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Body3D — Quantum Engine Docs</title>
+  <meta name="description" content="Body3D API reference — 3D physics body powered by Jolt Physics, shapes, forces, constraints, buoyancy, and contacts.">
+  <meta property="og:title" content="Body3D — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/reference/classes/body3d/">
+
+  <link rel="icon" type="image/png" href="../../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../../css/quantum.css">
+  <link rel="stylesheet" href="../../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="body3d">Body3D<a class="headerlink" href="#body3d" title="Link to this section">&para;</a></h1>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Link to this section">&para;</a></h2>
+<p><code>Body3D</code> is the 3D rigid-body handle built on top of the <strong>Jolt Physics</strong> library. Obtain one by calling <code>object.getBody3D()</code>. Create one or more shapes, set the body type and material properties, then call <code>load()</code> to register with the physics world. The body transform is synchronized with the parent <a href="../object/">Object</a> each physics step.</p>
+<p><strong>Inherits:</strong> <a href="../entityhandle/">EntityHandle</a></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Mesh</span><span class="w"> </span><span class="nf">cube</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">cube</span><span class="p">.</span><span class="n">setTexture</span><span class="p">(</span><span class="s">&quot;textures/box.png&quot;</span><span class="p">);</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">Body3D</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cube</span><span class="p">.</span><span class="n">getBody3D</span><span class="p">();</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">body</span><span class="p">.</span><span class="n">createBoxShape</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">);</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">body</span><span class="p">.</span><span class="n">setType</span><span class="p">(</span><span class="n">BodyType</span><span class="o">::</span><span class="n">DYNAMIC</span><span class="p">);</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">body</span><span class="p">.</span><span class="n">load</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">cube</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Mesh</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">cube</span><span class="p">:</span><span class="nf">setTexture</span><span class="p">(</span><span class="s2">&quot;textures/box.png&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kd">local</span><span class="w"> </span><span class="nv">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">cube</span><span class="p">:</span><span class="nf">getBody3D</span><span class="p">()</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nv">body</span><span class="p">:</span><span class="nf">createBoxShape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nv">body</span><span class="p">.</span><span class="py">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BodyType</span><span class="p">.</span><span class="py">DYNAMIC</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nv">body</span><span class="p">:</span><span class="nf">load</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="properties">Properties<a class="headerlink" href="#properties" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Default</th>
+<th>Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#bodytype">BodyType</a></td>
+<td><a href="#type">type</a></td>
+<td><code>STATIC</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td><a href="#body3dmotionquality">Body3DMotionQuality</a></td>
+<td><a href="#motionquality">motionQuality</a></td>
+<td><code>DISCRETE</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector3</td>
+<td><a href="#position-rotation">position</a></td>
+<td>—</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Quaternion</td>
+<td><a href="#position-rotation">rotation</a></td>
+<td>—</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#mass">mass</a></td>
+<td>—</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#gravityfactor">gravityFactor</a></td>
+<td><code>1.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#buoyancy">buoyancy</a></td>
+<td><code>0.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#buoyancy">waterDrag</a></td>
+<td><code>0.5</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#buoyancy">waterAngularDrag</a></td>
+<td><code>0.01</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#friction-restitution">friction</a></td>
+<td><code>0.2</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#friction-restitution">restitution</a></td>
+<td><code>0.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector3</td>
+<td><a href="#linearvelocity-angularvelocity">linearVelocity</a></td>
+<td><code>(0,0,0)</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector3</td>
+<td><a href="#linearvelocity-angularvelocity">angularVelocity</a></td>
+<td><code>(0,0,0)</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>allowSleeping</td>
+<td><code>true</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#sensor">sensor</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#collidekinematicvsnondynamic">collideKinematicVsNonDynamic</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>uint16_t</td>
+<td><a href="#categorybitsfilter-maskbitsfilter">categoryBitsFilter</a></td>
+<td><code>0xFFFF</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>uint16_t</td>
+<td><a href="#categorybitsfilter-maskbitsfilter">maskBitsFilter</a></td>
+<td><code>0xFFFF</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>uint32_t</td>
+<td><a href="#collisiongroupid">collisionGroupID</a></td>
+<td><code>0</code></td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Returns</th>
+<th>Name</th>
+<th>Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void</td>
+<td><a href="#load">load</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#createboxshape">createBoxShape</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#createsphereshape">createSphereShape</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#createcapsuleshape">createCapsuleShape</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#createtaperedcapsuleshape">createTaperedCapsuleShape</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#createcylindershape">createCylinderShape</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#createconvexhullshape">createConvexHullShape</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#createmeshshape">createMeshShape</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#createheightfieldshape">createHeightFieldShape</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>size_t</td>
+<td>getNumShapes</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td><a href="#shape3dtype">Shape3DType</a></td>
+<td>getShapeType</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setshapedensity">setShapeDensity</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#setshapedensity">getShapeDensity</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#activate-deactivate">activate</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#activate-deactivate">deactivate</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>canBeKinematicOrDynamic</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setalloweddofsall-setalloweddofs2dplane-setalloweddofs">setAllowedDOFsAll</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setalloweddofsall-setalloweddofs2dplane-setalloweddofs">setAllowedDOFs2DPlane</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setalloweddofsall-setalloweddofs2dplane-setalloweddofs">setAllowedDOFs</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setmass-setoverridemassandinertia">setMass</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setmass-setoverridemassandinertia">setOverrideMassAndInertia</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#categorybitsfilter-maskbitsfilter">setBitsFilter</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#linearvelocity-angularvelocity">setLinearVelocity</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setlinearvelocityclamped-setangularvelocityclamped">setLinearVelocityClamped</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#linearvelocity-angularvelocity">setAngularVelocity</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setlinearvelocityclamped-setangularvelocityclamped">setAngularVelocityClamped</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector3</td>
+<td><a href="#getpointvelocity">getPointVelocity</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector3</td>
+<td>getAccumulatedForce</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector3</td>
+<td>getAccumulatedTorque</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#applyforce">applyForce</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#applytorque">applyTorque</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#applyimpulse">applyImpulse</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#applyangularimpulse">applyAngularImpulse</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#applybuoyancyimpulse">applyBuoyancyImpulse</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector3</td>
+<td><a href="#getcenterofmassposition">getCenterOfMassPosition</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Object</td>
+<td><a href="#getattachedobject">getAttachedObject</a></td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<h2 id="enumerations">Enumerations<a class="headerlink" href="#enumerations" title="Link to this section">&para;</a></h2>
+<h3 id="bodytype">BodyType<a class="headerlink" href="#bodytype" title="Link to this section">&para;</a></h3>
+<ul>
+<li><strong>STATIC</strong> — Infinite mass; never moves. Walls, floors, and terrain.</li>
+<li><strong>KINEMATIC</strong> — Controlled by velocity, not forces. Elevators and moving platforms.</li>
+<li><strong>DYNAMIC</strong> — Fully simulated by Jolt; reacts to forces and gravity.</li>
+</ul>
+<hr />
+<h3 id="body3dmotionquality">Body3DMotionQuality<a class="headerlink" href="#body3dmotionquality" title="Link to this section">&para;</a></h3>
+<ul>
+<li><strong>DISCRETE</strong> — Standard collision detection per time step (default). Suitable for most objects.</li>
+<li><strong>LINEAR_CAST</strong> — Continuous collision detection: sweeps the shape along its path each step. Use for fast-moving objects that may tunnel through thin geometry.</li>
+</ul>
+<hr />
+<h3 id="shape3dtype">Shape3DType<a class="headerlink" href="#shape3dtype" title="Link to this section">&para;</a></h3>
+<p><code>BOX</code>, <code>SPHERE</code>, <code>CAPSULE</code>, <code>TAPERED_CAPSULE</code>, <code>CYLINDER</code>, <code>CONVEX_HULL</code>, <code>MESH</code>, <code>HEIGHT_FIELD</code></p>
+<h2 id="property-details">Property details<a class="headerlink" href="#property-details" title="Link to this section">&para;</a></h2>
+<h3 id="type">type<a class="headerlink" href="#type" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setType(BodyType type)</code></li>
+<li><em>Getter:</em> <code>BodyType getType() const</code></li>
+</ul>
+<p>Simulation mode. See <a href="#bodytype">BodyType</a>. Can be changed at runtime to switch between, e.g., KINEMATIC and DYNAMIC.</p>
+<hr />
+<h3 id="motionquality">motionQuality<a class="headerlink" href="#motionquality" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setMotionQuality(Body3DMotionQuality motionQuality)</code></li>
+<li><em>Getter:</em> <code>Body3DMotionQuality getMotionQuality() const</code></li>
+</ul>
+<p>Collision detection mode. See <a href="#body3dmotionquality">Body3DMotionQuality</a>.</p>
+<hr />
+<h3 id="mass">mass<a class="headerlink" href="#mass" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setMass(float mass)</code></li>
+<li><em>Getter:</em> <code>float getMass() const</code></li>
+</ul>
+<p>Manual mass override in kilograms. Applies to dynamic bodies. Set the mass after calling <a href="#load">load</a>, or use <a href="#setmass-setoverridemassandinertia">setOverrideMassAndInertia</a> for combined mass + inertia control.</p>
+<hr />
+<h3 id="gravityfactor">gravityFactor<a class="headerlink" href="#gravityfactor" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setGravityFactor(float gravityFactor)</code></li>
+<li><em>Getter:</em> <code>float getGravityFactor() const</code></li>
+</ul>
+<p>Scales the global gravity for this body. <code>0</code> = gravity-free, <code>2</code> = double gravity.</p>
+<p>Stored on the body component, so it can be set <strong>before</strong> <a href="#load">load</a> and survives a body
+reload. In the editor it is the <strong>Gravity Factor</strong> field of the Body3D component, saved with
+the scene and applied in exported projects.</p>
+<hr />
+<h3 id="buoyancy">buoyancy<a class="headerlink" href="#buoyancy" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setBuoyancy(float buoyancy)</code></li>
+<li><em>Getter:</em> <code>float getBuoyancy() const</code></li>
+<li><em>Setter:</em> <code>void setWaterDrag(float waterDrag)</code></li>
+<li><em>Getter:</em> <code>float getWaterDrag() const</code></li>
+<li><em>Setter:</em> <code>void setWaterAngularDrag(float waterAngularDrag)</code></li>
+<li><em>Getter:</em> <code>float getWaterAngularDrag() const</code></li>
+</ul>
+<p>How the body floats in a <a href="../water/">Water</a>. <code>buoyancy</code> compares the water's density to the
+body's: <code>1</code> is neutral, more floats and less sinks. <code>0</code> (the default) ignores the water.
+<code>waterDrag</code> is how much the water slows the body down, and <code>waterAngularDrag</code> how much it
+slows its rotation.</p>
+<p>Every fixed step, a <strong>dynamic</strong> body with a <code>buoyancy</code> above <code>0</code> whose centre of mass is
+inside a water's area is pushed up by the part of its shape below the wave surface there,
+and tilted by the wave normal, so it bobs and rolls with the waves. No script or
+<a href="#applybuoyancyimpulse">applyBuoyancyImpulse</a> call is needed. Static and kinematic bodies
+are not affected, and waters with their own <a href="../water/#buoyancy-buoyancydepth">buoyancy</a>
+off float nothing.</p>
+<p>Like <a href="#gravityfactor">gravityFactor</a>, the values are stored on the body component, so they
+can be set before <a href="#load">load</a>. In the editor they are the <strong>Buoyancy</strong> section of the
+Body3D component (shown for dynamic bodies). See
+<a href="../../../manual/physics/#buoyancy">Physics — Buoyancy</a>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Body3D</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">crate</span><span class="p">.</span><span class="n">getBody3D</span><span class="p">();</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">body</span><span class="p">.</span><span class="n">createBoxShape</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">);</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">body</span><span class="p">.</span><span class="n">setType</span><span class="p">(</span><span class="n">BodyType</span><span class="o">::</span><span class="n">DYNAMIC</span><span class="p">);</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">body</span><span class="p">.</span><span class="n">setBuoyancy</span><span class="p">(</span><span class="mf">1.4f</span><span class="p">);</span><span class="w">   </span><span class="c1">// floats, about 70% under</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">body</span><span class="p">.</span><span class="n">load</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">crate</span><span class="p">:</span><span class="nf">getBody3D</span><span class="p">()</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">body</span><span class="p">:</span><span class="nf">createBoxShape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">body</span><span class="p">.</span><span class="py">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BodyType</span><span class="p">.</span><span class="py">DYNAMIC</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nv">body</span><span class="p">.</span><span class="py">buoyancy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.4</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nv">body</span><span class="p">:</span><span class="nf">load</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="friction-restitution">friction / restitution<a class="headerlink" href="#friction-restitution" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setters:</em> <code>void setFriction(float)</code> / <code>void setRestitution(float)</code></li>
+<li><em>Getters:</em> <code>float getFriction() const</code> / <code>float getRestitution() const</code></li>
+</ul>
+<p>Surface material properties shared across all shapes on this body. Friction <code>[0, ∞)</code> controls sliding resistance; restitution <code>[0, 1]</code> controls bounciness.</p>
+<hr />
+<h3 id="position-rotation">position / rotation<a class="headerlink" href="#position-rotation" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setters:</em> <code>void setPosition(Vector3)</code> / <code>void setRotation(Quaternion)</code></li>
+<li><em>Getters:</em> <code>Vector3 getPosition() const</code> / <code>Quaternion getRotation() const</code></li>
+</ul>
+<p>The body's own pose in <strong>world space</strong>, read from and written straight to the simulation, and the only way to place a body from <code>onFixedUpdate</code>. Setting either also updates the entity <a href="../object/">Object</a> transform so rendering follows and the next step does not undo the move. Both wake the body.</p>
+<p>Use these for teleports — respawns, checkpoints, portals. For continuous movement prefer <a href="#linearvelocity-angularvelocity">linearVelocity</a> or <a href="#applyforce">applyForce</a>, which let the solver resolve collisions instead of pushing bodies through walls.</p>
+<div class="admonition note">
+<p class="admonition-title">Parented bodies</p>
+<p>The world pose is converted to the entity's local space using the parent's transform as
+of the last variable-timestep sync. Moving a body's <strong>parent</strong> and teleporting the body
+in the same callback therefore places it relative to the parent's <em>previous</em> pose — do
+one or the other per frame. Bodies with no parent, the common case, are exact.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">C++</label><label for="__tabbed_3_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">Body3D</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">object</span><span class="p">.</span><span class="n">getBody3D</span><span class="p">();</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">body</span><span class="p">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span><span class="w">   </span><span class="c1">// respawn</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">body</span><span class="p">.</span><span class="n">setLinearVelocity</span><span class="p">(</span><span class="n">Vector3</span><span class="o">::</span><span class="n">ZERO</span><span class="p">);</span><span class="w"> </span><span class="c1">// stop residual motion</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">object</span><span class="p">:</span><span class="nf">getBody3D</span><span class="p">()</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nv">body</span><span class="p">.</span><span class="py">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nv">body</span><span class="p">.</span><span class="py">linearVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Do not use Object::setPosition from onFixedUpdate</p>
+<p>Writing an entity's <a href="../object/">Object</a> transform only reaches the body between fixed
+steps. Inside <code>onFixedUpdate</code> the physics system syncs the body from the transform
+<em>before</em> stepping and writes the stepped pose back <em>after</em>, so a transform written
+there is discarded unless you also call <a href="../object/#updatetransform">updateTransform</a>
+to refresh the world transform the sync reads. Prefer <code>Body3D::setPosition</code> /
+<code>setRotation</code>: one call, and it writes the simulation directly.
+<code>Object::setPosition</code> is fine from <code>onUpdate</code> and outside the update callbacks.</p>
+</div>
+<hr />
+<h3 id="linearvelocity-angularvelocity">linearVelocity / angularVelocity<a class="headerlink" href="#linearvelocity-angularvelocity" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setters:</em> <code>void setLinearVelocity(Vector3)</code> / <code>void setAngularVelocity(Vector3)</code></li>
+<li><em>Getters:</em> <code>Vector3 getLinearVelocity() const</code> / <code>Vector3 getAngularVelocity() const</code></li>
+</ul>
+<p>Current velocity vectors. Linear velocity is in world units/second; angular velocity is in radians/second around each world axis.</p>
+<hr />
+<h3 id="sensor">sensor<a class="headerlink" href="#sensor" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setIsSensor(bool sensor)</code></li>
+<li><em>Getter:</em> <code>bool isSensor() const</code></li>
+<li><em>Lua property:</em> <code>body.sensor</code></li>
+</ul>
+<p>When <code>true</code>, the body acts as a trigger volume: overlapping bodies generate contact events but no physical impulse is applied.</p>
+<p>The flag is stored on the body component, not only on the live simulation body, so it can be set <strong>before</strong> <code>load()</code> and survives a body reload (a shape change, a body type change, or reopening the scene). In the editor it is the <strong>Sensor</strong> checkbox of the Body3D component, saved with the scene and applied in exported projects.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">C++</label><label for="__tabbed_4_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">Body3D</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">checkpoint</span><span class="p">.</span><span class="n">getBody3D</span><span class="p">();</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">trigger</span><span class="p">.</span><span class="n">createBoxShape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">trigger</span><span class="p">.</span><span class="n">setIsSensor</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span><span class="w">   </span><span class="c1">// before load()</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">trigger</span><span class="p">.</span><span class="n">load</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">trigger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">checkpoint</span><span class="p">:</span><span class="nf">getBody3D</span><span class="p">()</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">trigger</span><span class="p">:</span><span class="nf">createBoxShape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nv">trigger</span><span class="p">.</span><span class="py">sensor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="nv">trigger</span><span class="p">:</span><span class="nf">load</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Which bodies a sensor detects</p>
+<p>A <code>STATIC</code> sensor is the cheapest option, but it only detects <strong>awake</strong> dynamic and
+kinematic bodies — the contact is lost as soon as the other body falls asleep. Making
+the sensor dynamic or kinematic (and activating it) also detects sleeping bodies, and
+such a sensor never sleeps on its own. Keep dynamic and kinematic sensors on a
+category/mask that excludes static bodies and other sensors to avoid broad-phase work.</p>
+</div>
+<hr />
+<h3 id="collidekinematicvsnondynamic">collideKinematicVsNonDynamic<a class="headerlink" href="#collidekinematicvsnondynamic" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setCollideKinematicVsNonDynamic(bool)</code></li>
+<li><em>Getter:</em> <code>bool isCollideKinematicVsNonDynamic() const</code></li>
+</ul>
+<p>When <code>true</code>, this kinematic body generates collision reports against static and other kinematic bodies (normally skipped for performance).</p>
+<hr />
+<h3 id="categorybitsfilter-maskbitsfilter">categoryBitsFilter / maskBitsFilter<a class="headerlink" href="#categorybitsfilter-maskbitsfilter" title="Link to this section">&para;</a></h3>
+<p>Collision layer filtering bitmasks. A collision occurs only when <code>(a.category &amp; b.mask) != 0</code>.</p>
+<hr />
+<h3 id="collisiongroupid">collisionGroupID<a class="headerlink" href="#collisiongroupid" title="Link to this section">&para;</a></h3>
+<p>Group index for disabling self-collision within a group (e.g. ragdoll bones).</p>
+<h2 id="method-details">Method details<a class="headerlink" href="#method-details" title="Link to this section">&para;</a></h2>
+<h3 id="load">load<a class="headerlink" href="#load" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void load()</code></li>
+</ul>
+<p>Registers the body and all its shapes with the Jolt physics world. Must be called after defining shapes. Re-call if shapes change at runtime.</p>
+<hr />
+<h3 id="createboxshape">createBoxShape<a class="headerlink" href="#createboxshape" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>int createBoxShape(float width, float height, float depth)</code></li>
+<li><code>int createBoxShape(Vector3 position, Quaternion rotation, float width, float height, float depth)</code> <em>(with local offset)</em></li>
+</ul>
+<p>Creates a solid box collider. Returns the shape index. The offset overload positions the shape relative to the entity origin.</p>
+<hr />
+<h3 id="createsphereshape">createSphereShape<a class="headerlink" href="#createsphereshape" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>int createSphereShape(float radius)</code></li>
+<li><code>int createSphereShape(Vector3 position, Quaternion rotation, float radius)</code> <em>(with local offset)</em></li>
+</ul>
+<p>Creates a sphere collider. Spheres are the cheapest shape to simulate.</p>
+<hr />
+<h3 id="createcapsuleshape">createCapsuleShape<a class="headerlink" href="#createcapsuleshape" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>int createCapsuleShape(float halfHeight, float radius)</code></li>
+<li><code>int createCapsuleShape(Vector3 position, Quaternion rotation, float halfHeight, float radius)</code></li>
+</ul>
+<p>Creates a vertical capsule (hemisphere-capped cylinder). Standard character controller shape.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">C++</label><label for="__tabbed_5_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">Body3D</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">player</span><span class="p">.</span><span class="n">getBody3D</span><span class="p">();</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">body</span><span class="p">.</span><span class="n">createCapsuleShape</span><span class="p">(</span><span class="mf">0.9f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3f</span><span class="p">);</span><span class="w">   </span><span class="c1">// 1.8 m tall, 0.3 m radius</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">body</span><span class="p">.</span><span class="n">setType</span><span class="p">(</span><span class="n">BodyType</span><span class="o">::</span><span class="n">DYNAMIC</span><span class="p">);</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">body</span><span class="p">.</span><span class="n">setAllowedDOFs2DPlane</span><span class="p">();</span><span class="w">           </span><span class="c1">// constrain to XZ plane</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">body</span><span class="p">.</span><span class="n">load</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">player</span><span class="p">:</span><span class="nf">getBody3D</span><span class="p">()</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nv">body</span><span class="p">:</span><span class="nf">createCapsuleShape</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nv">body</span><span class="p">.</span><span class="py">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BodyType</span><span class="p">.</span><span class="py">DYNAMIC</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="nv">body</span><span class="p">:</span><span class="nf">setAllowedDOFs2DPlane</span><span class="p">()</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nv">body</span><span class="p">:</span><span class="nf">load</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="createtaperedcapsuleshape">createTaperedCapsuleShape<a class="headerlink" href="#createtaperedcapsuleshape" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>int createTaperedCapsuleShape(float halfHeight, float topRadius, float bottomRadius)</code></li>
+<li><code>int createTaperedCapsuleShape(Vector3 position, Quaternion rotation, float halfHeight, float topRadius, float bottomRadius)</code></li>
+</ul>
+<p>Capsule with different radii at each end. Useful for cones, bullets, and stylised characters.</p>
+<hr />
+<h3 id="createcylindershape">createCylinderShape<a class="headerlink" href="#createcylindershape" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>int createCylinderShape(float halfHeight, float radius)</code></li>
+<li><code>int createCylinderShape(Vector3 position, Quaternion rotation, float halfHeight, float radius)</code></li>
+</ul>
+<p>Upright cylinder collider. Less stable than capsules on uneven ground; prefer capsules for characters.</p>
+<hr />
+<h3 id="createconvexhullshape">createConvexHullShape<a class="headerlink" href="#createconvexhullshape" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>int createConvexHullShape()</code></li>
+<li><code>int createConvexHullShape(std::vector&lt;Vector3&gt; vertices)</code></li>
+<li><code>int createConvexHullShape(Vector3 position, Quaternion rotation, std::vector&lt;Vector3&gt; vertices)</code></li>
+</ul>
+<p>Creates a convex hull from the mesh vertices (no-argument form) or from explicit vertices. Must be convex; Jolt computes the hull automatically.</p>
+<hr />
+<h3 id="createmeshshape">createMeshShape<a class="headerlink" href="#createmeshshape" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>int createMeshShape()</code></li>
+<li><code>int createMeshShape(std::vector&lt;Vector3&gt; vertices, std::vector&lt;uint16_t&gt; indices)</code></li>
+<li><code>int createMeshShape(Vector3 position, Quaternion rotation, std::vector&lt;Vector3&gt; vertices, std::vector&lt;uint16_t&gt; indices)</code></li>
+</ul>
+<p>Creates a static triangle-mesh collider. <strong>Mesh shapes can only be STATIC.</strong> Use convex hull for dynamic objects.</p>
+<hr />
+<h3 id="createheightfieldshape">createHeightFieldShape<a class="headerlink" href="#createheightfieldshape" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>int createHeightFieldShape()</code></li>
+<li><code>int createHeightFieldShape(unsigned int samplesSize)</code></li>
+</ul>
+<p>Creates a height-field collider sized to the terrain mesh in the entity. Used with the <a href="../terrain/">Terrain</a> class. <code>samplesSize</code> controls the resolution grid.</p>
+<hr />
+<h3 id="activate-deactivate">activate / deactivate<a class="headerlink" href="#activate-deactivate" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void activate()</code> — Wakes the body if it is sleeping.</li>
+<li><code>void deactivate()</code> — Forces the body to sleep immediately.</li>
+</ul>
+<hr />
+<h3 id="setalloweddofsall-setalloweddofs2dplane-setalloweddofs">setAllowedDOFsAll / setAllowedDOFs2DPlane / setAllowedDOFs<a class="headerlink" href="#setalloweddofsall-setalloweddofs2dplane-setalloweddofs" title="Link to this section">&para;</a></h3>
+<p>Constrain which degrees of freedom the body can move in.</p>
+<ul>
+<li><strong>setAllowedDOFsAll</strong> — All 6 DOF (default).</li>
+<li><strong>setAllowedDOFs2DPlane</strong> — Restricts to translation on X/Z and rotation on Y. Use for top-down or side-view games.</li>
+<li><strong>setAllowedDOFs(translationX, translationY, translationZ, rotationX, rotationY, rotationZ)</strong> — Fine-grained control per axis.</li>
+</ul>
+<p>Locking all three rotation axes is the usual way to keep a character upright; drive its
+facing with <a href="#position-rotation">rotation</a> instead of letting the solver spin it.</p>
+<p>Like <a href="#gravityfactor">gravityFactor</a>, the mask is stored on the body component, so it
+survives a body reload and is saved with the scene and applied in exported projects. Leaving
+every axis locked is invalid in Jolt — use a static body to freeze one completely.</p>
+<hr />
+<h3 id="setmass-setoverridemassandinertia">setMass / setOverrideMassAndInertia<a class="headerlink" href="#setmass-setoverridemassandinertia" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void setMass(float mass)</code> — Overrides the auto-computed mass.</li>
+<li><code>void setOverrideMassAndInertia(Vector3 solidBoxSize, float solidBoxDensity)</code> — Computes mass and inertia for a solid box of the given size and density (kg/m³), then applies those values.</li>
+</ul>
+<p>The solid-box override is stored on the body component, so it can be set <strong>before</strong>
+<a href="#load">load</a> and survives a body reload; on a loaded dynamic body it takes effect at once.
+In the editor it is <strong>Override Mass</strong> on the Body3D component, with <strong>Solid Box Size</strong> and
+<strong>Solid Box Density</strong> (1000 kg/m³ by default, about the density of water), saved with the
+scene and applied in exported projects.</p>
+<hr />
+<h3 id="setshapedensity">setShapeDensity<a class="headerlink" href="#setshapedensity" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void setShapeDensity(float density)</code> <em>(all shapes)</em></li>
+<li><code>void setShapeDensity(size_t index, float density)</code> <em>(specific shape)</em></li>
+</ul>
+<p>Sets the density (kg/m³) used to compute mass. Call after adding shapes and before <a href="#load">load</a>, or call <a href="#load">load</a> again after runtime changes.</p>
+<hr />
+<h3 id="setlinearvelocityclamped-setangularvelocityclamped">setLinearVelocityClamped / setAngularVelocityClamped<a class="headerlink" href="#setlinearvelocityclamped-setangularvelocityclamped" title="Link to this section">&para;</a></h3>
+<p>Velocity setters that clamp the new value to the body's configured speed limits (set in Jolt body settings). Safer for kinematic controllers.</p>
+<hr />
+<h3 id="getpointvelocity">getPointVelocity<a class="headerlink" href="#getpointvelocity" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>Vector3 getPointVelocity(Vector3 point) const</code></li>
+</ul>
+<p>Returns the velocity of a world-space point on the body, including the contribution of angular velocity. Use for precise impact and dragging calculations.</p>
+<hr />
+<h3 id="applyforce">applyForce<a class="headerlink" href="#applyforce" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void applyForce(const Vector3&amp; force)</code></li>
+<li><code>void applyForce(const Vector3&amp; force, const Vector3&amp; point)</code></li>
+</ul>
+<p>Applies a force in Newtons each simulation step. The single-argument overload applies force at the center of mass (no torque). The two-argument overload applies force at a world-space point, potentially generating torque.</p>
+<hr />
+<h3 id="applytorque">applyTorque<a class="headerlink" href="#applytorque" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void applyTorque(const Vector3&amp; torque)</code></li>
+</ul>
+<p>Applies a torque (Nm) to rotate the body. The vector direction defines the rotation axis (right-hand rule).</p>
+<hr />
+<h3 id="applyimpulse">applyImpulse<a class="headerlink" href="#applyimpulse" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void applyImpulse(const Vector3&amp; impulse)</code></li>
+<li><code>void applyImpulse(const Vector3&amp; impulse, const Vector3&amp; point)</code></li>
+</ul>
+<p>Instantaneous velocity change. Prefer impulses over forces for one-shot events (jumps, explosions, hits).</p>
+<hr />
+<h3 id="applyangularimpulse">applyAngularImpulse<a class="headerlink" href="#applyangularimpulse" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void applyAngularImpulse(const Vector3&amp; angularImpulse)</code></li>
+</ul>
+<p>Instantaneous angular velocity change. Useful for spinning objects on impact.</p>
+<hr />
+<h3 id="applybuoyancyimpulse">applyBuoyancyImpulse<a class="headerlink" href="#applybuoyancyimpulse" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>bool applyBuoyancyImpulse(Vector3 surfacePosition, Vector3 surfaceNormal, float buoyancy, float linearDrag, float angularDrag, Vector3 fluidVelocity, Vector3 gravity, float deltaTime)</code></li>
+</ul>
+<p>Simulates buoyancy for a body partially submerged in a fluid. Returns <code>true</code> if the body intersects the water plane. Call once per physics step with the water plane data. A body in a <a href="../water/">Water</a> gets this every fixed step from its <a href="#buoyancy">buoyancy</a> settings, so call it yourself only for fluids that are not a Water component.</p>
+<hr />
+<h3 id="getattachedobject">getAttachedObject<a class="headerlink" href="#getattachedobject" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>Object getAttachedObject()</code></li>
+</ul>
+<p>Returns the <a href="../object/">Object</a> that owns this body.</p>
+<hr />
+<h3 id="getcenterofmassposition">getCenterOfMassPosition<a class="headerlink" href="#getcenterofmassposition" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>Vector3 getCenterOfMassPosition()</code></li>
+</ul>
+<p>Returns the world-space position of the center of mass, which may differ from the entity origin if shapes are offset.</p>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../body2d/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Body2D</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../joint2d/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Joint2D</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/reference/classes/body3d.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#body3d" class="dx-toc-link" data-level="1">Body3D</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#description" class="dx-toc-link" data-level="2">Description</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#properties" class="dx-toc-link" data-level="3">Properties</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#methods" class="dx-toc-link" data-level="3">Methods</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#enumerations" class="dx-toc-link" data-level="2">Enumerations</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#bodytype" class="dx-toc-link" data-level="3">BodyType</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#body3dmotionquality" class="dx-toc-link" data-level="3">Body3DMotionQuality</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#shape3dtype" class="dx-toc-link" data-level="3">Shape3DType</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#property-details" class="dx-toc-link" data-level="2">Property details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#type" class="dx-toc-link" data-level="3">type</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#motionquality" class="dx-toc-link" data-level="3">motionQuality</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#mass" class="dx-toc-link" data-level="3">mass</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#gravityfactor" class="dx-toc-link" data-level="3">gravityFactor</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#buoyancy" class="dx-toc-link" data-level="3">buoyancy</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#friction-restitution" class="dx-toc-link" data-level="3">friction / restitution</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#position-rotation" class="dx-toc-link" data-level="3">position / rotation</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#linearvelocity-angularvelocity" class="dx-toc-link" data-level="3">linearVelocity / angularVelocity</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#sensor" class="dx-toc-link" data-level="3">sensor</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#collidekinematicvsnondynamic" class="dx-toc-link" data-level="3">collideKinematicVsNonDynamic</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#categorybitsfilter-maskbitsfilter" class="dx-toc-link" data-level="3">categoryBitsFilter / maskBitsFilter</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#collisiongroupid" class="dx-toc-link" data-level="3">collisionGroupID</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#method-details" class="dx-toc-link" data-level="2">Method details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#load" class="dx-toc-link" data-level="3">load</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#createboxshape" class="dx-toc-link" data-level="3">createBoxShape</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#createsphereshape" class="dx-toc-link" data-level="3">createSphereShape</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#createcapsuleshape" class="dx-toc-link" data-level="3">createCapsuleShape</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#createtaperedcapsuleshape" class="dx-toc-link" data-level="3">createTaperedCapsuleShape</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#createcylindershape" class="dx-toc-link" data-level="3">createCylinderShape</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#createconvexhullshape" class="dx-toc-link" data-level="3">createConvexHullShape</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#createmeshshape" class="dx-toc-link" data-level="3">createMeshShape</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#createheightfieldshape" class="dx-toc-link" data-level="3">createHeightFieldShape</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#activate-deactivate" class="dx-toc-link" data-level="3">activate / deactivate</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setalloweddofsall-setalloweddofs2dplane-setalloweddofs" class="dx-toc-link" data-level="3">setAllowedDOFsAll / setAllowedDOFs2DPlane / setAllowedDOFs</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setmass-setoverridemassandinertia" class="dx-toc-link" data-level="3">setMass / setOverrideMassAndInertia</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setshapedensity" class="dx-toc-link" data-level="3">setShapeDensity</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setlinearvelocityclamped-setangularvelocityclamped" class="dx-toc-link" data-level="3">setLinearVelocityClamped / setAngularVelocityClamped</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getpointvelocity" class="dx-toc-link" data-level="3">getPointVelocity</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#applyforce" class="dx-toc-link" data-level="3">applyForce</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#applytorque" class="dx-toc-link" data-level="3">applyTorque</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#applyimpulse" class="dx-toc-link" data-level="3">applyImpulse</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#applyangularimpulse" class="dx-toc-link" data-level="3">applyAngularImpulse</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#applybuoyancyimpulse" class="dx-toc-link" data-level="3">applyBuoyancyImpulse</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getattachedobject" class="dx-toc-link" data-level="3">getAttachedObject</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getcenterofmassposition" class="dx-toc-link" data-level="3">getCenterOfMassPosition</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../../versions.json";
+    window.QUANTUM_PAGE_URL = "reference/classes/body3d/";
+  </script>
+  <script src="../../../js/quantum.js" defer></script>
+</body>
+</html>

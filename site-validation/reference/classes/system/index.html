@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System — Quantum Engine Docs</title>
+  <meta name="description" content="System API reference — screen dimensions, paths, virtual keyboard, fullscreen, window control, and user preferences.">
+  <meta property="og:title" content="System — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/reference/classes/system/">
+
+  <link rel="icon" type="image/png" href="../../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../../css/quantum.css">
+  <link rel="stylesheet" href="../../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="system">System<a class="headerlink" href="#system" title="Link to this section">&para;</a></h1>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Link to this section">&para;</a></h2>
+<p><code>System</code> is a virtual platform-abstraction layer. It provides screen dimensions, file-system paths, virtual keyboard control, fullscreen management, and persistent key-value storage. You access it via <code>System::instance()</code> in C++ or the global <code>System</code> table in Lua.</p>
+<p>Ads, in-app purchases and web portal SDKs have their own classes: <a href="../admob/">AdMob</a>, <a href="../inapppurchase/">InAppPurchase</a> and <a href="../webportal/">WebPortal</a>. See <a href="../../../manual/monetization/#migrating">Monetization</a> for the <code>System</code> methods they replaced.</p>
+<p>Each target platform provides its own concrete <code>System</code> subclass; the engine injects the correct implementation at startup.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Quantum.h&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">quantum</span><span class="p">;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kt">int</span><span class="w"> </span><span class="n">screenW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">getScreenWidth</span><span class="p">();</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kt">int</span><span class="w"> </span><span class="n">screenH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">getScreenHeight</span><span class="p">();</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">Log</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Screen: %dx%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">screenW</span><span class="p">,</span><span class="w"> </span><span class="n">screenH</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">System</span><span class="p">.</span><span class="nf">getScreenWidth</span><span class="p">()</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">local</span><span class="w"> </span><span class="nv">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">System</span><span class="p">.</span><span class="nf">getScreenHeight</span><span class="p">()</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">Log</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="s2">&quot;Screen: &quot;</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="nv">w</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="s2">&quot;x&quot;</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="nv">h</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Returns</th>
+<th>Name</th>
+<th>Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td><a href="#getscreenwidth-getscreenheight">getScreenWidth</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#getscreenwidth-getscreenheight">getScreenHeight</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#getsamplecount">getSampleCount</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#istouchdevice">isTouchDevice</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#showvirtualkeyboard">showVirtualKeyboard</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#showvirtualkeyboard">hideVirtualKeyboard</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#isfullscreen-requestfullscreen-exitfullscreen">isFullscreen</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#isfullscreen-requestfullscreen-exitfullscreen">requestFullscreen</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#isfullscreen-requestfullscreen-exitfullscreen">exitFullscreen</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#window-control">isWindowMaximized</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#window-control">maximizeWindow</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#window-control">restoreWindow</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#window-control">setWindowSize</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#window-control">isWindowResizable</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#window-control">setWindowResizable</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#window-control">setWindowTitle</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#quit">quit</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>char</td>
+<td><a href="#getdirseparator">getDirSeparator</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>std::string</td>
+<td><a href="#getassetpath">getAssetPath</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>std::string</td>
+<td><a href="#getuserdatapath">getUserDataPath</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>std::string</td>
+<td><a href="#getluapath">getLuaPath</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>std::string</td>
+<td><a href="#getshaderpath">getShaderPath</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>std::string</td>
+<td><a href="#getimportpath">getImportPath</a></td>
+<td>C++</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#persistent-keyvalue-storage">getBoolForKey</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#persistent-keyvalue-storage">getIntegerForKey</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>long</td>
+<td><a href="#persistent-keyvalue-storage">getLongForKey</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#persistent-keyvalue-storage">getFloatForKey</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>double</td>
+<td><a href="#persistent-keyvalue-storage">getDoubleForKey</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>std::string</td>
+<td><a href="#persistent-keyvalue-storage">getStringForKey</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#persistent-keyvalue-storage">setBoolForKey</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#persistent-keyvalue-storage">setIntegerForKey</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#persistent-keyvalue-storage">setLongForKey</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#persistent-keyvalue-storage">setFloatForKey</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#persistent-keyvalue-storage">setDoubleForKey</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#persistent-keyvalue-storage">setStringForKey</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#persistent-keyvalue-storage">removeKey</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>AdMobBackend*</td>
+<td><a href="#service-backends">getAdMobBackend</a></td>
+<td>C++</td>
+</tr>
+<tr>
+<td>InAppPurchaseBackend*</td>
+<td><a href="#service-backends">getInAppPurchaseBackend</a></td>
+<td>C++</td>
+</tr>
+<tr>
+<td>WebPortalBackend*</td>
+<td><a href="#service-backends">getWebPortalBackend</a></td>
+<td>C++</td>
+</tr>
+</tbody>
+</table>
+<h2 id="method-details">Method details<a class="headerlink" href="#method-details" title="Link to this section">&para;</a></h2>
+<h3 id="getscreenwidth-getscreenheight">getScreenWidth / getScreenHeight<a class="headerlink" href="#getscreenwidth-getscreenheight" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>virtual int getScreenWidth() = 0</code></li>
+<li><code>virtual int getScreenHeight() = 0</code></li>
+</ul>
+<p>Physical screen (window) dimensions in pixels. These may differ from <a href="../engine/#canvaswidth-canvasheight">Engine::canvasWidth / canvasHeight</a> when a scaling mode other than <code>NATIVE</code> is active.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">getScreenWidth</span><span class="p">();</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">getScreenHeight</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">System</span><span class="p">.</span><span class="nf">getScreenWidth</span><span class="p">()</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">local</span><span class="w"> </span><span class="nv">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">System</span><span class="p">.</span><span class="nf">getScreenHeight</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="getsamplecount">getSampleCount<a class="headerlink" href="#getsamplecount" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>virtual int getSampleCount()</code></li>
+</ul>
+<p>Returns the MSAA sample count configured for the current graphics backend (e.g. 1, 2, or 4). Useful when creating render targets that must match the main framebuffer.</p>
+<hr />
+<h3 id="istouchdevice">isTouchDevice<a class="headerlink" href="#istouchdevice" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>virtual bool isTouchDevice()</code></li>
+</ul>
+<p>Returns <code>true</code> when touch is the main input, as on phones and tablets. Android and iOS
+always report it. On the web the browser decides from its primary pointer, so a phone
+reports <code>true</code> and a laptop with a touch screen and a mouse reports <code>false</code>. Desktop
+platforms report <code>false</code>, and the editor reports <code>true</code> while
+<a href="../../../editor/scene-view/#touch-simulation">touch simulation</a> is on.</p>
+<p>Use it to decide whether to start with on-screen controls. The player can still connect a
+keyboard or touch a laptop screen, so following the last input used as well is more
+reliable; see <a href="../../../manual/input/#on-screen-controls">On-screen controls</a>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">C++</label><label for="__tabbed_3_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kt">bool</span><span class="w"> </span><span class="n">showControls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">isTouchDevice</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">showControls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">System</span><span class="p">.</span><span class="nf">isTouchDevice</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="showvirtualkeyboard">showVirtualKeyboard<a class="headerlink" href="#showvirtualkeyboard" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>virtual void showVirtualKeyboard(std::wstring text = L"")</code></li>
+</ul>
+<p>Displays the platform's on-screen keyboard with <code>text</code> as the initial input buffer. Has no effect on desktop platforms. On iOS/Android, raises the software keyboard and fires <code>Engine::onCharInput</code> for each key typed.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">C++</label><label for="__tabbed_4_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">System</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">showVirtualKeyboard</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Enter name&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">System</span><span class="p">.</span><span class="nf">showVirtualKeyboard</span><span class="p">(</span><span class="s2">&quot;Enter name&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="hidevirtualkeyboard">hideVirtualKeyboard<a class="headerlink" href="#hidevirtualkeyboard" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>virtual void hideVirtualKeyboard()</code></li>
+</ul>
+<p>Dismisses the on-screen keyboard.</p>
+<hr />
+<h3 id="isfullscreen-requestfullscreen-exitfullscreen">isFullscreen / requestFullscreen / exitFullscreen<a class="headerlink" href="#isfullscreen-requestfullscreen-exitfullscreen" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>virtual bool isFullscreen()</code></li>
+<li><code>virtual void requestFullscreen()</code></li>
+<li><code>virtual void exitFullscreen()</code></li>
+</ul>
+<p>Query and control fullscreen mode. On desktop platforms, <code>requestFullscreen()</code> typically toggles borderless fullscreen; on web, it requests the Fullscreen API. Has no effect on mobile (always fullscreen).</p>
+<p>Whether a desktop build <em>starts</em> fullscreen is a project setting (see <a href="../../../editor/project-workflow/#window">Project Workflow — Window</a>); <code>exitFullscreen()</code> restores the window size configured there.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">C++</label><label for="__tabbed_5_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">System</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">isFullscreen</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="n">System</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">requestFullscreen</span><span class="p">();</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kr">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">System</span><span class="p">.</span><span class="nf">isFullscreen</span><span class="p">()</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nv">System</span><span class="p">.</span><span class="nf">requestFullscreen</span><span class="p">()</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="window-control">Window control<a class="headerlink" href="#window-control" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>virtual bool isWindowMaximized()</code></li>
+<li><code>virtual void maximizeWindow()</code></li>
+<li><code>virtual void restoreWindow()</code></li>
+<li><code>virtual void setWindowSize(int width, int height)</code></li>
+<li><code>virtual bool isWindowResizable()</code></li>
+<li><code>virtual void setWindowResizable(bool resizable)</code></li>
+<li><code>virtual void setWindowTitle(const std::string&amp; title)</code></li>
+</ul>
+<p>Control the OS window of desktop builds at runtime. <code>maximizeWindow()</code>/<code>restoreWindow()</code> toggle the maximized state, <code>setWindowSize()</code> resizes the window in screen coordinates (while fullscreen it instead updates the size restored by <code>exitFullscreen()</code>), and <code>setWindowTitle()</code> changes the title-bar text. The initial values come from the project's <a href="../../../editor/project-workflow/#window">Window settings</a>.</p>
+<p>Note that <code>setWindowSize()</code> takes <em>window</em> coordinates while <a href="#getscreenwidth-getscreenheight">getScreenWidth/getScreenHeight</a> report <em>framebuffer</em> pixels — on HiDPI/scaled displays these differ by the content scale, so the two do not round-trip 1:1.</p>
+<p>Platform support: fully implemented on GLFW-based desktop builds (generated desktop projects and Linux exports). Windows/macOS Sokol exports support only <code>setWindowTitle()</code> — the other calls are no-ops there. On web, <code>setWindowTitle()</code> sets the browser tab title and the rest are no-ops. All are no-ops on mobile.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">C++</label><label for="__tabbed_6_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">System</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s">&quot;My Game — Level 2&quot;</span><span class="p">);</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">System</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">setWindowSize</span><span class="p">(</span><span class="mi">1600</span><span class="p">,</span><span class="w"> </span><span class="mi">900</span><span class="p">);</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">System</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">isWindowMaximized</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="n">System</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">maximizeWindow</span><span class="p">();</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">System</span><span class="p">.</span><span class="nf">setWindowTitle</span><span class="p">(</span><span class="s2">&quot;My Game — Level 2&quot;</span><span class="p">)</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nv">System</span><span class="p">.</span><span class="nf">setWindowSize</span><span class="p">(</span><span class="mi">1600</span><span class="p">,</span><span class="w"> </span><span class="mi">900</span><span class="p">)</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kr">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">System</span><span class="p">.</span><span class="nf">isWindowMaximized</span><span class="p">()</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nv">System</span><span class="p">.</span><span class="nf">maximizeWindow</span><span class="p">()</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="quit">quit<a class="headerlink" href="#quit" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>virtual void quit()</code></li>
+</ul>
+<p>Closes the application. The shutdown happens after the current frame ends, so it is safe to call from a button callback or any other script code, and <a href="../engine/#onshutdown"><code>Engine::onShutdown</code></a> still runs before the app goes away.</p>
+<p>Platform support: desktop builds close the window, web stops the render loop and shuts the engine down (writing pending <a href="#getuserdatapath">user data</a> to IndexedDB first — the browser tab itself stays open), and Android finishes the activity. On iOS it is a no-op and logs a warning, since apps are not supposed to terminate themselves.</p>
+<p>Running a scene with Play in the editor stops play instead of closing the editor, so a quit button can be tested there.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">C++</label><label for="__tabbed_7_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">UI_MainMenu::onButtonClickQuit</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="n">System</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">quit</span><span class="p">();</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kr">function</span><span class="w"> </span><span class="nc">UI_MainMenu</span><span class="p">:</span><span class="nf">onButtonClickQuit</span><span class="p">()</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="nv">System</span><span class="p">.</span><span class="nf">quit</span><span class="p">()</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="getdirseparator">getDirSeparator<a class="headerlink" href="#getdirseparator" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>virtual char getDirSeparator()</code></li>
+</ul>
+<p>Returns the platform path directory separator: <code>'/'</code> on Unix/macOS/iOS/Android/Web, <code>'\\'</code> on Windows.</p>
+<hr />
+<h3 id="getassetpath">getAssetPath<a class="headerlink" href="#getassetpath" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>virtual std::string getAssetPath()</code></li>
+</ul>
+<p>Returns the root path for read-only assets bundled with the project: the project's assets directory in the editor, and the <code>assets</code> folder beside the executable in an exported build. Prepend this to asset file names when opening files directly from C++. In Lua and the high-level C++ loaders (<code>setTexture</code>, etc.), paths are automatically resolved relative to the asset root.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">getAssetPath</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;textures/sprite.png&quot;</span><span class="p">;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="getuserdatapath">getUserDataPath<a class="headerlink" href="#getuserdatapath" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>virtual std::string getUserDataPath()</code></li>
+</ul>
+<p>Returns a writable per-user data directory (Documents on iOS, internal storage on Android, <code>%AppData%</code> on Windows, <code>~/.local/share</code> on Linux). Use for save files and configuration.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">savePath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">getUserDataPath</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;save.dat&quot;</span><span class="p">;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="getluapath">getLuaPath<a class="headerlink" href="#getluapath" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>virtual std::string getLuaPath()</code></li>
+</ul>
+<p>Returns the base path prepended when Lua <code>require()</code> looks for script modules and when a <code>ScriptComponent</code> entry is loaded: the project's Lua directory in the editor, and the <code>lua</code> folder beside the executable in an exported build.</p>
+<hr />
+<h3 id="getshaderpath">getShaderPath<a class="headerlink" href="#getshaderpath" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>virtual std::string getShaderPath()</code></li>
+</ul>
+<p>Returns the directory holding compiled <code>.sdat</code> shader binaries, and the root for <code>shader://</code> paths: the project's <code>shaders</code> folder in the editor, and <code>assets/shaders</code> beside the executable in an exported build. The folder name is fixed, not configurable.</p>
+<hr />
+<h3 id="getimportpath">getImportPath<a class="headerlink" href="#getimportpath" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>virtual std::string getImportPath()</code></li>
+</ul>
+<p>Returns the directory holding the glTF conversions of FBX models: the project's <code>.quantum/imported</code> folder in the editor. It is empty in an exported build, where each conversion sits beside its FBX's path as <code>&lt;name&gt;.fbx.glb</code>. See <a href="../../../manual/3d-graphics/#fbx-models">3D Graphics — FBX models</a>.</p>
+<hr />
+<h3 id="persistent-keyvalue-storage">Persistent key–value storage<a class="headerlink" href="#persistent-keyvalue-storage" title="Link to this section">&para;</a></h3>
+<p>The system exposes a simple cross-platform persistent store backed by <code>NSUserDefaults</code> (iOS/macOS), <code>SharedPreferences</code> (Android), <code>localStorage</code> (Web), and a JSON file (desktop/Linux/Windows).</p>
+<p>On the web, keys are stored as <code>&lt;id&gt;/&lt;key&gt;</code>, where <code>&lt;id&gt;</code> is the <a href="../../../editor/project-settings/#application">application identifier</a>, so games on the same site keep separate values. While the identifier is the default <code>com.yourcompany.project</code>, the project name is used instead, so set one before publishing. Characters other than ASCII letters, digits, <code>.</code>, and <code>-</code> are written as <code>_</code> and their hex code, so <code>My Game</code> becomes <code>My_20Game</code>. Keys saved by builds before v0.8.1 are still read.</p>
+<p><strong>Getters</strong> return the stored value or <code>defaultValue</code> if the key does not exist:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getBoolForKey(key, defaultValue)</code></td>
+<td>bool</td>
+</tr>
+<tr>
+<td><code>getIntegerForKey(key, defaultValue)</code></td>
+<td>int</td>
+</tr>
+<tr>
+<td><code>getLongForKey(key, defaultValue)</code></td>
+<td>long</td>
+</tr>
+<tr>
+<td><code>getFloatForKey(key, defaultValue)</code></td>
+<td>float</td>
+</tr>
+<tr>
+<td><code>getDoubleForKey(key, defaultValue)</code></td>
+<td>double</td>
+</tr>
+<tr>
+<td><code>getStringForKey(key, defaultValue)</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Setters</strong> write or update a value:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>setBoolForKey(key, value)</code></td>
+<td>bool</td>
+</tr>
+<tr>
+<td><code>setIntegerForKey(key, value)</code></td>
+<td>int</td>
+</tr>
+<tr>
+<td><code>setLongForKey(key, value)</code></td>
+<td>long</td>
+</tr>
+<tr>
+<td><code>setFloatForKey(key, value)</code></td>
+<td>float</td>
+</tr>
+<tr>
+<td><code>setDoubleForKey(key, value)</code></td>
+<td>double</td>
+</tr>
+<tr>
+<td><code>setStringForKey(key, value)</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<p><strong>removeKey</strong> deletes a stored entry:</p>
+<ul>
+<li><code>virtual void removeKey(const char* key)</code></li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">C++</label><label for="__tabbed_10_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">System</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="o">::</span><span class="n">instance</span><span class="p">();</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="c1">// Save high score</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="n">sys</span><span class="p">.</span><span class="n">setIntegerForKey</span><span class="p">(</span><span class="s">&quot;highScore&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">score</span><span class="p">);</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="c1">// Load with default 0</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="kt">int</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">getIntegerForKey</span><span class="p">(</span><span class="s">&quot;highScore&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1">-- Preferences are exposed to Lua through UserSettings (not System).</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nv">UserSettings</span><span class="p">.</span><span class="nf">setIntegerForKey</span><span class="p">(</span><span class="s2">&quot;highScore&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">score</span><span class="p">)</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="kd">local</span><span class="w"> </span><span class="nv">best</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">UserSettings</span><span class="p">.</span><span class="nf">getIntegerForKey</span><span class="p">(</span><span class="s2">&quot;highScore&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="service-backends">Service backends<a class="headerlink" href="#service-backends" title="Link to this section">&para;</a></h2>
+<ul>
+<li><code>virtual AdMobBackend* getAdMobBackend()</code></li>
+<li><code>virtual InAppPurchaseBackend* getInAppPurchaseBackend()</code></li>
+<li><code>virtual WebPortalBackend* getWebPortalBackend()</code></li>
+</ul>
+<p>How the <a href="../admob/">AdMob</a>, <a href="../inapppurchase/">InAppPurchase</a> and <a href="../webportal/">WebPortal</a> classes reach the platform's SDKs. Each returns the platform's implementation, or <code>nullptr</code> where the platform or the build has none, which the classes report as "not available". Games call those classes rather than these methods; a port to a new platform overrides them to plug in its own SDKs.</p>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../log/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Log</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../entityregistry/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">EntityRegistry</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/reference/classes/system.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#system" class="dx-toc-link" data-level="1">System</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#description" class="dx-toc-link" data-level="2">Description</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#methods" class="dx-toc-link" data-level="3">Methods</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#method-details" class="dx-toc-link" data-level="2">Method details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#getscreenwidth-getscreenheight" class="dx-toc-link" data-level="3">getScreenWidth / getScreenHeight</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getsamplecount" class="dx-toc-link" data-level="3">getSampleCount</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#istouchdevice" class="dx-toc-link" data-level="3">isTouchDevice</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#showvirtualkeyboard" class="dx-toc-link" data-level="3">showVirtualKeyboard</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#hidevirtualkeyboard" class="dx-toc-link" data-level="3">hideVirtualKeyboard</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#isfullscreen-requestfullscreen-exitfullscreen" class="dx-toc-link" data-level="3">isFullscreen / requestFullscreen / exitFullscreen</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#window-control" class="dx-toc-link" data-level="3">Window control</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#quit" class="dx-toc-link" data-level="3">quit</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getdirseparator" class="dx-toc-link" data-level="3">getDirSeparator</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getassetpath" class="dx-toc-link" data-level="3">getAssetPath</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getuserdatapath" class="dx-toc-link" data-level="3">getUserDataPath</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getluapath" class="dx-toc-link" data-level="3">getLuaPath</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getshaderpath" class="dx-toc-link" data-level="3">getShaderPath</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getimportpath" class="dx-toc-link" data-level="3">getImportPath</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#persistent-keyvalue-storage" class="dx-toc-link" data-level="3">Persistent key–value storage</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#service-backends" class="dx-toc-link" data-level="2">Service backends</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../../versions.json";
+    window.QUANTUM_PAGE_URL = "reference/classes/system/";
+  </script>
+  <script src="../../../js/quantum.js" defer></script>
+</body>
+</html>

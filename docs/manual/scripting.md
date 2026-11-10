@@ -1,10 +1,10 @@
 ---
-description: Scripting your game in Doriax with Lua or C++.
+description: Scripting your game in Quantum with Lua or C++.
 ---
 
 # Scripting
 
-Doriax supports two scripting languages: **Lua** for fast iteration and flexible
+Quantum supports two scripting languages: **Lua** for fast iteration and flexible
 scripting, and **C++** for full native performance. You can use either one or combine
 both in the same project.
 
@@ -22,7 +22,7 @@ extra performance.
 
 ## Editor-era scripting model
 
-Current Doriax projects usually attach behavior to entities with `ScriptComponent`.
+Current Quantum projects usually attach behavior to entities with `ScriptComponent`.
 Each `ScriptComponent` can contain multiple script entries. A script entry stores the
 script type, paths, class/module name, enabled state, Properties window fields, and runtime
 instance pointer.
@@ -62,12 +62,12 @@ Each project has entry points for both languages:
 
     ```cpp
     // main.cpp
-    #include "Doriax.h"
-    using namespace doriax;
+    #include "Quantum.h"
+    using namespace quantum;
 
     Scene scene;
 
-    DORIAX_INIT void init() {
+    QUANTUM_INIT void init() {
         // build your scene here
         Engine::setScene(&scene);
     }
@@ -98,7 +98,7 @@ The same methods are available in C++ through `Engine::` static methods.
 
 ## Lua bindings
 
-Doriax uses LuaBridge to expose the engine API to Lua. The binding layer registers:
+Quantum uses LuaBridge to expose the engine API to Lua. The binding layer registers:
 
 | Binding group | Examples |
 | --- | --- |

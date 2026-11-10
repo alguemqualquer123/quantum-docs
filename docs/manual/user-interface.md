@@ -1,10 +1,10 @@
 ---
-description: UI components, layout, anchors, events, text, buttons, panels, and UI scenes in Doriax.
+description: UI components, layout, anchors, events, text, buttons, panels, and UI scenes in Quantum.
 ---
 
 # User Interface
 
-Doriax includes a complete runtime UI system for menus, HUDs, overlays, and in-game
+Quantum includes a complete runtime UI system for menus, HUDs, overlays, and in-game
 controls. UI entities are regular ECS entities with UI-specific components and layout
 state. Because the UI system is built on the same ECS foundation as the rest of the
 engine, you can combine UI with 3D, 2D, and scripting seamlessly.

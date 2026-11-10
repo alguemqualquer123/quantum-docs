@@ -1,10 +1,10 @@
 ---
-description: Cameras, render systems, PBR materials, lighting, shadows, reflections, water, mesh LOD, depth prepass, instancing, shaders, framebuffers, and backend support in Doriax.
+description: Cameras, render systems, PBR materials, lighting, shadows, reflections, water, mesh LOD, depth prepass, instancing, shaders, framebuffers, and backend support in Quantum.
 ---
 
 # Rendering Pipeline
 
-Doriax renders through a flexible pipeline that supports 2D, 3D, UI, and
+Quantum renders through a flexible pipeline that supports 2D, 3D, UI, and
 render-to-texture workflows. The same codebase targets OpenGL, OpenGL ES, Metal,
 Direct3D 11, and WebGPU through a backend abstraction layer.
 
@@ -76,7 +76,7 @@ A camera can render to its own texture instead of the screen — see
 
 ## PBR materials
 
-Doriax uses a **Physically Based Rendering** (PBR) material model with the following
+Quantum uses a **Physically Based Rendering** (PBR) material model with the following
 texture slots and scalar properties:
 
 | Slot / Property | Controls |
@@ -96,7 +96,7 @@ the green channel, metallic in the blue channel).
 Alpha is the product of `baseColorFactor.a` and the base-colour texture's alpha.
 `ALPHA_OPAQUE` forces the result opaque, `MASK` discards pixels below `alphaCutoff`, and
 `BLEND` preserves partial alpha for transparent rendering. `AUTO` keeps the historical
-Doriax texture-alpha detection used by editor-created materials. Imported GLTF/GLB
+Quantum texture-alpha detection used by editor-created materials. Imported GLTF/GLB
 materials preserve their explicit alpha mode. A blended submesh (`BLEND`, or `AUTO` when
 the texture or factor is translucent) disables depth writes on its colour pipeline.
 
@@ -461,8 +461,10 @@ polished metal, glossy surfaces — by marching the camera depth buffer in scree
 sampling the lit scene colour where a reflected ray hits. Like Godot and Unity, SSR is
 *energy-conserving*: where a ray finds a hit it **replaces** the surface's
 [IBL](#image-based-lighting-ibl) environment reflection rather than adding on top of it, and
-where a ray misses (off-screen or occluded) the IBL reflection remains as the fallback. So
-SSR refines what IBL already provides instead of double-counting it.
+where a ray misses (off-screen or occluded) the IBL reflection remains as the fallback. A
+local `ReflectionProbeComponent` is selected by the renderable's bounds center; its captured
+reflection remains in the forward colour pass while SSR adds only the confident screen-space
+detail. So SSR refines what IBL already provides instead of double-counting it.
 
 When SSR is enabled the main camera first renders a small **G-buffer** geometry pre-pass —
 packed depth, view-space normal, roughness/metallic, and base colour — then runs three
@@ -524,6 +526,11 @@ colour come from the material factors and the metallic-roughness / base-colour t
     those in). Thin contact lines where an object meets a reflective surface can leave a
     small seam — raise **Max Steps** or lower **Thickness** to tighten it. SSR runs for the
     main camera only and is skipped when there is no framebuffer destination.
+
+    The reproducible visual fixture `--render-feature ssrfallback` creates a 32 px dynamic
+    local probe, captures its six faces in memory, and compares a real 640x360 presented
+    frame. It is useful for validating the fallback plumbing without changing a project
+    scene; GPU/driver-specific reference images are still separate release evidence.
 
 ## Post-processing
 
@@ -848,7 +855,7 @@ The editor revisions its compiled shader cache when this built-in shader interfa
 changes, so an updated editor does not reuse incompatible older skinned variants.
 
 GPU pipeline creation can be deferred by the graphics backend. If a pipeline variant
-fails creation or validation, Doriax skips that draw instead of submitting its uniform,
+fails creation or validation, Quantum skips that draw instead of submitting its uniform,
 binding, and draw commands against the failed handle. Diagnose the original pipeline
 creation message in the Output panel; the dependent validation-error cascade is
 suppressed.

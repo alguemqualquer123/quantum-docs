@@ -8,7 +8,7 @@ description: Angle API reference (C++ and Lua).
 
 ## Description
 
-A static utility class providing angle conversion functions between degrees, radians, and Doriax's *default* unit, which is controlled by `Engine::useDegrees`.
+A static utility class providing angle conversion functions between degrees, radians, and Quantum's *default* unit, which is controlled by `Engine::useDegrees`.
 
 Because the "default" unit changes depending on the engine configuration, these helpers make it easy to write code that works correctly regardless of how the engine is configured.
 

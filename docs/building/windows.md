@@ -1,5 +1,5 @@
 ---
-description: Build Doriax from source on Windows.
+description: Build Quantum from source on Windows.
 ---
 
 # Building for Windows
@@ -14,8 +14,8 @@ description: Build Doriax from source on Windows.
 ## 2. Clone the repository
 
 ```bash
-git clone https://github.com/doriaxengine/doriax.git
-cd doriax
+git clone https://github.com/alguemqualquer123/quantum.git
+cd quantum
 ```
 
 ## 3. Configure and build
@@ -24,10 +24,10 @@ Using the Visual Studio generator:
 
 ```bash
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 17 2022"
-cmake --build build --config Release --target doriax-editor
+cmake --build build --config Release --target quantum-editor
 ```
 
-Visual Studio is a **multi-config** generator, so the resulting `doriax-editor`
+Visual Studio is a **multi-config** generator, so the resulting `quantum-editor`
 executable is placed under a configuration subdirectory such as `build/Release/`.
 
 The Windows runtime defaults to Direct3D 11 for standalone projects. You can request
@@ -38,7 +38,7 @@ OpenGL Core instead with `-DGRAPHIC_BACKEND=glcore` when configuring a runtime b
 
     ```bash
     cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -G "Ninja"
-    cmake --build build --config Release --target doriax-editor
+    cmake --build build --config Release --target quantum-editor
     ```
 
     With Ninja the executable is created directly under `build/`.
@@ -52,7 +52,7 @@ MinGW-w64 GCC toolchain — for example from [MSYS2](https://www.msys2.org/) —
 ```bash
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -G "Ninja" ^
   -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
-cmake --build build --config Release --target doriax-editor
+cmake --build build --config Release --target quantum-editor
 ```
 
 Launch that editor from the same MSYS2 terminal so it finds `g++`, `mingw32-make` and the
@@ -74,12 +74,12 @@ the project root if it is not the default `engine/project` folder:
 
 ```bash
 cmake -S engine -B build-runtime -DPROJECT_ROOT="C:/path/to/project" -DCMAKE_BUILD_TYPE=Release
-cmake --build build-runtime --config Release --target doriax-project
+cmake --build build-runtime --config Release --target quantum-project
 ```
 
 Use the generated executable from the selected configuration folder.
 
-In a Source Code export, `python doriax.py` runs both commands with the newest Visual
+In a Source Code export, `python quantum.py` runs both commands with the newest Visual
 Studio. Pass `-G` to choose another generator. See [Build Script](build-script.md).
 
 ## Vulkan backend
@@ -94,7 +94,7 @@ cmake -S engine -B build-vulkan ^
   -DGRAPHIC_BACKEND=vulkan ^
   -DCMAKE_BUILD_TYPE=Release ^
   -G "Ninja"
-cmake --build build-vulkan --config Release --target doriax-project
+cmake --build build-vulkan --config Release --target quantum-project
 ```
 
 Shaders for exported Vulkan projects are compiled to SPIR-V by the editor's shader

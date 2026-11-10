@@ -1,10 +1,10 @@
 ---
-description: Async loading, thread pool, queued work, and web threading caveats in Doriax.
+description: Async loading, thread pool, queued work, and web threading caveats in Quantum.
 ---
 
 # Threading & Async Loading
 
-Doriax includes thread utilities and async loading support for resource-heavy work such
+Quantum includes thread utilities and async loading support for resource-heavy work such
 as loading large models, generating terrain, or pre-warming audio pools in the
 background. Threading support depends on the target platform and build options.
 

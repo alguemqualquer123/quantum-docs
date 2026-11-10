@@ -1,5 +1,5 @@
 ---
-description: Build Doriax from source on Linux.
+description: Build Quantum from source on Linux.
 ---
 
 # Building for Linux
@@ -33,18 +33,18 @@ sudo apt install -y \
 ## 2. Clone the repository
 
 ```bash
-git clone https://github.com/doriaxengine/doriax.git
-cd doriax
+git clone https://github.com/alguemqualquer123/quantum.git
+cd quantum
 ```
 
 ## 3. Configure and build
 
 ```bash
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -G "Ninja"
-cmake --build build --config Release --target doriax-editor
+cmake --build build --config Release --target quantum-editor
 ```
 
-Ninja is a **single-config** generator, so the `doriax-editor` executable is created
+Ninja is a **single-config** generator, so the `quantum-editor` executable is created
 directly under `build/`.
 
 The editor itself renders with OpenGL Core on Linux. To build it against Vulkan instead,
@@ -68,13 +68,13 @@ cmake -S engine -B build-runtime \
   -DPROJECT_ROOT=/path/to/project \
   -DCMAKE_BUILD_TYPE=Release \
   -G "Ninja"
-cmake --build build-runtime --config Release --target doriax-project
+cmake --build build-runtime --config Release --target quantum-project
 ```
 
 Assets and Lua files are copied next to the build output when the project contains
 `assets/` and `lua/` folders.
 
-In a Source Code export, `python3 doriax.py` runs both commands. See
+In a Source Code export, `python3 quantum.py` runs both commands. See
 [Build Script](build-script.md).
 
 ## Vulkan backend
@@ -89,7 +89,7 @@ cmake -S engine -B build-vulkan \
   -DGRAPHIC_BACKEND=vulkan \
   -DCMAKE_BUILD_TYPE=Release \
   -G "Ninja"
-cmake --build build-vulkan --config Release --target doriax-project
+cmake --build build-vulkan --config Release --target quantum-project
 ```
 
 Shaders for exported Vulkan projects are compiled to SPIR-V by the editor's shader

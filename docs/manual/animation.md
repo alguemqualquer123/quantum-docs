@@ -1,10 +1,10 @@
 ---
-description: Runtime animation, actions, sprite animation, keyframe tracks, skeletal animation, and morph targets in Doriax.
+description: Runtime animation, actions, sprite animation, keyframe tracks, skeletal animation, and morph targets in Quantum.
 ---
 
 # Animation
 
-Doriax supports two complementary animation approaches: **editor-authored keyframe
+Quantum supports two complementary animation approaches: **editor-authored keyframe
 animation** built in the Animation Timeline, and **runtime action playback** written
 in code. Both are updated each frame by `ActionSystem`. You can mix them freely —
 author the idle loop in the timeline and drive attacks and UI effects with runtime
@@ -333,7 +333,7 @@ simultaneously for layered animation blending.
 Imported clips honor the GLTF sampler's `interpolation` setting, following the glTF 2.0
 specification:
 
-| GLTF mode | Playback in Doriax |
+| GLTF mode | Playback in Quantum |
 | --- | --- |
 | `LINEAR` (default) | Linear interpolation between keys; rotations use spherical linear interpolation (slerp) |
 | `STEP` | Each key's value holds until the next key — imported as per-segment `STEP` easing |
@@ -351,7 +351,7 @@ values, playback degrades safely to linear.
 Starting a clip with `start()` snaps the skeleton straight into that clip's pose. For
 character motion you almost always want a **crossfade** instead — when the player stops
 running, the skeleton should ease from the run cycle into idle over a fraction of a
-second rather than pop. Doriax blends this for you: while a transition is in progress
+second rather than pop. Quantum blends this for you: while a transition is in progress
 both clips play and each bone's pose is a weight-normalized average of them.
 
 The simplest entry point is [`Model:playAnimation`](../reference/classes/model.md#playanimation-stopanimations),

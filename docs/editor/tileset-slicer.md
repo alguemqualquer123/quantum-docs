@@ -1,5 +1,5 @@
 ---
-description: Using the Tileset Slicer tool in Doriax to define tile regions for tilemaps.
+description: Using the Tileset Slicer tool in Quantum to define tile regions for tilemaps.
 ---
 
 # Tileset Slicer

@@ -1,5 +1,5 @@
 ---
-description: Using the Properties window to inspect, edit, and configure entity components in Doriax.
+description: Using the Properties window to inspect, edit, and configure entity components in Quantum.
 ---
 
 # Properties & Components
@@ -222,7 +222,7 @@ G-buffer.
 **Leaf Transmission** (`0`–`1`, default `0`) lets light through a thin surface when it
 is lit from behind — backlit foliage. Leave it at `0` on bark, trunks, and solid
 geometry. Like the other material fields it is stored as an override on imported models;
-a glTF can also carry it as the material extra `doriax_foliage_transmission`. See
+a glTF can also carry it as the material extra `quantum_foliage_transmission`. See
 [3D Graphics — PBR materials](../manual/3d-graphics.md#pbr-materials).
 
 For explicit **Opaque**, **Mask**, and **Blend** modes, the engine derives **Texture

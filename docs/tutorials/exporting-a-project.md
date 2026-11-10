@@ -1,5 +1,5 @@
 ---
-description: Export a Doriax project from the editor and prepare it for a target platform build.
+description: Export a Quantum project from the editor and prepare it for a target platform build.
 ---
 
 # Exporting a Project
@@ -26,7 +26,7 @@ the mode you choose.
   window at your `emsdk` folder once) and uses WebGL 2.
 
 Desktop and Web reuse the Source Code pipeline internally, building inside
-`.doriax/export/` in your project — the first export compiles the engine and is slow,
+`.quantum/export/` in your project — the first export compiles the engine and is slow,
 later ones are incremental and fast.
 
 ## Export checklist
@@ -72,7 +72,7 @@ destination folder, or serve the web files with any local web server
 [build script](../building/build-script.md) that runs both steps for you:
 
 ```bash
-python3 doriax.py
+python3 quantum.py
 ```
 
 or run CMake yourself:
@@ -100,11 +100,11 @@ Android, iOS, macOS, and HTML5 have additional platform requirements. See the
 
 ## Exporting without the GUI
 
-You can run the same export from a terminal with the `doriax-editor` CLI — handy for
+You can run the same export from a terminal with the `quantum-editor` CLI — handy for
 build servers and automated releases:
 
 ```bash
-doriax-editor export --project ./MyGame --out ./build/MyGame --backend "vulkan,opengles"
+quantum-editor export --project ./MyGame --out ./build/MyGame --backend "vulkan,opengles"
 ```
 
 See [Command-Line Tools](../editor/command-line.md) for all options.

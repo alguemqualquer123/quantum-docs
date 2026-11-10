@@ -1,19 +1,19 @@
 ---
-description: Project organization, scene types, bundles, settings, and save/load behavior in the Doriax editor.
+description: Project organization, scene types, bundles, settings, and save/load behavior in the Quantum editor.
 ---
 
 # Project Workflow
 
-A Doriax project is the editable source for a game. It organizes scenes, resources,
+A Quantum project is the editable source for a game. It organizes scenes, resources,
 scripts, bundles, and export configuration into a single directory that the editor
 understands. The editor keeps visual authoring, code, and build settings clearly
 separated so teams can iterate and collaborate effectively.
 
 ## Creating a project
 
-Doriax does not display a startup dialog. When the editor launches, it reopens the
+Quantum does not display a startup dialog. When the editor launches, it reopens the
 last saved project if that project is still available. Otherwise, it opens a temporary
-project named `MyDoriaxProject` with a new 3D scene so you can begin editing
+project named `MyQuantumProject` with a new 3D scene so you can begin editing
 immediately. **File → New Project** also replaces the current project with a fresh
 temporary project.
 
@@ -36,7 +36,7 @@ Temporary projects are stored in the operating system's temporary directory. Sav
 project to another directory before relying on it as permanent work.
 
 New projects begin with a 3D scene. To add a different scene type, choose
-**Scene → New Scene → 2D Scene** or **Scene → New Scene → UI Scene**. Doriax does not
+**Scene → New Scene → 2D Scene** or **Scene → New Scene → UI Scene**. Quantum does not
 use project templates.
 
 ## Project anatomy
@@ -49,7 +49,7 @@ use project templates.
 | `shaders/` | Default location for forked shader sources (`.vert`/`.frag`/`.glsl`), and where compiled `.sdat` output goes — see [Custom Shaders](custom-shaders.md) |
 | `bundles/` | Reusable entity hierarchy files |
 | `settings/` | Scene startup references, build target settings, and export configuration |
-| `.doriax/` | The editor's own working directory: generated C++, build trees, models converted from FBX, and the settings that belong to your machine and your session. Recreated as needed and never committed — see [Version Control](version-control.md) |
+| `.quantum/` | The editor's own working directory: generated C++, build trees, models converted from FBX, and the settings that belong to your machine and your session. Recreated as needed and never committed — see [Version Control](version-control.md) |
 
 Folder names may differ by project. The structure is a convention, not a strict
 requirement — you can reorganize asset folders and update resource paths accordingly.
@@ -173,9 +173,9 @@ whether they travel with the project:
 | --- | --- | --- | --- |
 | **[Project settings](project-settings.md)** | Project → Project Settings | `project.yaml` | Start scene, application identity, canvas, window, VSync, asset/Lua/script directories, native resource packaging, and the per-platform settings for Web, Linux, Windows, macOS, iOS and Android |
 | **[Editor settings](editor-settings.md)** | Edit → Editor Settings | `settings.yaml`, with API keys and the MCP token in `ai_keys.dat` | Compiler kit, CMake and Emscripten paths, default export directory, editor VSync, UI scale, AI Chat keys and limits, the [MCP server](mcp-server.md) |
-| **Export settings** | File → Export Project | `project.yaml` (`export`) and the project's `.doriax/user/build.yaml` | Shader overrides and graphic backends in the project; output directories per machine |
-| **Machine settings** | — | `.doriax/user/build.yaml` | The compiler kit, build jobs and export folders chosen for *this* project on *this* machine |
-| **Editor workspace** | — | `.doriax/user/workspace.yaml` | Open tabs and their order, the selected scene, each scene's editor camera and viewport guides, the terrain brush |
+| **Export settings** | File → Export Project | `project.yaml` (`export`) and the project's `.quantum/user/build.yaml` | Shader overrides and graphic backends in the project; output directories per machine |
+| **Machine settings** | — | `.quantum/user/build.yaml` | The compiler kit, build jobs and export folders chosen for *this* project on *this* machine |
+| **Editor workspace** | — | `.quantum/user/workspace.yaml` | Open tabs and their order, the selected scene, each scene's editor camera and viewport guides, the terrain brush |
 | **Window and layout state** | — | `settings.yaml` | Window size, maximized state, recent projects, panel visibility, Resources Browser preferences |
 
 Two dividing lines run through that table. The first is the machine: a compiler path, an

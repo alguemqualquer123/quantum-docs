@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C++ Build Setup — Quantum Engine Docs</title>
+  <meta name="description" content="Toolchain requirements and troubleshooting for compiling C++ scripts with the Quantum Editor.">
+  <meta property="og:title" content="C++ Build Setup — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/manual/cpp-build-setup/">
+
+  <link rel="icon" type="image/png" href="../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/quantum.css">
+  <link rel="stylesheet" href="../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="c-build-setup">C++ Build Setup<a class="headerlink" href="#c-build-setup" title="Link to this section">&para;</a></h1>
+<p>Lua scripts run as-is, but <strong>C++ scripts are compiled on your machine</strong> the first time
+you press Play (and again whenever a C++ source changes). The editor generates a CMake
+project for your scripts, configures it, and builds a shared library that is loaded back
+into the editor. This page covers what tools that build step needs and how to fix the
+most common failures.</p>
+<p>If you only use Lua scripts, no build tools are required.</p>
+<h2 id="required-tools">Required tools<a class="headerlink" href="#required-tools" title="Link to this section">&para;</a></h2>
+<ul>
+<li><strong>CMake 3.20 or newer</strong>, available on <code>PATH</code>.</li>
+<li>A compiler for your platform (see below) that supports the project's <strong>C++ Standard</strong>
+  — C++17 by default, set under <a href="../../editor/project-settings/#build">Project Settings →
+  Build</a>.</li>
+</ul>
+<p>When you press Play in a project that contains C++ scripts, the editor first checks for
+these tools and shows a <em>Missing Build Tools</em> dialog listing anything it could not find.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Windows</label><label for="__tabbed_1_2">Linux</label><label for="__tabbed_1_3">macOS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Install one of:</p>
+<ul>
+<li><strong>Visual Studio 2019/2022</strong> (Community is fine) with the
+  <strong>"Desktop development with C++"</strong> workload — the simplest option. The editor
+  finds it automatically even when <code>cl.exe</code> is not on <code>PATH</code>.</li>
+<li><strong>LLVM/Clang</strong> (MSVC target, e.g. the <code>clang+llvm-*-pc-windows-msvc</code> release) —
+  also requires <strong>Ninja</strong> on <code>PATH</code> (see the warning below).</li>
+<li><strong>MinGW GCC or Clang</strong> — uses the <em>MinGW Makefiles</em> generator. Only works with a
+  <strong>MinGW build of the editor</strong>, <em>not</em> the official MSVC download — see the ABI note
+  under <a href="#choosing-a-compiler">Choosing a compiler</a>.</li>
+</ul>
+<p>Install CMake from <a href="https://cmake.org/download/">cmake.org/download</a> and check
+<strong>"Add CMake to the system PATH"</strong> during setup.</p>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>cmake<span class="w"> </span>build-essential<span class="w">   </span><span class="c1"># Debian/Ubuntu</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>cmake<span class="w"> </span>gcc-c++<span class="w">           </span><span class="c1"># Fedora</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>xcode-select<span class="w"> </span>--install<span class="w">   </span><span class="c1"># Apple Clang</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>brew<span class="w"> </span>install<span class="w"> </span>cmake
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="choosing-a-compiler">Choosing a compiler<a class="headerlink" href="#choosing-a-compiler" title="Link to this section">&para;</a></h2>
+<p>Open <strong>Edit → <a href="../../editor/editor-settings/#desktop">Editor Settings</a> → Desktop</strong> and use
+the <strong>Compiler</strong> dropdown. The editor detects available compilers (GCC, Clang,
+MSVC/Visual Studio) and pairs each one with a compatible CMake generator:</p>
+<table>
+<thead>
+<tr>
+<th>Compiler (Windows)</th>
+<th>CMake generator</th>
+<th>C++ ABI</th>
+<th>Official (MSVC) build</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MSVC / Visual Studio</td>
+<td>The newest installed <code>Visual Studio N YYYY</code> your CMake supports, or Ninja with <code>cl</code></td>
+<td>MSVC</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Clang targeting MSVC (<code>x86_64-pc-windows-msvc</code>)</td>
+<td>Ninja — <strong>required</strong></td>
+<td>MSVC</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>MinGW GCC or Clang (<code>*-mingw*</code>)</td>
+<td>MinGW Makefiles</td>
+<td>GNU</td>
+<td>No — needs a MinGW editor build</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Default</strong> does not simply hand the choice to CMake on Windows. The editor runs the same
+detection as the dropdown and picks the best <strong>ABI-compatible</strong> kit it finds, pinning both
+the compiler and the generator; the result is printed in the Output panel as <em>"Default
+compiler resolved to: …"</em>. On Linux and macOS, where a single system C++ ABI makes any
+detected compiler usable, Default leaves the toolchain to CMake.</p>
+<div class="admonition note">
+<p class="admonition-title">Why Default pins an explicit toolchain on Windows</p>
+<p>A bare <code>cmake</code> picks whatever toolchain that particular CMake prefers — and an
+<strong>MSYS2 CMake earlier on <code>PATH</code></strong> than the Visual Studio one prefers Ninja with MinGW
+GCC, even when Visual Studio is installed. On the official MSVC editor that silently
+produced a GNU-ABI plugin that cannot link the engine. Pinning removes the ambiguity.</p>
+</div>
+<p>Your selection is stored <strong>per project</strong>, so a project that needs MSVC and one that
+needs MinGW can coexist, and it is <strong>remembered across sessions</strong> — a project that has no
+kit yet inherits the compiler you last chose, so you only need to set it once (rather
+than having each new project silently fall back to <strong>Default</strong>).</p>
+<p>Because a compiler path only means something on the machine it was installed on, the kit
+is written to the project's <code>.quantum/user/build.yaml</code> — not to <code>project.yaml</code>. That file
+is not committed, so it never reaches version control and a teammate opening the same
+project picks their own kit, while a project moved or copied to another folder keeps
+working. Projects saved by older editors carry the kit in <code>project.yaml</code> or in the
+editor's <code>settings.yaml</code>; opening one migrates it once, without overwriting a kit this
+machine already chose.</p>
+<div class="admonition danger">
+<p class="admonition-title">Your compiler must match the editor's own C++ ABI</p>
+<p>C++ scripts are compiled into a shared library that is loaded <strong>into the running
+editor and shares its engine instance</strong> — so the plugin must use the same C++ ABI as
+the editor was built with. MSVC and MinGW (GCC) are <strong>not</strong> ABI-compatible: they
+disagree on name mangling, class layout, RTTI, exception handling and STL types. A
+MinGW plugin therefore cannot link against an MSVC-built engine — you get a wall of
+<code>undefined reference</code> errors — and the reverse fails just as badly.</p>
+<p>The <strong>official Windows download is built with MSVC</strong>, so with it you must use <strong>MSVC</strong>
+or <strong>Clang targeting MSVC</strong> (both free — see <a href="#required-tools">Required tools</a>). To
+build plugins with <strong>MinGW GCC</strong>, you need a MinGW build of the editor (see
+<a href="../../building/windows/">Building from Source → Windows</a>). The two never mix: one
+editor download supports one ABI.</p>
+<p>The editor knows which toolchain it was built with and <strong>greys out incompatible
+compilers</strong> in the <strong>Compiler</strong> dropdown — hover one to read why. If the kit a
+project already had is no longer detected, the dropdown falls back to <strong>Default</strong>
+and warns that builds still use the stored one until you press OK. This is a
+Windows-only concern; Linux and macOS each have a single system C++ ABI, so GCC and
+Clang interoperate there.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Clang on Windows needs Ninja</p>
+<p>CMake's Visual Studio generator always compiles with MSVC's <code>cl.exe</code> — it cannot
+drive a standalone <code>clang.exe</code>. A Clang (MSVC target) compiler therefore only works
+with the <strong>Ninja</strong> generator. If Ninja is not installed, the editor lists the Clang
+entry greyed-out with a <em>"requires Ninja on PATH"</em> note.</p>
+<p>Install Ninja with <code>winget install Ninja-build.Ninja</code>, or download <code>ninja-win.zip</code>
+from <a href="https://ninja-build.org">ninja-build.org</a>, unzip it to a folder on <code>PATH</code>,
+and verify with <code>ninja --version</code> in a new terminal. Restart the editor afterwards
+so it re-detects the compiler list.</p>
+<p>Do <strong>not</strong> use a pip-installed <code>ninja.exe</code> copied out of Python's <code>Scripts</code> folder —
+it is a wrapper that stops working outside its install location. If Windows blocked
+a downloaded exe, right-click it → <strong>Properties</strong> → <strong>Unblock</strong>.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Clang also needs the Windows SDK</p>
+<p>A standalone Clang compiles your code with its own toolchain but still <strong>links
+against the Windows SDK and the MSVC C runtime</strong> (<code>kernel32.lib</code>, <code>msvcrtd</code>, …).
+Those ship with Visual Studio's "Desktop development with C++" workload. The editor
+loads the Visual Studio environment automatically before building with Ninja, so you
+do <strong>not</strong> need to launch it from a Developer Command Prompt. If linking fails with
+<code>lld-link: error: could not open 'kernel32.lib'</code>, the Windows SDK is either not
+installed or could not be located — install it via the Visual Studio Installer.</p>
+</div>
+<p>Switching compilers is safe at any time: the editor detects the change — including a
+change of target architecture — and cleans the build directory automatically (CMake
+cannot switch generators or compilers in-place).</p>
+<h2 id="parallel-builds">Parallel builds<a class="headerlink" href="#parallel-builds" title="Link to this section">&para;</a></h2>
+<p>C++ scripts compile in parallel: by default the editor runs <strong>one build job per
+detected logical CPU thread</strong>. That is dramatically faster on multi-core machines but
+raises peak memory use, since every concurrent compiler process needs its own working
+memory.</p>
+<p>Open <strong>File → Export Project... → Desktop</strong> and use <strong>Build Jobs</strong> to tune this. The
+field starts at the automatic value — one job per logical CPU thread — and the same
+number is used for Play-mode script builds, not just for the export you are configuring.</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Automatic (default)</td>
+<td>One job per logical CPU thread of the machine running the build</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>Serial build — slowest, but minimal memory use</td>
+</tr>
+<tr>
+<td>Any other number</td>
+<td>At most that many concurrent jobs</td>
+</tr>
+</tbody>
+</table>
+<p>Lower the value if builds fail with out-of-memory errors or make the system
+unresponsive — each concurrent C++ compile can use hundreds of MB of RAM, more with
+heavy template use.</p>
+<p>The value is machine-local, like the compiler: it is saved per project in
+<code>.quantum/user/build.yaml</code> (as <code>build_jobs</code>, omitted when automatic), not in
+<code>project.yaml</code>, so a limit chosen on a 32-core workstation is never imposed on a
+teammate's 4-core laptop. Whatever the stored number, each build caps it at <strong>4× the
+machine's logical CPU count</strong>, up to 65536.</p>
+<p>Projects saved by older editors carry the setting as <code>cmakeBuildJobs</code> in <code>project.yaml</code>.
+Opening one migrates the value into the editor settings once — see <a href="../../editor/editor-settings/#migrating-from-older-projects">Editor
+Settings</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">MSVC rebuilds scripts when the value changes</p>
+<p>With the MSVC compiler the limit is applied through the compiler's <code>/MP</code> flag,
+because MSBuild alone cannot throttle per-file compilation within a single target.
+Since that changes compile flags, changing <strong>Build Jobs</strong> triggers a full script
+rebuild on the next Play. Ninja and Make apply the limit at the build-tool level,
+so changing it there only affects new compilations.</p>
+</div>
+<h2 id="script-directories">Script directories<a class="headerlink" href="#script-directories" title="Link to this section">&para;</a></h2>
+<p>By default the editor compiles only the C++ scripts a scene actually uses — the files
+referenced by a Script component. A helper class that no entity mentions is never built,
+and every header is included by its full path from the project root.</p>
+<p><strong>Project → <a href="../../editor/project-settings/#directories">Project Settings</a> → Directories →
+Script Directories</strong> changes that. Add any
+folder inside your project and it becomes two things at once:</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Include root</strong></td>
+<td>Headers under it are included by the path <em>below</em> the folder, so the full path from the project root is no longer needed</td>
+</tr>
+<tr>
+<td><strong>Compile root</strong></td>
+<td>Every <code>.cpp</code> under it is compiled, even when no entity references it</td>
+</tr>
+</tbody>
+</table>
+<p>Only the folders you add behave this way — the rest of the project is untouched, and a
+project with no script directories builds exactly as before.</p>
+<p>This lets you lay out code in modules and include across them by short path. With
+<code>Source/Public</code> added as a root, a header at <code>Source/Public/Player/Script.h</code> becomes:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Player/Script.h&quot;</span><span class="c1">   // instead of &quot;Source/Public/Player/Script.h&quot;</span>
+</code></pre></div>
+<p>Add as many roots as you need; they are searched in the order listed. Both roles apply to
+Play builds and to <a href="../../editor/export/">exported projects</a> alike.</p>
+<p>To add files to a root, right-click it in the Resources Browser and use <strong>New → C++
+Source</strong> or <strong>New → C++ Header</strong> — see
+<a href="../../editor/resources/#creating-files-and-folders">Creating files and folders</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Keep roots inside the project</p>
+<p>A folder outside the project compiles in the editor but <strong>cannot be exported</strong> — the
+export copies the project tree only, and warns that the directory was skipped. Use a
+folder inside the project for anything you intend to ship.</p>
+</div>
+<p>The list is saved as <code>scriptDirs</code> in <code>project.yaml</code> and travels with the project.</p>
+<h2 id="customizing-the-build">Customizing the build<a class="headerlink" href="#customizing-the-build" title="Link to this section">&para;</a></h2>
+<p>The <code>CMakeLists.txt</code> at your project root is generated: Play and Save overwrite it, so
+edits to it are lost. To add your own CMake — linking a third-party library, extra
+compile definitions, platform flags — create <strong><code>ProjectBuild.cmake</code></strong> next to it. The
+editor never creates, reads or overwrites that file, and both the editor build and
+exported CMake builds include it when it exists.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">QUANTUM_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">mylib</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">target_include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">QUANTUM_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="o">${</span><span class="nv">QUANTUM_SCRIPTS_DIR</span><span class="o">}</span><span class="s">/ThirdParty/include</span><span class="p">)</span>
+</code></pre></div>
+<p>Two variables are set for you, with the same meaning in both builds:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>QUANTUM_TARGET</code></td>
+<td>The target to attach to</td>
+</tr>
+<tr>
+<td><code>QUANTUM_SCRIPTS_DIR</code></td>
+<td>The root your <code>.h</code>/<code>.cpp</code> paths are relative to</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Attach through <code>${QUANTUM_TARGET}</code>, not the target name</p>
+<p>The target is named after your project in editor builds and after the application
+name in exported ones, so a hard-coded name works in one and breaks in the other —
+and breaks again if you rename the project.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Not used by the exported Xcode workspace</p>
+<p>The Xcode workspace of a Source Code export, <code>workspaces/xcode/Quantum.xcodeproj</code>, is
+not a CMake build, so <code>ProjectBuild.cmake</code> has no effect there and the export warns
+about it. Make the same changes in Xcode, or build through CMake with
+<code>python3 quantum.py -p ios-xcode</code> or <code>-p macos-xcode</code>, which does include the file.</p>
+</div>
+<p>For include paths alone you do not need this file: <a href="#script-directories">Script
+directories</a> covers that case from the editor. The language standard
+has its own setting too — <code>CMAKE_CXX_STANDARD</code> is written from <a href="../../editor/project-settings/#build">Project Settings →
+Build</a>, so do not set it here.</p>
+<h2 id="where-build-files-live">Where build files live<a class="headerlink" href="#where-build-files-live" title="Link to this section">&para;</a></h2>
+<p>Play and Save rewrite the generated C++ glue: <code>CMakeLists.txt</code> at the <strong>project root</strong>,
+<code>scene_scripts.cpp</code> and <code>LocalPaths.cmake</code> under <strong><code>.quantum</code></strong>, and <code>main.cpp</code> plus the
+scene and bundle factories under <strong><code>.quantum/generated</code></strong>. Together they cover every C++
+script and <code>.bundle</code> file that still exists on disk. Do <strong>not</strong> edit those files by hand
+— the next Play or Save overwrites them. Put your own build settings in
+<a href="#customizing-the-build"><code>ProjectBuild.cmake</code></a> instead, which is never overwritten.</p>
+<p><code>CMakeLists.txt</code> names no path belonging to your machine, so the same file works for
+everyone: the asset and Lua roots resolve from <code>${PROJECT_ROOT}</code>, and the shader cache
+and engine library directory come from <code>LocalPaths.cmake</code>, which the editor rewrites for
+whichever machine opens the project. Both are regenerated rather than committed — see
+<a href="../../editor/version-control/">Version Control</a>.</p>
+<p>Configuring outside the editor works the same way, as long as the project has been
+opened in the editor once so <code>.quantum</code> exists. Pass <code>-DQUANTUM_SHADER_PATH=&lt;dir&gt;</code> to
+override the shader cache location.</p>
+<p>The CMake build tree is generated under <strong><code>.quantum/build</code></strong>. It is a disposable cache —
+deleting it forces a full clean reconfigure and rebuild, which is a good first step when
+the build state seems corrupted (for example after moving the project, or upgrading CMake
+or the compiler).</p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this section">&para;</a></h2>
+<p>All configure and compile output streams into the <strong>Output panel</strong>. The first error line
+is almost always the meaningful one.</p>
+<table>
+<thead>
+<tr>
+<th>Symptom in the Output panel</th>
+<th>Likely cause and fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Missing Build Tools</code> dialog</td>
+<td>CMake or a C++ compiler is not installed / not on <code>PATH</code>. Install it and restart the editor.</td>
+</tr>
+<tr>
+<td><code>C++ toolchain compatible with this editor: not found</code> in that dialog</td>
+<td>Compilers were found, but none matches the editor's C++ ABI. The dialog lists every detected compiler with the reason it was rejected — see <a href="#choosing-a-compiler">Choosing a compiler</a>.</td>
+</tr>
+<tr>
+<td>MSVC greyed out with <em>"requires a CMake version supporting the installed Visual Studio, or Ninja and an MSVC toolchain environment"</em></td>
+<td>Your CMake is older than your Visual Studio, so it has no matching <code>Visual Studio N YYYY</code> generator. Update CMake, install an older Visual Studio, or install Ninja so the editor can drive <code>cl.exe</code> through it.</td>
+</tr>
+<tr>
+<td><code>The C compiler ... is not able to compile a simple test program</code> together with <code>CMAKE_LINKER-NOTFOUND</code> or <code>TRK0005</code></td>
+<td>A custom compiler (usually Clang) was configured with the Visual Studio generator. Install Ninja and re-select the Clang compiler in Editor Settings, or switch to the MSVC compiler. Editor versions before June 2026 allowed this broken combination.</td>
+</tr>
+<tr>
+<td><code>CMake was unable to find a build program corresponding to "Ninja"</code></td>
+<td><code>ninja.exe</code> is not on <code>PATH</code>, or it exists but cannot run (pip wrapper copied out of place, or blocked download). Install the standalone binary and check <code>ninja --version</code> works in a fresh terminal.</td>
+</tr>
+<tr>
+<td><code>undefined reference to</code> <strong>every</strong> engine symbol (<code>quantum::Vector3::Vector3</code>, <code>quantum::Engine::onUpdate</code>, …) at the <strong>link</strong> step</td>
+<td>The selected compiler's C++ ABI does not match the editor's — typically MinGW GCC against the official MSVC build. Use MSVC or Clang-targeting-MSVC on the MSVC build (or a MinGW editor for MinGW). Current editors grey out incompatible compilers and stop the build at configure time with a readable message, so this mainly appears in older versions or when building outside the editor. See <a href="#choosing-a-compiler">Choosing a compiler</a>.</td>
+</tr>
+<tr>
+<td><code>This Quantum editor requires MSVC-compatible C++ plugins</code> (or <code>... MinGW/GNU C++ plugins</code>) at the <strong>configure</strong> step</td>
+<td>The selected compiler's ABI does not match the editor's, and the generated CMake project stops before compiling anything. Pick a compatible compiler in <strong>Editor Settings → Desktop → Compiler</strong>; this mainly appears with a compiler saved before the ABI check existed, or one selected outside the editor. See <a href="#choosing-a-compiler">Choosing a compiler</a>.</td>
+</tr>
+<tr>
+<td>The build uses <code>C:\msys64\ucrt64\bin\g++.exe</code> even though Visual Studio is installed and <strong>Compiler</strong> is <strong>Default</strong></td>
+<td>An MSYS2 <code>cmake</code> came earlier on <code>PATH</code> than the Visual Studio one, and older editors let CMake choose the toolchain — which that CMake resolves to Ninja with MinGW GCC. Update the editor (Default now pins an ABI-compatible toolchain), or select <strong>MSVC</strong> explicitly in <strong>Editor Settings → Desktop → Compiler</strong>.</td>
+</tr>
+<tr>
+<td><code>lld-link: error: could not open 'kernel32.lib'</code> (or other <code>*.lib</code>)</td>
+<td>Clang cannot find the Windows SDK libraries. Install the Windows SDK through the Visual Studio Installer ("Desktop development with C++"). The editor loads the MSVC environment automatically; if it can't find Visual Studio it warns and you can instead launch the editor from a Developer Command Prompt.</td>
+</tr>
+<tr>
+<td><code>No CMAKE_C_COMPILER could be found</code> (with <code>Building for: Visual Studio 17 2022</code>)</td>
+<td>CMake's Visual Studio auto-detection found no usable compiler. Current editors no longer route <strong>Default</strong> through that auto-detection on Windows, so update the editor first. Otherwise pick an explicit compiler in <strong>Editor Settings → Desktop → Compiler</strong> (MSVC, or Clang). The choice is remembered across projects, so you only set it once. If even MSVC fails here, your Visual Studio C++ toolset is incomplete — repair "Desktop development with C++" in the Visual Studio Installer.</td>
+</tr>
+<tr>
+<td><code>internal compiler error: Killed</code> (GCC/Clang) or <code>fatal error C1060: compiler is out of heap space</code> (MSVC)</td>
+<td>The parallel build ran out of memory. Lower <strong>Export Project → Desktop → Build Jobs</strong> (try <code>1</code> or <code>2</code>) — see <a href="#parallel-builds">Parallel builds</a>.</td>
+</tr>
+<tr>
+<td><code>Does not match the generator used previously</code></td>
+<td>The build directory holds a cache from a different generator. The editor normally cleans it automatically when you switch compilers; if it reports the directory is <strong>locked</strong>, close anything using <code>.quantum/build</code> (notably the VS Code <em>CMake Tools</em> extension) or delete the folder manually, then try again.</td>
+</tr>
+<tr>
+<td><code>CMake configuration failed</code> with <strong>no other output</strong></td>
+<td>Update the editor — older versions dropped the output of commands that failed quickly. Current versions print the full CMake error plus a <code>Process exited with code N</code> line.</td>
+</tr>
+<tr>
+<td><code>CMake Error: File ... does not exist.</code> (or similar) for a script or <code>.bundle</code> you already deleted</td>
+<td>Generated sources still listed a missing file. Current editors skip files that are gone from disk; press Play or Save once to regenerate. Do not patch the generated <code>CMakeLists.txt</code> — it is overwritten. If a closed scene still shows the old ScriptComponent entry, open that scene, remove the leftover, and save.</td>
+</tr>
+<tr>
+<td><code>Unknown type SomeClass</code></td>
+<td>A leftover C++ script class name is still registered. Remove that ScriptComponent entry from every scene and bundle that still lists it, then Play or Save. Recreating a script with the same class name also recovers a project that was already broken.</td>
+</tr>
+<tr>
+<td><code>Compiler kit or engine library directory changed...</code> or <code>CMake generator or architecture changed...</code> followed by <em>Cleaning build directory</em></td>
+<td>Not an error — the compiler, generator, target architecture or editor install changed, so the editor wipes <code>.quantum/build</code> and reconfigures from scratch.</td>
+</tr>
+<tr>
+<td>Errors persist after fixing the toolchain</td>
+<td>Delete <code>.quantum/build</code> and press Play again to force a clean configure.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Link to this section">&para;</a></h2>
+<ul>
+<li><a href="../creating-scripts/">Creating Scripts</a> — script types and editor workflow</li>
+<li><a href="../../editor/code-editor/">Code Editor</a> — editing C++ in the editor and reading build output</li>
+<li><a href="../../editor/editor-settings/">Editor Settings</a> — where the compiler and CMake path are configured</li>
+<li><a href="../../editor/export/">Export Window</a> — building standalone projects outside the editor</li>
+</ul>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../creating-scripts/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Creating Scripts</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../events/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Events</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/manual/cpp-build-setup.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#c-build-setup" class="dx-toc-link" data-level="1">C++ Build Setup</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#required-tools" class="dx-toc-link" data-level="2">Required tools</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#choosing-a-compiler" class="dx-toc-link" data-level="2">Choosing a compiler</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#parallel-builds" class="dx-toc-link" data-level="2">Parallel builds</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#script-directories" class="dx-toc-link" data-level="2">Script directories</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#customizing-the-build" class="dx-toc-link" data-level="2">Customizing the build</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#where-build-files-live" class="dx-toc-link" data-level="2">Where build files live</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#troubleshooting" class="dx-toc-link" data-level="2">Troubleshooting</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#next-steps" class="dx-toc-link" data-level="2">Next steps</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../versions.json";
+    window.QUANTUM_PAGE_URL = "manual/cpp-build-setup/";
+  </script>
+  <script src="../../js/quantum.js" defer></script>
+</body>
+</html>

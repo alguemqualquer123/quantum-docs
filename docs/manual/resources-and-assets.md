@@ -1,10 +1,10 @@
 ---
-description: Resource loading, asset formats, runtime pools, file I/O, and user settings in Doriax.
+description: Resource loading, asset formats, runtime pools, file I/O, and user settings in Quantum.
 ---
 
 # Resources & Assets
 
-Doriax projects combine editor-managed resources with runtime pools and file helpers.
+Quantum projects combine editor-managed resources with runtime pools and file helpers.
 Media assets are ordinary files that the runtime opens directly, both in the editor and
 in an exported game. Export copies them unchanged or places their bytes in an optional
 native resource pack, compiles shaders for the target backend, and turns scenes and
@@ -308,8 +308,10 @@ At export time the editor copies the **contents** of the assets and Lua director
 the `assets` and `lua` folders of the output. With the experimental **Native Resource
 Pack** project setting enabled, native exports then combine those two trees into
 `resources.pak` and remove the loose contents. Editor Play mode keeps using the source
-directories. Shaders are compiled for the target platform. The source project folder is
-not modified in either case.
+directories. Shaders are compiled for the target platform. Visual-script `.graph` source
+files are validated and compiled to adjacent runtime `.gdat` blobs in the output; the
+authoring YAML is kept, but the game consumes the deterministic DGR1 blob. The source
+project folder is not modified in either case.
 
 Scene and bundle YAML is not needed by the exported game, since export has already turned
 it into compiled code. Those files may still appear inside the output `assets` folder when

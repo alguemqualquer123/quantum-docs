@@ -1,10 +1,10 @@
 ---
-description: Integrated 2D and 3D physics in Doriax, powered by Box2D and Jolt Physics.
+description: Integrated 2D and 3D physics in Quantum, powered by Box2D and Jolt Physics.
 ---
 
 # Physics
 
-Doriax includes integrated physics for both 2D and 3D games, so you can add realistic
+Quantum includes integrated physics for both 2D and 3D games, so you can add realistic
 movement, collisions, and interactions without external libraries.
 
 ![A platform's Body3D box shape drawn in the editor](../assets/screenshots/editor-physics.png)
@@ -417,7 +417,7 @@ the work from `onUpdate` or `onFixedUpdate`. `PhysicsSystem::isSteppingWorld3D()
 ## Raycasts and ground checks
 
 A common need for character controllers is knowing whether a body is **standing on the
-ground**. Doriax has no built-in `isGrounded()` flag, but you can build a reliable check
+ground**. Quantum has no built-in `isGrounded()` flag, but you can build a reliable check
 two ways.
 
 ### Downward raycast (recommended)
@@ -473,7 +473,7 @@ handled correctly.
 
 ## Joints
 
-Doriax exposes 2D and 3D joint wrappers for constrained motion. 2D joint types are
+Quantum exposes 2D and 3D joint wrappers for constrained motion. 2D joint types are
 distance, revolute, prismatic, mouse, wheel, weld, and motor joints. With **Rope**
 enabled, a distance joint lets the bodies move closer but never farther apart than when
 it was created. In 3D, use constraints and allowed degrees of freedom to lock or limit
@@ -590,7 +590,7 @@ need full two-way physics, put both bodies in the same scene.
 
 ### Move a body to another scene
 
-Doriax has no transfer API. Recreate the entity in the target scene instead:
+Quantum has no transfer API. Recreate the entity in the target scene instead:
 
 1. Read the position, rotation, `linearVelocity` and `angularVelocity` of the old body.
 2. Create the entity in the target scene, or instance a bundle there, and set those

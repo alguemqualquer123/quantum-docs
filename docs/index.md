@@ -1,21 +1,22 @@
 ---
 hide_title: true
-description: Official documentation for the Doriax game engine — a free, lightweight, open-source engine for building 2D and 3D games with Lua or C++.
+description: Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and release automation.
 ---
 
 <div class="dx-hero" markdown>
 
-<span class="dx-hero-badge">Open Source &amp; Free</span>
+<span class="dx-hero-badge">C++17 · Lua · Open Source</span>
 
-# Lightweight engine <span class="dx-text-gradient">for 2D &amp; 3D games</span> { .dx-hero-title }
+# Build worlds. Ship runtimes. <span class="dx-text-gradient">Stay in control.</span> { .dx-hero-title }
 
-Welcome to the official documentation for **Doriax Engine** — a free, lightweight,
+Welcome to the official documentation for **Quantum Engine** — a free, lightweight,
 and efficient open-source game engine with an integrated editor for creating 2D and
-3D games. Script in **Lua** or **C++**, design scenes visually, and deploy to six platforms.
+3D games. Script in **Lua** or **C++**, author scenes in the editor, validate real frames,
+and ship a tested runtime across desktop, mobile, and web targets.
 
 <div class="dx-hero-actions" markdown>
 [Get Started](getting-started/introduction.md){ .dx-btn .dx-btn-primary }
-[Download the Editor](https://doriax.org/#download){ .dx-btn .dx-btn-outline }
+[Editor &amp; runtime workflow](getting-started/the-editor.md){ .dx-btn .dx-btn-outline }
 </div>
 
 </div>
@@ -23,7 +24,7 @@ and efficient open-source game engine with an integrated editor for creating 2D 
 !!! note "Documentation status"
     This documentation covers the editor workflow, runtime architecture, core
     subsystems, build targets, and the current public API surface exposed by the
-    Doriax source tree. Doriax is moving quickly, so the reference pages are written
+    Quantum source tree. Quantum is moving quickly, so the reference pages are written
     to be practical guides rather than frozen ABI guarantees.
 
 ## Start here
@@ -32,12 +33,12 @@ and efficient open-source game engine with an integrated editor for creating 2D 
 
 <a class="dx-card" href="getting-started/introduction/">
 <p class="dx-card-title">Introduction</p>
-<p class="dx-card-desc">What Doriax is, its architecture, and what you can build with it.</p>
+<p class="dx-card-desc">What Quantum is, its architecture, and what you can build with it.</p>
 </a>
 
 <a class="dx-card" href="getting-started/installation/">
 <p class="dx-card-title">Installation</p>
-<p class="dx-card-desc">Download a prebuilt editor or build Doriax from source.</p>
+<p class="dx-card-desc">Download a prebuilt editor or build Quantum from source.</p>
 </a>
 
 <a class="dx-card" href="getting-started/first-project/">
@@ -55,9 +56,19 @@ and efficient open-source game engine with an integrated editor for creating 2D 
 <p class="dx-card-desc">Complete class reference with C++ and Lua on every page.</p>
 </a>
 
+<a class="dx-card" href="manual/networking/">
+<p class="dx-card-title">Multiplayer</p>
+<p class="dx-card-desc">Authenticated UDP, replication policy, reconnect soak, and two-player Network Play.</p>
+</a>
+
+<a class="dx-card" href="manual/asset-pipeline/">
+<p class="dx-card-title">Assets &amp; releases</p>
+<p class="dx-card-desc">Deep asset audits, DXPK2 integrity, manifests, and release artifact hashes.</p>
+</a>
+
 </div>
 
-## Why Doriax
+## Why Quantum
 
 <div class="dx-feature-grid" markdown>
 
@@ -83,7 +94,7 @@ and efficient open-source game engine with an integrated editor for creating 2D 
 
 <div class="dx-feature" markdown>
 **Cross-Platform**
-<p>Deploy to Windows, Linux, macOS, Android, iOS, and HTML5 with OpenGL, Vulkan, Metal, and DirectX backends.</p>
+<p>Build for Windows, Linux, macOS, Android, iOS, and WebGL2 with platform-specific release manifests and smoke gates.</p>
 </div>
 
 <div class="dx-feature" markdown>
@@ -96,19 +107,25 @@ and efficient open-source game engine with an integrated editor for creating 2D 
 <p>Scene serialization, script generation, shader compilation, and platform-specific project generation live in the editor.</p>
 </div>
 
+<div class="dx-feature" markdown>
+**Production diagnostics**
+<p>Crash sidecars, safe mode, script lint/debug, asset verification, frame capture, and artifact hashing keep failures observable.</p>
+</div>
+
 </div>
 
 ## The editor
 
-![Doriax editor with a 3D pirate adventure scene](assets/screenshots/editor-pirate-adventure.png)
+![Quantum atmosphere runtime capture with HDR, TAA, and analytical atmosphere](assets/screenshots/quantum-atmosphere-banner.png)
 
-Doriax ships with a complete visual editor: design scenes, edit 2D tilemaps, animate
-characters, write code, and test your game in play mode — all from one unified
-environment. Learn more in [The Editor](editor/index.md).
+Quantum ships with a visual editor for scene structure, assets, properties,
+animation, code, terrain, shader variants, Network Play, and export. Learn more
+in [The Editor](editor/index.md), or jump to [Network Play](editor/network-play.md)
+and [stability &amp; recovery](editor/stability-and-recovery.md).
 
 ---
 
-!!! tip "Coming from Supernova?"
-    Doriax Engine is the continuation of **Supernova Engine** under a new identity.
-    Version `0.5.5` was the last legacy Supernova release. The core ECS and
-    data-oriented runtime remain, now wrapped in a full editor and export pipeline.
+!!! note "Documentation status"
+    The docs distinguish integrated runtime paths from roadmap items. Backend- and
+    GPU-specific visual baselines, artistic rendering fixtures, signing/notarization, matchmaking/NAT, and the
+    editor Play debugger endpoint remain explicit follow-up work.

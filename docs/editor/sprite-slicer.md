@@ -1,5 +1,5 @@
 ---
-description: Using the Sprite Slicer tool in Doriax to cut sprite sheets into individual frames.
+description: Using the Sprite Slicer tool in Quantum to cut sprite sheets into individual frames.
 ---
 
 # Sprite Slicer

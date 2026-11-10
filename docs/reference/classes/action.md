@@ -9,7 +9,7 @@ description: Action API reference (C++ and Lua).
 
 ## Description
 
-Base class for all time-driven actions in Doriax. Actions are managed by [ActionSystem](actionsystem.md), which advances them each frame. You typically do not instantiate `Action` directly; instead you use concrete subclasses:
+Base class for all time-driven actions in Quantum. Actions are managed by [ActionSystem](actionsystem.md), which advances them each frame. You typically do not instantiate `Action` directly; instead you use concrete subclasses:
 
 * [TimedAction](timedaction.md) — a single tween with start/end values and duration
 * [Animation](animation.md) — a sequenced timeline of `ActionFrame` entries

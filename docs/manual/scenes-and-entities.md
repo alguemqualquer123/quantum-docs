@@ -1,5 +1,5 @@
 ---
-description: Scenes, entities, transforms, scene types, child scenes, and bundles in Doriax Engine.
+description: Scenes, entities, transforms, scene types, child scenes, and bundles in Quantum Engine.
 ---
 
 # Scenes & Entities
@@ -27,8 +27,8 @@ it.
 === "C++"
 
     ```cpp
-    #include "Doriax.h"
-    using namespace doriax;
+    #include "Quantum.h"
+    using namespace quantum;
 
     Scene scene;
     // ... add entities ...
@@ -97,7 +97,7 @@ An **entity** is a lightweight integer identifier that lives in a scene. By itse
 holds no behavior or data; it gains both by having **components** attached to it. This
 is the core of the [Entity Component System](entity-component-system.md).
 
-Higher-level objects in Doriax — `Sprite`, `Model`, `Camera`, `Button`, etc. — are
+Higher-level objects in Quantum — `Sprite`, `Model`, `Camera`, `Button`, etc. — are
 convenience wrappers. They create or reference an entity and manipulate the components
 it needs for you.
 

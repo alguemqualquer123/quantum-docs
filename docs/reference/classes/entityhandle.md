@@ -8,9 +8,9 @@ description: EntityHandle API reference (C++ and Lua).
 
 ## Description
 
-The base class for all high-level Doriax objects that wrap an ECS entity. `EntityHandle` stores a reference to its owning `Scene` and its `Entity` identifier, giving C++ and Lua code a convenient handle to a scene entity without having to interact with the raw ECS API.
+The base class for all high-level Quantum objects that wrap an ECS entity. `EntityHandle` stores a reference to its owning `Scene` and its `Entity` identifier, giving C++ and Lua code a convenient handle to a scene entity without having to interact with the raw ECS API.
 
-Most classes in the Doriax API — [Object](object.md), [Action](action.md), [Sound](sound.md), [Skybox](skybox.md), etc. — inherit from `EntityHandle`.
+Most classes in the Quantum API — [Object](object.md), [Action](action.md), [Sound](sound.md), [Skybox](skybox.md), etc. — inherit from `EntityHandle`.
 
 ### Properties
 

@@ -1,10 +1,10 @@
 ---
-description: Overview of building Doriax from source and exporting projects to each platform.
+description: Overview of building Quantum from source and exporting projects to each platform.
 ---
 
 # Building — Overview
 
-There are two things you might "build" with Doriax:
+There are two things you might "build" with Quantum:
 
 1. **The editor itself**, from source, using CMake.
 2. **Your game project**, exported from the editor to a target platform.
@@ -16,19 +16,20 @@ This section focuses on building from source and the per-platform requirements.
     manual per-platform steps here apply to **Source Code** exports and to building the
     editor or engine itself. See [Export Window](../editor/export.md#export-modes).
 
-!!! note "Transition in progress"
-    Doriax is the continuation of Supernova Engine. Some platform tooling and folder
-    names are still being refreshed under the Doriax name, so a few steps may reference
-    legacy paths. When in doubt, the CMake commands below are the source of truth.
+!!! note "Current tooling"
+    Quantum keeps platform tooling and project folders under the `quantum` naming
+    convention. Generated project files may still contain upstream compatibility
+    identifiers in isolated integration points; the CMake commands below are the source
+    of truth.
 
 ## Building the editor from source
 
-Doriax uses **CMake**. The root project builds the desktop editor target
-`doriax-editor`.
+Quantum uses **CMake**. The root project builds the desktop editor target
+`quantum-editor`.
 
 ```bash
-git clone https://github.com/doriaxengine/doriax.git
-cd doriax
+git clone https://github.com/alguemqualquer123/quantum.git
+cd quantum
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build --config Release
 ```
@@ -53,7 +54,7 @@ the top-level CMake project, it looks for a project root at `engine/project` unl
 
 ```bash
 cmake -S engine -B build-runtime -DCMAKE_BUILD_TYPE=Debug
-cmake --build build-runtime --config Debug --target doriax-project
+cmake --build build-runtime --config Debug --target quantum-project
 ```
 
 Useful runtime variables:
@@ -68,7 +69,7 @@ The target system picks the app backend, so there is no variable to set. See
 [App backend](../reference/build-options.md#app-backend).
 
 The [build script](build-script.md) runs these commands in one step:
-`python3 engine/doriax.py` here, or `python3 doriax.py` in a Source Code export.
+`python3 engine/quantum.py` here, or `python3 quantum.py` in a Source Code export.
 
 ## Per-platform guides
 
@@ -83,14 +84,14 @@ The [build script](build-script.md) runs these commands in one step:
 
 ## Build options
 
-Doriax exposes CMake options to control how a project is built. Two common ones control
+Quantum exposes CMake options to control how a project is built. Two common ones control
 the scripting entry point:
 
 | Option | Effect |
 | --- | --- |
 | `NO_CPP_INIT` | Disable the C++ `init()` entry point |
 | `NO_LUA_INIT` | Disable the Lua entry point |
-| `DORIAX_SHARED` | Build the engine as a shared library where supported |
+| `QUANTUM_SHARED` | Build the engine as a shared library where supported |
 | `EMSCRIPTEN_THREAD_SUPPORT` | Enable pthread support for Emscripten builds |
 
 Pass them at configure time, for example:

@@ -1,5 +1,5 @@
 ---
-description: The Project Settings dialog — application identity, canvas, window, directories, build, and per-platform export settings in the Doriax editor.
+description: The Project Settings dialog — application identity, canvas, window, directories, build, and per-platform export settings in the Quantum editor.
 ---
 
 # Project Settings
@@ -169,7 +169,7 @@ Play is not affected: the editor always runs with both backends, so a scene can 
 hold a body the export will drop. The export warns when it does, naming the scenes, and
 the exported game runs without those bodies and joints. A C++ script that includes
 `Body2D.h` or `Body3D.h` stops the export build with an error naming this setting; code
-that must build either way can test `DORIAX_PHYSICS_2D` and `DORIAX_PHYSICS_3D`, which are
+that must build either way can test `QUANTUM_PHYSICS_2D` and `QUANTUM_PHYSICS_3D`, which are
 only defined for an enabled backend. For picking and line-of-sight without any physics, cast against mesh
 bounds with [`RayFilter::BOUNDS`](../reference/classes/ray.md#rayfilter).
 
@@ -192,18 +192,18 @@ Studio workspaces are generated.
 | Setting | Default | Effect |
 | --- | --- | --- |
 | **App Name** | Shared name | Title of the exported web page |
-| **Favicon** | Doriax icon | Browser-tab icon, copied next to the page and linked from its `<head>` |
-| **Custom HTML Shell** | None | HTML wrapper for the generated page. The file **must** contain a `{{DORIAX_DEFAULT_HTML}}` marker |
+| **Favicon** | Quantum icon | Browser-tab icon, copied next to the page and linked from its `<head>` |
+| **Custom HTML Shell** | None | HTML wrapper for the generated page. The file **must** contain a `{{QUANTUM_DEFAULT_HTML}}` marker |
 | **Head Include** | Empty | HTML inserted into the page's `<head>` |
 | **Resize Canvas To Window** | Enabled | Resizes the rendering surface to the browser window. Aspect ratio and stretching still follow the canvas **Scaling Mode** |
 | **Hide Emscripten UI** | Disabled | Hides the default logo, status line, controls and output console. The nodes are kept alive, so the SDK's status callbacks keep working |
 | **Game Portal** | None | The web game portal whose SDK the export builds in, for the [`WebPortal`](../reference/classes/webportal.md) class: CrazyGames, Poki, GameDistribution, Yandex Games or YouTube Playables |
 | **Portal Game ID** | Empty | GameDistribution only: the game's ID from the GameDistribution dashboard. Without it the SDK is not loaded |
 
-A custom shell replaces `{{DORIAX_DEFAULT_HTML}}` with the page Emscripten generated;
+A custom shell replaces `{{QUANTUM_DEFAULT_HTML}}` with the page Emscripten generated;
 the build fails with a clear CMake error when the marker is missing. Two more optional
-markers give you control over placement: `{{DORIAX_TITLE}}` is replaced with the app
-name, and `{{DORIAX_HEAD_INCLUDE}}` receives the favicon link, the head include, and the
+markers give you control over placement: `{{QUANTUM_TITLE}}` is replaced with the app
+name, and `{{QUANTUM_HEAD_INCLUDE}}` receives the favicon link, the head include, and the
 styles the two checkboxes add. Without that second marker the block is inserted before
 `</head>`.
 

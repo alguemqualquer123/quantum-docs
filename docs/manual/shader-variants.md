@@ -1,5 +1,5 @@
 ---
-description: How Doriax keys shader variants, where a project's set is collected, and what to do when an exported build is missing one.
+description: How Quantum keys shader variants, where a project's set is collected, and what to do when an exported build is missing one.
 ---
 
 # Shader Variants
@@ -36,7 +36,7 @@ editor has actually drawn. Two consequences:
   not been rendered yet does not lose its variant from the file. Entries accumulate and
   are never pruned automatically — drop stale ones in the Export Window's **Shaders**
   list.
-- A headless [`doriax-editor export`](../editor/command-line.md#export-build-a-project-to-a-target)
+- A headless [`quantum-editor export`](../editor/command-line.md#export-build-a-project-to-a-target)
   has no renderer, so it discovers nothing and exports exactly what the `.scene` files
   already carry.
 
@@ -149,16 +149,16 @@ An exported game checks its precompiled set at startup. If a variant it needs is
 it prints the missing specs together with the command that generates them, then exits:
 
 ```
-Doriax is missing precompiled shaders in:
+Quantum is missing precompiled shaders in:
 assets/shaders
 
 Missing shaders:
 mesh:Uv1,Uv2,Puc,Shw,Nor,Tan,Ski,Aop; mesh:Uv1,Puc,Shw,Nor,Tan,Aop
 
 Bundle precompiled shaders for graphic backend: opengl
-To generate them manually with Doriax Editor:
+To generate them manually with Quantum Editor:
 
-> doriax-editor shaders --out "assets/shaders" --backend opengl --shader "mesh:Uv1,Uv2,Puc,Shw,Nor,Tan,Ski,Aop" --shader "mesh:Uv1,Puc,Shw,Nor,Tan,Aop"
+> quantum-editor shaders --out "assets/shaders" --backend opengl --shader "mesh:Uv1,Uv2,Puc,Shw,Nor,Tan,Ski,Aop" --shader "mesh:Uv1,Puc,Shw,Nor,Tan,Aop"
 ```
 
 The listed specs are authoritative — they are what the running scene asked for. Fix it in

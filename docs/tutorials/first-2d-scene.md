@@ -1,5 +1,5 @@
 ---
-description: Build a small 2D Doriax scene with a sprite, camera, input, physics, and a script.
+description: Build a small 2D Quantum scene with a sprite, camera, input, physics, and a script.
 ---
 
 # First 2D Scene

@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creating Scripts — Quantum Engine Docs</title>
+  <meta name="description" content="Create Lua and C++ scripts in Quantum, attach them to entities, and understand script lifecycle.">
+  <meta property="og:title" content="Creating Scripts — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/manual/creating-scripts/">
+
+  <link rel="icon" type="image/png" href="../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/quantum.css">
+  <link rel="stylesheet" href="../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="creating-scripts">Creating Scripts<a class="headerlink" href="#creating-scripts" title="Link to this section">&para;</a></h1>
+<p>Scripts attach behavior to entities through <code>ScriptComponent</code>. A script does not own
+the entity. It receives the entity ID and scene pointer, then reads or changes the
+components attached to that entity.</p>
+<p>This page covers the full workflow from the Quantum editor through runtime initialization,
+export, and cleanup.</p>
+<h2 id="mental-model">Mental model<a class="headerlink" href="#mental-model" title="Link to this section">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Entity
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  └── ScriptComponent
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        └── scripts[]: ScriptEntry
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>              ├── type        (SUBCLASS | SCRIPT_CLASS | SCRIPT_LUA)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>              ├── path        (.lua or .cpp)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>              ├── headerPath  (.h for C++; empty for Lua)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>              ├── className   (C++ class or Lua module name)
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>              ├── enabled
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>              ├── properties[] (inspector values)
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>              └── instance    (C++ pointer or Lua registry ref)
+</code></pre></div>
+<p>One <code>ScriptComponent</code> holds <strong>multiple</strong> script entries. Each entry is independent and
+can be enabled or disabled separately.</p>
+<h2 id="create-a-script-in-the-editor">Create a script in the editor<a class="headerlink" href="#create-a-script-in-the-editor" title="Link to this section">&para;</a></h2>
+<p>There are two ways to attach a script to an entity. Use <strong>New Script</strong> when you want
+the editor to generate the files for you; use <strong>Add Script</strong> when the files already
+exist and you only need a new entry pointing at them.</p>
+<h3 id="flow-a-new-script-generates-the-files">Flow A — New Script (generates the files)<a class="headerlink" href="#flow-a-new-script-generates-the-files" title="Link to this section">&para;</a></h3>
+<ol>
+<li>Select an entity in the <strong>Structure</strong> panel.</li>
+<li>Click <strong>New Script</strong> at the top of the <strong>Properties</strong> window (next to
+   <strong>New component</strong>).</li>
+<li>Choose <strong>Lua Script</strong>, <strong>C++ Subclass</strong>, or <strong>C++ Script Class</strong>.</li>
+<li>Enter a class/module name and confirm.</li>
+</ol>
+<p>The editor then does everything in one undoable step:</p>
+<ul>
+<li>writes template files into your project (header + source for C++, a single <code>.lua</code>
+  module for Lua) with example properties and event registration already in place,</li>
+<li>adds a <code>ScriptComponent</code> to the entity if it does not have one,</li>
+<li>appends an enabled script entry linked to the new files.</li>
+</ul>
+<p><img alt="The Create Script dialog" src="../../assets/screenshots/script-create-dialog.png" /></p>
+<p>The same dialog's <strong>Attach existing</strong> option links a script that already exists: browse
+to the <code>.lua</code> file (or the C++ header and source) and click <strong>Attach</strong>. The files are
+not changed.</p>
+<h3 id="flow-b-add-script-links-existing-files">Flow B — Add Script (links existing files)<a class="headerlink" href="#flow-b-add-script-links-existing-files" title="Link to this section">&para;</a></h3>
+<ol>
+<li>Select the entity and add <code>ScriptComponent</code> through <strong>New component</strong> (skip if it
+   already has one).</li>
+<li>In the <strong>ScriptComponent</strong> section, click <strong>Add Script</strong>. This creates an <em>empty</em>
+   script entry — no files are written.</li>
+<li>Click the pencil button on the new entry to open <strong>Edit Script Details</strong> and set the
+   class name, then pick the <strong>Header File</strong> and <strong>Source File</strong> (or the <code>.lua</code> file for
+   Lua scripts) from your project.</li>
+</ol>
+<p>Use this flow to reuse one script across many entities, or to wire up files you wrote
+outside the editor.</p>
+<h3 id="managing-script-entries">Managing script entries<a class="headerlink" href="#managing-script-entries" title="Link to this section">&para;</a></h3>
+<p>Each entry in the ScriptComponent section has its own controls:</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Checkbox</td>
+<td>Enable or disable the entry without removing it</td>
+</tr>
+<tr>
+<td>Pencil button</td>
+<td>Open <strong>Edit Script Details</strong> (class name, header, source); the <strong>×</strong> buttons clear a linked file</td>
+</tr>
+<tr>
+<td>File buttons</td>
+<td>Open the header or source in the integrated Code Editor</td>
+</tr>
+<tr>
+<td>Right-click the entry header</td>
+<td><strong>Move Up</strong>, <strong>Move Down</strong>, or <strong>Remove</strong> the entry</td>
+</tr>
+</tbody>
+</table>
+<p>Entries run in list order, so use Move Up/Down when one script must initialize before
+another. All edits are undoable.</p>
+<h2 id="script-types">Script types<a class="headerlink" href="#script-types" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Enum value</th>
+<th>Generated base</th>
+<th>Best use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lua Script</td>
+<td><code>SCRIPT_LUA</code></td>
+<td>Lua table module</td>
+<td>Fast iteration, UI glue, triggers, controllers</td>
+</tr>
+<tr>
+<td>C++ Subclass</td>
+<td><code>SUBCLASS</code></td>
+<td>The wrapper class matching the entity (<code>Mesh</code>, <code>Camera</code>, <code>Terrain</code>, <code>Button</code>, …)</td>
+<td>Behavior that calls wrapper methods like <code>getPosition()</code></td>
+</tr>
+<tr>
+<td>C++ Script Class</td>
+<td><code>SCRIPT_CLASS</code></td>
+<td><code>ScriptBase</code></td>
+<td>Logic that accesses scene/entity explicitly without a wrapper</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-the-editor-picks-a-c-subclass-base">How the editor picks a C++ subclass base<a class="headerlink" href="#how-the-editor-picks-a-c-subclass-base" title="Link to this section">&para;</a></h3>
+<p>The editor inspects the selected entity's components and picks the <strong>most specific</strong>
+wrapper class for it — the same class it uses when you drag that entity into a header as
+an <a href="../script-properties/#insert-entity-references-by-drag-and-drop">entity reference property</a>.
+A few examples:</p>
+<table>
+<thead>
+<tr>
+<th>Entity has</th>
+<th>Default base class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TerrainComponent</code></td>
+<td><code>Terrain</code></td>
+</tr>
+<tr>
+<td><code>ModelComponent</code></td>
+<td><code>Model</code></td>
+</tr>
+<tr>
+<td><code>WaterComponent</code></td>
+<td><code>Water</code></td>
+</tr>
+<tr>
+<td><code>MeshComponent</code> (and none of the above)</td>
+<td><code>Mesh</code></td>
+</tr>
+<tr>
+<td><code>ButtonComponent</code></td>
+<td><code>Button</code></td>
+</tr>
+<tr>
+<td><code>CameraComponent</code></td>
+<td><code>Camera</code></td>
+</tr>
+<tr>
+<td><code>Body3DComponent</code></td>
+<td><code>Body3D</code></td>
+</tr>
+<tr>
+<td><code>Transform</code> (and no recognized component)</td>
+<td><code>Object</code></td>
+</tr>
+<tr>
+<td>None of the above</td>
+<td><code>EntityHandle</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Not every base has a transform</p>
+<p>Wrappers such as <code>Body3D</code>, <code>Sound</code>, and the action classes derive from <code>EntityHandle</code>
+rather than <code>Object</code>, so they have no <code>getPosition()</code> / <code>setPosition()</code> and the
+generated skeleton leaves the movement example out.</p>
+</div>
+<h3 id="c-subclass-vs-c-script-class">C++ Subclass vs. C++ Script Class<a class="headerlink" href="#c-subclass-vs-c-script-class" title="Link to this section">&para;</a></h3>
+<p>This is the most common source of confusion, so it's worth stating plainly. Both are C++
+classes attached through a <code>ScriptComponent</code>. The <strong>only</strong> difference is what they inherit
+from — and that changes how you reach the entity.</p>
+<p><strong>C++ Subclass — the script <em>is</em> the object.</strong></p>
+<p>The class inherits from the object wrapper that matches the entity (the table above shows
+which one the editor picks). The script instance therefore <em>is</em> a <code>Camera</code>, <code>Mesh</code>,
+<code>Object</code>, etc. for that entity, so you call wrapper methods directly on <code>this</code> — no wrapper
+to construct:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Subclass generated on a Camera entity</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">FreeLook</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">quantum</span><span class="o">::</span><span class="n">Camera</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onUpdate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="n">setPosition</span><span class="p">(</span><span class="n">getPosition</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">offset</span><span class="p">);</span><span class="w">   </span><span class="c1">// Object method, called on this</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">        </span><span class="n">setView</span><span class="p">(</span><span class="n">target</span><span class="p">);</span><span class="w">                        </span><span class="c1">// Camera-specific method, called on this</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">};</span>
+</code></pre></div>
+<p>Yes — exactly as you'd expect: a subclass created on a <strong>Camera</strong> entity inherits from
+<code>Camera</code>, and you get the <code>Camera</code> API for free. The wrapper hierarchy is:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>EntityHandle  →  Object  →  Camera
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>                         →  Light
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>                         →  Mesh   →  Shape   →  Mirror
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>                                   →  Terrain
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>                         →  Water
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>              →  Body3D
+</code></pre></div>
+<p>So a <code>Camera</code> subclass also has every <code>Object</code> method (<code>getPosition</code>, <code>setRotation</code>, …)
+and every <code>EntityHandle</code> method (<code>getComponent</code>, <code>addComponent</code>, <code>getName</code>, …). An
+<code>Object</code> subclass has Object + EntityHandle methods; a bare <code>EntityHandle</code> subclass (an
+entity with no <code>Transform</code>) has only the component-access methods.</p>
+<p><strong>C++ Script Class — the script <em>references</em> the object.</strong></p>
+<p>The class inherits from <code>ScriptBase</code>, which holds nothing but <code>getScene()</code> and
+<code>getEntity()</code>. It implies no object type at all. To touch the entity you construct a
+wrapper yourself:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">ScoreTracker</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">quantum</span><span class="o">::</span><span class="n">ScriptBase</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onUpdate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="n">Object</span><span class="w"> </span><span class="n">self</span><span class="p">(</span><span class="n">getScene</span><span class="p">(),</span><span class="w"> </span><span class="n">getEntity</span><span class="p">());</span><span class="w">   </span><span class="c1">// wrap the entity explicitly</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">setPosition</span><span class="p">(...);</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">};</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>C++ Subclass</th>
+<th>C++ Script Class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base class</td>
+<td>Closest wrapper (<code>Camera</code> / <code>Terrain</code> / <code>Mesh</code> / <code>Object</code> / <code>EntityHandle</code>)</td>
+<td><code>ScriptBase</code></td>
+</tr>
+<tr>
+<td>Reaching the entity</td>
+<td>Call methods on <code>this</code> directly</td>
+<td>Construct a wrapper from <code>getScene()</code> / <code>getEntity()</code></td>
+</tr>
+<tr>
+<td>Implies an object type</td>
+<td>Yes — matches the entity</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Best when</td>
+<td>The script's job <em>is</em> this entity</td>
+<td>The script coordinates other entities or holds non-entity logic</td>
+</tr>
+</tbody>
+</table>
+<p>Neither is more powerful: a Script Class can do everything a Subclass can by constructing
+wrappers, and a Subclass can still reach other entities the same way. It is a design choice
+about ergonomics and intent — pick the base that matches what the script is <em>about</em>.</p>
+<h3 id="when-to-use-each-type">When to use each type<a class="headerlink" href="#when-to-use-each-type" title="Link to this section">&para;</a></h3>
+<ul>
+<li><strong>Lua</strong> — Prototyping, gameplay that changes often, designers tuning values in the
+  Properties, UI event handlers.</li>
+<li><strong>C++ Subclass</strong> — Movement, animation control, or physics on the entity the script
+  lives on. You get <code>setPosition()</code>, <code>getBody2D()</code>, camera/mesh/light methods, etc.
+  directly on <code>this</code>.</li>
+<li><strong>C++ Script Class</strong> — Managers, score trackers, spawners, or logic that touches many
+  entities through <code>getScene()</code> and <code>getEntity()</code>.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Which should a player controller use?</p>
+<p>A player controller almost always drives its <strong>own</strong> entity — reading input and moving
+its transform — so a <strong>C++ Subclass</strong> is the natural fit. The editor bases it on
+<code>Object</code> (or <code>Mesh</code> / <code>Camera</code> if the player entity has those components), so
+<code>getPosition()</code>/<code>setPosition()</code> and the physics wrappers are available on <code>this</code> with
+no boilerplate. Reach for a <strong>C++ Script Class</strong> only when the controller is really a
+coordinator that mostly manipulates <em>other</em> entities.</p>
+</div>
+<h2 id="lua-script-format">Lua script format<a class="headerlink" href="#lua-script-format" title="Link to this section">&para;</a></h2>
+<p>A Lua script file <strong>must return a table</strong>. The table is the script prototype; Quantum
+creates a per-entity instance at runtime.</p>
+<h3 id="minimal-template">Minimal template<a class="headerlink" href="#minimal-template" title="Link to this section">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">PlayerController</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nv">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;speed&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">displayName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Speed&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;float&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5.0</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">}</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="kr">function</span><span class="w"> </span><span class="nc">PlayerController</span><span class="p">:</span><span class="nf">init</span><span class="p">()</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nf">RegisterEngineEvent</span><span class="p">(</span><span class="nv">self</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;onUpdate&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="kr">end</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="kr">function</span><span class="w"> </span><span class="nc">PlayerController</span><span class="p">:</span><span class="nf">onUpdate</span><span class="p">()</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Object</span><span class="p">(</span><span class="nv">self</span><span class="p">.</span><span class="py">scene</span><span class="p">,</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">entity</span><span class="p">)</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">Input</span><span class="p">.</span><span class="nf">isKeyPressed</span><span class="p">(</span><span class="nv">Input</span><span class="p">.</span><span class="py">KEY_RIGHT</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">        </span><span class="nv">object</span><span class="p">.</span><span class="py">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">object</span><span class="p">.</span><span class="py">position</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="nv">self</span><span class="p">.</span><span class="py">speed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">Engine</span><span class="p">.</span><span class="py">deltatime</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="kr">end</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="kr">end</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="kr">return</span><span class="w"> </span><span class="nv">PlayerController</span>
+</code></pre></div>
+<h3 id="required-conventions">Required conventions<a class="headerlink" href="#required-conventions" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Return a table</td>
+<td><code>return MyScript</code> at end of file</td>
+</tr>
+<tr>
+<td>Properties table</td>
+<td>Optional <code>properties = { ... }</code> for Properties fields</td>
+</tr>
+<tr>
+<td><code>init()</code></td>
+<td>Optional lifecycle hook called after properties are injected</td>
+</tr>
+<tr>
+<td>Event methods</td>
+<td>Name methods to match events (<code>onUpdate</code>, <code>onClick</code>, etc.) and register in <code>init()</code></td>
+</tr>
+<tr>
+<td><code>self.scene</code></td>
+<td>Injected <code>Scene*</code> — use for systems and entity wrappers</td>
+</tr>
+<tr>
+<td><code>self.entity</code></td>
+<td>Injected entity ID</td>
+</tr>
+</tbody>
+</table>
+<h3 id="module-loading">Module loading<a class="headerlink" href="#module-loading" title="Link to this section">&para;</a></h3>
+<p><code>require("myscript")</code> resolves through the virtual filesystem:</p>
+<ol>
+<li><code>lua://lua/myscript.lua</code></li>
+<li><code>lua://myscript.lua</code></li>
+</ol>
+<p><code>ScriptComponent</code> entries store the path relative to the
+<a href="../../editor/project-workflow/#assets-and-lua-directories">Lua directory</a> and load it as
+<code>lua://</code> + path. Both lookups go through <code>Data</code>, so they still work when a native export
+packs Lua sources into <code>resources.pak</code>.</p>
+<p>A module that no entity runs, such as a utility table, is created from the Resources
+Browser with <strong>New → Lua Script</strong> — see
+<a href="../../editor/resources/#creating-files-and-folders">Creating files and folders</a>.</p>
+<h2 id="referencing-other-entities">Referencing other entities<a class="headerlink" href="#referencing-other-entities" title="Link to this section">&para;</a></h2>
+<p>A script frequently needs to touch entities other than its own — a child model, a sibling
+UI element, a target the designer picks. There are three ways to get a handle, and
+choosing the right one (and the right constructor) avoids the most common scripting bug:
+accidentally creating a new entity instead of referencing an existing one.</p>
+<h3 id="1-your-own-entity">1. Your own entity<a class="headerlink" href="#1-your-own-entity" title="Link to this section">&para;</a></h3>
+<p><code>self.entity</code> is the entity the script is attached to. Wrap it with the <strong>two-argument</strong>
+constructor for the object type you need:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Object</span><span class="p">(</span><span class="nv">self</span><span class="p">.</span><span class="py">scene</span><span class="p">,</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">entity</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="2-an-entity-the-designer-picks-entity-reference-property">2. An entity the designer picks (entity reference property)<a class="headerlink" href="#2-an-entity-the-designer-picks-entity-reference-property" title="Link to this section">&para;</a></h3>
+<p>Expose a typed property and drag the target entity onto it in the Properties window. The
+engine resolves it to a ready-to-use handle (or the target's script instance) before
+<code>init()</code> runs. This is the preferred way to wire up known relationships:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">MyScript</span><span class="p">.</span><span class="py">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;target&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Object&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">}</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="kr">function</span><span class="w"> </span><span class="nc">MyScript</span><span class="p">:</span><span class="nf">init</span><span class="p">()</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">target</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="nv">self</span><span class="p">.</span><span class="py">target</span><span class="p">.</span><span class="py">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="kr">end</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="kr">end</span>
+</code></pre></div>
+<p>See <a href="../script-properties/">Script Properties</a> for the supported reference types.</p>
+<div class="admonition tip">
+<p class="admonition-title">Declare the property by drag and drop</p>
+<p>You don't have to write the property declaration by hand: drag the entity from the
+<strong>Structure panel</strong> straight into the script open in the Code Editor — onto the
+<code>.lua</code> file or the C++ header. The editor inserts a typed property declaration <em>and</em>
+assigns the dropped entity as its value. See
+<a href="../script-properties/#insert-entity-references-by-drag-and-drop">Insert entity references by drag and drop</a>.</p>
+</div>
+<h3 id="3-an-entity-found-by-name">3. An entity found by name<a class="headerlink" href="#3-an-entity-found-by-name" title="Link to this section">&para;</a></h3>
+<p>When a reference isn't wired up, look it up with
+<a href="../../reference/classes/entityregistry/#findentity"><code>Scene:findEntity</code></a>. It returns the
+first entity with that name, or <code>NULL_ENTITY</code> if none. The two-argument form scopes the
+search to children of a parent:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kr">function</span><span class="w"> </span><span class="nc">MyScript</span><span class="p">:</span><span class="nf">init</span><span class="p">()</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">childEntity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">scene</span><span class="p">:</span><span class="nf">findEntity</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">entity</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">childEntity</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="nv">NULL_ENTITY</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">        </span><span class="nv">self</span><span class="p">.</span><span class="py">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Model</span><span class="p">(</span><span class="nv">self</span><span class="p">.</span><span class="py">scene</span><span class="p">,</span><span class="w"> </span><span class="nv">childEntity</span><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="kr">end</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="kr">end</span>
+</code></pre></div>
+<h3 id="wrap-vs-create-the-constructor-that-bites-people">Wrap vs. create: the constructor that bites people<a class="headerlink" href="#wrap-vs-create-the-constructor-that-bites-people" title="Link to this section">&para;</a></h3>
+<p>Every object handle has two constructors:</p>
+<table>
+<thead>
+<tr>
+<th>Constructor</th>
+<th>Effect</th>
+<th>Owns the entity?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Type(scene, entity)</code></td>
+<td><strong>Wraps</strong> an existing entity</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>Type(scene)</code></td>
+<td><strong>Creates a brand-new</strong> entity</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Use the two-argument form whenever the entity already exists (your own entity, a found
+child, an editor-placed object). Reserve the one-argument form for genuinely spawning new
+objects at runtime.</p>
+<div class="admonition warning">
+<p class="admonition-title">Pitfalls to avoid</p>
+<ul>
+<li><strong><code>Type(scene)</code> does not find anything</strong> — it always creates a new, empty entity.
+  Using it to "get" a model placed in the editor silently produces a duplicate.</li>
+<li><strong>Don't create or load assets in <code>onUpdate</code>.</strong> Loading a model
+  (<code>Model(scene)</code> + <code>loadGLTF</code>) every frame churns entities and floods the log with
+  errors. Do it once in <code>init()</code>.</li>
+<li><strong>Keep handles to created entities alive.</strong> A one-argument handle <em>owns</em> its
+  entity; if you store it only in a local variable, the entity can be destroyed when
+  that handle is garbage-collected. Store runtime-spawned objects in <code>self</code>.</li>
+<li><strong>Cache <code>findEntity</code> results.</strong> The lookup is linear over the entity list — resolve
+  once in <code>init()</code>, not every frame.</li>
+</ul>
+</div>
+<h2 id="lua-runtime-lifecycle">Lua runtime lifecycle<a class="headerlink" href="#lua-runtime-lifecycle" title="Link to this section">&para;</a></h2>
+<p>When a scene loads, and again whenever a bundle is spawned into it,
+<code>LuaBinding::initializeLuaScripts(scene)</code> runs three passes over the scripts that have not
+started yet:</p>
+<h3 id="pass-1-create-instances">Pass 1 — Create instances<a class="headerlink" href="#pass-1-create-instances" title="Link to this section">&para;</a></h3>
+<p>For each enabled <code>SCRIPT_LUA</code> entry:</p>
+<ol>
+<li>Load and execute the Lua module with <code>require</code>.</li>
+<li>Verify the return value is a table.</li>
+<li>Create an instance table with the module table as <code>__index</code>.</li>
+<li>Set <code>__name</code> to the script class name.</li>
+<li>Inject <code>scene</code> and <code>entity</code>.</li>
+<li>Copy Properties property values onto the instance (<code>self.speed = 5.0</code>, etc.).</li>
+<li>Store a Lua registry reference in <code>ScriptEntry.instance</code>.</li>
+</ol>
+<h3 id="pass-2-resolve-entity-references">Pass 2 — Resolve entity references<a class="headerlink" href="#pass-2-resolve-entity-references" title="Link to this section">&para;</a></h3>
+<p>Pointer/entity properties (<code>EntityReference</code>) are resolved:</p>
+<ul>
+<li>If the target entity has a matching enabled Lua script, the reference becomes that
+  Lua script instance.</li>
+<li>Otherwise Quantum pushes a typed wrapper (<code>Object</code>, <code>Mesh</code>, <code>Camera</code>, <code>EntityHandle</code>,
+  etc.) based on <code>ptrTypeName</code>.</li>
+</ul>
+<h3 id="pass-3-call-init">Pass 3 — Call <code>init()</code><a class="headerlink" href="#pass-3-call-init" title="Link to this section">&para;</a></h3>
+<p>If the instance has an <code>init</code> function, Quantum calls <code>self:init()</code>.</p>
+<p>Register events inside <code>init()</code> so <code>self</code> and resolved references are ready.</p>
+<h3 id="cleanup">Cleanup<a class="headerlink" href="#cleanup" title="Link to this section">&para;</a></h3>
+<p><code>LuaBinding::cleanupLuaScripts(scene)</code> runs on scene unload, and
+<code>cleanupLuaScripts(scene, entity)</code> for each entity <code>destroyBundle</code> removes:</p>
+<ol>
+<li>Remove all <code>FunctionSubscribe</code> callbacks whose tag contains the script instance
+   address (<code>Engine::removeSubscriptionsByTag</code> and <code>Scene::removeSubscriptionsByTag</code>).</li>
+<li><code>luaL_unref</code> the script instance.</li>
+<li>Clear <code>ScriptEntry.instance</code>.</li>
+</ol>
+<h2 id="c-subclass">C++ Subclass<a class="headerlink" href="#c-subclass" title="Link to this section">&para;</a></h2>
+<p>A subclass script derives from the object wrapper that matches the entity and calls wrapper
+methods directly on <code>this</code> — see
+<a href="#c-subclass-vs-c-script-class">C++ Subclass vs. C++ Script Class</a> for why.</p>
+<h3 id="header-playermoverh">Header (<code>PlayerMover.h</code>)<a class="headerlink" href="#header-playermoverh" title="Link to this section">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="cp">#pragma once</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Object.h&quot;</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ScriptProperty.h&quot;</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="k">class</span><span class="w"> </span><span class="nc">PlayerMover</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">quantum</span><span class="o">::</span><span class="n">Object</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="k">public</span><span class="o">:</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="n">DPROPERTY</span><span class="p">(</span><span class="s">&quot;Speed&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5.0f</span><span class="p">;</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="n">PlayerMover</span><span class="p">(</span><span class="n">quantum</span><span class="o">::</span><span class="n">Scene</span><span class="o">*</span><span class="w"> </span><span class="n">scene</span><span class="p">,</span><span class="w"> </span><span class="n">quantum</span><span class="o">::</span><span class="n">Entity</span><span class="w"> </span><span class="n">entity</span><span class="p">);</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">    </span><span class="o">~</span><span class="n">PlayerMover</span><span class="p">();</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onUpdate</span><span class="p">();</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="p">};</span>
+</code></pre></div>
+<h3 id="implementation-playermovercpp">Implementation (<code>PlayerMover.cpp</code>)<a class="headerlink" href="#implementation-playermovercpp" title="Link to this section">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;PlayerMover.h&quot;</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">quantum</span><span class="p">;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">PlayerMover</span><span class="o">::</span><span class="n">PlayerMover</span><span class="p">(</span><span class="n">Scene</span><span class="o">*</span><span class="w"> </span><span class="n">scene</span><span class="p">,</span><span class="w"> </span><span class="n">Entity</span><span class="w"> </span><span class="n">entity</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Object</span><span class="p">(</span><span class="n">scene</span><span class="p">,</span><span class="w"> </span><span class="n">entity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="n">REGISTER_ENGINE_EVENT</span><span class="p">(</span><span class="n">onUpdate</span><span class="p">);</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">}</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="n">PlayerMover</span><span class="o">::~</span><span class="n">PlayerMover</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">    </span><span class="n">UNREGISTER_ENGINE_EVENT</span><span class="p">(</span><span class="n">onUpdate</span><span class="p">);</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="p">}</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="kt">void</span><span class="w"> </span><span class="n">PlayerMover</span><span class="o">::</span><span class="n">onUpdate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">    </span><span class="n">Vector3</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getPosition</span><span class="p">();</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="o">::</span><span class="n">isKeyPressed</span><span class="p">(</span><span class="n">D_KEY_RIGHT</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">        </span><span class="n">setPosition</span><span class="p">(</span><span class="n">position</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="n">speed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Engine</span><span class="o">::</span><span class="n">getDeltatime</span><span class="p">(),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="p">}</span>
+</code></pre></div>
+<p>The editor's <strong>Factory</strong> generates instantiation code when you export or build the
+project. Subclass scripts are compiled into the game binary.</p>
+<h2 id="c-script-class-scriptbase">C++ Script Class (<code>ScriptBase</code>)<a class="headerlink" href="#c-script-class-scriptbase" title="Link to this section">&para;</a></h2>
+<p>Use a Script Class when you want a behavior class without implying any object wrapper. It
+derives from <code>ScriptBase</code> — which exposes only <code>getScene()</code> and <code>getEntity()</code> — so you
+reach the entity by constructing a wrapper explicitly.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="cp">#pragma once</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ScriptBase.h&quot;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ScriptProperty.h&quot;</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="k">class</span><span class="w"> </span><span class="nc">ScoreTracker</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">quantum</span><span class="o">::</span><span class="n">ScriptBase</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="k">public</span><span class="o">:</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="n">DPROPERTY</span><span class="p">(</span><span class="s">&quot;Score&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">    </span><span class="n">ScoreTracker</span><span class="p">(</span><span class="n">quantum</span><span class="o">::</span><span class="n">Scene</span><span class="o">*</span><span class="w"> </span><span class="n">scene</span><span class="p">,</span><span class="w"> </span><span class="n">quantum</span><span class="o">::</span><span class="n">Entity</span><span class="w"> </span><span class="n">entity</span><span class="p">);</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">    </span><span class="o">~</span><span class="n">ScoreTracker</span><span class="p">();</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onUpdate</span><span class="p">();</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="p">};</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ScoreTracker.h&quot;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">ScoreTracker</span><span class="o">::</span><span class="n">ScoreTracker</span><span class="p">(</span><span class="n">Scene</span><span class="o">*</span><span class="w"> </span><span class="n">scene</span><span class="p">,</span><span class="w"> </span><span class="n">Entity</span><span class="w"> </span><span class="n">entity</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ScriptBase</span><span class="p">(</span><span class="n">scene</span><span class="p">,</span><span class="w"> </span><span class="n">entity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="n">REGISTER_ENGINE_EVENT</span><span class="p">(</span><span class="n">onUpdate</span><span class="p">);</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="p">}</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">ScoreTracker</span><span class="o">::~</span><span class="n">ScoreTracker</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span><span class="n">UNREGISTER_ENGINE_EVENT</span><span class="p">(</span><span class="n">onUpdate</span><span class="p">);</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="p">}</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="kt">void</span><span class="w"> </span><span class="n">ScoreTracker</span><span class="o">::</span><span class="n">onUpdate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">    </span><span class="c1">// getScene(), getEntity() available from ScriptBase</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="c-script-lifetime">C++ script lifetime<a class="headerlink" href="#c-script-lifetime" title="Link to this section">&para;</a></h2>
+<p>A C++ script is constructed when its scene starts or when
+<a href="../../reference/classes/bundlemanager/#createbundle"><code>createBundle</code></a> spawns its bundle, and
+deleted when the scene unloads or
+<a href="../../reference/classes/bundlemanager/#destroybundle"><code>destroyBundle</code></a> removes the instance.
+A script that destroys its own bundle is therefore deleted during that call: return right
+after it without touching a member.</p>
+<h2 id="property-sync-at-runtime">Property sync at runtime<a class="headerlink" href="#property-sync-at-runtime" title="Link to this section">&para;</a></h2>
+<p>Properties values are stored in <code>ScriptEntry.properties</code>. At play/export:</p>
+<ul>
+<li><strong>C++</strong> — <code>ScriptProperty::syncToMember()</code> writes values into the <code>memberPtr</code> captured
+  during editor parsing.</li>
+<li><strong>Lua</strong> — values are set as fields on the instance table before <code>init()</code>.</li>
+</ul>
+<p>See <a href="../script-properties/">Script Properties</a> for the full type mapping.</p>
+<h2 id="editor-serialization-and-export">Editor serialization and export<a class="headerlink" href="#editor-serialization-and-export" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scene save</td>
+<td><code>ScriptComponent</code> entries serialize to YAML with paths, types, and property values</td>
+</tr>
+<tr>
+<td>Property parse</td>
+<td>C++: <code>ScriptParser</code> reads <code>DPROPERTY</code> from headers. Lua: editor loads <code>properties</code> table</td>
+</tr>
+<tr>
+<td>Play mode</td>
+<td>Editor calls <code>initializeLuaScripts</code> on scene load and after each <code>createBundle</code></td>
+</tr>
+<tr>
+<td>Export</td>
+<td><code>Generator</code> emits C++ that registers scenes, creates C++ script instances, and calls <code>initializeLuaScripts</code>, for scenes and spawned bundles</td>
+</tr>
+</tbody>
+</table>
+<h2 id="common-patterns">Common patterns<a class="headerlink" href="#common-patterns" title="Link to this section">&para;</a></h2>
+<h3 id="ui-button-handler-lua">UI button handler (Lua)<a class="headerlink" href="#ui-button-handler-lua" title="Link to this section">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">MenuButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="kr">function</span><span class="w"> </span><span class="nc">MenuButton</span><span class="p">:</span><span class="nf">init</span><span class="p">()</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">button</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Button</span><span class="p">(</span><span class="nv">self</span><span class="p">.</span><span class="py">scene</span><span class="p">,</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">entity</span><span class="p">)</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">ui</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">button</span><span class="p">:</span><span class="nf">getUIComponent</span><span class="p">()</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="nf">RegisterEvent</span><span class="p">(</span><span class="nv">self</span><span class="p">,</span><span class="w"> </span><span class="nv">ui</span><span class="p">.</span><span class="py">onClick</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;onClick&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="kr">end</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="kr">function</span><span class="w"> </span><span class="nc">MenuButton</span><span class="p">:</span><span class="nf">onClick</span><span class="p">(</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">)</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;clicked at&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">)</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="kr">end</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="kr">return</span><span class="w"> </span><span class="nv">MenuButton</span>
+</code></pre></div>
+<h3 id="physics-contact-c">Physics contact (C++)<a class="headerlink" href="#physics-contact-c" title="Link to this section">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Trap::onBeginContact</span><span class="p">(</span><span class="n">Body2D</span><span class="w"> </span><span class="n">bodyA</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">shapeA</span><span class="p">,</span><span class="w"> </span><span class="n">Body2D</span><span class="w"> </span><span class="n">bodyB</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">shapeB</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="c1">// registered with REGISTER_EVENT(physics-&gt;beginContact2D, onBeginContact)</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="referencing-another-entity-lua">Referencing another entity (Lua)<a class="headerlink" href="#referencing-another-entity-lua" title="Link to this section">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">Follower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="nv">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;target&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">displayName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Target&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Object&quot;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="p">}</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="kr">function</span><span class="w"> </span><span class="nc">Follower</span><span class="p">:</span><span class="nf">init</span><span class="p">()</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">    </span><span class="nf">RegisterEngineEvent</span><span class="p">(</span><span class="nv">self</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;onUpdate&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="kr">end</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="kr">function</span><span class="w"> </span><span class="nc">Follower</span><span class="p">:</span><span class="nf">onUpdate</span><span class="p">()</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">target</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="w">        </span><span class="kd">local</span><span class="w"> </span><span class="nv">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Object</span><span class="p">(</span><span class="nv">self</span><span class="p">.</span><span class="py">scene</span><span class="p">,</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">entity</span><span class="p">)</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="w">        </span><span class="nv">obj</span><span class="p">.</span><span class="py">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">target</span><span class="p">.</span><span class="py">position</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="w">    </span><span class="kr">end</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="kr">end</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="kr">return</span><span class="w"> </span><span class="nv">Follower</span>
+</code></pre></div>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Likely cause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>init()</code> never runs</td>
+<td>Script entry disabled, wrong type, or Lua module does not return a table</td>
+</tr>
+<tr>
+<td>Event handler not called</td>
+<td>Forgot <code>RegisterEngineEvent</code> / <code>REGISTER_ENGINE_EVENT</code> in constructor or <code>init()</code></td>
+</tr>
+<tr>
+<td>Property not in Properties</td>
+<td><code>DPROPERTY</code> not immediately above member; unsupported type; header path wrong</td>
+</tr>
+<tr>
+<td>Entity reference is nil</td>
+<td>Target entity missing, wrong scene, or referenced script disabled</td>
+</tr>
+<tr>
+<td>Duplicate event callbacks</td>
+<td>Same tag registered twice; use <code>UNREGISTER_*</code> in destructor</td>
+</tr>
+<tr>
+<td><code>obj.position.y = v</code> does not move the object</td>
+<td>Properties return a copy of the vector; assign the whole value, e.g. <code>obj.position = Vector3(x, v, z)</code> — see <a href="../math-and-utilities/#changing-one-component-of-a-property">Math &amp; Utilities</a></td>
+</tr>
+<tr>
+<td>C++ build or CMake errors</td>
+<td>Missing toolchain, or a leftover deleted script still listed in generated sources — see <a href="../cpp-build-setup/">C++ Build Setup</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Link to this section">&para;</a></h2>
+<ul>
+<li><a href="../cpp-build-setup/">C++ Build Setup</a> — compilers, CMake, and build troubleshooting</li>
+<li><a href="../events/">Events</a> — full event list, macros, and Lua registration</li>
+<li><a href="../script-properties/">Script Properties</a> — <code>DPROPERTY</code> and Lua <code>properties</code> tables</li>
+<li><a href="../../reference/classes/engine/">Engine</a> — runtime API</li>
+<li><a href="../../reference/">API Index</a> — all classes</li>
+</ul>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../scripting/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Scripting</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../cpp-build-setup/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">C++ Build Setup</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/manual/creating-scripts.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#creating-scripts" class="dx-toc-link" data-level="1">Creating Scripts</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#mental-model" class="dx-toc-link" data-level="2">Mental model</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#create-a-script-in-the-editor" class="dx-toc-link" data-level="2">Create a script in the editor</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#flow-a-new-script-generates-the-files" class="dx-toc-link" data-level="3">Flow A — New Script (generates the files)</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#flow-b-add-script-links-existing-files" class="dx-toc-link" data-level="3">Flow B — Add Script (links existing files)</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#managing-script-entries" class="dx-toc-link" data-level="3">Managing script entries</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#script-types" class="dx-toc-link" data-level="2">Script types</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#how-the-editor-picks-a-c-subclass-base" class="dx-toc-link" data-level="3">How the editor picks a C++ subclass base</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#c-subclass-vs-c-script-class" class="dx-toc-link" data-level="3">C++ Subclass vs. C++ Script Class</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#when-to-use-each-type" class="dx-toc-link" data-level="3">When to use each type</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#lua-script-format" class="dx-toc-link" data-level="2">Lua script format</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#minimal-template" class="dx-toc-link" data-level="3">Minimal template</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#required-conventions" class="dx-toc-link" data-level="3">Required conventions</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#module-loading" class="dx-toc-link" data-level="3">Module loading</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#referencing-other-entities" class="dx-toc-link" data-level="2">Referencing other entities</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#1-your-own-entity" class="dx-toc-link" data-level="3">1. Your own entity</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#2-an-entity-the-designer-picks-entity-reference-property" class="dx-toc-link" data-level="3">2. An entity the designer picks (entity reference property)</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#3-an-entity-found-by-name" class="dx-toc-link" data-level="3">3. An entity found by name</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#wrap-vs-create-the-constructor-that-bites-people" class="dx-toc-link" data-level="3">Wrap vs. create: the constructor that bites people</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#lua-runtime-lifecycle" class="dx-toc-link" data-level="2">Lua runtime lifecycle</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#pass-1-create-instances" class="dx-toc-link" data-level="3">Pass 1 — Create instances</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#pass-2-resolve-entity-references" class="dx-toc-link" data-level="3">Pass 2 — Resolve entity references</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#pass-3-call-init" class="dx-toc-link" data-level="3">Pass 3 — Call init()</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#cleanup" class="dx-toc-link" data-level="3">Cleanup</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#c-subclass" class="dx-toc-link" data-level="2">C++ Subclass</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#header-playermoverh" class="dx-toc-link" data-level="3">Header (PlayerMover.h)</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#implementation-playermovercpp" class="dx-toc-link" data-level="3">Implementation (PlayerMover.cpp)</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#c-script-class-scriptbase" class="dx-toc-link" data-level="2">C++ Script Class (ScriptBase)</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#c-script-lifetime" class="dx-toc-link" data-level="2">C++ script lifetime</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#property-sync-at-runtime" class="dx-toc-link" data-level="2">Property sync at runtime</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#editor-serialization-and-export" class="dx-toc-link" data-level="2">Editor serialization and export</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#common-patterns" class="dx-toc-link" data-level="2">Common patterns</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#ui-button-handler-lua" class="dx-toc-link" data-level="3">UI button handler (Lua)</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#physics-contact-c" class="dx-toc-link" data-level="3">Physics contact (C++)</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#referencing-another-entity-lua" class="dx-toc-link" data-level="3">Referencing another entity (Lua)</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#troubleshooting" class="dx-toc-link" data-level="2">Troubleshooting</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#next-steps" class="dx-toc-link" data-level="2">Next steps</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../versions.json";
+    window.QUANTUM_PAGE_URL = "manual/creating-scripts/";
+  </script>
+  <script src="../../js/quantum.js" defer></script>
+</body>
+</html>

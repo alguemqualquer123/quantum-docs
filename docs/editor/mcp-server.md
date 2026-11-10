@@ -44,32 +44,32 @@ or **Cancel**. The other fields apply on **OK**.
 Copy the **Claude Code** row and run it in a terminal:
 
 ```bash
-claude mcp add --transport http doriax http://127.0.0.1:3674/mcp \
+claude mcp add --transport http quantum http://127.0.0.1:3674/mcp \
   --header "Authorization: Bearer <token>"
 ```
 
 The command adds the server for the folder you run it in, so run it in the project folder,
 where Claude Code can also read the project's files. Add `--scope user` after
 `--transport http` to have it in every folder. In a Claude Code session, `/mcp` then lists
-`doriax` as connected, with its tools.
+`quantum` as connected, with its tools.
 
 ## Connecting Codex
 
 Copy the **Codex** row and run it in a terminal:
 
 ```bash
-codex mcp add doriax --url http://127.0.0.1:3674/mcp --bearer-token-env-var DORIAX_MCP_TOKEN
+codex mcp add quantum --url http://127.0.0.1:3674/mcp --bearer-token-env-var QUANTUM_MCP_TOKEN
 ```
 
-Codex keeps the token out of its configuration: it reads it from the `DORIAX_MCP_TOKEN`
+Codex keeps the token out of its configuration: it reads it from the `QUANTUM_MCP_TOKEN`
 environment variable each time it connects. Set that variable to the token (**Copy** on the
 **Token** row) where Codex runs, for example in your shell profile:
 
 ```bash
-export DORIAX_MCP_TOKEN=<token>
+export QUANTUM_MCP_TOKEN=<token>
 ```
 
-On Windows, `setx DORIAX_MCP_TOKEN <token>` sets it for terminals opened afterwards.
+On Windows, `setx QUANTUM_MCP_TOKEN <token>` sets it for terminals opened afterwards.
 
 ## Connecting Gemini CLI
 
@@ -77,7 +77,7 @@ Copy the **Gemini CLI** row and run it in a terminal:
 
 ```bash
 gemini mcp add -s user --transport http --header "Authorization: Bearer <token>" \
-  doriax http://127.0.0.1:3674/mcp
+  quantum http://127.0.0.1:3674/mcp
 ```
 
 `-s user` saves the server in your user settings. Without it, Gemini CLI writes it to
@@ -98,10 +98,10 @@ local (stdio) servers needs a stdio-to-HTTP bridge in between.
     ```json
     {
       "mcpServers": {
-        "doriax": {
+        "quantum": {
           "type": "http",
           "url": "http://127.0.0.1:3674/mcp",
-          "headers": { "Authorization": "Bearer ${DORIAX_MCP_TOKEN}" }
+          "headers": { "Authorization": "Bearer ${QUANTUM_MCP_TOKEN}" }
         }
       }
     }
@@ -205,7 +205,7 @@ token applies from the next request, so every connected client needs the new com
 | Symptom | Cause and fix |
 | --- | --- |
 | **Status** says it could not listen on the port | Another program, or another editor with the server on, holds the port. Pick another **Port**, press **OK**, and add the server to the client again with the new URL |
-| The client reports `401` or *Missing or wrong token* | The token was replaced, or the command came from another machine. Run the client's command from **Clients** again, after `claude mcp remove doriax` for Claude Code; for Codex, update `DORIAX_MCP_TOKEN` instead |
+| The client reports `401` or *Missing or wrong token* | The token was replaced, or the command came from another machine. Run the client's command from **Clients** again, after `claude mcp remove quantum` for Claude Code; for Codex, update `QUANTUM_MCP_TOKEN` instead |
 | The client cannot connect | The server only runs while the editor does, and only with **Enable Server** on. Start the editor, then reconnect from the client; in Claude Code, `/mcp` shows the server's status |
 | Calls fail with *Changes are turned off* | **Allow Changes** is off. Turn it on, or ask the agent only for inspections |
 | Calls fail with *The editor was busy* | A project load took longer than two minutes. Try again once it finishes |

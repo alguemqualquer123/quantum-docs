@@ -1,17 +1,17 @@
 ---
-description: Working with 3D graphics in Doriax — models, materials, lighting, the sky system, reflections, and water.
+description: Working with 3D graphics in Quantum — models, materials, lighting, the sky system, reflections, and water.
 ---
 
 # 3D Graphics
 
-Doriax provides a complete 3D pipeline with model loading, physically-based rendering,
+Quantum provides a complete 3D pipeline with model loading, physically-based rendering,
 dynamic lighting, and environment effects.
 
 ![A 3D tower-defence map in the editor](../assets/screenshots/editor-bastion-vale.png)
 
 ## Models
 
-Doriax loads 3D models in **GLTF** and **OBJ** formats, and **FBX** through an automatic
+Quantum loads 3D models in **GLTF** and **OBJ** formats, and **FBX** through an automatic
 conversion to glTF (see [FBX models](#fbx-models)). Import a model as a resource and add it
 to a scene as an entity, then position it with its transform.
 
@@ -50,7 +50,7 @@ target:
 
 The importer bases that capacity on the leading targets it actually loads and ignores
 the unsupported tail. Sparse GLTF accessors are supported for morph-target attributes,
-including sparse accessors without a dense base `bufferView`; Doriax expands them into
+including sparse accessors without a dense base `bufferView`; Quantum expands them into
 dense GPU vertex data during loading. See the [Model reference](../reference/classes/model.md#gltf-import-support-and-limits)
 for the exact import behaviour.
 
@@ -180,8 +180,8 @@ A script can load any FBX in the assets directory, because Play and export conve
 all first. An FBX without a conversion does not load, so an engine build used without the
 editor cannot load FBX at all.
 
-While you work, conversions live in `.doriax/imported/`, which mirrors the assets
-directory (`characters/hero.fbx` becomes `.doriax/imported/characters/hero.fbx.glb`) and is
+While you work, conversions live in `.quantum/imported/`, which mirrors the assets
+directory (`characters/hero.fbx` becomes `.quantum/imported/characters/hero.fbx.glb`) and is
 not committed. An exported game ships each one beside its FBX as `hero.fbx.glb` and leaves
 the `.fbx` out. See [Export — FBX models](../editor/export.md#fbx-models).
 
@@ -251,7 +251,7 @@ materials, instead of appearing in shadow. **Leaf Transmission**
 default `0`) adds the light that passes through a thin surface such as a leaf when the
 sun is behind it, scaled by the base colour and the same shadow term as direct lighting.
 Set it per submesh in the editor, or author it in the glTF as the material extra
-`doriax_foliage_transmission`; ordinary glTF materials are unaffected.
+`quantum_foliage_transmission`; ordinary glTF materials are unaffected.
 
 ### Editing an imported model's submeshes
 
@@ -313,7 +313,7 @@ full workflow.
 
 ## Lighting and shadows
 
-Doriax supports multiple light types with **dynamic shadows**, so moving objects cast
+Quantum supports multiple light types with **dynamic shadows**, so moving objects cast
 and receive shadows in real time.
 
 ![A directional light casting shadows, with its settings in the Properties window](../assets/screenshots/editor-lighting.png)

@@ -1,10 +1,10 @@
 ---
-description: Particle systems in Doriax — emitters, initializers, modifiers, bursts, and rendering through points or instanced meshes.
+description: Particle systems in Quantum — emitters, initializers, modifiers, bursts, and rendering through points or instanced meshes.
 ---
 
 # Particles
 
-Doriax includes a CPU-simulated particle system for effects such as fire, smoke, sparks,
+Quantum includes a CPU-simulated particle system for effects such as fire, smoke, sparks,
 rain, explosions, and magic. A particle system has two parts:
 
 | Part | Role |

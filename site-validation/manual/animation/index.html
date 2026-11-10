@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation — Quantum Engine Docs</title>
+  <meta name="description" content="Runtime animation, actions, sprite animation, keyframe tracks, skeletal animation, and morph targets in Quantum.">
+  <meta property="og:title" content="Animation — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/manual/animation/">
+
+  <link rel="icon" type="image/png" href="../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/quantum.css">
+  <link rel="stylesheet" href="../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="animation">Animation<a class="headerlink" href="#animation" title="Link to this section">&para;</a></h1>
+<p>Quantum supports two complementary animation approaches: <strong>editor-authored keyframe
+animation</strong> built in the Animation Timeline, and <strong>runtime action playback</strong> written
+in code. Both are updated each frame by <code>ActionSystem</code>. You can mix them freely —
+author the idle loop in the timeline and drive attacks and UI effects with runtime
+actions.</p>
+<h2 id="animation-families">Animation families<a class="headerlink" href="#animation-families" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Family</th>
+<th>Best for</th>
+<th>System</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Actions</strong></td>
+<td>Scripted one-shot or looping motion — position, rotation, scale, color, alpha</td>
+<td><code>ActionSystem</code>, <code>TimedAction</code> subclasses</td>
+</tr>
+<tr>
+<td><strong>Sprite animation</strong></td>
+<td>2D frame cycling through an atlas</td>
+<td><code>SpriteAnimation</code></td>
+</tr>
+<tr>
+<td><strong>Skeletal / keyframe</strong></td>
+<td>Imported GLTF character and node clips</td>
+<td><code>Animation</code>, <code>Model</code></td>
+</tr>
+<tr>
+<td><strong>Keyframe tracks</strong></td>
+<td>Authored transform and property curves on the timeline</td>
+<td><code>TranslateTracks</code>, <code>RotateTracks</code>, <code>ScaleTracks</code>, <code>MorphTracks</code></td>
+</tr>
+<tr>
+<td><strong>Morph targets</strong></td>
+<td>Blend shape deformation for facial animation</td>
+<td><code>MorphTracks</code></td>
+</tr>
+<tr>
+<td><strong>Particles</strong></td>
+<td>Time-based particle playback</td>
+<td><code>Particles</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="runtime-actions">Runtime actions<a class="headerlink" href="#runtime-actions" title="Link to this section">&para;</a></h2>
+<p>Actions target an entity and update one property over time. They are lightweight,
+code-friendly, and do not require the timeline editor.</p>
+<h3 id="available-action-types">Available action types<a class="headerlink" href="#available-action-types" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Property controlled</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../reference/classes/positionaction/"><code>PositionAction</code></a></td>
+<td>Entity position</td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/rotationaction/"><code>RotationAction</code></a></td>
+<td>Entity rotation</td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/scaleaction/"><code>ScaleAction</code></a></td>
+<td>Entity scale</td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/coloraction/"><code>ColorAction</code></a></td>
+<td>Material or UI element color</td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/alphaaction/"><code>AlphaAction</code></a></td>
+<td>Opacity / alpha</td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/timedaction/"><code>TimedAction</code></a></td>
+<td>Callback after a duration or on each loop</td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/spriteanimation/"><code>SpriteAnimation</code></a></td>
+<td>Sprite atlas frame sequence</td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/animation/"><code>Animation</code></a></td>
+<td>Skeletal or keyframe clip</td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/particles/"><code>Particles</code></a></td>
+<td>Particle system playback</td>
+</tr>
+</tbody>
+</table>
+<h3 id="basic-action-example">Basic action example<a class="headerlink" href="#basic-action-example" title="Link to this section">&para;</a></h3>
+<p><code>setAction</code> takes the start value, end value, duration in seconds, and an optional loop
+flag. The easing curve is set separately with <code>setFunctionType</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Lua</label><label for="__tabbed_1_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">-- Move an entity from (0, 0, 0) to (100, 200, 0) over 1.5 seconds</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">move</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">PositionAction</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nv">move</span><span class="p">:</span><span class="nf">setTarget</span><span class="p">(</span><span class="nv">entity</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nv">move</span><span class="p">:</span><span class="nf">setAction</span><span class="p">(</span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nv">move</span><span class="p">:</span><span class="nf">setFunctionType</span><span class="p">(</span><span class="nv">EaseType</span><span class="p">.</span><span class="py">QUAD_OUT</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nv">move</span><span class="p">:</span><span class="nf">start</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">PositionAction</span><span class="w"> </span><span class="nf">move</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">move</span><span class="p">.</span><span class="n">setTarget</span><span class="p">(</span><span class="n">entity</span><span class="p">);</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">move</span><span class="p">.</span><span class="n">setAction</span><span class="p">(</span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mf">1.5f</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">move</span><span class="p">.</span><span class="n">setFunctionType</span><span class="p">(</span><span class="n">EaseType</span><span class="o">::</span><span class="n">QUAD_OUT</span><span class="p">);</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">move</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="chaining-actions-with-events">Chaining actions with events<a class="headerlink" href="#chaining-actions-with-events" title="Link to this section">&para;</a></h3>
+<p>Every action's <code>ActionComponent</code> exposes <code>onStart</code>, <code>onPause</code>, <code>onStop</code>, and <code>onStep</code>
+events. Subscribe to <code>onStop</code> to start the next action when one finishes:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Lua</label><label for="__tabbed_2_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">move</span><span class="p">:</span><span class="nf">getActionComponent</span><span class="p">().</span><span class="nv">onStop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">function</span><span class="p">()</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="c1">-- start the next action when this one ends</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nv">nextAction</span><span class="p">:</span><span class="nf">start</span><span class="p">()</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="kr">end</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nv">move</span><span class="p">:</span><span class="nf">start</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">move</span><span class="p">.</span><span class="n">getComponent</span><span class="o">&lt;</span><span class="n">ActionComponent</span><span class="o">&gt;</span><span class="p">().</span><span class="n">onStop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">nextAction</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">};</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">move</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="looping-ping-pong-and-spins">Looping, ping-pong and spins<a class="headerlink" href="#looping-ping-pong-and-spins" title="Link to this section">&para;</a></h3>
+<p><code>loop</code> repeats a timed action, and <code>pingPong</code> plays it to the end and back, in twice its
+duration, so a floating bob is a single <code>PositionAction</code> with both set. A
+<code>RotationAction</code> interpolates between two rotations, which never turns more than half a
+turn; for a full spin use <code>setSpinAction</code>, which turns the start rotation by an angle of
+any size around an axis (<strong>Spin</strong>, <strong>Axis</strong> and <strong>Angle</strong> in the editor):</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Lua</label><label for="__tabbed_3_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">bob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">PositionAction</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nv">bob</span><span class="p">:</span><span class="nf">setTarget</span><span class="p">(</span><span class="nv">coin</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nv">bob</span><span class="p">:</span><span class="nf">setAction</span><span class="p">(</span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.4</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nv">bob</span><span class="p">:</span><span class="nf">setFunctionType</span><span class="p">(</span><span class="nv">EaseType</span><span class="p">.</span><span class="py">SINE_IN_OUT</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nv">bob</span><span class="p">.</span><span class="py">pingPong</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nv">bob</span><span class="p">:</span><span class="nf">start</span><span class="p">()</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="nv">spin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">RotationAction</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="nv">spin</span><span class="p">:</span><span class="nf">setTarget</span><span class="p">(</span><span class="nv">coin</span><span class="p">)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="nv">spin</span><span class="p">:</span><span class="nf">setSpinAction</span><span class="p">(</span><span class="nf">Quaternion</span><span class="p">(),</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mi">360</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="nv">spin</span><span class="p">:</span><span class="nf">start</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">PositionAction</span><span class="w"> </span><span class="nf">bob</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">bob</span><span class="p">.</span><span class="n">setTarget</span><span class="p">(</span><span class="o">&amp;</span><span class="n">coin</span><span class="p">);</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">bob</span><span class="p">.</span><span class="n">setAction</span><span class="p">(</span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.4f</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mf">0.8f</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">bob</span><span class="p">.</span><span class="n">setFunctionType</span><span class="p">(</span><span class="n">EaseType</span><span class="o">::</span><span class="n">SINE_IN_OUT</span><span class="p">);</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">bob</span><span class="p">.</span><span class="n">setPingPong</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">bob</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">RotationAction</span><span class="w"> </span><span class="nf">spin</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="n">spin</span><span class="p">.</span><span class="n">setTarget</span><span class="p">(</span><span class="o">&amp;</span><span class="n">coin</span><span class="p">);</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="n">spin</span><span class="p">.</span><span class="n">setSpinAction</span><span class="p">(</span><span class="n">Quaternion</span><span class="p">(),</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mf">360.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="n">spin</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="starting-restarting-and-phase">Starting, restarting and phase<a class="headerlink" href="#starting-restarting-and-phase" title="Link to this section">&para;</a></h3>
+<p><code>start()</code> resumes a paused action and does nothing to a running one, so a <code>stop()</code>
+followed by <code>start()</code> in the same frame leaves an action running where it was. To play
+it again from the beginning, call <code>restart()</code>.</p>
+<p>Copies of the same animation, such as the coins of a level, move in sync. Set an
+action's <code>startOffset</code> to start it some seconds in, or <code>randomStart</code> to start each copy
+at a random time of its duration (<strong>Start offset</strong> and <strong>Random start</strong> in the
+Properties window). Both apply when an action starts from stopped, not when it resumes
+from a pause, and an action inside an Animation keeps its own offset, so a random start
+on one track shifts only that track.</p>
+<h2 id="easing-curves">Easing curves<a class="headerlink" href="#easing-curves" title="Link to this section">&para;</a></h2>
+<p>All <code>TimedAction</code> subclasses accept an <code>EaseType</code> (via <code>setFunctionType</code>) that shapes
+the interpolation curve. Names follow the <code>&lt;CURVE&gt;_&lt;IN/OUT/IN_OUT&gt;</code> pattern. Common
+choices:</p>
+<table>
+<thead>
+<tr>
+<th>EaseType</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LINEAR</code></td>
+<td>Constant-speed motion, debug</td>
+</tr>
+<tr>
+<td><code>STEP</code></td>
+<td>Held poses — stop-motion and stepped, pose-to-pose motion</td>
+</tr>
+<tr>
+<td><code>QUAD_IN_OUT</code></td>
+<td>UI transitions and camera moves</td>
+</tr>
+<tr>
+<td><code>BOUNCE_OUT</code></td>
+<td>Playful jumps and pop-in effects</td>
+</tr>
+<tr>
+<td><code>BACK_IN</code></td>
+<td>Anticipation before a jump</td>
+</tr>
+<tr>
+<td><code>ELASTIC_OUT</code></td>
+<td>Springing UI elements</td>
+</tr>
+<tr>
+<td><code>CUBIC_OUT</code></td>
+<td>Smooth deceleration into a stop</td>
+</tr>
+</tbody>
+</table>
+<p>The full set covers <code>QUAD</code>, <code>CUBIC</code>, <code>QUART</code>, <code>QUINT</code>, <code>SINE</code>, <code>EXPO</code>, <code>CIRC</code>,
+<code>ELASTIC</code>, <code>BACK</code>, and <code>BOUNCE</code>, each with <code>_IN</code>, <code>_OUT</code>, and <code>_IN_OUT</code> variants, plus
+<code>STEP</code> (hold the start value and jump at the end) and <code>CUSTOM</code> for supplying your own
+curve function.</p>
+<h2 id="sprite-animation">Sprite animation<a class="headerlink" href="#sprite-animation" title="Link to this section">&para;</a></h2>
+<p><code>SpriteAnimation</code> cycles through a sequence of atlas frames by <strong>frame index</strong>. Frames
+must be registered on the sprite first — with <code>addFrame</code> in code or via the
+<a href="../../editor/sprite-slicer/">Sprite Slicer</a>. The interval is in <strong>milliseconds</strong>, and
+looping is the last argument of <code>setAnimation</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Lua</label><label for="__tabbed_4_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">sprite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Sprite</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nv">sprite</span><span class="p">:</span><span class="nf">setTexture</span><span class="p">(</span><span class="s2">&quot;characters/hero.png&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1">-- frames 0..7 previously registered with addFrame or the Sprite Slicer</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nv">anim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">SpriteAnimation</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nv">anim</span><span class="p">:</span><span class="nf">setTarget</span><span class="p">(</span><span class="nv">sprite</span><span class="p">)</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="nv">anim</span><span class="p">:</span><span class="nf">setAnimation</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w">  </span><span class="c1">-- startFrame, endFrame, interval (ms), loop</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="nv">anim</span><span class="p">:</span><span class="nf">start</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">Sprite</span><span class="w"> </span><span class="nf">hero</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">hero</span><span class="p">.</span><span class="n">setTexture</span><span class="p">(</span><span class="s">&quot;characters/hero.png&quot;</span><span class="p">);</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">SpriteAnimation</span><span class="w"> </span><span class="nf">anim</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">anim</span><span class="p">.</span><span class="n">setTarget</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hero</span><span class="p">);</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">anim</span><span class="p">.</span><span class="n">setAnimation</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="n">anim</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For per-frame timing, pass explicit frame and time lists:
+<code>setAnimation({0, 1, 2, 5}, {100, 80, 80, 200}, true)</code>.</p>
+<p>As a shortcut, <code>Sprite</code> can drive its own animation without a separate action object:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">sprite</span><span class="p">:</span><span class="nf">startAnimation</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1">-- ...</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nv">sprite</span><span class="p">:</span><span class="nf">stopAnimation</span><span class="p">()</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Lookup uses the sprite animation entity name</p>
+<p><code>SpriteAnimationComponent</code> has no separate name. Rename the action entity in the
+Structure panel (or call <code>setName</code>) and find it with <code>Scene:findEntity</code> when you need
+to look it up by name.</p>
+</div>
+<h2 id="skeletal-animation-from-gltf">Skeletal animation from GLTF<a class="headerlink" href="#skeletal-animation-from-gltf" title="Link to this section">&para;</a></h2>
+<p>A <code>Model</code> exposes the animation clips embedded in its GLTF file, addressable by name or
+index. How you obtain the <code>Model</code> depends on whether the model is <strong>already in your
+scene</strong> or is being <strong>created at runtime</strong> — these are two different things, and mixing
+them up is the most common animation mistake.</p>
+<p>GLTF files that contain clips, or more than one skin, import the <strong>full node tree</strong> under
+the Model entity. Animation channels target those node entities — joints <em>and</em>
+transform-only helpers — so node animation authored in the DCC plays back, not only
+skeletal deformation. Models may use several skins; each skinned mesh keeps its own joint
+list and inverse-bind matrices. See
+<a href="../3d-graphics/#gltf-node-hierarchy">3D Graphics — GLTF node hierarchy</a>.</p>
+<h3 id="playing-a-clip-on-a-model-already-in-the-scene">Playing a clip on a model already in the scene<a class="headerlink" href="#playing-a-clip-on-a-model-already-in-the-scene" title="Link to this section">&para;</a></h3>
+<p>This is the usual case: you imported the GLTF in the editor (so it appears as an entity
+in the Structure panel), and you want a script on that entity — or on a parent — to start
+its idle clip. <strong>Do not reload the file.</strong> The mesh, nodes, and clips are already
+loaded; the script only needs to <em>reference</em> the existing entity and start the clip.</p>
+<p>The cleanest way to reach another entity is an <a href="../script-properties/">entity reference property</a>:
+expose a <code>Model</code> property, then drag the model entity onto it in the Properties window.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">-- player.lua — attached to a parent entity that has a child model</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kd">local</span><span class="w"> </span><span class="nv">player</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1">-- &#39;model&#39; is filled in by dragging the child model onto the property</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nv">player</span><span class="p">.</span><span class="py">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;model&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Model&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">}</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="kr">function</span><span class="w"> </span><span class="nc">player</span><span class="p">:</span><span class="nf">init</span><span class="p">()</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">model</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">        </span><span class="kd">local</span><span class="w"> </span><span class="nv">idle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">model</span><span class="p">:</span><span class="nf">findAnimation</span><span class="p">(</span><span class="s2">&quot;idle&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">        </span><span class="nv">idle</span><span class="p">.</span><span class="py">loop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">        </span><span class="nv">idle</span><span class="p">:</span><span class="nf">start</span><span class="p">()</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">    </span><span class="kr">end</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="kr">end</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="kr">return</span><span class="w"> </span><span class="nv">player</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Don't have a property wired up? Look the child up by name instead. <code>Scene:findEntity</code>
+returns the first entity with that name (use the two-argument form to scope the search to
+children of a given parent), and the <strong>two-argument</strong> <code>Model(scene, entity)</code> constructor
+<em>wraps that existing entity</em> without creating or destroying anything:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kr">function</span><span class="w"> </span><span class="nc">player</span><span class="p">:</span><span class="nf">init</span><span class="p">()</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="c1">-- find the child named &quot;model&quot; under this script&#39;s entity</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">modelEntity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">scene</span><span class="p">:</span><span class="nf">findEntity</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">entity</span><span class="p">)</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">modelEntity</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="nv">NULL_ENTITY</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">        </span><span class="kd">local</span><span class="w"> </span><span class="nv">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Model</span><span class="p">(</span><span class="nv">self</span><span class="p">.</span><span class="py">scene</span><span class="p">,</span><span class="w"> </span><span class="nv">modelEntity</span><span class="p">)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">        </span><span class="nv">model</span><span class="p">:</span><span class="nf">getAnimation</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span><span class="nf">start</span><span class="p">()</span><span class="w">   </span><span class="c1">-- first clip, by index</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span><span class="kr">end</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="creating-a-model-at-runtime">Creating a model at runtime<a class="headerlink" href="#creating-a-model-at-runtime" title="Link to this section">&para;</a></h3>
+<p>When you genuinely want to spawn a brand-new model from code (an enemy, a pickup), use
+the <strong>single-argument</strong> constructor and then <code>loadGLTF</code>. This <em>creates a new entity</em>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Lua</label><label for="__tabbed_7_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1">-- store the handle so it lives as long as you need the entity</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nv">self</span><span class="p">.</span><span class="py">enemy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Model</span><span class="p">(</span><span class="nv">self</span><span class="p">.</span><span class="py">scene</span><span class="p">)</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nv">self</span><span class="p">.</span><span class="py">enemy</span><span class="p">:</span><span class="nf">loadGLTF</span><span class="p">(</span><span class="s2">&quot;characters/hero.gltf&quot;</span><span class="p">)</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="kd">local</span><span class="w"> </span><span class="nv">walk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">enemy</span><span class="p">:</span><span class="nf">findAnimation</span><span class="p">(</span><span class="s2">&quot;Walk&quot;</span><span class="p">)</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="nv">walk</span><span class="p">.</span><span class="py">loop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="nv">walk</span><span class="p">:</span><span class="nf">start</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">Model</span><span class="w"> </span><span class="nf">hero</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">hero</span><span class="p">.</span><span class="n">loadGLTF</span><span class="p">(</span><span class="s">&quot;characters/hero.gltf&quot;</span><span class="p">);</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="n">Animation</span><span class="w"> </span><span class="n">walk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hero</span><span class="p">.</span><span class="n">findAnimation</span><span class="p">(</span><span class="s">&quot;Walk&quot;</span><span class="p">);</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="n">walk</span><span class="p">.</span><span class="n">setLoop</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="n">walk</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title"><code>Model(scene)</code> creates a new entity — it does not find an existing one</p>
+<p><code>Model(self.scene)</code> (one argument) <strong>always creates a new entity</strong> and that handle
+<em>owns</em> it. <code>Model(self.scene, entity)</code> (two arguments) <strong>wraps an existing entity</strong>
+and does not own it. So:</p>
+<ul>
+<li>Never put <code>Model(...)</code> + <code>loadGLTF</code> inside <code>onUpdate</code> — that reloads the file and
+  churns entities every frame. Load once in <code>init</code>.</li>
+<li>To touch a model placed in the editor, reference it (property or <code>findEntity</code>) and
+  use the two-argument constructor. Reloading the GLTF in code is <strong>not</strong> required.</li>
+<li>When you do create a model at runtime, keep the handle in <code>self</code> (or another
+  long-lived reference). A one-argument handle stored only in a local can have its
+  entity destroyed when the local is garbage-collected.</li>
+</ul>
+</div>
+<p>GLTF can carry multiple named clips in a single file. You can play several clips
+simultaneously for layered animation blending.</p>
+<div class="admonition note">
+<p class="admonition-title">Clip lookup uses the animation entity name</p>
+<p>GLTF import initially names each animation entity from the authored clip name (often
+Mixamo-style, e.g. <code>mixamo.com</code>). <code>findAnimation</code> searches that entity name—the same
+name shown in the Structure panel and animation selector. If you rename the entity,
+use the new name in <code>findAnimation</code> and <code>playAnimation</code>. You can also address the clip
+by index with <code>getAnimation(0)</code>. Requesting a name or index that doesn't exist raises
+an error, so guard lookups you're unsure of.</p>
+</div>
+<h3 id="interpolation-modes">Interpolation modes<a class="headerlink" href="#interpolation-modes" title="Link to this section">&para;</a></h3>
+<p>Imported clips honor the GLTF sampler's <code>interpolation</code> setting, following the glTF 2.0
+specification:</p>
+<table>
+<thead>
+<tr>
+<th>GLTF mode</th>
+<th>Playback in Quantum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LINEAR</code> (default)</td>
+<td>Linear interpolation between keys; rotations use spherical linear interpolation (slerp)</td>
+</tr>
+<tr>
+<td><code>STEP</code></td>
+<td>Each key's value holds until the next key — imported as per-segment <code>STEP</code> easing</td>
+</tr>
+<tr>
+<td><code>CUBICSPLINE</code></td>
+<td>Cubic Hermite interpolation from the clip's per-key in/out tangents; interpolated rotations are normalized</td>
+</tr>
+</tbody>
+</table>
+<p><code>CUBICSPLINE</code> tangents are stored on the track components (<code>inTangents</code> / <code>outTangents</code>)
+and survive scene saves and code export. Editing an imported cubic track keeps the
+tangents aligned with its keys: a key added in the timeline or the Properties window
+gets zero tangents — its two neighboring segments flatten toward it while the rest of
+the clip keeps its imported shape. If a track's tangents ever fall out of sync with its
+values, playback degrades safely to linear.</p>
+<h3 id="smooth-transitions-crossfading">Smooth transitions (crossfading)<a class="headerlink" href="#smooth-transitions-crossfading" title="Link to this section">&para;</a></h3>
+<p>Starting a clip with <code>start()</code> snaps the skeleton straight into that clip's pose. For
+character motion you almost always want a <strong>crossfade</strong> instead — when the player stops
+running, the skeleton should ease from the run cycle into idle over a fraction of a
+second rather than pop. Quantum blends this for you: while a transition is in progress
+both clips play and each bone's pose is a weight-normalized average of them.</p>
+<p>The simplest entry point is <a href="../../reference/classes/model/#playanimation-stopanimations"><code>Model:playAnimation</code></a>,
+which fades out whatever is currently playing on the model and fades the requested clip
+in:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Lua</label><label for="__tabbed_8_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1">-- Hold looping clips; playAnimation manages the transition</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nv">self</span><span class="p">.</span><span class="py">model</span><span class="p">:</span><span class="nf">findAnimation</span><span class="p">(</span><span class="s2">&quot;Idle&quot;</span><span class="p">).</span><span class="nv">loop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nv">self</span><span class="p">.</span><span class="py">model</span><span class="p">:</span><span class="nf">findAnimation</span><span class="p">(</span><span class="s2">&quot;Run&quot;</span><span class="p">).</span><span class="nv">loop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="nv">self</span><span class="p">.</span><span class="py">model</span><span class="p">:</span><span class="nf">playAnimation</span><span class="p">(</span><span class="s2">&quot;Idle&quot;</span><span class="p">)</span><span class="w">        </span><span class="c1">-- uses each clip&#39;s Fade time</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="c1">-- on input, later:</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="nv">self</span><span class="p">.</span><span class="py">model</span><span class="p">:</span><span class="nf">playAnimation</span><span class="p">(</span><span class="s2">&quot;Run&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">)</span><span class="w">    </span><span class="c1">-- crossfade over 0.2s</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="nv">self</span><span class="p">.</span><span class="py">model</span><span class="p">:</span><span class="nf">playAnimation</span><span class="p">(</span><span class="s2">&quot;Die&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">)</span><span class="w">    </span><span class="c1">-- quick blend into a one-shot</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">model</span><span class="p">.</span><span class="n">findAnimation</span><span class="p">(</span><span class="s">&quot;Idle&quot;</span><span class="p">).</span><span class="n">setLoop</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">model</span><span class="p">.</span><span class="n">findAnimation</span><span class="p">(</span><span class="s">&quot;Run&quot;</span><span class="p">).</span><span class="n">setLoop</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="n">model</span><span class="p">.</span><span class="n">playAnimation</span><span class="p">(</span><span class="s">&quot;Idle&quot;</span><span class="p">);</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="n">model</span><span class="p">.</span><span class="n">playAnimation</span><span class="p">(</span><span class="s">&quot;Run&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2f</span><span class="p">);</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="n">model</span><span class="p">.</span><span class="n">playAnimation</span><span class="p">(</span><span class="s">&quot;Die&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>When the fade time is omitted, each clip's authored <strong>Fade time</strong>
+(<a href="../../reference/classes/animation/#defaultfadetime"><code>defaultFadeTime</code></a>, set in the
+Properties window or in code) is used. Tune it per clip: ~0.2–0.3s for locomotion,
+shorter (~0.1s) for a snappy hit or death reaction. <code>playAnimation</code> works on clips of a
+single model; to crossfade arbitrary clips by hand, ramp their weights directly with
+<a href="../../reference/classes/animation/#fadein-fadeout"><code>Animation:fadeIn</code></a> and <code>fadeOut</code>, or
+set <a href="../../reference/classes/animation/#blendweight"><code>blendWeight</code></a> yourself for layered
+blending.</p>
+<p>You can preview a transition without running the game — see
+<a href="../../editor/animation/#skeletal-animation">Blending clips in the editor</a>.</p>
+<h2 id="keyframe-tracks-timeline-authored">Keyframe tracks (timeline-authored)<a class="headerlink" href="#keyframe-tracks-timeline-authored" title="Link to this section">&para;</a></h2>
+<p>In the editor, the Animation Timeline writes keyframe data into component tracks. These
+are stored in the scene file and played back at runtime through the action system. The
+track types available are:</p>
+<table>
+<thead>
+<tr>
+<th>Track class</th>
+<th>Property animated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TranslateTracks</code></td>
+<td>Entity position over time</td>
+</tr>
+<tr>
+<td><code>RotateTracks</code></td>
+<td>Entity rotation over time</td>
+</tr>
+<tr>
+<td><code>ScaleTracks</code></td>
+<td>Entity scale over time</td>
+</tr>
+<tr>
+<td><code>MorphTracks</code></td>
+<td>Morph target weights for shape blending</td>
+</tr>
+</tbody>
+</table>
+<p>Create track entities from the <strong>Structure panel</strong> (<strong>Create entity → Animation →
+Translate/Rotate/Scale/Morph Tracks</strong>) or from the Animation Timeline's <strong>+ Add
+Action</strong> menu. A track entity holds a shared key-time list plus one value per key,
+and animates the entity set as its action target. In the Animation Timeline,
+right-click empty track space to create and key transform tracks on demand, then use
+the camera <strong>Snapshot</strong> button to store the complete pose across existing tracks as one
+undo step. See <a href="../../editor/animation/#keying-transforms">Keying transforms</a>.
+<code>TranslateTracks</code> paths can also be edited visually in the scene view — see
+<a href="../../editor/scene-view/#editing-movement-paths-translatetracks">Editing movement paths</a>.</p>
+<p>An action or animation with <strong>Play on start</strong> checked (ActionComponent) starts with
+the scene, so idle motion such as a spinning pickup needs no script. <strong>Loop</strong> on an
+AnimationComponent repeats the animation, and <strong>Loop</strong> on a track's KeyframeTracks
+component repeats the track when it plays on its own, without an animation.</p>
+<h3 id="relative-tracks">Relative tracks<a class="headerlink" href="#relative-tracks" title="Link to this section">&para;</a></h3>
+<p>Track values are the target's local position, rotation and scale. With <strong>Relative</strong>
+checked on the KeyframeTracks component (<code>setRelative(true)</code>), they are offsets from the
+pose the target has when the track starts instead: the position adds to it, the rotation
+is applied after it and the scale multiplies it. The same track then works wherever the
+target is placed, so one bob or wobble serves every copy of a bundle. A relative track
+that does not end where it began moves the target a bit further each time it is started
+again; a looping animation repeats it from the same starting pose.</p>
+<p>A UI element with anchors is placed by its layout every frame, so an absolute track
+cannot move it; a relative track moves it through its layout offset, and the anchors keep
+working. Keying a relative track in the Animation Timeline stores the target's offset
+from where it was when the preview started.</p>
+<h3 id="per-segment-easing">Per-segment easing<a class="headerlink" href="#per-segment-easing" title="Link to this section">&para;</a></h3>
+<p>Each segment between two consecutive keys can have its own easing curve: segment <code>i</code>
+shapes the interpolation from key <code>i</code> to key <code>i+1</code>, using any
+<a href="../../reference/classes/timedaction/"><code>EaseType</code></a>. Unset segments are linear. <code>STEP</code>
+holds key <code>i</code>'s value for the whole segment — useful for stepped, pose-to-pose motion.
+GLTF-imported clips arrive with easing matching their sampler: <code>LINEAR</code> clips leave the
+list empty, <code>STEP</code> clips fill every segment with <code>STEP</code>, and <code>CUBICSPLINE</code> clips carry
+per-key tangents instead (see <a href="#interpolation-modes">Interpolation modes</a>). In the
+<strong>Properties</strong> window, <strong>KeyframeTracks → Easing</strong> is a collapsible, sparse list:
+<strong>Add Ease</strong> appends the next explicit segment entry, up to the number of key pairs,
+and the trash button removes an entry and shifts later entries to preceding segments.
+Missing trailing entries remain linear. You can also edit easing in code:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Lua</label><label for="__tabbed_9_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">TranslateTracks</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nv">path</span><span class="p">:</span><span class="nf">setTarget</span><span class="p">(</span><span class="nv">box</span><span class="p">.</span><span class="py">entity</span><span class="p">)</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="nv">path</span><span class="p">:</span><span class="nf">setTimes</span><span class="p">({</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.5</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">})</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="nv">path</span><span class="p">:</span><span class="nf">setValues</span><span class="p">({</span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)})</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="nv">path</span><span class="p">:</span><span class="nf">setEasing</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">EaseType</span><span class="p">.</span><span class="py">QUAD_IN_OUT</span><span class="p">)</span><span class="w"> </span><span class="c1">-- key 0 -&gt; key 1</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="nv">path</span><span class="p">:</span><span class="nf">setEasing</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nv">EaseType</span><span class="p">.</span><span class="py">BOUNCE_OUT</span><span class="p">)</span><span class="w">  </span><span class="c1">-- key 2 -&gt; key 3</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="nv">path</span><span class="p">:</span><span class="nf">start</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">TranslateTracks</span><span class="w"> </span><span class="nf">path</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">path</span><span class="p">.</span><span class="n">setTarget</span><span class="p">(</span><span class="n">box</span><span class="p">.</span><span class="n">getEntity</span><span class="p">());</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">path</span><span class="p">.</span><span class="n">setTimes</span><span class="p">({</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">2.5f</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0f</span><span class="p">});</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="n">path</span><span class="p">.</span><span class="n">setValues</span><span class="p">({</span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)});</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="n">path</span><span class="p">.</span><span class="n">setEasing</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">EaseType</span><span class="o">::</span><span class="n">QUAD_IN_OUT</span><span class="p">);</span><span class="w"> </span><span class="c1">// key 0 -&gt; key 1</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="n">path</span><span class="p">.</span><span class="n">setEasing</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">EaseType</span><span class="o">::</span><span class="n">BOUNCE_OUT</span><span class="p">);</span><span class="w">  </span><span class="c1">// key 2 -&gt; key 3</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="n">path</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="morph-targets">Morph targets<a class="headerlink" href="#morph-targets" title="Link to this section">&para;</a></h2>
+<p>Morph targets (blend shapes) are authored in a 3D tool such as Blender and exported
+through GLTF. Use <code>MorphTracks</code> on a Model entity to blend between shape keys at
+runtime.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">model</span><span class="p">.</span><span class="n">setMorphWeight</span><span class="p">(</span><span class="s">&quot;smile&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8f</span><span class="p">);</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">model</span><span class="p">.</span><span class="n">setMorphWeight</span><span class="p">(</span><span class="s">&quot;blink&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Link to this section">&para;</a></h2>
+<ul>
+<li>Name animation clips consistently (<code>idle</code>, <code>walk</code>, <code>run</code>, <code>jump</code>, <code>attack</code>).</li>
+<li>Keep looping clips separate from one-shot clips.</li>
+<li>Use runtime actions for UI and gameplay feedback; use the timeline for complex
+  authored motion.</li>
+<li>Leave dynamic bodies to the simulation. A kinematic body (a moving platform) can be
+  animated: it follows the animation with a velocity, so it carries and pushes dynamic
+  bodies (see <a href="../physics/#moving-a-body">Moving a body</a>).</li>
+<li>Test frame intervals in play mode; what looks good in the editor may feel wrong at
+  the actual game frame rate.</li>
+</ul>
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Link to this section">&para;</a></h2>
+<ul>
+<li><a href="../../reference/classes/action/">Action</a> — base action class</li>
+<li><a href="../../reference/classes/timedaction/">TimedAction</a> — duration-based base</li>
+<li><a href="../../reference/classes/spriteanimation/">SpriteAnimation</a></li>
+<li><a href="../../reference/classes/spriteanimationcomponent/">SpriteAnimationComponent</a></li>
+<li><a href="../../reference/classes/animation/">Animation</a></li>
+<li><a href="../../reference/classes/particles/">Particles</a></li>
+<li><a href="../../editor/animation/">Animation Timeline</a> — editor authoring</li>
+</ul>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../user-interface/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">User Interface</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../particles/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Particles</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/manual/animation.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#animation" class="dx-toc-link" data-level="1">Animation</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#animation-families" class="dx-toc-link" data-level="2">Animation families</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#runtime-actions" class="dx-toc-link" data-level="2">Runtime actions</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#available-action-types" class="dx-toc-link" data-level="3">Available action types</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#basic-action-example" class="dx-toc-link" data-level="3">Basic action example</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#chaining-actions-with-events" class="dx-toc-link" data-level="3">Chaining actions with events</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#looping-ping-pong-and-spins" class="dx-toc-link" data-level="3">Looping, ping-pong and spins</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#starting-restarting-and-phase" class="dx-toc-link" data-level="3">Starting, restarting and phase</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#easing-curves" class="dx-toc-link" data-level="2">Easing curves</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#sprite-animation" class="dx-toc-link" data-level="2">Sprite animation</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#skeletal-animation-from-gltf" class="dx-toc-link" data-level="2">Skeletal animation from GLTF</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#playing-a-clip-on-a-model-already-in-the-scene" class="dx-toc-link" data-level="3">Playing a clip on a model already in the scene</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#creating-a-model-at-runtime" class="dx-toc-link" data-level="3">Creating a model at runtime</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#interpolation-modes" class="dx-toc-link" data-level="3">Interpolation modes</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#smooth-transitions-crossfading" class="dx-toc-link" data-level="3">Smooth transitions (crossfading)</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#keyframe-tracks-timeline-authored" class="dx-toc-link" data-level="2">Keyframe tracks (timeline-authored)</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#relative-tracks" class="dx-toc-link" data-level="3">Relative tracks</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#per-segment-easing" class="dx-toc-link" data-level="3">Per-segment easing</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#morph-targets" class="dx-toc-link" data-level="2">Morph targets</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#best-practices" class="dx-toc-link" data-level="2">Best practices</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#see-also" class="dx-toc-link" data-level="2">See also</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../versions.json";
+    window.QUANTUM_PAGE_URL = "manual/animation/";
+  </script>
+  <script src="../../js/quantum.js" defer></script>
+</body>
+</html>

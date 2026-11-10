@@ -1,11 +1,11 @@
 ---
-description: How Doriax handles window sizes, aspect ratios, canvas scaling, and fixed render resolution with upscaling.
+description: How Quantum handles window sizes, aspect ratios, canvas scaling, and fixed render resolution with upscaling.
 ---
 
 # Multiple Resolutions
 
 Games run on an enormous range of displays: phones in portrait and landscape, laptops,
-4K monitors, ultrawide screens, and resizable desktop windows. Doriax separates the
+4K monitors, ultrawide screens, and resizable desktop windows. Quantum separates the
 size your game is *designed* for from the size it is *displayed* at, so one project can
 look correct everywhere. This page covers the three concepts involved and how to
 combine them:

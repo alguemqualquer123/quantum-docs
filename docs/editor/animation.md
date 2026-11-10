@@ -1,5 +1,5 @@
 ---
-description: Using the animation timeline, sprite animation, skeletal animation, and keyframe tracks in the Doriax editor.
+description: Using the animation timeline, sprite animation, skeletal animation, and keyframe tracks in the Quantum editor.
 ---
 
 # Animation Timeline

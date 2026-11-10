@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events — Quantum Engine Docs</title>
+  <meta name="description" content="Engine, physics, UI, action, component, and monetization service events in Quantum, including C++ macros and Lua registration helpers.">
+  <meta property="og:title" content="Events — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/manual/events/">
+
+  <link rel="icon" type="image/png" href="../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/quantum.css">
+  <link rel="stylesheet" href="../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="events">Events<a class="headerlink" href="#events" title="Link to this section">&para;</a></h1>
+<p>Quantum events use <code>FunctionSubscribe&lt;Ret(Args...)&gt;</code>, a multicast delegate that stores
+callbacks with string tags. Adding a callback with an existing tag <strong>replaces</strong> the
+previous one, which prevents duplicate subscriptions from the same source.</p>
+<p>Events work identically in C++ and Lua. C++ uses macros from <code>FunctionSubscribe.h</code>.
+Lua uses <code>RegisterEvent</code> and <code>RegisterEngineEvent</code> globals registered by <code>LuaBinding</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Let the Code Editor write it</p>
+<p>The <a href="../../editor/code-editor/#add-events">event menu</a> of the Code Editor adds the
+registration and an empty handler for any event on this page, in C++ or Lua.</p>
+</div>
+<h2 id="how-dispatch-works">How dispatch works<a class="headerlink" href="#how-dispatch-works" title="Link to this section">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Platform input / frame tick
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        │
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        ▼
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Engine.systemTouchStart / systemUpdate
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        │
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        ▼
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>FunctionSubscribe.call ──► C++ callbacks
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>                       └─► Lua closures
+</code></pre></div>
+<ol>
+<li>The platform layer calls <code>Engine::systemDraw()</code> (or <code>systemUpdate()</code> when nothing can
+   be drawn), <code>systemTouchStart()</code>, etc.</li>
+<li>Engine forwards to static <code>FunctionSubscribe</code> members (<code>onUpdate.call()</code>, etc.).</li>
+<li>Subsystems and components fire their own events during simulation (physics contacts,
+   UI pointer events, action start/stop).</li>
+<li>Each subscriber runs in registration order unless disabled or removed.</li>
+</ol>
+<p>A callback can add or remove subscribers, or destroy the object that owns the event. A
+subscriber added during a call first runs on the next one, and one removed before its turn
+is skipped.</p>
+<h2 id="functionsubscribe-api">FunctionSubscribe API<a class="headerlink" href="#functionsubscribe-api" title="Link to this section">&para;</a></h2>
+<p>Defined in <code>engine/core/util/FunctionSubscribe.h</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>add(tag, callback)</code></td>
+<td>Register a callback; replaces existing tag</td>
+</tr>
+<tr>
+<td><code>add(tag, lua_State*)</code></td>
+<td>Register a Lua function with tag</td>
+</tr>
+<tr>
+<td><code>remove(tag)</code></td>
+<td>Remove one callback by exact tag</td>
+</tr>
+<tr>
+<td><code>removeByTagSubstring(substr)</code></td>
+<td>Remove all callbacks whose tag contains substring</td>
+</tr>
+<tr>
+<td><code>clear()</code></td>
+<td>Remove all callbacks</td>
+</tr>
+<tr>
+<td><code>call(args...)</code> / <code>operator()</code></td>
+<td>Invoke all enabled callbacks</td>
+</tr>
+<tr>
+<td><code>setEnabled(bool)</code></td>
+<td>Enable or disable the entire event without removing subscribers</td>
+</tr>
+</tbody>
+</table>
+<p>With <code>QUANTUM_CRASH_GUARD</code> enabled, failing subscribers are removed automatically and
+optionally reported through a global crash handler. A C++ exception that escapes a
+subscriber counts as a failure too, and the report carries its message. Copies of an
+event share their subscribers, so a failing one stops running in all of them.</p>
+<h2 id="engine-events">Engine events<a class="headerlink" href="#engine-events" title="Link to this section">&para;</a></h2>
+<p><code>Engine</code> exposes frame, lifecycle, input, and pointer events.</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Signature</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>onInit</code></td>
+<td><code>void()</code></td>
+<td>User init via <code>QUANTUM_INIT</code> macro (access through <code>getOnInit()</code>)</td>
+</tr>
+<tr>
+<td><code>onViewLoaded</code></td>
+<td><code>void()</code></td>
+<td>View/surface ready</td>
+</tr>
+<tr>
+<td><code>onViewChanged</code></td>
+<td><code>void()</code></td>
+<td>Canvas/view changed; Lua name: <code>onCanvasChanged</code></td>
+</tr>
+<tr>
+<td><code>onViewDestroyed</code></td>
+<td><code>void()</code></td>
+<td>View destroyed</td>
+</tr>
+<tr>
+<td><code>onDraw</code></td>
+<td><code>void()</code></td>
+<td>Every drawn frame, before the scenes are drawn</td>
+</tr>
+<tr>
+<td><code>onUpdate</code></td>
+<td><code>void()</code></td>
+<td>Variable-step gameplay update</td>
+</tr>
+<tr>
+<td><code>onFixedUpdate</code></td>
+<td><code>void()</code></td>
+<td>Fixed-step simulation update</td>
+</tr>
+<tr>
+<td><code>onPostUpdate</code></td>
+<td><code>void()</code></td>
+<td>Work after regular update</td>
+</tr>
+<tr>
+<td><code>onPause</code> / <code>onResume</code></td>
+<td><code>void()</code></td>
+<td>App/game pause and resume</td>
+</tr>
+<tr>
+<td><code>onShutdown</code></td>
+<td><code>void()</code></td>
+<td>Runtime shutdown</td>
+</tr>
+<tr>
+<td><code>onSceneLoaded</code></td>
+<td><code>void()</code></td>
+<td>A scene loaded by <code>SceneManager</code> finished loading, before its loading scene closes</td>
+</tr>
+<tr>
+<td><code>onTouchStart/End/Move</code></td>
+<td><code>void(int, float, float)</code></td>
+<td>Touch identifier, x, y</td>
+</tr>
+<tr>
+<td><code>onTouchCancel</code></td>
+<td><code>void(int, float, float)</code></td>
+<td>One touch canceled; identifier and last recorded canvas position</td>
+</tr>
+<tr>
+<td><code>onMouseDown/Up</code></td>
+<td><code>void(int, float, float, int)</code></td>
+<td>Button, x, y, modifiers</td>
+</tr>
+<tr>
+<td><code>onMouseMove/Scroll</code></td>
+<td><code>void(float, float, int)</code></td>
+<td>Position or scroll offsets plus modifiers</td>
+</tr>
+<tr>
+<td><code>onMouseEnter/Leave</code></td>
+<td><code>void()</code></td>
+<td>Pointer enters/leaves view</td>
+</tr>
+<tr>
+<td><code>onKeyDown/Up</code></td>
+<td><code>void(int, bool, int)</code></td>
+<td>Key, repeat flag, modifiers</td>
+</tr>
+<tr>
+<td><code>onCharInput</code></td>
+<td><code>void(wchar_t)</code></td>
+<td>Text input codepoint</td>
+</tr>
+<tr>
+<td><code>onGamepadConnect/Disconnect</code></td>
+<td><code>void(int)</code></td>
+<td>Gamepad id connected/disconnected</td>
+</tr>
+<tr>
+<td><code>onGamepadButtonDown/Up</code></td>
+<td><code>void(int, int)</code></td>
+<td>Gamepad id, button index</td>
+</tr>
+<tr>
+<td><code>onGamepadAxisMove</code></td>
+<td><code>void(int, int, float)</code></td>
+<td>Gamepad id, axis index, value <code>-1</code>…<code>1</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="touch-cancellation">Touch cancellation<a class="headerlink" href="#touch-cancellation" title="Link to this section">&para;</a></h3>
+<p>Use <code>onTouchEnd</code> for a finger lifting normally and <code>onTouchCancel</code> for an
+interrupted contact. Both identify the finger, but cancellation does not dispatch
+UI pointer-up or click events. In a per-pointer cancellation, the canceled touch is
+removed from <code>Input</code> before its callback runs; other fingers remain active. Release
+only the gameplay action associated with that identifier in your handler.</p>
+<p>A full cancellation removes all tracked touches before emitting <code>onTouchCancel</code>
+once for each of them. There is no separate global notification; an empty full
+cancellation emits no callbacks. Each callback receives the last recorded position
+in logical canvas coordinates. An already removed or unknown identifier produces
+no additional notification. Use <code>Input::numTouches()</code> (<code>Input.numTouches()</code> in Lua)
+to check whether any fingers remain; it is zero during every full-cancel callback.</p>
+<p>Subscribe to <code>onTouchCancel</code> as well as <code>onTouchEnd</code> when tracking held fingers.
+Cancellation notifications follow <code>pauseGameEvents</code>, and are not filtered by
+<code>setIgnoreEventsHandledByUI</code> or the current pointer position.</p>
+<p>In the Code Editor, choose <strong>Add event &gt; Input &gt; Touch &gt; onTouchCancel</strong>
+(<code>Touch</code> is the section label). The generated handler has this signature:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">onTouchCancel</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">pointer</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</code></pre></div>
+<p>Use <code>REGISTER_ENGINE_EVENT(onTouchCancel)</code> in the C++ constructor and
+<code>UNREGISTER_ENGINE_EVENT(onTouchCancel)</code> in the destructor. In Lua:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">function</span><span class="w"> </span><span class="nc">Player</span><span class="p">:</span><span class="nf">init</span><span class="p">()</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nf">RegisterEngineEvent</span><span class="p">(</span><span class="nv">self</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;onTouchCancel&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kr">end</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kr">function</span><span class="w"> </span><span class="nc">Player</span><span class="p">:</span><span class="nf">onTouchCancel</span><span class="p">(</span><span class="nv">pointer</span><span class="p">,</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">)</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="c1">-- Release the action associated with this pointer.</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="kr">end</span>
+</code></pre></div>
+<h3 id="input-routing-options">Input routing options<a class="headerlink" href="#input-routing-options" title="Link to this section">&para;</a></h3>
+<p>Configure how events reach gameplay vs. UI:</p>
+<table>
+<thead>
+<tr>
+<th>Engine setting</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>setIgnoreEventsHandledByUI(true)</code></td>
+<td>Gameplay handlers skip events already consumed by UI</td>
+</tr>
+<tr>
+<td><code>setAllowEventsOutCanvas(false)</code></td>
+<td>Clip events to the logical canvas</td>
+</tr>
+<tr>
+<td><code>pauseGameEvents(true)</code></td>
+<td>Pause game event delivery (editor pause, etc.)</td>
+</tr>
+<tr>
+<td><code>setCallMouseInTouchEvent</code> / <code>setCallTouchInMouseEvent</code></td>
+<td>Mirror mouse/touch for cross-platform testing</td>
+</tr>
+</tbody>
+</table>
+<h2 id="c-registration-macros">C++ registration macros<a class="headerlink" href="#c-registration-macros" title="Link to this section">&para;</a></h2>
+<p>All macros live in <code>FunctionSubscribe.h</code> and generate a unique tag:
+<code>typeid(ClassName)_objectAddress_methodName</code>.</p>
+<h3 id="engine-events_1">Engine events<a class="headerlink" href="#engine-events_1" title="Link to this section">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">REGISTER_ENGINE_EVENT</span><span class="p">(</span><span class="n">onUpdate</span><span class="p">);</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">UNREGISTER_ENGINE_EVENT</span><span class="p">(</span><span class="n">onUpdate</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="any-functionsubscribe-member">Any FunctionSubscribe member<a class="headerlink" href="#any-functionsubscribe-member" title="Link to this section">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">PhysicsSystem</span><span class="o">*</span><span class="w"> </span><span class="n">physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scene</span><span class="o">-&gt;</span><span class="n">getSystem</span><span class="o">&lt;</span><span class="n">PhysicsSystem</span><span class="o">&gt;</span><span class="p">().</span><span class="n">get</span><span class="p">();</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">REGISTER_EVENT</span><span class="p">(</span><span class="n">physics</span><span class="o">-&gt;</span><span class="n">beginContact2D</span><span class="p">,</span><span class="w"> </span><span class="n">onBeginContact</span><span class="p">);</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">UNREGISTER_EVENT</span><span class="p">(</span><span class="n">physics</span><span class="o">-&gt;</span><span class="n">beginContact2D</span><span class="p">,</span><span class="w"> </span><span class="n">onBeginContact</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="component-events-on-the-same-entity">Component events on the same entity<a class="headerlink" href="#component-events-on-the-same-entity" title="Link to this section">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">REGISTER_COMPONENT_EVENT</span><span class="p">(</span><span class="n">UIComponent</span><span class="p">,</span><span class="w"> </span><span class="n">onClick</span><span class="p">,</span><span class="w"> </span><span class="n">onClick</span><span class="p">);</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">REGISTER_UI_EVENT</span><span class="p">(</span><span class="n">onClick</span><span class="p">,</span><span class="w"> </span><span class="n">onClick</span><span class="p">);</span><span class="w">           </span><span class="c1">// shorthand for UIComponent</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">REGISTER_BUTTON_EVENT</span><span class="p">(</span><span class="n">onPress</span><span class="p">,</span><span class="w"> </span><span class="n">onPress</span><span class="p">);</span><span class="w">       </span><span class="c1">// ButtonComponent</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">REGISTER_SCROLLBAR_EVENT</span><span class="p">(</span><span class="n">onChange</span><span class="p">,</span><span class="w"> </span><span class="n">onChange</span><span class="p">);</span><span class="w">  </span><span class="c1">// ScrollbarComponent</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">REGISTER_PANEL_EVENT</span><span class="p">(</span><span class="n">onMove</span><span class="p">,</span><span class="w"> </span><span class="n">onMove</span><span class="p">);</span><span class="w">          </span><span class="c1">// PanelComponent</span>
+</code></pre></div>
+<p>Matching <code>UNREGISTER_*</code> macros remove subscriptions in destructors.</p>
+<h3 id="example-full-c-script">Example: full C++ script<a class="headerlink" href="#example-full-c-script" title="Link to this section">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">DoorTrigger</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">quantum</span><span class="o">::</span><span class="n">ScriptBase</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">public</span><span class="o">:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">DoorTrigger</span><span class="p">(</span><span class="n">quantum</span><span class="o">::</span><span class="n">Scene</span><span class="o">*</span><span class="w"> </span><span class="n">scene</span><span class="p">,</span><span class="w"> </span><span class="n">quantum</span><span class="o">::</span><span class="n">Entity</span><span class="w"> </span><span class="n">entity</span><span class="p">);</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="o">~</span><span class="n">DoorTrigger</span><span class="p">();</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onUpdate</span><span class="p">();</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onClick</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBeginContact</span><span class="p">(</span><span class="n">quantum</span><span class="o">::</span><span class="n">Body2D</span><span class="w"> </span><span class="n">bodyA</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">shapeA</span><span class="p">,</span><span class="w"> </span><span class="n">quantum</span><span class="o">::</span><span class="n">Body2D</span><span class="w"> </span><span class="n">bodyB</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">shapeB</span><span class="p">);</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="k">private</span><span class="o">:</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="n">quantum</span><span class="o">::</span><span class="n">PhysicsSystem</span><span class="o">*</span><span class="w"> </span><span class="n">physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">;</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="p">};</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="n">DoorTrigger</span><span class="o">::</span><span class="n">DoorTrigger</span><span class="p">(</span><span class="n">Scene</span><span class="o">*</span><span class="w"> </span><span class="n">scene</span><span class="p">,</span><span class="w"> </span><span class="n">Entity</span><span class="w"> </span><span class="n">entity</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ScriptBase</span><span class="p">(</span><span class="n">scene</span><span class="p">,</span><span class="w"> </span><span class="n">entity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">    </span><span class="n">physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scene</span><span class="o">-&gt;</span><span class="n">getSystem</span><span class="o">&lt;</span><span class="n">PhysicsSystem</span><span class="o">&gt;</span><span class="p">().</span><span class="n">get</span><span class="p">();</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">    </span><span class="n">REGISTER_ENGINE_EVENT</span><span class="p">(</span><span class="n">onUpdate</span><span class="p">);</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">    </span><span class="n">REGISTER_UI_EVENT</span><span class="p">(</span><span class="n">onClick</span><span class="p">,</span><span class="w"> </span><span class="n">onClick</span><span class="p">);</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">physics</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">        </span><span class="n">REGISTER_EVENT</span><span class="p">(</span><span class="n">physics</span><span class="o">-&gt;</span><span class="n">beginContact2D</span><span class="p">,</span><span class="w"> </span><span class="n">onBeginContact</span><span class="p">);</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="p">}</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="n">DoorTrigger</span><span class="o">::~</span><span class="n">DoorTrigger</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">    </span><span class="n">UNREGISTER_ENGINE_EVENT</span><span class="p">(</span><span class="n">onUpdate</span><span class="p">);</span>
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="w">    </span><span class="n">UNREGISTER_UI_EVENT</span><span class="p">(</span><span class="n">onClick</span><span class="p">,</span><span class="w"> </span><span class="n">onClick</span><span class="p">);</span>
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">physics</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="w">        </span><span class="n">UNREGISTER_EVENT</span><span class="p">(</span><span class="n">physics</span><span class="o">-&gt;</span><span class="n">beginContact2D</span><span class="p">,</span><span class="w"> </span><span class="n">onBeginContact</span><span class="p">);</span>
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="lua-event-registration">Lua event registration<a class="headerlink" href="#lua-event-registration" title="Link to this section">&para;</a></h2>
+<p><code>LuaBinding::registerHelpersFunctions</code> exposes two globals:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Arguments</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RegisterEvent(self, event, methodName [, tag])</code></td>
+<td>Script table, event object, method name</td>
+<td>Subscribes <code>self:methodName(...)</code> to any exposed <code>FunctionSubscribe</code></td>
+</tr>
+<tr>
+<td><code>RegisterEngineEvent(self, methodName [, tag])</code></td>
+<td>Script table, engine event name</td>
+<td>Looks up <code>Engine.&lt;methodName&gt;</code> and subscribes</td>
+</tr>
+</tbody>
+</table>
+<p>If <code>tag</code> is omitted, Quantum builds:
+<code>ClassName_instancePointer_methodName</code></p>
+<h3 id="engine-event-lua">Engine event (Lua)<a class="headerlink" href="#engine-event-lua" title="Link to this section">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kr">function</span><span class="w"> </span><span class="nc">Player</span><span class="p">:</span><span class="nf">init</span><span class="p">()</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="nf">RegisterEngineEvent</span><span class="p">(</span><span class="nv">self</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;onUpdate&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kr">end</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="kr">function</span><span class="w"> </span><span class="nc">Player</span><span class="p">:</span><span class="nf">onUpdate</span><span class="p">()</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="c1">-- called every frame</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="kr">end</span>
+</code></pre></div>
+<h3 id="component-event-lua">Component event (Lua)<a class="headerlink" href="#component-event-lua" title="Link to this section">&para;</a></h3>
+<p>Lua has no per-component macros. The pattern that replaces <code>REGISTER_UI_EVENT</code>,
+<code>REGISTER_BUTTON_EVENT</code>, and the other component macros is always the same: wrap the
+entity, get the component, and pass its event to <code>RegisterEvent</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kr">function</span><span class="w"> </span><span class="nc">Trigger</span><span class="p">:</span><span class="nf">init</span><span class="p">()</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="c1">-- Get the UIComponent through a wrapper for this entity</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Image</span><span class="p">(</span><span class="nv">self</span><span class="p">.</span><span class="py">scene</span><span class="p">,</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">entity</span><span class="p">)</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">ui</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">image</span><span class="p">:</span><span class="nf">getUIComponent</span><span class="p">()</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nf">RegisterEvent</span><span class="p">(</span><span class="nv">self</span><span class="p">,</span><span class="w"> </span><span class="nv">ui</span><span class="p">.</span><span class="py">onClick</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;onClick&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="kr">end</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="kr">function</span><span class="w"> </span><span class="nc">Trigger</span><span class="p">:</span><span class="nf">onClick</span><span class="p">(</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">)</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">)</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="kr">end</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>C++ macro</th>
+<th>Lua equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>REGISTER_ENGINE_EVENT(onUpdate)</code></td>
+<td><code>RegisterEngineEvent(self, "onUpdate")</code></td>
+</tr>
+<tr>
+<td><code>REGISTER_UI_EVENT(onClick, onClick)</code></td>
+<td><code>RegisterEvent(self, wrapper:getUIComponent().onClick, "onClick")</code></td>
+</tr>
+<tr>
+<td><code>REGISTER_BUTTON_EVENT(onPress, onPress)</code></td>
+<td><code>RegisterEvent(self, button:getButtonComponent().onPress, "onPress")</code></td>
+</tr>
+<tr>
+<td><code>REGISTER_SCROLLBAR_EVENT(onChange, onChange)</code></td>
+<td><code>RegisterEvent(self, scrollbar:getScrollbarComponent().onChange, "onChange")</code></td>
+</tr>
+<tr>
+<td><code>REGISTER_PANEL_EVENT(onMove, onMove)</code></td>
+<td><code>RegisterEvent(self, panel:getPanelComponent().onMove, "onMove")</code></td>
+</tr>
+<tr>
+<td><code>REGISTER_EVENT(physics-&gt;beginContact2D, onBeginContact)</code></td>
+<td><code>RegisterEvent(self, physics.beginContact2D, "onBeginContact")</code></td>
+</tr>
+<tr>
+<td><code>REGISTER_EVENT(AdMob::onAdLoaded, onAdLoaded)</code></td>
+<td><code>RegisterEvent(self, AdMob.onAdLoaded, "onAdLoaded")</code></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kr">function</span><span class="w"> </span><span class="nc">MenuButton</span><span class="p">:</span><span class="nf">init</span><span class="p">()</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">button</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Button</span><span class="p">(</span><span class="nv">self</span><span class="p">.</span><span class="py">scene</span><span class="p">,</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">entity</span><span class="p">)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">bc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">button</span><span class="p">:</span><span class="nf">getButtonComponent</span><span class="p">()</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nf">RegisterEvent</span><span class="p">(</span><span class="nv">self</span><span class="p">,</span><span class="w"> </span><span class="nv">bc</span><span class="p">.</span><span class="py">onPress</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;onPress&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="kr">end</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="kr">function</span><span class="w"> </span><span class="nc">MenuButton</span><span class="p">:</span><span class="nf">onPress</span><span class="p">()</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;button pressed&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="kr">end</span>
+</code></pre></div>
+<p>Cleanup is also automatic in Lua: when the scene unloads, or <code>destroyBundle</code> removes the
+script's entity, all subscriptions tagged with the script instance are removed — there is
+no <code>UNREGISTER_*</code> to call.</p>
+<h3 id="physics-event-lua">Physics event (Lua)<a class="headerlink" href="#physics-event-lua" title="Link to this section">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kr">function</span><span class="w"> </span><span class="nc">Trap</span><span class="p">:</span><span class="nf">init</span><span class="p">()</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">scene</span><span class="p">:</span><span class="nf">getPhysicsSystem</span><span class="p">()</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nf">RegisterEvent</span><span class="p">(</span><span class="nv">self</span><span class="p">,</span><span class="w"> </span><span class="nv">physics</span><span class="p">.</span><span class="py">beginContact2D</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;onBeginContact&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="kr">end</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="kr">function</span><span class="w"> </span><span class="nc">Trap</span><span class="p">:</span><span class="nf">onBeginContact</span><span class="p">(</span><span class="nv">bodyA</span><span class="p">,</span><span class="w"> </span><span class="nv">shapeA</span><span class="p">,</span><span class="w"> </span><span class="nv">bodyB</span><span class="p">,</span><span class="w"> </span><span class="nv">shapeB</span><span class="p">)</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2D contact&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="kr">end</span>
+</code></pre></div>
+<p>The filters (<code>preSolve2D</code>, <code>shouldCollide2D</code>, <code>shouldCollide3D</code>) use what the method
+returns, so end them with an explicit <code>return</code>: a method that returns nothing rejects the
+contact. See <a href="../../reference/classes/physicssystem/#events">PhysicsSystem</a>.</p>
+<h3 id="custom-tag">Custom tag<a class="headerlink" href="#custom-tag" title="Link to this section">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nf">RegisterEngineEvent</span><span class="p">(</span><span class="nv">self</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;onUpdate&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;player1_update&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Use custom tags when you need to replace or manually remove a specific subscription.</p>
+<h2 id="physics-events">Physics events<a class="headerlink" href="#physics-events" title="Link to this section">&para;</a></h2>
+<p><code>PhysicsSystem</code> exposes 2D (Box2D) and 3D (Jolt) collision events.</p>
+<h3 id="2d-events">2D events<a class="headerlink" href="#2d-events" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Signature</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>beginContact2D</code></td>
+<td><code>void(Body2D, unsigned long, Body2D, unsigned long)</code></td>
+<td>Contact begins</td>
+</tr>
+<tr>
+<td><code>endContact2D</code></td>
+<td><code>void(Body2D, unsigned long, Body2D, unsigned long)</code></td>
+<td>Contact ends</td>
+</tr>
+<tr>
+<td><code>hitContact2D</code></td>
+<td><code>void(Body2D, unsigned long, Body2D, unsigned long, Vector2, Vector2, float)</code></td>
+<td>Impact with hit data</td>
+</tr>
+<tr>
+<td><code>beginSensorContact2D</code></td>
+<td><code>void(Body2D, unsigned long, Body2D, unsigned long)</code></td>
+<td>Sensor overlap begins</td>
+</tr>
+<tr>
+<td><code>endSensorContact2D</code></td>
+<td><code>void(Body2D, unsigned long, Body2D, unsigned long)</code></td>
+<td>Sensor overlap ends</td>
+</tr>
+<tr>
+<td><code>preSolve2D</code></td>
+<td><code>bool(Body2D, unsigned long, Body2D, unsigned long, Manifold2D)</code></td>
+<td>Return <code>false</code> to disable contact before solve</td>
+</tr>
+<tr>
+<td><code>shouldCollide2D</code></td>
+<td><code>bool(Body2D, unsigned long, Body2D, unsigned long)</code></td>
+<td>Filter pairs before collision</td>
+</tr>
+</tbody>
+</table>
+<p><code>beginContact2D</code>, <code>endContact2D</code>, <code>hitContact2D</code> and <code>preSolve2D</code> fire only for pairs where
+one of the shapes has <strong>Contact Events</strong>, <strong>Enable Hit Events</strong> or <strong>PreSolve Events</strong> on,
+and each is off by default — see
+<a href="../../reference/classes/body2d/#setshapeenablehitevents-setshapecontactevents-setshapepresolveevents-setshapesensorevents">Body2D events</a>.</p>
+<h3 id="3d-events">3D events<a class="headerlink" href="#3d-events" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>onBodyActivated3D</code> / <code>onBodyDeactivated3D</code></td>
+<td>Body activation state changed</td>
+</tr>
+<tr>
+<td><code>onContactAdded3D</code> / <code>onContactPersisted3D</code> / <code>onContactRemoved3D</code></td>
+<td>3D contact lifecycle</td>
+</tr>
+<tr>
+<td><code>shouldCollide3D</code></td>
+<td>Filter whether two 3D bodies/shapes should collide</td>
+</tr>
+</tbody>
+</table>
+<p>Unlike the 2D contact events, these run while Jolt is stepping, which limits what they may
+do to the world — see <a href="../physics/#what-a-3d-callback-may-do">What a 3D callback may do</a>.</p>
+<h2 id="ui-component-events">UI component events<a class="headerlink" href="#ui-component-events" title="Link to this section">&para;</a></h2>
+<p><code>UIComponent</code> events (also available through <code>REGISTER_UI_EVENT</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Signature</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>onGetFocus</code> / <code>onLostFocus</code></td>
+<td><code>void()</code></td>
+<td>Focus changes</td>
+</tr>
+<tr>
+<td><code>onPointerEnter</code> / <code>onPointerLeave</code></td>
+<td><code>void(float, float)</code></td>
+<td>Pointer enters/leaves widget bounds</td>
+</tr>
+<tr>
+<td><code>onPointerMove</code></td>
+<td><code>void(float, float)</code></td>
+<td>Pointer moves over widget</td>
+</tr>
+<tr>
+<td><code>onPointerDown</code> / <code>onPointerUp</code></td>
+<td><code>void(float, float)</code></td>
+<td>Pointer button down/up</td>
+</tr>
+<tr>
+<td><code>onClick</code> / <code>onDoubleClick</code></td>
+<td><code>void(float, float)</code></td>
+<td>Click gestures</td>
+</tr>
+<tr>
+<td><code>onDragStart</code> / <code>onDrag</code> / <code>onDragEnd</code></td>
+<td><code>void(float, float)</code></td>
+<td>Drag gestures</td>
+</tr>
+</tbody>
+</table>
+<h3 id="widget-specific-events">Widget-specific events<a class="headerlink" href="#widget-specific-events" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Events</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ButtonComponent</code></td>
+<td><code>onPress</code>, <code>onRelease</code></td>
+</tr>
+<tr>
+<td><code>ScrollbarComponent</code></td>
+<td><code>onChange</code></td>
+</tr>
+<tr>
+<td><code>PanelComponent</code></td>
+<td><code>onMove</code>, <code>onResize</code></td>
+</tr>
+<tr>
+<td><code>TextEditComponent</code></td>
+<td><code>onChange</code>, <code>onSubmit</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="action-and-sound-events">Action and sound events<a class="headerlink" href="#action-and-sound-events" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Events</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ActionComponent</code></td>
+<td><code>onStart</code>, <code>onStop</code>, <code>onPause</code>, <code>onStep</code></td>
+</tr>
+<tr>
+<td><code>SoundComponent</code></td>
+<td><code>onStart</code>, <code>onStop</code>, <code>onPause</code></td>
+</tr>
+</tbody>
+</table>
+<p>Use these to chain gameplay reactions to tweens, timelines, or audio playback.</p>
+<h2 id="service-events">Service events<a class="headerlink" href="#service-events" title="Link to this section">&para;</a></h2>
+<p>The <a href="../monetization/">monetization services</a> report through static events of their
+classes, which belong to no entity or scene:</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Events</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../reference/classes/admob/#events"><code>AdMob</code></a></td>
+<td><code>onInitialized</code>, <code>onConsentUpdated</code>, <code>onAdLoaded</code>, <code>onAdFailedToLoad</code>, <code>onAdShown</code>, <code>onAdFailedToShow</code>, <code>onAdDismissed</code>, <code>onAdClicked</code>, <code>onAdImpression</code>, <code>onUserEarnedReward</code>, <code>onAdPaid</code>, <code>onAdInspectorClosed</code></td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/inapppurchase/#events"><code>InAppPurchase</code></a></td>
+<td><code>onInitialized</code>, <code>onDisconnected</code>, <code>onProductsQueried</code>, <code>onPurchaseUpdated</code>, <code>onPurchaseFailed</code>, <code>onPurchasesQueried</code>, <code>onPurchaseAcknowledged</code>, <code>onPurchaseConsumed</code></td>
+</tr>
+<tr>
+<td><a href="../../reference/classes/webportal/#events"><code>WebPortal</code></a></td>
+<td><code>onInitialized</code>, <code>onAdStarted</code>, <code>onAdFinished</code>, <code>onAdError</code>, <code>onDataLoaded</code>, <code>onDataLoadFailed</code>, <code>onDataSaveFailed</code></td>
+</tr>
+</tbody>
+</table>
+<p>Pass the static member to <code>REGISTER_EVENT</code> in C++ or <code>RegisterEvent</code> in Lua:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">REGISTER_EVENT</span><span class="p">(</span><span class="n">AdMob</span><span class="o">::</span><span class="n">onUserEarnedReward</span><span class="p">,</span><span class="w"> </span><span class="n">onUserEarnedReward</span><span class="p">);</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">UNREGISTER_EVENT</span><span class="p">(</span><span class="n">AdMob</span><span class="o">::</span><span class="n">onUserEarnedReward</span><span class="p">,</span><span class="w"> </span><span class="n">onUserEarnedReward</span><span class="p">);</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Shop::onUserEarnedReward</span><span class="p">(</span><span class="n">AdMobFormat</span><span class="w"> </span><span class="n">format</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nf">RegisterEvent</span><span class="p">(</span><span class="nv">self</span><span class="p">,</span><span class="w"> </span><span class="nv">AdMob</span><span class="p">.</span><span class="py">onUserEarnedReward</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;onUserEarnedReward&quot;</span><span class="p">)</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="kr">function</span><span class="w"> </span><span class="nc">Shop</span><span class="p">:</span><span class="nf">onUserEarnedReward</span><span class="p">(</span><span class="nv">format</span><span class="p">,</span><span class="w"> </span><span class="nv">rewardType</span><span class="p">,</span><span class="w"> </span><span class="nv">amount</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>The platform answers on its own thread, and the engine calls these subscribers at the
+start of the next frame, on the game thread. A C++ handler must take the parameters by
+value, exactly as the event declares them (<code>std::string</code>, not <code>const std::string&amp;</code>).
+Since the events outlive scenes, remove C++ subscriptions in the destructor; Lua script
+subscriptions go away with the script. See
+<a href="../monetization/#how-results-arrive">How results arrive</a>.</p>
+<h2 id="easing-as-an-event">Easing as an event<a class="headerlink" href="#easing-as-an-event" title="Link to this section">&para;</a></h2>
+<p><code>Ease</code> extends <code>FunctionSubscribe&lt;float(float)&gt;</code>. Timed actions can use custom easing
+curves by subscribing to an <code>Ease</code> instance.</p>
+<h2 id="cleanup">Cleanup<a class="headerlink" href="#cleanup" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Cleanup mechanism</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C++ script destructor</td>
+<td>Call matching <code>UNREGISTER_*</code> macros</td>
+</tr>
+<tr>
+<td>Lua script unload</td>
+<td><code>cleanupLuaScripts</code> removes tags containing instance pointer</td>
+</tr>
+<tr>
+<td>Bundle instance destroyed</td>
+<td><code>destroyBundle</code> stops its C++ and Lua scripts as a scene unload does</td>
+</tr>
+<tr>
+<td>Scene unload</td>
+<td><code>Scene::removeSubscriptionsByTag</code>, including the <code>PhysicsSystem</code> events</td>
+</tr>
+<tr>
+<td>Component callbacks</td>
+<td><code>Engine::clearComponentSubscriptions(scene)</code></td>
+</tr>
+<tr>
+<td>Full reset</td>
+<td><code>Engine::clearAllSubscriptions()</code></td>
+</tr>
+</tbody>
+</table>
+<p>Always unregister in C++ destructors when the object can outlive a scene reload. A callback added
+straight to a component event (<code>button.onPress.add("pressed", ...)</code>) is not removed with the script
+that added it, so unregister it too — <code>Engine::clearComponentSubscriptions(scene)</code> drops every
+component callback of a scene at once.</p>
+<h2 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Link to this section">&para;</a></h2>
+<ul>
+<li>Register in a constructor or Lua <code>init()</code>. Never register in hot per-frame code.</li>
+<li>Unregister in destructors (C++) or rely on Lua cleanup for script components.</li>
+<li>Use <code>onFixedUpdate</code> for physics-sensitive simulation, not <code>onUpdate</code>.</li>
+<li>Inside <code>onFixedUpdate</code>, move physics bodies with <code>Body2D</code>/<code>Body3D</code> <code>setPosition</code> or
+  velocities — an <code>Object::setPosition</code> on a body-carrying entity is discarded there.
+  See <a href="../physics/#moving-a-body">Moving a body</a>.</li>
+<li>Enable <code>setIgnoreEventsHandledByUI(true)</code> when UI and gameplay share screen space.</li>
+<li>Return <code>false</code> from <code>preSolve2D</code> or <code>shouldCollide*</code> filters to implement one-way
+  platforms, team filters, or trigger volumes.</li>
+</ul>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Link to this section">&para;</a></h2>
+<ul>
+<li><a href="../../reference/classes/engine/">Engine</a> — engine events (<code>onUpdate</code>, input, lifecycle)</li>
+<li><a href="../../reference/classes/physicssystem/">PhysicsSystem</a> — collision and contact events</li>
+<li><a href="../../reference/classes/admob/">AdMob</a>, <a href="../../reference/classes/inapppurchase/">InAppPurchase</a>, <a href="../../reference/classes/webportal/">WebPortal</a> — service events</li>
+<li>Script workflow: <a href="../creating-scripts/">Creating Scripts</a></li>
+</ul>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../cpp-build-setup/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">C++ Build Setup</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../script-properties/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Script Properties</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/manual/events.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#events" class="dx-toc-link" data-level="1">Events</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#how-dispatch-works" class="dx-toc-link" data-level="2">How dispatch works</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#functionsubscribe-api" class="dx-toc-link" data-level="2">FunctionSubscribe API</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#engine-events" class="dx-toc-link" data-level="2">Engine events</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#touch-cancellation" class="dx-toc-link" data-level="3">Touch cancellation</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#input-routing-options" class="dx-toc-link" data-level="3">Input routing options</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#c-registration-macros" class="dx-toc-link" data-level="2">C++ registration macros</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#engine-events_1" class="dx-toc-link" data-level="3">Engine events</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#any-functionsubscribe-member" class="dx-toc-link" data-level="3">Any FunctionSubscribe member</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#component-events-on-the-same-entity" class="dx-toc-link" data-level="3">Component events on the same entity</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#example-full-c-script" class="dx-toc-link" data-level="3">Example: full C++ script</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#lua-event-registration" class="dx-toc-link" data-level="2">Lua event registration</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#engine-event-lua" class="dx-toc-link" data-level="3">Engine event (Lua)</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#component-event-lua" class="dx-toc-link" data-level="3">Component event (Lua)</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#physics-event-lua" class="dx-toc-link" data-level="3">Physics event (Lua)</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#custom-tag" class="dx-toc-link" data-level="3">Custom tag</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#physics-events" class="dx-toc-link" data-level="2">Physics events</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#2d-events" class="dx-toc-link" data-level="3">2D events</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#3d-events" class="dx-toc-link" data-level="3">3D events</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ui-component-events" class="dx-toc-link" data-level="2">UI component events</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#widget-specific-events" class="dx-toc-link" data-level="3">Widget-specific events</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#action-and-sound-events" class="dx-toc-link" data-level="2">Action and sound events</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#service-events" class="dx-toc-link" data-level="2">Service events</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#easing-as-an-event" class="dx-toc-link" data-level="2">Easing as an event</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#cleanup" class="dx-toc-link" data-level="2">Cleanup</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#best-practices" class="dx-toc-link" data-level="2">Best practices</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#reference" class="dx-toc-link" data-level="2">Reference</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../versions.json";
+    window.QUANTUM_PAGE_URL = "manual/events/";
+  </script>
+  <script src="../../js/quantum.js" defer></script>
+</body>
+</html>

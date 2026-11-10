@@ -1,12 +1,12 @@
 ---
-description: Build a UI overlay scene in Doriax with buttons, text, and a health bar.
+description: Build a UI overlay scene in Quantum with buttons, text, and a health bar.
 ---
 
 # First UI Scene
 
 This tutorial builds a **UI scene** — a separate scene dedicated to screen-space
 widgets — and shows how to layer it on top of a gameplay scene. UI scenes are the
-recommended approach for HUDs, menus, and overlays in Doriax.
+recommended approach for HUDs, menus, and overlays in Quantum.
 
 ![The finished HUD running in play mode](../assets/screenshots/tutorial-ui-play.png)
 

@@ -13,8 +13,8 @@ In Lua, the global `print()` function is also available as an alias for `Log.pri
 === "C++"
 
     ```cpp
-    #include "Doriax.h"
-    using namespace doriax;
+    #include "Quantum.h"
+    using namespace quantum;
 
     Log::print("Player health: %d", health);
     Log::warn("Physics body not loaded yet!");

@@ -1,10 +1,10 @@
 ---
-description: Create, instantiate, and edit entity bundles (prefabs) in the Doriax editor with .bundle files.
+description: Create, instantiate, and edit entity bundles (prefabs) in the Quantum editor with .bundle files.
 ---
 
 # Bundles
 
-A **bundle** is a reusable entity hierarchy saved as a YAML `.bundle` file — Doriax's
+A **bundle** is a reusable entity hierarchy saved as a YAML `.bundle` file — Quantum's
 prefab. Build an entity once (a configured enemy, a UI panel, a streetlight with light
 and physics), turn it into a bundle, and instance it as many times as you need. Editing
 the bundle updates every instance.

@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terrain Editor — Quantum Engine Docs</title>
+  <meta name="description" content="The Quantum Terrain Editor window — sculpt brushes, PBR layer painting, scattered foliage, and object placement over a heightmap terrain.">
+  <meta property="og:title" content="Terrain Editor — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/editor/terrain-editor/">
+
+  <link rel="icon" type="image/png" href="../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/quantum.css">
+  <link rel="stylesheet" href="../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="terrain-editor">Terrain Editor<a class="headerlink" href="#terrain-editor" title="Link to this section">&para;</a></h1>
+<p>The <strong>Terrain Editor</strong> is the authoring window for entities with a
+<a href="../../manual/terrain/">Terrain</a> component. It paints the terrain's maps — heightmap,
+blend maps, and foliage density maps — and places props on the surface, all with the same
+brush.</p>
+<p><img alt="The Terrain Editor window with a sculpt brush over the terrain" src="../../assets/screenshots/editor-terrain.png" /></p>
+<h2 id="opening-the-window">Opening the window<a class="headerlink" href="#opening-the-window" title="Link to this section">&para;</a></h2>
+<p>Select the terrain entity and click <strong>Open Terrain Editor</strong> in the
+<a href="../properties/">Properties</a> window, or choose <strong>View → Terrain Editor</strong>. The window can also stay open while you work: it
+follows the selection, and shows a hint instead of the tools when the selected entity is
+not a terrain or a scene is playing.</p>
+<p>Terrain editing is disabled during play mode.</p>
+<h2 id="maps">Maps<a class="headerlink" href="#maps" title="Link to this section">&para;</a></h2>
+<p>Every brush writes into a texture, and each map section has the same row:</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thumbnail / size</td>
+<td>The current map and its pixel size</td>
+</tr>
+<tr>
+<td>Resolution field</td>
+<td>Size used when a new map is created</td>
+</tr>
+<tr>
+<td><strong>Create</strong></td>
+<td>Creates the map at the chosen resolution and assigns it to the terrain</td>
+</tr>
+<tr>
+<td><strong>Recreate</strong></td>
+<td>Replaces the map with a fresh one at its current resolution</td>
+</tr>
+<tr>
+<td><strong>Remove</strong></td>
+<td>Clears the map from the terrain</td>
+</tr>
+<tr>
+<td><strong>Start at middle height</strong> (heightmap only)</td>
+<td>New heightmaps start at half height so the first stroke can lower as well as raise</td>
+</tr>
+</tbody>
+</table>
+<p>Painted maps are written as PNG files under <code>terrain_maps/</code> inside the project's assets
+directory, so they are referenced, exported, and version-controlled like any other
+texture. Heightmaps are stored 16-bit to keep gentle slopes free of terracing.</p>
+<p>Files are written in the background while you paint, and every scene save flushes the
+pending writes and deletes the maps no scene, bundle, or material still references. If a
+write fails the editor says so and keeps the scene marked unsaved, so the next save
+retries it.</p>
+<h2 id="sculpt">Sculpt<a class="headerlink" href="#sculpt" title="Link to this section">&para;</a></h2>
+<p>Sculpt brushes write the heightmap. They need a heightmap to exist first — the buttons
+stay disabled until one is created.</p>
+<table>
+<thead>
+<tr>
+<th>Brush</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Raise</strong></td>
+<td>Pushes the surface up (Ctrl lowers, Shift smooths)</td>
+</tr>
+<tr>
+<td><strong>Lower</strong></td>
+<td>Pulls the surface down (Ctrl raises, Shift smooths)</td>
+</tr>
+<tr>
+<td><strong>Smooth</strong></td>
+<td>Averages each texel with its neighbours</td>
+</tr>
+<tr>
+<td><strong>Flatten</strong></td>
+<td>Levels toward a target height (Shift smooths)</td>
+</tr>
+<tr>
+<td><strong>Sharpen</strong></td>
+<td>The smooth kernel pushed the other way — pulls ridges back out of an over-smoothed surface</td>
+</tr>
+<tr>
+<td><strong>Noise</strong></td>
+<td>Adds fractal value noise to break up flat ground</td>
+</tr>
+<tr>
+<td><strong>Terrace</strong></td>
+<td>Snaps heights to evenly spaced flat levels</td>
+</tr>
+<tr>
+<td><strong>Stamp</strong></td>
+<td>Stamps the brush mask into the surface as relief (needs a brush mask)</td>
+</tr>
+<tr>
+<td><strong>Erode</strong></td>
+<td>Hydraulic droplets cut channels and drop sediment; thermal talus settles slopes steeper than the angle of repose</td>
+</tr>
+<tr>
+<td><strong>Ramp</strong></td>
+<td>Drag from one point to another to lay a ramp between the heights the stroke started and ended at</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Flatten</strong> takes its target from <strong>Sample height</strong> (picked from the terrain where each
+stroke begins) or from an explicit <strong>Flatten height</strong>. <strong>Noise</strong> exposes a <strong>Noise size</strong>
+— the width of one noise feature in world units, anchored to the terrain so the field
+stays put as the brush moves. <strong>Terrace</strong> exposes <strong>Terrace steps</strong>, the number of flat
+levels the height range is cut into.</p>
+<h2 id="texture-paint">Texture Paint<a class="headerlink" href="#texture-paint" title="Link to this section">&para;</a></h2>
+<p>The terrain's ground is a base texture plus up to nine detail <strong>layers</strong>. Layers are
+grouped in threes: each group is weighted by the RGB channels of one blend map, and the
+<strong>Blendmap</strong> row above the list creates the map for the group the selected layer belongs
+to.</p>
+<p><img alt="The Sculpt and Texture Paint sections, with PBR layers" src="../../assets/screenshots/terrain-texture-paint.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Base</strong></td>
+<td>The material's base color texture. Painting it clears the blend map the selected layer sits on, letting the base show through</td>
+</tr>
+<tr>
+<td><strong>Layer 1…9</strong></td>
+<td>A painted surface. Click the thumbnail to paint that layer; use the folder/clear buttons or drop an image from the <a href="../resources/">Resources Browser</a> to assign its color</td>
+</tr>
+<tr>
+<td>▾ (per layer)</td>
+<td>Opens that layer's settings under the row</td>
+</tr>
+<tr>
+<td><strong>Layers</strong></td>
+<td>Add or remove the last layer, up to nine (three per blend map)</td>
+</tr>
+<tr>
+<td><strong>Normalize</strong></td>
+<td>Fades the other layers sharing the same blend map as you paint. Layers on other blend maps keep their weight</td>
+</tr>
+</tbody>
+</table>
+<p>Painting is a blend-map write, so the layer textures themselves are never modified.</p>
+<p>See <a href="../../manual/terrain/#detail-layers">Detail layers</a> for how the layers are blended at
+runtime.</p>
+<h3 id="layer-settings">Layer settings<a class="headerlink" href="#layer-settings" title="Link to this section">&para;</a></h3>
+<p>The arrow beside a layer's clear button opens its settings under the row. A layer with
+<strong>Enable PBR</strong> off shows only what it can use — the rest appears once it is on, and the
+layer's preview is marked <strong>PBR</strong> in the list.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Enable PBR</strong></td>
+<td>Off blends only the layer's color and leaves the rest to the terrain material. On gives the layer its own surface</td>
+</tr>
+<tr>
+<td><strong>Copy from material</strong></td>
+<td>Fills the layer from a <code>.material</code> file. Dropping one on the layer does the same</td>
+</tr>
+<tr>
+<td><strong>Tint</strong></td>
+<td>Multiplies the layer color</td>
+</tr>
+<tr>
+<td><strong>Normal</strong> + <strong>Normal Strength</strong></td>
+<td>Tangent-space normal map and how far it tilts the surface</td>
+</tr>
+<tr>
+<td><strong>Roughness</strong> + <strong>Roughness Factor</strong></td>
+<td>Map read from green (or the only channel of a grayscale map), multiplied by the factor</td>
+</tr>
+<tr>
+<td><strong>Metallic</strong> + <strong>Metallic Factor</strong></td>
+<td>Map read from blue, same fallback and multiply</td>
+</tr>
+<tr>
+<td><strong>Occlusion</strong> + <strong>Occlusion Strength</strong></td>
+<td>Map read from red, and how far it darkens ambient light</td>
+</tr>
+<tr>
+<td><strong>Height</strong></td>
+<td>Biases the blend toward this layer where it is taller — it never moves geometry</td>
+</tr>
+<tr>
+<td><strong>UV Scale</strong> / <strong>UV Offset</strong></td>
+<td>Tiling for this layer alone, multiplying the shared detail tiling</td>
+</tr>
+</tbody>
+</table>
+<p>Copying a material takes its base color and tint, normal, metallic/roughness, occlusion
+and factors, and turns the layer into a PBR one. Emission and transparency are not part
+of a terrain layer and are left out; the layer keeps the tiling it already had.</p>
+<h3 id="slope-and-height-mask">Slope and height mask<a class="headerlink" href="#slope-and-height-mask" title="Link to this section">&para;</a></h3>
+<p>While a paint brush is selected the Brush section grows a <strong>Mask</strong> toggle that restricts
+painting to a range of ground <strong>slope</strong> (degrees) and <strong>height</strong> (normalized against the
+terrain's max height). Texels outside the range keep what they had — the way to paint
+"rock only above 40 degrees" without tracing the cliffs by hand.</p>
+<h2 id="foliage">Foliage<a class="headerlink" href="#foliage" title="Link to this section">&para;</a></h2>
+<p>A foliage layer scatters a mesh over the terrain from a painted density map. Instances
+are resolved from that map at runtime rather than stored in the scene, so a dense field
+costs a density map and a set of parameters.</p>
+<p>Add a layer, pick its <strong>mesh</strong> (a model file), create its <strong>Density map</strong>, then paint with
+<strong>Paint density</strong> (Ctrl erases) or <strong>Erase density</strong> (Ctrl paints).</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Density</strong></td>
+<td>Instances per square world unit where the map is fully painted</td>
+</tr>
+<tr>
+<td><strong>Scale range</strong></td>
+<td>Minimum and maximum random scale per instance</td>
+</tr>
+<tr>
+<td><strong>Slope range</strong></td>
+<td>Allowed ground slope in degrees, 0 (flat) to 90 (vertical)</td>
+</tr>
+<tr>
+<td><strong>Height range</strong></td>
+<td>Allowed ground height, 0 (terrain base) to 1 (max height)</td>
+</tr>
+<tr>
+<td><strong>Rotation</strong></td>
+<td>Random yaw as a share of a full turn</td>
+</tr>
+<tr>
+<td><strong>Normal alignment</strong></td>
+<td>Blends from upright (0%) to lying along the surface normal (100%)</td>
+</tr>
+<tr>
+<td><strong>Draw distance</strong></td>
+<td>Visibility distance in world units; instances fade in over the last quarter of it</td>
+</tr>
+<tr>
+<td><strong>Min distance</strong></td>
+<td>Instances nearer than this are skipped. A copy of the layer with a simpler mesh, a min distance near this layer's draw distance and a longer draw distance becomes its far detail level</td>
+</tr>
+<tr>
+<td><strong>Cast shadows</strong></td>
+<td>Put this layer into the shadow cascades. Turn off for grass-scale scatter so it still draws in the colour pass without the extra shadow geometry</td>
+</tr>
+<tr>
+<td><strong>Seed</strong></td>
+<td>Change it to reshuffle instance positions</td>
+</tr>
+</tbody>
+</table>
+<p>Foliage entities are created by the engine, not authored: they never appear in the
+<a href="../structure/">Structure panel</a>, and clicking one in the viewport selects its terrain.</p>
+<div class="admonition note">
+<p class="admonition-title">Draw distance while editing</p>
+<p>While the Terrain Editor is open on a terrain, that terrain's foliage is scattered
+over its whole surface so you can see what you painted. <strong>Draw distance</strong> and <strong>Min
+distance</strong> apply again when the window closes, the selection changes, or play mode
+starts.</p>
+</div>
+<h2 id="objects">Objects<a class="headerlink" href="#objects" title="Link to this section">&para;</a></h2>
+<p>The <strong>Objects</strong> section places real props — models or entity <a href="../bundles/">bundles</a> —
+along the drag, as children of the terrain entity.</p>
+<p><img alt="The Objects and Brush sections" src="../../assets/screenshots/terrain-objects-brush.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Asset</td>
+<td>The model or <code>.bundle</code> to place; browse or drop one from the Resources Browser</td>
+</tr>
+<tr>
+<td><strong>Instanced</strong></td>
+<td>Batches every object of this asset into a single instanced draw. Off is one entity per object</td>
+</tr>
+<tr>
+<td><strong>Spacing</strong></td>
+<td>Closest two placed objects are allowed to get, in world units</td>
+</tr>
+<tr>
+<td><strong>Scale range</strong></td>
+<td>Random scale per object; left at 1 a model keeps the scale its file authored</td>
+</tr>
+<tr>
+<td><strong>Rotation</strong></td>
+<td>Random yaw as a share of a full turn</td>
+</tr>
+<tr>
+<td><strong>Normal alignment</strong></td>
+<td>Upright (0%) to aligned with the terrain normal (100%)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Place objects</strong> scatters within the brush radius (Ctrl erases); <strong>Erase objects</strong>
+removes the terrain's child props under the brush (Ctrl places). Only meshes and bundle
+roots count as props — a light or a camera parented to the terrain is neither erased nor
+counted for spacing.</p>
+<p>Instanced placement keeps one host entity per asset under the terrain and adds an instance
+per object. Instances can be moved, but carry no components of their own, so turn
+<strong>Instanced</strong> off for props that need collision, scripts, or animation. Bundles are
+hierarchies of entities and are always placed un-instanced.</p>
+<p>A whole drag is one undo step, whichever mode it used.</p>
+<h2 id="brush-settings">Brush settings<a class="headerlink" href="#brush-settings" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Shape</strong></td>
+<td>Circle or square</td>
+</tr>
+<tr>
+<td><strong>Falloff</strong></td>
+<td>Smooth, Linear, or Constant — how strength fades from the center to the edge</td>
+</tr>
+<tr>
+<td><strong>Size</strong></td>
+<td>Brush radius in world units; for placement, how far objects scatter from the cursor</td>
+</tr>
+<tr>
+<td><strong>Strength</strong></td>
+<td>Flow per second while the button is held (not applicable to placement)</td>
+</tr>
+<tr>
+<td><strong>Mask</strong></td>
+<td>A grayscale image that multiplies the falloff — and the relief the <strong>Stamp</strong> brush lays down</td>
+</tr>
+<tr>
+<td><strong>Mask rotation</strong></td>
+<td>Turns the mask under the brush</td>
+</tr>
+</tbody>
+</table>
+<p>Because strength is a flow rate, holding the brush in place keeps building up the effect,
+and stroke speed does not change how much a slow frame applies.</p>
+<p>Brush settings, the selected brush, map resolutions and the placement palette are stored
+per project, so they come back the way you left them.</p>
+<h2 id="shortcuts">Shortcuts<a class="headerlink" href="#shortcuts" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>[</strong> / <strong>]</strong></td>
+<td>Shrink / grow the brush</td>
+</tr>
+<tr>
+<td><strong>Shift+[</strong> / <strong>Shift+]</strong></td>
+<td>Lower / raise brush strength</td>
+</tr>
+<tr>
+<td><strong>Ctrl</strong> (held)</td>
+<td>Inverts the brush: raise↔lower, paint↔erase density, place↔erase objects</td>
+</tr>
+<tr>
+<td><strong>Shift</strong> (held)</td>
+<td>Smooths, for the height brushes that support it</td>
+</tr>
+</tbody>
+</table>
+<h2 id="undo">Undo<a class="headerlink" href="#undo" title="Link to this section">&para;</a></h2>
+<p>Each stroke is one undo entry. Map strokes record only the rectangle of texels they
+changed rather than a copy of the whole map, so a long sculpting session stays cheap to
+undo.</p>
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Link to this section">&para;</a></h2>
+<ul>
+<li><a href="../../manual/terrain/">Terrain</a> — terrain concepts, LOD tuning, and the runtime API</li>
+<li><a href="../../reference/classes/terrain/">Terrain class reference</a></li>
+<li><a href="../properties/">Properties &amp; Components</a> — the Terrain component rows</li>
+</ul>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../tileset-slicer/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Tileset Slicer</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../animation/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Animation Timeline</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/editor/terrain-editor.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#terrain-editor" class="dx-toc-link" data-level="1">Terrain Editor</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#opening-the-window" class="dx-toc-link" data-level="2">Opening the window</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#maps" class="dx-toc-link" data-level="2">Maps</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#sculpt" class="dx-toc-link" data-level="2">Sculpt</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#texture-paint" class="dx-toc-link" data-level="2">Texture Paint</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#layer-settings" class="dx-toc-link" data-level="3">Layer settings</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#slope-and-height-mask" class="dx-toc-link" data-level="3">Slope and height mask</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#foliage" class="dx-toc-link" data-level="2">Foliage</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#objects" class="dx-toc-link" data-level="2">Objects</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#brush-settings" class="dx-toc-link" data-level="2">Brush settings</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#shortcuts" class="dx-toc-link" data-level="2">Shortcuts</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#undo" class="dx-toc-link" data-level="2">Undo</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#see-also" class="dx-toc-link" data-level="2">See also</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../versions.json";
+    window.QUANTUM_PAGE_URL = "editor/terrain-editor/";
+  </script>
+  <script src="../../js/quantum.js" defer></script>
+</body>
+</html>

@@ -1,10 +1,10 @@
 ---
-description: Export modes (Source Code, Desktop, Web), settings, generated files, shader compilation, and platform builds in the Doriax editor.
+description: Export modes (Source Code, Desktop, Web), settings, generated files, shader compilation, and platform builds in the Quantum editor.
 ---
 
 # Export Window
 
-The **Export Window** turns a Doriax project into something you can ship. It collects
+The **Export Window** turns a Quantum project into something you can ship. It collects
 generated scene and bundle C++, resources, scripts, engine runtime files, and compiled
 shaders — and, depending on the mode, also compiles the result into a ready-to-run
 build.
@@ -60,8 +60,8 @@ Selecting a mode opens its settings screen; the **Back** button returns to the m
 selection.
 
 **Desktop** and **Web** run the Source Code pipeline internally: they generate the full
-project into a build cache inside your project (`.doriax/export/desktop` or
-`.doriax/export/web`), compile it there, and copy only the final artifacts to your
+project into a build cache inside your project (`.quantum/export/desktop` or
+`.quantum/export/web`), compile it there, and copy only the final artifacts to your
 chosen destination folder.
 
 ## Common settings
@@ -78,7 +78,7 @@ The output folder is remembered **per project and per export mode**, so switchin
 Desktop to Source Code brings back the folder you last used for that mode rather than
 overwriting one with the other. A project that has never been exported starts from the
 **Default Export Directory** in [Editor Settings](editor-settings.md#general), when one
-is set. Both are machine-local: they live in the project's `.doriax/user/build.yaml`,
+is set. Both are machine-local: they live in the project's `.quantum/user/build.yaml`,
 which is not committed, not in `project.yaml`.
 
 **Start Scene** is the same setting as [Project Settings →
@@ -181,7 +181,7 @@ you are running on already ticked; once a selection is saved, the window reopens
 ```
 output/
 ├── CMakeLists.txt       ← build system entry point
-├── doriax.py            ← configure and build script
+├── quantum.py            ← configure and build script
 ├── core/  libs/  platform/  renders/  workspaces/
 │                        ← engine runtime source (copied from the editor's SDK)
 ├── shaders/             ← compiled shader headers for the selected backends
@@ -214,7 +214,7 @@ but scripts leaves no empty directory behind. The exception is a packed Source C
 export, which keeps an empty `project/lua/` directory for the generated Xcode workspace.
 
 Build it afterwards with the appropriate [platform toolchain](#platform-toolchains), or
-run `python3 doriax.py` in the export folder to configure and build it in one step. See
+run `python3 quantum.py` in the export folder to configure and build it in one step. See
 [Build Script](../building/build-script.md).
 
 ## Native resource pack
@@ -295,7 +295,7 @@ selected).
 | **Graphic Backend** | The API the executable is built against, and the only shader format compiled |
 
 Both the compiler and the job count are machine-local: they are stored per project in
-`.doriax/user/build.yaml`, not in `project.yaml`, so a teammate on another machine keeps
+`.quantum/user/build.yaml`, not in `project.yaml`, so a teammate on another machine keeps
 their own toolchain.
 
 Choose the **Graphic Backend** before exporting. The available choices follow the host
@@ -394,14 +394,14 @@ running compiler processes.
 ## The build cache
 
 Desktop and Web modes keep their generated project and CMake build tree inside your
-project under `.doriax/export/desktop` and `.doriax/export/web`. The first export
+project under `.quantum/export/desktop` and `.quantum/export/web`. The first export
 compiles the whole engine and takes a while; subsequent exports only rebuild what
 changed — typically just your scenes and scripts, finishing in seconds.
 
 - Changing the graphics backend, compiler kit, generator, or Emscripten SDK wipes the
   cache's build tree automatically (CMake cannot switch these settings in place).
 - The cache is safe to delete at any time; the next export simply starts from scratch.
-- Keep `.doriax/` out of version control.
+- Keep `.quantum/` out of version control.
 
 ## Export phases
 
@@ -497,7 +497,7 @@ so ticking your target platforms there is the same as reading this table.
 
 Including a backend you never build with only costs export time and file size. Leaving one
 out that you do build with makes the game report the shaders as missing at startup, with
-the `doriax-editor shaders` command needed to generate them.
+the `quantum-editor shaders` command needed to generate them.
 
 If shader compilation fails, the Output panel reports the shader name, stage, backend,
 and the compiler error. Fix the shader source and re-export.
@@ -528,7 +528,7 @@ builds use swap interval `0`. Vulkan builds prefer Immediate presentation, use M
 when Immediate is unavailable, and fall back to the always-supported FIFO mode when
 required by the driver or surface.
 
-macOS Metal currently has no uncapped application-loop path in Doriax. Metal exports
+macOS Metal currently has no uncapped application-loop path in Quantum. Metal exports
 therefore remain synchronized and emit a CMake warning when project VSync is disabled.
 See [Project Workflow — VSync](project-workflow.md#vsync) for the full behavior table.
 
@@ -549,11 +549,11 @@ settings entirely — the game always fills the browser canvas or the device scr
 
 ## Exporting from the command line
 
-The Source Code pipeline is available headlessly through the `doriax-editor` CLI, which
+The Source Code pipeline is available headlessly through the `quantum-editor` CLI, which
 is ideal for build servers and CI/CD:
 
 ```bash
-doriax-editor export --project ./MyGame --out ./build/MyGame --backend "vulkan,opengles"
+quantum-editor export --project ./MyGame --out ./build/MyGame --backend "vulkan,opengles"
 ```
 
 See [Command-Line Tools](command-line.md) for the full `export` and `shaders` reference.
@@ -568,7 +568,7 @@ from the largest values used in your scenes and bundles — see
 
 ## Tips
 
-- Keep export destinations and the `.doriax/` folder out of version control.
+- Keep export destinations and the `.quantum/` folder out of version control.
 - Test exported builds on actual devices — some graphics, input, and memory behaviors
   differ between the editor's desktop preview and the target platform.
 - If a shader is reported missing at runtime, re-export (the scene shader list refreshes

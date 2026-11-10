@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCP Server — Quantum Engine Docs</title>
+  <meta name="description" content="Let AI agents outside the editor, such as Claude Code, Codex or Gemini CLI, inspect and change the open project through the Model Context Protocol.">
+  <meta property="og:title" content="MCP Server — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/editor/mcp-server/">
+
+  <link rel="icon" type="image/png" href="../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/quantum.css">
+  <link rel="stylesheet" href="../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="mcp-server">MCP Server<a class="headerlink" href="#mcp-server" title="Link to this section">&para;</a></h1>
+<p>The editor can run a <a href="https://modelcontextprotocol.io">Model Context Protocol</a> (MCP)
+server, so AI agents outside it — Claude Code, Codex, Gemini CLI and other MCP clients —
+can work on the open project with the same tools as the built-in AI Chat: inspect scenes
+and entities, add components, write scripts, fork shaders, run a scene and read the
+output log.</p>
+<p>The agent brings its own model and account. The editor only runs the tools, so no API key
+is needed here and the AI Chat can stay closed. The server works on whichever project the
+editor has open, so opening another project changes what agents see, and an agent can
+<a href="#opening-and-creating-projects">open or create one</a> itself.</p>
+<h2 id="turning-it-on">Turning it on<a class="headerlink" href="#turning-it-on" title="Link to this section">&para;</a></h2>
+<ol>
+<li>Open <strong>Edit → <a href="../editor-settings/#mcp-server">Editor Settings</a> → AI</strong> and expand <strong>MCP Server</strong>.</li>
+<li>Tick <strong>Enable Server</strong> and press <strong>OK</strong>.</li>
+</ol>
+<p>The Output panel reports <code>MCP server listening on http://127.0.0.1:3674/mcp</code>, and the
+server starts with the editor from then on.</p>
+<p><img alt="The MCP Server section of Editor Settings" src="../../assets/screenshots/editor-settings-mcp.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Enable Server</strong></td>
+<td>Off</td>
+<td>Listens for MCP clients on <code>127.0.0.1</code> only, so nothing outside this computer can reach it</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>—</td>
+<td><strong>Running</strong>, <strong>Stopped</strong>, or why the server could not start, such as a port another program holds</td>
+</tr>
+<tr>
+<td><strong>Port</strong></td>
+<td><code>3674</code></td>
+<td>The local TCP port. Change it when another program uses it, or to run two editors with the server on</td>
+</tr>
+<tr>
+<td><strong>Allow Changes</strong></td>
+<td>On</td>
+<td>Off leaves agents only the read-only tools, which inspect and search the project</td>
+</tr>
+<tr>
+<td><strong>Token</strong></td>
+<td>Generated</td>
+<td>The secret every request must carry. <strong>Copy</strong> puts it on the clipboard and <strong>Replace</strong> makes a new one</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>—</td>
+<td>The endpoint, <code>http://127.0.0.1:&lt;port&gt;/mcp</code></td>
+</tr>
+<tr>
+<td><strong>Clients</strong></td>
+<td>—</td>
+<td>Ready commands that add the editor to Claude Code, Codex and Gemini CLI, each with a copy button</td>
+</tr>
+</tbody>
+</table>
+<p>The token is created and kept the first time the section opens, and replacing it takes effect
+at once, so a command copied from here keeps working whether the dialog closes with <strong>OK</strong>
+or <strong>Cancel</strong>. The other fields apply on <strong>OK</strong>.</p>
+<h2 id="connecting-claude-code">Connecting Claude Code<a class="headerlink" href="#connecting-claude-code" title="Link to this section">&para;</a></h2>
+<p>Copy the <strong>Claude Code</strong> row and run it in a terminal:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>claude<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>--transport<span class="w"> </span>http<span class="w"> </span>quantum<span class="w"> </span>http://127.0.0.1:3674/mcp<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>--header<span class="w"> </span><span class="s2">&quot;Authorization: Bearer &lt;token&gt;&quot;</span>
+</code></pre></div>
+<p>The command adds the server for the folder you run it in, so run it in the project folder,
+where Claude Code can also read the project's files. Add <code>--scope user</code> after
+<code>--transport http</code> to have it in every folder. In a Claude Code session, <code>/mcp</code> then lists
+<code>quantum</code> as connected, with its tools.</p>
+<h2 id="connecting-codex">Connecting Codex<a class="headerlink" href="#connecting-codex" title="Link to this section">&para;</a></h2>
+<p>Copy the <strong>Codex</strong> row and run it in a terminal:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>codex<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>quantum<span class="w"> </span>--url<span class="w"> </span>http://127.0.0.1:3674/mcp<span class="w"> </span>--bearer-token-env-var<span class="w"> </span>QUANTUM_MCP_TOKEN
+</code></pre></div>
+<p>Codex keeps the token out of its configuration: it reads it from the <code>QUANTUM_MCP_TOKEN</code>
+environment variable each time it connects. Set that variable to the token (<strong>Copy</strong> on the
+<strong>Token</strong> row) where Codex runs, for example in your shell profile:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">QUANTUM_MCP_TOKEN</span><span class="o">=</span>&lt;token&gt;
+</code></pre></div>
+<p>On Windows, <code>setx QUANTUM_MCP_TOKEN &lt;token&gt;</code> sets it for terminals opened afterwards.</p>
+<h2 id="connecting-gemini-cli">Connecting Gemini CLI<a class="headerlink" href="#connecting-gemini-cli" title="Link to this section">&para;</a></h2>
+<p>Copy the <strong>Gemini CLI</strong> row and run it in a terminal:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>gemini<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>-s<span class="w"> </span>user<span class="w"> </span>--transport<span class="w"> </span>http<span class="w"> </span>--header<span class="w"> </span><span class="s2">&quot;Authorization: Bearer &lt;token&gt;&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>quantum<span class="w"> </span>http://127.0.0.1:3674/mcp
+</code></pre></div>
+<p><code>-s user</code> saves the server in your user settings. Without it, Gemini CLI writes it to
+<code>.gemini/settings.json</code> in the current folder, token included, where it could end up in
+version control.</p>
+<h2 id="other-clients">Other clients<a class="headerlink" href="#other-clients" title="Link to this section">&para;</a></h2>
+<p>Any other client that speaks MCP over Streamable HTTP and can send a custom header works:
+give it the <strong>URL</strong> and the header <code>Authorization: Bearer &lt;token&gt;</code>. A client that can only start
+local (stdio) servers needs a stdio-to-HTTP bridge in between.</p>
+<div class="admonition warning">
+<p class="admonition-title">Keep the token out of version control</p>
+<p>The token belongs to one machine and lets its holder change your project. When a
+client's configuration is committed, such as Claude Code's project-scoped <code>.mcp.json</code>,
+read the token from an environment variable instead of writing it there:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;mcpServers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">&quot;quantum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://127.0.0.1:3674/mcp&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">      </span><span class="nt">&quot;headers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Authorization&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bearer ${QUANTUM_MCP_TOKEN}&quot;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<h2 id="what-agents-can-do">What agents can do<a class="headerlink" href="#what-agents-can-do" title="Link to this section">&para;</a></h2>
+<p>The server offers every tool the AI Chat uses, with the same checks and the same results,
+plus <code>open_project</code> and <code>create_project</code>, which only MCP clients get: the chat runs inside
+the editor, and switching projects would end its own turn. Each tool is marked read-only
+or not (<code>readOnlyHint</code>), which clients can use when they ask you to confirm a call.</p>
+<p>When a client connects, the server also sends the engine rules the AI Chat's model gets:
+how Lua and C++ scripts are written, to confirm an API in the engine source before using
+it, how physics bodies get their shapes, how to verify a script by running the scene and
+reading the log. An agent that reads them follows the same conventions as the AI Chat.</p>
+<h2 id="how-calls-run">How calls run<a class="headerlink" href="#how-calls-run" title="Link to this section">&para;</a></h2>
+<ul>
+<li>Each call runs on the editor's main thread between frames, one at a time, exactly as if
+  the AI Chat made it. A long action such as an export holds the editor until it ends.</li>
+<li>Scene edits go through the editor's undo history, so <strong>Edit → Undo</strong> reverts what an
+  agent did.</li>
+<li>Each change an agent makes is logged in the Output panel as <code>MCP: &lt;what it did&gt;</code>, and a
+  failed call as a warning or an error.</li>
+<li>While a project is loading, calls wait. A call still waiting after two minutes fails,
+  and the agent is told to try again.</li>
+<li>A call the client gives up on before it starts, for example when you cancel it, is
+  dropped. One already running is asked to stop early where the action supports it, as an
+  export or an asset download does.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Scenes are edited through the tools, not on disk</p>
+<p>The editor holds open scenes and <code>project.yaml</code> in memory and writes them back when it
+saves, so an agent that edits those files directly loses its change at the next save
+or overwrites yours. The server tells agents this; remind yours if it keeps editing the
+files. Scripts are ordinary files, but writing one with the <code>update_script_file</code> tool
+also refreshes the properties of every entity that uses it.</p>
+</div>
+<h2 id="saving-an-agents-work">Saving an agent's work<a class="headerlink" href="#saving-an-agents-work" title="Link to this section">&para;</a></h2>
+<p>Agents save with <code>save_scene</code>, <code>save_all_scenes</code> and <code>save_project</code>, like the AI Chat.
+Two saves would need a dialog that only you can answer, so the tools take a path instead:</p>
+<ul>
+<li><strong>A scene that was never saved.</strong> <code>save_scene</code> with a project-relative <code>path</code>, such as
+  <code>scenes/Level1.scene</code>, saves it there. Without one, and with <code>save_all_scenes</code>, which
+  takes no paths, the editor opens the <strong>Save Scene</strong> dialog for you.</li>
+<li><strong>A <a href="../project-workflow/#creating-a-project">temporary project</a>.</strong> <code>save_project</code> with
+  an absolute <code>path</code> moves the project out of the system temp folder, as <strong>Save Project</strong>
+  does, into a directory that is empty or does not exist yet. An optional <code>name</code> renames
+  it too. A project that is not temporary is saved where it is, without <code>path</code>.</li>
+</ul>
+<p>Tools that would stop to ask you about unsaved work refuse instead, and tell the agent
+what to save first. <code>create_scene</code>, for example, closes the selected scene, so it refuses
+while that scene or one of its child scenes has unsaved changes.</p>
+<h2 id="opening-and-creating-projects">Opening and creating projects<a class="headerlink" href="#opening-and-creating-projects" title="Link to this section">&para;</a></h2>
+<p>Two tools replace the project the editor has open, and only MCP clients have them:</p>
+<ul>
+<li><code>open_project</code> opens an existing project directory, the one holding <code>project.yaml</code>, as
+  <strong>File → Open Project</strong> does.</li>
+<li><code>create_project</code> creates a project in an empty or new directory and opens it. It is
+  named after the directory unless the agent passes <code>name</code>, and starts with an unsaved 3D
+  scene, <em>New Scene</em>, which <code>save_scene</code> with a <code>path</code> keeps.</li>
+</ul>
+<p>Both take an absolute path. The switch happens after the call returns, and the agent's
+next calls wait until the new project has loaded.</p>
+<p>The editor does not drop work to switch, so both refuse where its menus would ask you
+first:</p>
+<table>
+<thead>
+<tr>
+<th>Refused while</th>
+<th>Resolved by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A scene is playing, saving or loading</td>
+<td>Stopping play mode (<code>control_play_mode</code>), or retrying once the save or load ends</td>
+</tr>
+<tr>
+<td>A scene has unsaved changes</td>
+<td>Saving it with <code>save_scene</code>, with a <code>path</code> if it has no file yet</td>
+</tr>
+<tr>
+<td>A script in the Code Editor has unsaved edits</td>
+<td>You saving or discarding them; the agent cannot</td>
+</tr>
+<tr>
+<td>The project is temporary and holds work: a saved or changed scene</td>
+<td>Moving it out of the temp folder with <code>save_project</code> and a <code>path</code></td>
+</tr>
+</tbody>
+</table>
+<p>The temporary project the editor opens at startup holds no work until you or an agent
+change it, so an agent can switch away from it at once.</p>
+<h2 id="security">Security<a class="headerlink" href="#security" title="Link to this section">&para;</a></h2>
+<p>The server is meant for agents running on your own computer:</p>
+<ul>
+<li>It listens on <code>127.0.0.1</code> only.</li>
+<li>Every request must carry the token as <code>Authorization: Bearer &lt;token&gt;</code>. A missing or wrong
+  token is answered with HTTP <code>401</code>.</li>
+<li>Requests from web pages are refused with HTTP <code>403</code>: the server checks the <code>Origin</code>
+  header, so a site cannot reach it through your browser, not even by pointing its own
+  domain at <code>127.0.0.1</code>.</li>
+<li>The token is stored obfuscated in <code>ai_keys.dat</code>, beside the editor's <code>settings.yaml</code>,
+  and never in the project.</li>
+</ul>
+<p>Treat the token like access to the editor itself. With <strong>Allow Changes</strong> on, an agent can
+write scripts and build settings, and those run on the next Play or export. A replaced
+token applies from the next request, so every connected client needs the new command.</p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Cause and fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Status</strong> says it could not listen on the port</td>
+<td>Another program, or another editor with the server on, holds the port. Pick another <strong>Port</strong>, press <strong>OK</strong>, and add the server to the client again with the new URL</td>
+</tr>
+<tr>
+<td>The client reports <code>401</code> or <em>Missing or wrong token</em></td>
+<td>The token was replaced, or the command came from another machine. Run the client's command from <strong>Clients</strong> again, after <code>claude mcp remove quantum</code> for Claude Code; for Codex, update <code>QUANTUM_MCP_TOKEN</code> instead</td>
+</tr>
+<tr>
+<td>The client cannot connect</td>
+<td>The server only runs while the editor does, and only with <strong>Enable Server</strong> on. Start the editor, then reconnect from the client; in Claude Code, <code>/mcp</code> shows the server's status</td>
+</tr>
+<tr>
+<td>Calls fail with <em>Changes are turned off</em></td>
+<td><strong>Allow Changes</strong> is off. Turn it on, or ask the agent only for inspections</td>
+</tr>
+<tr>
+<td>Calls fail with <em>The editor was busy</em></td>
+<td>A project load took longer than two minutes. Try again once it finishes</td>
+</tr>
+<tr>
+<td><code>open_project</code> or <code>create_project</code> fails over unsaved work</td>
+<td>The editor does not drop work to switch projects. Let the agent save it, or save or discard it yourself; see <a href="#opening-and-creating-projects">Opening and creating projects</a></td>
+</tr>
+<tr>
+<td>A <strong>Save Scene</strong> dialog opens while an agent works</td>
+<td>The agent saved a scene that has no file yet without a <code>path</code>. Answer the dialog, or ask the agent to pass <code>path</code> to <code>save_scene</code></td>
+</tr>
+<tr>
+<td>The agent still lists tools that <strong>Allow Changes</strong> removed, or misses ones it added</td>
+<td>Clients keep the tool list they read when they connected. Reconnect the client</td>
+</tr>
+</tbody>
+</table>
+<h2 id="protocol-details">Protocol details<a class="headerlink" href="#protocol-details" title="Link to this section">&para;</a></h2>
+<p>For client authors:</p>
+<ul>
+<li><strong>Transport:</strong> Streamable HTTP on one endpoint, <code>POST /mcp</code>. Every response is a single
+  JSON object, never an SSE stream. <code>GET</code> and <code>DELETE</code> return <code>405</code>.</li>
+<li><strong>Versions:</strong> <code>2026-07-28</code> (stateless: <code>server/discover</code>, <code>_meta</code> on every request, and
+  the mirrored <code>MCP-Protocol-Version</code>, <code>Mcp-Method</code> and <code>Mcp-Name</code> headers checked), plus
+  the <code>initialize</code>-based <code>2025-11-25</code>, <code>2025-06-18</code> and <code>2025-03-26</code>. No sessions are
+  created.</li>
+<li><strong>Capabilities:</strong> tools only, with no resources, prompts or change notifications. The
+  tool list only changes with <strong>Allow Changes</strong>, but that can happen at any time, so under
+  <code>2026-07-28</code> the <code>server/discover</code> and <code>tools/list</code> results are marked never to be
+  cached (<code>ttlMs: 0</code>, <code>cacheScope: "private"</code>).</li>
+<li><strong>Results:</strong> text content holding the action's message followed by its data as JSON. A
+  failed action is a result with <code>isError: true</code>, so the model can correct itself; an
+  unknown tool or a malformed request is a JSON-RPC error.</li>
+</ul>
+<h2 id="where-the-values-are-stored">Where the values are stored<a class="headerlink" href="#where-the-values-are-stored" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Key</th>
+<th>Holds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>settings.yaml</code></td>
+<td><code>mcp_server</code></td>
+<td><code>enabled</code>, <code>port</code> and <code>allow_changes</code></td>
+</tr>
+<tr>
+<td><code>ai_keys.dat</code></td>
+<td><code>mcp_server</code></td>
+<td>The token, obfuscated and bound to this machine</td>
+</tr>
+</tbody>
+</table>
+<p>Both files are in the editor's settings folder, which the
+<a href="../../about/faq/#where-can-i-find-the-editor-crash-log">FAQ</a> lists per platform.</p>
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Link to this section">&para;</a></h2>
+<ul>
+<li><a href="../editor-settings/#mcp-server">Editor Settings</a> — the MCP Server section, beside the AI
+  Chat's keys</li>
+<li><a href="../command-line/">Command-Line Tools</a> — exports, shader builds and benchmarks without
+  the editor window</li>
+<li><a href="https://modelcontextprotocol.io">Model Context Protocol</a> — the specification</li>
+</ul>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../command-line/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Command-Line Tools</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../network-play/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Network Play</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/editor/mcp-server.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#mcp-server" class="dx-toc-link" data-level="1">MCP Server</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#turning-it-on" class="dx-toc-link" data-level="2">Turning it on</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#connecting-claude-code" class="dx-toc-link" data-level="2">Connecting Claude Code</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#connecting-codex" class="dx-toc-link" data-level="2">Connecting Codex</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#connecting-gemini-cli" class="dx-toc-link" data-level="2">Connecting Gemini CLI</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#other-clients" class="dx-toc-link" data-level="2">Other clients</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#what-agents-can-do" class="dx-toc-link" data-level="2">What agents can do</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#how-calls-run" class="dx-toc-link" data-level="2">How calls run</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#saving-an-agents-work" class="dx-toc-link" data-level="2">Saving an agent's work</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#opening-and-creating-projects" class="dx-toc-link" data-level="2">Opening and creating projects</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#security" class="dx-toc-link" data-level="2">Security</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#troubleshooting" class="dx-toc-link" data-level="2">Troubleshooting</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#protocol-details" class="dx-toc-link" data-level="2">Protocol details</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#where-the-values-are-stored" class="dx-toc-link" data-level="2">Where the values are stored</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#see-also" class="dx-toc-link" data-level="2">See also</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../versions.json";
+    window.QUANTUM_PAGE_URL = "editor/mcp-server/";
+  </script>
+  <script src="../../js/quantum.js" defer></script>
+</body>
+</html>

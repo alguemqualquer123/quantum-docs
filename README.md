@@ -1,7 +1,9 @@
-# Doriax Engine Documentation
+# Quantum Engine Documentation
 
-Official documentation for the [Doriax game engine](https://github.com/doriaxengine/doriax),
-built with [MkDocs](https://www.mkdocs.org/).
+Official documentation for [Quantum](https://github.com/alguemqualquer123/quantum),
+the C++17 game engine and visual editor maintained by SR VINIX. Published at
+<https://alguemqualquer123.github.io/quantum-docs/>. Built with
+[MkDocs](https://www.mkdocs.org/).
 
 Documentation content lives in [`docs/`](docs/). The site is organized into:
 
@@ -11,6 +13,10 @@ Documentation content lives in [`docs/`](docs/). The site is organized into:
 - `manual/` — engine concepts and subsystem guides
 - `reference/` — API reference, enumerations, and build options
 - `contributing/` — documentation and screenshot contribution notes
+
+The current docs also cover authenticated networking, Network Play, rendering
+validation, Lua tooling, DXPK2 asset integrity, editor recovery, and release
+artifact smoke reports.
 
 ## Local development
 

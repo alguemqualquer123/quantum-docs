@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text — Quantum Engine Docs</title>
+  <meta name="description" content="Text API reference (C++ and Lua).">
+  <meta property="og:title" content="Text — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/reference/classes/text/">
+
+  <link rel="icon" type="image/png" href="../../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../../css/quantum.css">
+  <link rel="stylesheet" href="../../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="text">Text<a class="headerlink" href="#text" title="Link to this section">&para;</a></h1>
+<p><strong>Inherits:</strong> <a href="../uilayout/">UILayout</a><br />
+<strong>C++ type:</strong> <code>Text</code></p>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Link to this section">&para;</a></h2>
+<p>Renders a unicode string with a TrueType or OpenType font. <code>Text</code> produces a quad mesh from glyph data at the specified font size. It supports multi-line wrapping, fixed-size constraints, and exposes per-character layout information for custom cursor or selection rendering.</p>
+<p>Text is shaped before it is drawn, so scripts that need contextual glyph forms work without any extra setup: Arabic letters join, ligatures and kerning are applied, and right-to-left runs are reordered by the Unicode Bidirectional Algorithm. A line mixing Arabic and Latin is laid out with each run in its own direction.</p>
+<h3 id="properties">Properties<a class="headerlink" href="#properties" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Default</th>
+<th>Langs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>std::string</td>
+<td><a href="#text">text</a></td>
+<td><code>""</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>std::string</td>
+<td><a href="#font">font</a> (slot 0)</td>
+<td><code>""</code> (built-in)</td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>unsigned int</td>
+<td><a href="#fontsize">fontSize</a></td>
+<td><code>20</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#multiline">multiline</a></td>
+<td><code>true</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>unsigned int</td>
+<td><a href="#maxtextsize">maxTextSize</a></td>
+<td><code>100</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector4</td>
+<td><a href="#color">color</a></td>
+<td><code>(1,1,1,1)</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#color">alpha</a></td>
+<td><code>1.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#fixedwidth-fixedheight">fixedWidth</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#fixedwidth-fixedheight">fixedHeight</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#flipy">flipY</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#pivotbaseline-pivotcentered">pivotBaseline</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#pivotbaseline-pivotcentered">pivotCentered</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>string</td>
+<td><a href="#customshader">customShader</a></td>
+<td><code>""</code></td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Langs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bool</td>
+<td><a href="#createtext">createText</a></td>
+<td>C++</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#getascent-getdescent-getlinegap-getlineheight">getAscent</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#getascent-getdescent-getlinegap-getlineheight">getDescent</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#getascent-getdescent-getlinegap-getlineheight">getLineGap</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#getascent-getdescent-getlinegap-getlineheight">getLineHeight</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>unsigned int</td>
+<td><a href="#getnumchars">getNumChars</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector2</td>
+<td><a href="#getcharposition">getCharPosition</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#getcharwidth">getCharWidth</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td><a href="../aabb/">AABB</a></td>
+<td><a href="#getaabb-getworldaabb">getAABB</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td><a href="../aabb/">AABB</a></td>
+<td><a href="#getaabb-getworldaabb">getWorldAABB</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setshaderuniform">setShaderUniform</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector4</td>
+<td><a href="#setshaderuniform">getShaderUniform</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#setshaderuniform">removeShaderUniform</a></td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<h2 id="property-details">Property details<a class="headerlink" href="#property-details" title="Link to this section">&para;</a></h2>
+<h3 id="text_1">text<a class="headerlink" href="#text_1" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setText</strong>(const std::string&amp; text)</li>
+<li><em>Getter</em>: std::string <strong>getText</strong>() const</li>
+</ul>
+<p>The string to render. Supports UTF-8 encoded unicode.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Text</span><span class="w"> </span><span class="nf">label</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">label</span><span class="p">.</span><span class="n">createText</span><span class="p">();</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">label</span><span class="p">.</span><span class="n">setFont</span><span class="p">(</span><span class="s">&quot;fonts/Roboto-Regular.ttf&quot;</span><span class="p">);</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">label</span><span class="p">.</span><span class="n">setFontSize</span><span class="p">(</span><span class="mi">24</span><span class="p">);</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">label</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;Score: 0&quot;</span><span class="p">);</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">label</span><span class="p">.</span><span class="n">setAnchorPreset</span><span class="p">(</span><span class="n">AnchorPreset</span><span class="o">::</span><span class="n">TOP_LEFT</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Text</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">label</span><span class="p">.</span><span class="py">font</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;fonts/Roboto-Regular.ttf&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">label</span><span class="p">.</span><span class="py">fontSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">24</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">label</span><span class="p">.</span><span class="py">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Score: 0&quot;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nv">label</span><span class="p">.</span><span class="py">anchorPreset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">AnchorPreset</span><span class="p">.</span><span class="py">TOP_LEFT</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="font">font<a class="headerlink" href="#font" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setFont</strong>(const std::string&amp; font)</li>
+<li><em>Setter</em>: void <strong>setFont</strong>(unsigned int index, const std::string&amp; font)</li>
+<li><em>Getter</em>: std::string <strong>getFont</strong>() const</li>
+<li><em>Getter</em>: std::string <strong>getFont</strong>(unsigned int index) const</li>
+</ul>
+<p>File path to a TTF/OTF font file, or a TrueType collection (<code>.ttc</code>). The <code>font</code>
+property and the overloads without an index read or write slot <code>0</code>, the main font.
+Setting the main font does not clear the fallback slots.</p>
+<p>Quantum stores a fixed <code>FontArray</code> with <code>MAX_TEXT_FONTS</code> slots (four by default). Index
+<code>0</code> is the main font; indexes <code>1</code> through <code>3</code> are tried in order when an earlier font
+does not contain a character. Empty slots are skipped. Indexes are zero-based in both
+C++ and Lua.</p>
+<p>Two fonts are built into the engine and always close the chain: a Roboto subset covering
+Latin, Cyrillic, Greek and Vietnamese, and an Arabic subset of Noto Sans Arabic. Any
+codepoint the custom fonts do not cover is drawn from them, so setting an Arabic-only
+font still renders Latin, and leaving slot <code>0</code> unset still renders Arabic. A codepoint
+no font in the chain covers is drawn as the missing-glyph box.</p>
+<p>A missing main-font file prevents that atlas from loading. A missing fallback is logged
+and skipped, so later fallbacks and the built-in fonts can still render the text.</p>
+<p>Use the indexed overloads to assign fallback fonts:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Text</span><span class="w"> </span><span class="nf">label</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">label</span><span class="p">.</span><span class="n">setFont</span><span class="p">(</span><span class="s">&quot;fonts/MyLatin.ttf&quot;</span><span class="p">);</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">label</span><span class="p">.</span><span class="n">setFont</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;fonts/NotoKufiArabic.ttf&quot;</span><span class="p">);</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">label</span><span class="p">.</span><span class="n">setFont</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;fonts/NotoSansCJK.ttc&quot;</span><span class="p">);</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">label</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;hello مرحبا 你好&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Text</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">label</span><span class="p">.</span><span class="py">font</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;fonts/MyLatin.ttf&quot;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">label</span><span class="p">:</span><span class="nf">setFont</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;fonts/NotoKufiArabic.ttf&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nv">label</span><span class="p">:</span><span class="nf">setFont</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;fonts/NotoSansCJK.ttc&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nv">label</span><span class="p">.</span><span class="py">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;hello مرحبا 你好&quot;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Texts only share a glyph atlas when their whole chain matches, so keep the slots
+identical across elements that use the same font.</p>
+</div>
+<p>An out-of-range index is rejected and logged. <code>getFont(index)</code> returns an empty string
+for an invalid index.</p>
+<p>At the component level, <code>TextComponent::font</code> is the same <code>FontArray</code>, so direct C++
+component access uses <code>text.font[0]</code> for the main font and <code>text.font[1]</code> onward for
+fallbacks.</p>
+<div class="admonition warning">
+<p class="admonition-title">Migrating from fontFallbacks</p>
+<p>The <code>fontFallbacks</code> property and <code>setFontFallbacks</code> / <code>getFontFallbacks</code> methods no
+longer exist. Replace a semicolon-separated fallback list with one indexed
+<code>setFont</code> call per font. The editor still accepts the former scalar <code>font</code> scene
+field as slot <code>0</code>; newly saved scenes write <code>font</code> as an ordered sequence.</p>
+</div>
+<hr />
+<h3 id="fontsize">fontSize<a class="headerlink" href="#fontsize" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setFontSize</strong>(unsigned int fontSize)</li>
+<li><em>Getter</em>: unsigned int <strong>getFontSize</strong>() const</li>
+</ul>
+<p>The glyph render size in pixels (points at 72 DPI).</p>
+<hr />
+<h3 id="multiline">multiline<a class="headerlink" href="#multiline" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setMultiline</strong>(bool multiline)</li>
+<li><em>Getter</em>: bool <strong>getMultiline</strong>() const</li>
+</ul>
+<p>When <code>true</code>, the text wraps to multiple lines at the element's width boundary.</p>
+<hr />
+<h3 id="maxtextsize">maxTextSize<a class="headerlink" href="#maxtextsize" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setMaxTextSize</strong>(unsigned int maxTextSize)</li>
+<li><em>Getter</em>: unsigned int <strong>getMaxTextSize</strong>() const</li>
+</ul>
+<p>Number of characters the vertex buffer is preallocated for. It is not a limit: a longer string grows the buffer automatically and logs a warning. Raise it up front for text that is known to be long, to avoid the reallocation.</p>
+<hr />
+<h3 id="color">color<a class="headerlink" href="#color" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setColor</strong>(Vector4 color)</li>
+<li><em>Setter</em>: void <strong>setAlpha</strong>(float alpha)</li>
+<li><em>Getter</em>: Vector4 <strong>getColor</strong>() const / float <strong>getAlpha</strong>() const</li>
+</ul>
+<p>RGBA tint colour applied to all glyphs, in sRGB. It is stored linear internally, so the value read back is the sRGB form of the stored one.</p>
+<hr />
+<h3 id="fixedwidth-fixedheight">fixedWidth / fixedHeight<a class="headerlink" href="#fixedwidth-fixedheight" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setFixedWidth</strong>(bool fixedWidth) / <strong>setFixedHeight</strong>(bool fixedHeight)</li>
+<li><em>Setter</em>: void <strong>setFixedSize</strong>(bool fixedSize) — sets both at once</li>
+<li><em>Getter</em>: bool <strong>isFixedWidth</strong>() / <strong>isFixedHeight</strong>() const</li>
+</ul>
+<p>When <code>fixedWidth</code> is <code>false</code>, the text element automatically resizes its width to fit the rendered text. Same applies for height. Set to <code>true</code> to keep a fixed size and clip/wrap text instead.</p>
+<hr />
+<h3 id="flipy">flipY<a class="headerlink" href="#flipy" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setFlipY</strong>(bool flipY)</li>
+<li><em>Getter</em>: bool <strong>isFlipY</strong>() const</li>
+</ul>
+<p>Flips glyph texture coordinates vertically. The engine normally picks this automatically from the camera; calling the setter takes over and pins the value.</p>
+<hr />
+<h3 id="pivotbaseline-pivotcentered">pivotBaseline / pivotCentered<a class="headerlink" href="#pivotbaseline-pivotcentered" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setPivotBaseline</strong>(bool pivotBaseline) / <strong>setPivotCentered</strong>(bool pivotCentered)</li>
+<li><em>Getter</em>: bool <strong>isPivotBaseline</strong>() / <strong>isPivotCentered</strong>() const</li>
+</ul>
+<p>Controls the local-space pivot point. <code>pivotBaseline</code> moves the pivot to the text baseline; <code>pivotCentered</code> centres it on the bounding box.</p>
+<hr />
+<h2 id="method-details">Method details<a class="headerlink" href="#method-details" title="Link to this section">&para;</a></h2>
+<h3 id="createtext">createText<a class="headerlink" href="#createtext" title="Link to this section">&para;</a></h3>
+<ul>
+<li>bool <strong>createText</strong>()</li>
+</ul>
+<p>Explicitly builds the text geometry and GPU buffers. This method is <strong>C++ only</strong> and
+is normally optional because the UI system builds and rebuilds text automatically.
+Use it when C++ code needs the geometry immediately.</p>
+<hr />
+<h3 id="getascent-getdescent-getlinegap-getlineheight">getAscent / getDescent / getLineGap / getLineHeight<a class="headerlink" href="#getascent-getdescent-getlinegap-getlineheight" title="Link to this section">&para;</a></h3>
+<ul>
+<li>float <strong>getAscent</strong>() const</li>
+<li>float <strong>getDescent</strong>() const</li>
+<li>float <strong>getLineGap</strong>() const</li>
+<li>int <strong>getLineHeight</strong>() const</li>
+</ul>
+<p>Font metrics in pixels for the current <code>fontSize</code>. Useful for precise cursor or selection rendering.</p>
+<hr />
+<h3 id="getnumchars">getNumChars<a class="headerlink" href="#getnumchars" title="Link to this section">&para;</a></h3>
+<ul>
+<li>unsigned int <strong>getNumChars</strong>() const</li>
+</ul>
+<p>Number of codepoints in the current string, excluding line breaks. This differs from <code>strlen</code> for multi-byte UTF-8 input, and from the number of glyphs drawn: shaping can merge codepoints into one ligature or expand one into several marks.</p>
+<hr />
+<h3 id="getcharposition">getCharPosition<a class="headerlink" href="#getcharposition" title="Link to this section">&para;</a></h3>
+<ul>
+<li>Vector2 <strong>getCharPosition</strong>(unsigned int index) const</li>
+</ul>
+<p>Returns the local-space pen position after the codepoint at <code>index</code>, in logical (string) order. Codepoints that shaping merged into a single cluster share one position.</p>
+<p>For a caret or a selection in text that can be right-to-left, this is not enough on its own, because logical order and screen order differ. <a href="../textedit/">TextEdit</a> handles that case internally.</p>
+<hr />
+<h3 id="getcharwidth">getCharWidth<a class="headerlink" href="#getcharwidth" title="Link to this section">&para;</a></h3>
+<ul>
+<li>float <strong>getCharWidth</strong>(uint32_t codepoint) const</li>
+</ul>
+<p>Returns the advance width of <code>codepoint</code> in pixels at the current font size, taken from the first font in the chain that covers it. Returns <code>0</code> when the font is not loaded yet.</p>
+<p>This is the advance of the glyph in isolation. It is not the width the codepoint takes inside a string, where shaping may change the form, apply kerning, or merge it into a ligature.</p>
+<hr />
+<h3 id="getaabb-getworldaabb">getAABB / getWorldAABB<a class="headerlink" href="#getaabb-getworldaabb" title="Link to this section">&para;</a></h3>
+<ul>
+<li><a href="../aabb/">AABB</a> <strong>getAABB</strong>() const</li>
+<li><a href="../aabb/">AABB</a> <strong>getWorldAABB</strong>() const</li>
+</ul>
+<p>Returns the axis-aligned bounding box of the rendered text in local or world space.</p>
+<hr />
+<h3 id="customshader">customShader<a class="headerlink" href="#customshader" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setCustomShader(const std::string&amp; path)</code></li>
+<li><em>Getter:</em> <code>std::string getCustomShader() const</code></li>
+</ul>
+<p>Project-relative base path of a forked shader (<code>"shaders/outline"</code> resolves to <code>shaders/outline.vert</code> and <code>shaders/outline.frag</code>, or <code>"a.vert|b.frag"</code> names the files separately). Empty (default) uses the scene default shader for this type, or the engine built-in. Changing it reloads the component. Same semantics as <a href="../mesh/#customshader">Mesh.customShader</a>; see <a href="../../../editor/custom-shaders/">Custom Shaders</a>.</p>
+<hr />
+<h3 id="setshaderuniform">setShaderUniform<a class="headerlink" href="#setshaderuniform" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void setShaderUniform(const std::string&amp; name, const Vector4&amp; value)</code></li>
+<li><code>void setShaderUniform(const std::string&amp; name, const Vector3&amp; value)</code></li>
+<li><code>void setShaderUniform(const std::string&amp; name, const Vector2&amp; value)</code></li>
+<li><code>void setShaderUniform(const std::string&amp; name, float value)</code></li>
+<li><code>Vector4 getShaderUniform(const std::string&amp; name) const</code></li>
+<li><code>bool removeShaderUniform(const std::string&amp; name)</code></li>
+</ul>
+<p>Values for the members of the custom shader's <code>u_vs_customParams</code> / <code>u_fs_customParams</code> blocks, by member name. Setting a value only rewrites the uploaded block, so it can run every frame; a member with no value reads zero, or the scene's value under a <a href="../scene/#setdefaultshaderuniform">scene default shader</a>, and <code>time</code> (seconds since startup) and <code>resolution</code> (render target size) are reserved for the engine. Same semantics as <a href="../mesh/#setshaderuniform">Mesh.setShaderUniform</a>; see <a href="../../../editor/custom-shaders/#shader-uniforms">Custom Shaders — Shader uniforms</a>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">C++</label><label for="__tabbed_3_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">text</span><span class="p">.</span><span class="n">setCustomShader</span><span class="p">(</span><span class="s">&quot;shaders/outline&quot;</span><span class="p">);</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">text</span><span class="p">.</span><span class="n">setShaderUniform</span><span class="p">(</span><span class="s">&quot;strength&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8f</span><span class="p">);</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">text</span><span class="p">.</span><span class="n">setShaderUniform</span><span class="p">(</span><span class="s">&quot;glowColor&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Vector4</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">));</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nv">text</span><span class="p">.</span><span class="py">customShader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;shaders/outline&quot;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nv">text</span><span class="p">:</span><span class="nf">setShaderUniform</span><span class="p">(</span><span class="s2">&quot;strength&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nv">text</span><span class="p">:</span><span class="nf">setShaderUniform</span><span class="p">(</span><span class="s2">&quot;glowColor&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">Vector4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../panel/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Panel</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../textedit/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">TextEdit</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/reference/classes/text.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#text" class="dx-toc-link" data-level="1">Text</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#description" class="dx-toc-link" data-level="2">Description</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#properties" class="dx-toc-link" data-level="3">Properties</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#methods" class="dx-toc-link" data-level="3">Methods</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#property-details" class="dx-toc-link" data-level="2">Property details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#text_1" class="dx-toc-link" data-level="3">text</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#font" class="dx-toc-link" data-level="3">font</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#fontsize" class="dx-toc-link" data-level="3">fontSize</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#multiline" class="dx-toc-link" data-level="3">multiline</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#maxtextsize" class="dx-toc-link" data-level="3">maxTextSize</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#color" class="dx-toc-link" data-level="3">color</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#fixedwidth-fixedheight" class="dx-toc-link" data-level="3">fixedWidth / fixedHeight</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#flipy" class="dx-toc-link" data-level="3">flipY</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#pivotbaseline-pivotcentered" class="dx-toc-link" data-level="3">pivotBaseline / pivotCentered</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#method-details" class="dx-toc-link" data-level="2">Method details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#createtext" class="dx-toc-link" data-level="3">createText</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getascent-getdescent-getlinegap-getlineheight" class="dx-toc-link" data-level="3">getAscent / getDescent / getLineGap / getLineHeight</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getnumchars" class="dx-toc-link" data-level="3">getNumChars</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getcharposition" class="dx-toc-link" data-level="3">getCharPosition</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getcharwidth" class="dx-toc-link" data-level="3">getCharWidth</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getaabb-getworldaabb" class="dx-toc-link" data-level="3">getAABB / getWorldAABB</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#customshader" class="dx-toc-link" data-level="3">customShader</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setshaderuniform" class="dx-toc-link" data-level="3">setShaderUniform</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../../versions.json";
+    window.QUANTUM_PAGE_URL = "reference/classes/text/";
+  </script>
+  <script src="../../../js/quantum.js" defer></script>
+</body>
+</html>

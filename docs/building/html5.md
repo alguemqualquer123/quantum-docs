@@ -1,10 +1,10 @@
 ---
-description: Targeting the web (HTML5) with Doriax using Emscripten.
+description: Targeting the web (HTML5) with Quantum using Emscripten.
 ---
 
 # Building for HTML5
 
-Doriax can export to the **web** (HTML5) using [Emscripten](https://emscripten.org/),
+Quantum can export to the **web** (HTML5) using [Emscripten](https://emscripten.org/),
 producing JavaScript and WebAssembly output that runs in the browser.
 
 !!! tip "Let the editor build it"
@@ -22,7 +22,7 @@ The generated page is not fixed. **Project Settings → Platforms → Web** sets
 title, a favicon, extra `<head>` markup, whether the canvas follows the browser window,
 and whether Emscripten's default logo, status line and console are hidden. For full
 control, supply a **Custom HTML Shell**: any HTML file containing a
-`{{DORIAX_DEFAULT_HTML}}` marker, which the build replaces with the page Emscripten
+`{{QUANTUM_DEFAULT_HTML}}` marker, which the build replaces with the page Emscripten
 generated. See [Web settings](../editor/project-settings.md#web).
 
 ## Game portals
@@ -32,8 +32,8 @@ Game Portal**: CrazyGames, Poki, GameDistribution, Yandex Games or YouTube Playa
 The export builds that portal's SDK in for the
 [`WebPortal`](../reference/classes/webportal.md) class, so each portal needs its own
 export. A build configured by hand takes the same choice as
-[`-DDORIAX_WEB_PORTAL=poki`](../reference/build-options.md#runtime-project-options),
-plus `-DDORIAX_WEB_PORTAL_GAME_ID=<id>` for GameDistribution. See
+[`-DQUANTUM_WEB_PORTAL=poki`](../reference/build-options.md#runtime-project-options),
+plus `-DQUANTUM_WEB_PORTAL_GAME_ID=<id>` for GameDistribution. See
 [Monetization → Web portals](../manual/monetization.md#web-portals) for the API and for
 testing each portal on `localhost`.
 
@@ -69,7 +69,7 @@ Configure and build using the Emscripten toolchain. The output is a set of `.js`
 emcmake cmake -S engine -B build-web -G "Ninja" \
     -DPROJECT_ROOT=/path/to/project \
     -DCMAKE_BUILD_TYPE=Release
-cmake --build build-web --config Release --target doriax-project
+cmake --build build-web --config Release --target quantum-project
 ```
 
 The runtime selects the `gles3` graphics backend and Emscripten app backend for web
@@ -78,7 +78,7 @@ contains `assets/` and `lua/` folders. The experimental Native Resource Pack set
 not apply to Web mode — Emscripten still emits its `.data` bundle from the loose folders.
 Leave packing off if you export Source Code and then run this Emscripten build yourself.
 
-In a Source Code export, `python3 doriax.py -p web` finds the SDK and runs both commands.
+In a Source Code export, `python3 quantum.py -p web` finds the SDK and runs both commands.
 See [Build Script — Web builds](build-script.md#web-builds).
 
 ## Thread support
@@ -105,7 +105,6 @@ python3 -m http.server
 
 Then open <http://127.0.0.1:8000> in your browser.
 
-!!! note "Tooling is being refreshed"
-    The web export pipeline is being updated under the Doriax name. Some steps may still
-    reference the legacy Supernova layout while the transition completes. Check the
-    [repository](https://github.com/doriaxengine/doriax) for the latest workflow.
+!!! note "Current tooling"
+    The web export pipeline uses the Quantum layout and Emscripten workflow. Check the
+    [repository](https://github.com/alguemqualquer123/quantum) for the latest matrix job.

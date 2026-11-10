@@ -1,5 +1,5 @@
 ---
-description: Importing, browsing, previewing, and organizing resources in the Doriax editor.
+description: Importing, browsing, previewing, and organizing resources in the Quantum editor.
 ---
 
 # Resources Browser
@@ -59,7 +59,7 @@ project folder changes.
 FBX files are used like any other model: drop one into a scene, pick it for a component,
 or load it by its `.fbx` path from a script. The editor converts each one to a binary glTF
 the first time it is needed (the browser's preview counts), keeps the conversion in
-`.doriax/imported/`, and converts it again when the FBX or one of its textures changes.
+`.quantum/imported/`, and converts it again when the FBX or one of its textures changes.
 Models in open scenes then reload with the new conversion. Warnings, such as a texture
 that could not be found, appear in the Output panel.
 

@@ -11,12 +11,12 @@ Control engine properties and define defaults used across the whole project. `En
 === "C++"
 
     ```cpp
-    #include "Doriax.h"
-    using namespace doriax;
+    #include "Quantum.h"
+    using namespace quantum;
 
     Scene scene;
 
-    DORIAX_INIT void init() {
+    QUANTUM_INIT void init() {
         Engine::setCanvasSize(1000, 480);
         Engine::setScalingMode(Scaling::FITWIDTH);
         Engine::setScene(&scene);

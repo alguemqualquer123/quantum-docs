@@ -1,11 +1,11 @@
 ---
-description: Writing Lua and C++ scripts in the Doriax integrated code editor.
+description: Writing Lua and C++ scripts in the Quantum integrated code editor.
 ---
 
 # Code Editor
 
 The integrated code editor lets you write and edit Lua and C++ scripts without leaving
-the Doriax editor. It provides syntax highlighting, API completion, script creation
+the Quantum editor. It provides syntax highlighting, API completion, script creation
 dialogs, and a live output panel for compile and export messages.
 
 ![Lua API completion in the Code Editor](../assets/screenshots/editor-code.png)
@@ -179,9 +179,9 @@ Scripts subscribe to the engine events they need (`onUpdate`, `onFixedUpdate`,
     ```cpp
     #include "ScriptBase.h"
 
-    class Player : public doriax::ScriptBase {
+    class Player : public quantum::ScriptBase {
     public:
-        Player(doriax::Scene* scene, doriax::Entity entity);
+        Player(quantum::Scene* scene, quantum::Entity entity);
         ~Player();
 
         void onUpdate();
@@ -230,12 +230,12 @@ compile time.
 === "C++ startup"
 
     ```cpp
-    #include "Doriax.h"
-    using namespace doriax;
+    #include "Quantum.h"
+    using namespace quantum;
 
     Scene scene;
 
-    DORIAX_INIT void init() {
+    QUANTUM_INIT void init() {
         Engine::setScene(&scene);
     }
     ```

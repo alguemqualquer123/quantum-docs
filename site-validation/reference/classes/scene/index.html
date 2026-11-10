@@ -1,0 +1,2533 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scene — Quantum Engine Docs</title>
+  <meta name="description" content="Scene API reference — camera, background, lighting, UI events, and subsystems.">
+  <meta property="og:title" content="Scene — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/reference/classes/scene/">
+
+  <link rel="icon" type="image/png" href="../../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../../css/quantum.css">
+  <link rel="stylesheet" href="../../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="scene">Scene<a class="headerlink" href="#scene" title="Link to this section">&para;</a></h1>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Link to this section">&para;</a></h2>
+<p>A <code>Scene</code> is the root container for all objects, systems, and resources in a project. It manages the active camera, background color, global illumination, shadow settings, mesh detail levels, the optional depth prepass, and the update/draw lifecycle. You typically create one or more scenes at startup and set the active one with <code>Engine::setScene</code>.</p>
+<p><strong>Inherits:</strong> <a href="../entityregistry/">EntityRegistry</a></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Quantum.h&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">quantum</span><span class="p">;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">Scene</span><span class="w"> </span><span class="n">scene</span><span class="p">;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kt">void</span><span class="w"> </span><span class="nf">MySystem::onUpdate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="n">scene</span><span class="p">.</span><span class="n">setBackgroundColor</span><span class="p">(</span><span class="mf">0.1f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2f</span><span class="p">);</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Scene</span><span class="p">()</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">scene</span><span class="p">:</span><span class="nf">setBackgroundColor</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">Engine</span><span class="p">.</span><span class="nf">setScene</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="properties">Properties<a class="headerlink" href="#properties" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Default</th>
+<th>Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector4</td>
+<td><a href="#backgroundcolor">backgroundColor</a></td>
+<td><code>(0,0,0,1)</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td><a href="#shadowquality">ShadowQuality</a></td>
+<td><a href="#shadowquality_1">shadowQuality</a></td>
+<td><code>LOW</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#meshlodenabled-meshlodthreshold">meshLodEnabled</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#meshlodenabled-meshlodthreshold">meshLodThreshold</a></td>
+<td><code>1.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#depthprepassenabled">depthPrepassEnabled</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td><a href="#lightstate">LightState</a></td>
+<td><a href="#lightstate_1">lightState</a></td>
+<td><code>AUTO</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#globalilluminationintensity">globalIlluminationIntensity</a></td>
+<td><code>1.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector3</td>
+<td><a href="#globalilluminationcolor">globalIlluminationColor</a></td>
+<td><code>(1,1,1)</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#ambientlight2dintensity">ambientLight2DIntensity</a></td>
+<td><code>1.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector3</td>
+<td><a href="#ambientlight2dcolor">ambientLight2DColor</a></td>
+<td><code>(1,1,1)</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td><a href="#shadowquality">ShadowQuality</a></td>
+<td><a href="#shadow2dquality">shadow2DQuality</a></td>
+<td><code>LOW</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector2</td>
+<td><a href="#gravity2d">gravity2D</a></td>
+<td><code>(0,-9.81)</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector3</td>
+<td><a href="#gravity3d">gravity3D</a></td>
+<td><code>(0,-9.81,0)</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#ssaoenabled">ssaoEnabled</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#ssaoradius">ssaoRadius</a></td>
+<td><code>0.5</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#ssaointensity">ssaoIntensity</a></td>
+<td><code>1.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#ssaobias">ssaoBias</a></td>
+<td><code>0.025</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#ssaodebug">ssaoDebug</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#ssrenabled">ssrEnabled</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#ssrmaxdistance">ssrMaxDistance</a></td>
+<td><code>8.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#ssrthickness">ssrThickness</a></td>
+<td><code>0.5</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#ssrmaxsteps">ssrMaxSteps</a></td>
+<td><code>48</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#ssrintensity">ssrIntensity</a></td>
+<td><code>1.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#ssrblur">ssrBlur</a></td>
+<td><code>0.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#ssrdebugmode">ssrDebugMode</a></td>
+<td><code>0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#fixedresolutionenabled">fixedResolutionEnabled</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>unsigned int</td>
+<td><a href="#fixedresolutionwidth-fixedresolutionheight">fixedResolutionWidth</a></td>
+<td><code>640</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>unsigned int</td>
+<td><a href="#fixedresolutionwidth-fixedresolutionheight">fixedResolutionHeight</a></td>
+<td><code>360</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>TextureFilter</td>
+<td><a href="#fixedresolutionfilter">fixedResolutionFilter</a></td>
+<td><code>NEAREST</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>string</td>
+<td><a href="#defaultmeshshader">defaultMeshShader</a></td>
+<td><code>""</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>string</td>
+<td><a href="#defaultuishader">defaultUIShader</a></td>
+<td><code>""</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>string</td>
+<td><a href="#defaultskyshader">defaultSkyShader</a></td>
+<td><code>""</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>string</td>
+<td><a href="#defaultpointsshader">defaultPointsShader</a></td>
+<td><code>""</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>string</td>
+<td><a href="#defaultlinesshader">defaultLinesShader</a></td>
+<td><code>""</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>string</td>
+<td><a href="#defaultwatershader">defaultWaterShader</a></td>
+<td><code>""</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>vector&lt;<a href="../postprocesspass/">PostProcessPass</a>&gt;</td>
+<td><a href="#postprocesspasses">postProcessPasses</a></td>
+<td><code>{}</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td><a href="#uieventstate">UIEventState</a></td>
+<td><a href="#enableuievents">enableUIEvents</a></td>
+<td><code>NOT_SET</code></td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Returns</th>
+<th>Name</th>
+<th>Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void</td>
+<td><a href="#load">load</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#destroy">destroy</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#draw">draw</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#update">update</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#fixedupdate">fixedUpdate</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setcamera">setCamera</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Entity</td>
+<td><a href="#getcamera">getCamera</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setviewcamera">setViewCamera</a></td>
+<td>C++</td>
+</tr>
+<tr>
+<td>Entity</td>
+<td><a href="#getrendercamera">getRenderCamera</a></td>
+<td>C++</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setbackgroundcolor">setBackgroundColor</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector4</td>
+<td><a href="#setbackgroundcolor">getBackgroundColor</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#shadowquality_1">setShadowQuality</a></td>
+<td>C++</td>
+</tr>
+<tr>
+<td>ShadowQuality</td>
+<td><a href="#shadowquality_1">getShadowQuality</a></td>
+<td>C++</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#meshlodenabled-meshlodthreshold">setMeshLodEnabled</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#meshlodenabled-meshlodthreshold">isMeshLodEnabled</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#meshlodenabled-meshlodthreshold">setMeshLodThreshold</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#meshlodenabled-meshlodthreshold">getMeshLodThreshold</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#depthprepassenabled">setDepthPrepassEnabled</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#depthprepassenabled">isDepthPrepassEnabled</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setlightstate">setLightState</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>LightState</td>
+<td><a href="#setlightstate">getLightState</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setglobalillumination">setGlobalIllumination</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#setglobalillumination">getGlobalIlluminationIntensity</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector3</td>
+<td><a href="#setglobalillumination">getGlobalIlluminationColor</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setambientlight2d">setAmbientLight2D</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#setambientlight2d">getAmbientLight2DIntensity</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector3</td>
+<td><a href="#setambientlight2d">getAmbientLight2DColor</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#shadow2dquality">setShadow2DQuality</a></td>
+<td>C++</td>
+</tr>
+<tr>
+<td>ShadowQuality</td>
+<td><a href="#shadow2dquality">getShadow2DQuality</a></td>
+<td>C++</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#gravity2d">setGravity2D</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector2</td>
+<td><a href="#gravity2d">getGravity2D</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#gravity3d">setGravity3D</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector3</td>
+<td><a href="#gravity3d">getGravity3D</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#ssaoenabled">setSSAOEnabled</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#ssaoenabled">isSSAOEnabled</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#ssaoradius">setSSAORadius</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#ssaoradius">getSSAORadius</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#ssaointensity">setSSAOIntensity</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#ssaointensity">getSSAOIntensity</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#ssaobias">setSSAOBias</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#ssaobias">getSSAOBias</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#ssaodebug">setSSAODebug</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#ssaodebug">isSSAODebug</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#ssrenabled">setSSREnabled</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#ssrenabled">isSSREnabled</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#ssrmaxdistance">setSSRMaxDistance</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#ssrmaxdistance">getSSRMaxDistance</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#ssrthickness">setSSRThickness</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#ssrthickness">getSSRThickness</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#ssrmaxsteps">setSSRMaxSteps</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#ssrmaxsteps">getSSRMaxSteps</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#ssrintensity">setSSRIntensity</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#ssrintensity">getSSRIntensity</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#ssrblur">setSSRBlur</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#ssrblur">getSSRBlur</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#ssrdebugmode">setSSRDebugMode</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#ssrdebugmode">getSSRDebugMode</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#fixedresolutionenabled">setFixedResolutionEnabled</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#fixedresolutionenabled">isFixedResolutionEnabled</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#fixedresolutionwidth-fixedresolutionheight">setFixedResolutionWidth</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>unsigned int</td>
+<td><a href="#fixedresolutionwidth-fixedresolutionheight">getFixedResolutionWidth</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#fixedresolutionwidth-fixedresolutionheight">setFixedResolutionHeight</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>unsigned int</td>
+<td><a href="#fixedresolutionwidth-fixedresolutionheight">getFixedResolutionHeight</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#fixedresolutionwidth-fixedresolutionheight">setFixedResolutionSize</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#fixedresolutionfilter">setFixedResolutionFilter</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>TextureFilter</td>
+<td><a href="#fixedresolutionfilter">getFixedResolutionFilter</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setdefaultshaderuniform">setDefaultShaderUniform</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector4</td>
+<td><a href="#setdefaultshaderuniform">getDefaultShaderUniform</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#setdefaultshaderuniform">removeDefaultShaderUniform</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setdefaultshaderuniform">setDefaultShaderUniforms</a></td>
+<td>C++</td>
+</tr>
+<tr>
+<td>const ShaderUniformValues&amp;</td>
+<td><a href="#setdefaultshaderuniform">getDefaultShaderUniforms</a></td>
+<td>C++</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#postprocesspasses">setPostProcessPasses</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>vector&lt;PostProcessPass&gt;</td>
+<td><a href="#postprocesspasses">getPostProcessPasses</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setpostprocessuniform">setPostProcessUniform</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>Vector4</td>
+<td><a href="#setpostprocessuniform">getPostProcessUniform</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#setpostprocessuniform">removePostProcessUniform</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setpostprocesspassenabled">setPostProcessPassEnabled</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#setpostprocesspassenabled">isPostProcessPassEnabled</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#enableuievents_1">enableUIEvents</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#isenableuievents">isEnableUIEvents</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#canreceiveuievents">canReceiveUIEvents</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#updatecamerasize">updateCameraSize</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#removesubscriptionsbytag">removeSubscriptionsByTag</a></td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<p>Entity and hierarchy methods — <code>createEntity</code>, <code>destroyEntity</code>, <code>setEntityName</code> /
+<code>getEntityName</code>, <a href="../entityregistry/#findentity"><code>findEntity</code></a>, <code>addEntityChild</code>,
+<code>getEntityList</code> — are inherited from <a href="../entityregistry/">EntityRegistry</a>.</p>
+<h2 id="enumerations">Enumerations<a class="headerlink" href="#enumerations" title="Link to this section">&para;</a></h2>
+<h3 id="lightstate">LightState<a class="headerlink" href="#lightstate" title="Link to this section">&para;</a></h3>
+<ul>
+<li><strong>OFF</strong> — Disables all lights in the scene; objects are rendered with no dynamic lighting.</li>
+<li><strong>ON</strong> — Forces dynamic lighting on regardless of light objects present.</li>
+<li><strong>AUTO</strong> — Activates lighting automatically when at least one light entity exists in the scene (default).</li>
+</ul>
+<hr />
+<h3 id="uieventstate">UIEventState<a class="headerlink" href="#uieventstate" title="Link to this section">&para;</a></h3>
+<ul>
+<li><strong>NOT_SET</strong> — Inherits UI event behaviour from the engine default.</li>
+<li><strong>ENABLED</strong> — This scene receives UI pointer events.</li>
+<li><strong>DISABLED</strong> — This scene ignores UI pointer events.</li>
+</ul>
+<hr />
+<h3 id="shadowquality">ShadowQuality<a class="headerlink" href="#shadowquality" title="Link to this section">&para;</a></h3>
+<p>PCF filter quality of shadow edges, shared by <a href="#shadowquality">shadowQuality</a> (3D shadow maps) and <a href="#shadow2dquality">shadow2DQuality</a> (2D lights).</p>
+<ul>
+<li><strong>NONE</strong> — 1 tap, no filtering (hard edges)</li>
+<li><strong>LOW</strong> — 3×3 taps in 3D / 5 taps in 2D (default)</li>
+<li><strong>MEDIUM</strong> — 5×5 taps in 3D / 9 taps in 2D</li>
+<li><strong>HIGH</strong> — 7×7 taps in 3D / 13 taps in 2D</li>
+</ul>
+<hr />
+<h3 id="shadertype">ShaderType<a class="headerlink" href="#shadertype" title="Link to this section">&para;</a></h3>
+<p>The shader types that can have a scene default, as taken by <a href="#setdefaultshaderuniform">setDefaultShaderUniform</a>. The C++ enum has more values, for the engine's internal passes; Lua exposes only these.</p>
+<ul>
+<li><strong>MESH</strong> — Mesh components (<a href="#defaultmeshshader">defaultMeshShader</a>)</li>
+<li><strong>UI</strong> — UI components (<a href="#defaultuishader">defaultUIShader</a>)</li>
+<li><strong>SKYBOX</strong> — the Sky component (<a href="#defaultskyshader">defaultSkyShader</a>)</li>
+<li><strong>POINTS</strong> — Points components (<a href="#defaultpointsshader">defaultPointsShader</a>)</li>
+<li><strong>LINES</strong> — Lines components (<a href="#defaultlinesshader">defaultLinesShader</a>)</li>
+<li><strong>WATER</strong> — the water surface (<a href="#defaultwatershader">defaultWaterShader</a>)</li>
+</ul>
+<h2 id="property-details">Property details<a class="headerlink" href="#property-details" title="Link to this section">&para;</a></h2>
+<h3 id="backgroundcolor">backgroundColor<a class="headerlink" href="#backgroundcolor" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setBackgroundColor(Vector4 color)</code></li>
+<li><em>Getter:</em> <code>Vector4 getBackgroundColor() const</code></li>
+</ul>
+<p>Background clear color for the scene, in RGBA [0, 1] range. Convenience overloads accept <code>(r, g, b)</code> or <code>(r, g, b, a)</code> floats directly.</p>
+<hr />
+<h3 id="shadowquality_1">shadowQuality<a class="headerlink" href="#shadowquality_1" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setShadowQuality(ShadowQuality quality)</code></li>
+<li><em>Getter:</em> <code>ShadowQuality getShadowQuality() const</code></li>
+</ul>
+<p>Filter quality of 3D shadow map edges (PCF kernel size, applied instantly with no shader rebuild):</p>
+<ul>
+<li><strong>NONE</strong> — 1 tap, hard edges (or performance savings on mobile)</li>
+<li><strong>LOW</strong> — 3×3 taps (default)</li>
+<li><strong>MEDIUM</strong> — 5×5 taps</li>
+<li><strong>HIGH</strong> — 7×7 taps</li>
+</ul>
+<p>The same <a href="#shadowquality">ShadowQuality</a> enum also drives <a href="#shadow2dquality">shadow2DQuality</a> for 2D lights.</p>
+<p>Lua exposes this setting as the <code>shadowQuality</code> property:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">scene</span><span class="p">.</span><span class="py">shadowQuality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">ShadowQuality</span><span class="p">.</span><span class="py">MEDIUM</span>
+</code></pre></div>
+<p>There is no separate <code>shadow3DQuality</code> Lua property; <code>shadowQuality</code> is the 3D shadow quality setting.</p>
+<hr />
+<h3 id="meshlodenabled-meshlodthreshold">meshLodEnabled / meshLodThreshold<a class="headerlink" href="#meshlodenabled-meshlodthreshold" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>meshLodEnabled Setter:</em> <code>void setMeshLodEnabled(bool enabled)</code></li>
+<li><em>meshLodEnabled Getter:</em> <code>bool isMeshLodEnabled() const</code></li>
+<li><em>meshLodThreshold Setter:</em> <code>void setMeshLodThreshold(float pixels)</code></li>
+<li><em>meshLodThreshold Getter:</em> <code>float getMeshLodThreshold() const</code></li>
+</ul>
+<p>Scene-wide <a href="../../../manual/rendering-pipeline/#mesh-detail-lod">mesh detail levels</a>. <code>meshLodEnabled</code> (default <code>false</code>) turns them on: each mesh gets simplified index ranges and draws one once its geometric error projects below <code>meshLodThreshold</code> screen pixels (default <code>1</code>). While it is off no levels are built, and turning it off frees their GPU buffers. The threshold is clamped to <code>≥ 0</code>. Changing either takes effect immediately; a mesh can opt out with <a href="../mesh/#lodenabled-lodbias">lodEnabled</a>.</p>
+<p>In the editor these are <strong>Scene → Mesh Detail (LOD)</strong> when nothing is selected.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setMeshLodEnabled</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">scene</span><span class="p">.</span><span class="n">setMeshLodThreshold</span><span class="p">(</span><span class="mf">2.0f</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">scene</span><span class="p">.</span><span class="py">meshLodEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nv">scene</span><span class="p">.</span><span class="py">meshLodThreshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="depthprepassenabled">depthPrepassEnabled<a class="headerlink" href="#depthprepassenabled" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setDepthPrepassEnabled(bool enabled)</code></li>
+<li><em>Getter:</em> <code>bool isDepthPrepassEnabled() const</code></li>
+</ul>
+<p>Writes a <a href="../../../manual/rendering-pipeline/#depth-prepass">depth-only pass</a> for the main camera before the opaque colour draws, so overlapping pixels fail the depth test instead of running the lit shader. Off by default. Toggling it reloads meshes (the prepass pipelines are built with each mesh).</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">C++</label><label for="__tabbed_3_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setDepthPrepassEnabled</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">scene</span><span class="p">.</span><span class="py">depthPrepassEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="lightstate_1">lightState<a class="headerlink" href="#lightstate_1" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setLightState(LightState state)</code></li>
+<li><em>Getter:</em> <code>LightState getLightState() const</code></li>
+</ul>
+<p>Controls whether the render system activates the lighting pass. See <a href="#lightstate">LightState</a>.</p>
+<hr />
+<h3 id="globalilluminationintensity">globalIlluminationIntensity<a class="headerlink" href="#globalilluminationintensity" title="Link to this section">&para;</a></h3>
+<p>Part of <a href="#setglobalillumination">setGlobalIllumination</a>. Controls the brightness of the ambient light applied uniformly across the scene.</p>
+<hr />
+<h3 id="globalilluminationcolor">globalIlluminationColor<a class="headerlink" href="#globalilluminationcolor" title="Link to this section">&para;</a></h3>
+<p>Part of <a href="#setglobalillumination">setGlobalIllumination</a>. Controls the tint of the ambient light (linear color, [0,1] per channel).</p>
+<hr />
+<h3 id="ambientlight2dintensity">ambientLight2DIntensity<a class="headerlink" href="#ambientlight2dintensity" title="Link to this section">&para;</a></h3>
+<p>Part of <a href="#setambientlight2d">setAmbientLight2D</a>. Controls the brightness of the 2D ambient light applied to 2D-lit objects. Defaults to <code>1.0</code> (fully lit), so a scene looks unchanged until you dim it.</p>
+<hr />
+<h3 id="ambientlight2dcolor">ambientLight2DColor<a class="headerlink" href="#ambientlight2dcolor" title="Link to this section">&para;</a></h3>
+<p>Part of <a href="#setambientlight2d">setAmbientLight2D</a>. Controls the tint of the 2D ambient light.</p>
+<hr />
+<h3 id="shadow2dquality">shadow2DQuality<a class="headerlink" href="#shadow2dquality" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setShadow2DQuality(ShadowQuality quality)</code></li>
+<li><em>Getter:</em> <code>ShadowQuality getShadow2DQuality() const</code></li>
+</ul>
+<p>Filter quality of 2D light shadows (PCF taps along the 1D polar shadow map). More taps smooth the <strong>same</strong> penumbra width (set per light by <a href="../light2d/#shadowsoftness">Light2D — shadowSoftness</a>), removing banding on wide penumbras. Changing it takes effect immediately (no shader rebuild).</p>
+<ul>
+<li><strong>NONE</strong> — 1 tap, no filtering (hard edges regardless of softness)</li>
+<li><strong>LOW</strong> — 5 taps (default)</li>
+<li><strong>MEDIUM</strong> — 9 taps</li>
+<li><strong>HIGH</strong> — 13 taps</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">C++</label><label for="__tabbed_4_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setShadow2DQuality</span><span class="p">(</span><span class="n">ShadowQuality</span><span class="o">::</span><span class="n">MEDIUM</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">scene</span><span class="p">.</span><span class="py">shadow2DQuality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">ShadowQuality</span><span class="p">.</span><span class="py">MEDIUM</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="gravity2d">gravity2D<a class="headerlink" href="#gravity2d" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setters:</em> <code>void setGravity2D(Vector2 gravity)</code>, <code>void setGravity2D(float x, float y)</code></li>
+<li><em>Getter:</em> <code>Vector2 getGravity2D() const</code></li>
+</ul>
+<p>Gravity of the <strong>2D physics world</strong> (Box2D), in meters per second squared. Affects every dynamic <a href="../body2d/">Body2D</a> in the scene, scaled per body by <a href="../body2d/#gravityscale">gravityScale</a>. Independent from <a href="#gravity3d">gravity3D</a>. Changing it at runtime does not wake sleeping bodies. Forwards to the scene's <a href="../physicssystem/">PhysicsSystem</a>. Default <code>(0, -9.81)</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">C++</label><label for="__tabbed_5_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setGravity2D</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">-20</span><span class="p">));</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">scene</span><span class="p">.</span><span class="py">gravity2D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="gravity3d">gravity3D<a class="headerlink" href="#gravity3d" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setters:</em> <code>void setGravity3D(Vector3 gravity)</code>, <code>void setGravity3D(float x, float y, float z)</code></li>
+<li><em>Getter:</em> <code>Vector3 getGravity3D() const</code></li>
+</ul>
+<p>Gravity of the <strong>3D physics world</strong> (Jolt), in meters per second squared. Affects every dynamic <a href="../body3d/">Body3D</a> in the scene, scaled per body by <a href="../body3d/#gravityfactor">gravityFactor</a>. Independent from <a href="#gravity2d">gravity2D</a>. Changing it at runtime does not wake sleeping bodies. Forwards to the scene's <a href="../physicssystem/">PhysicsSystem</a>. Default <code>(0, -9.81, 0)</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">C++</label><label for="__tabbed_6_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setGravity3D</span><span class="p">(</span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">-3.7f</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span><span class="w"> </span><span class="c1">// Mars</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nv">scene</span><span class="p">.</span><span class="py">gravity3D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.7</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c1">-- Mars</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="ssaoenabled">ssaoEnabled<a class="headerlink" href="#ssaoenabled" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setSSAOEnabled(bool enabled)</code></li>
+<li><em>Getter:</em> <code>bool isSSAOEnabled() const</code></li>
+</ul>
+<p>Enables screen-space ambient occlusion. SSAO darkens the ambient/indirect lighting (IBL or global illumination) in creases and contact areas; it does not affect direct light. Toggling it recompiles lit mesh shaders. Applies to the main camera; terrain is currently excluded.</p>
+<hr />
+<h3 id="ssaoradius">ssaoRadius<a class="headerlink" href="#ssaoradius" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setSSAORadius(float radius)</code></li>
+<li><em>Getter:</em> <code>float getSSAORadius() const</code></li>
+</ul>
+<p>View-space sampling radius (world units). Larger values gather occlusion from farther surfaces (broader, softer AO); smaller values keep it to tight contact creases.</p>
+<hr />
+<h3 id="ssaointensity">ssaoIntensity<a class="headerlink" href="#ssaointensity" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setSSAOIntensity(float intensity)</code></li>
+<li><em>Getter:</em> <code>float getSSAOIntensity() const</code></li>
+</ul>
+<p>Strength of the effect, applied as an exponent on the occlusion factor — higher values darken occluded areas more.</p>
+<hr />
+<h3 id="ssaobias">ssaoBias<a class="headerlink" href="#ssaobias" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setSSAOBias(float bias)</code></li>
+<li><em>Getter:</em> <code>float getSSAOBias() const</code></li>
+</ul>
+<p>View-space depth bias that prevents self-occlusion artifacts (acne) on flat surfaces. Increase slightly if flat areas appear dirty; keep small to preserve fine contact detail.</p>
+<hr />
+<h3 id="ssaodebug">ssaoDebug<a class="headerlink" href="#ssaodebug" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setSSAODebug(bool debug)</code></li>
+<li><em>Getter:</em> <code>bool isSSAODebug() const</code></li>
+</ul>
+<p>Debug aid: when enabled, lit meshes output the raw screen-space AO buffer as grayscale instead of their shaded color, so you can inspect and tune the occlusion directly. Not serialized.</p>
+<hr />
+<h3 id="ssrenabled">ssrEnabled<a class="headerlink" href="#ssrenabled" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setSSREnabled(bool ssrEnabled)</code></li>
+<li><em>Getter:</em> <code>bool isSSREnabled() const</code></li>
+</ul>
+<p>Enables screen-space reflections. SSR reflects on-screen geometry by marching the camera depth/G-buffer, and where it finds a hit it <em>replaces</em> the surface's IBL environment reflection rather than adding to it (falling back to IBL where the ray misses). Requires a framebuffer destination (editor viewport, render-to-texture camera, or engine framebuffer) and applies to the main camera. Toggling it reloads meshes to build the G-buffer shaders.</p>
+<hr />
+<h3 id="ssrmaxdistance">ssrMaxDistance<a class="headerlink" href="#ssrmaxdistance" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setSSRMaxDistance(float maxDistance)</code></li>
+<li><em>Getter:</em> <code>float getSSRMaxDistance() const</code></li>
+</ul>
+<p>Maximum reflection ray length in view-space units. Longer rays catch more distant reflections at higher cost. Default <code>8.0</code>.</p>
+<hr />
+<h3 id="ssrthickness">ssrThickness<a class="headerlink" href="#ssrthickness" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setSSRThickness(float thickness)</code></li>
+<li><em>Getter:</em> <code>float getSSRThickness() const</code></li>
+</ul>
+<p>Depth-compare tolerance (view-space units) for accepting a ray hit. Smaller is stricter; larger fills gaps but can smear at object contacts. Default <code>0.5</code>.</p>
+<hr />
+<h3 id="ssrmaxsteps">ssrMaxSteps<a class="headerlink" href="#ssrmaxsteps" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setSSRMaxSteps(int maxSteps)</code></li>
+<li><em>Getter:</em> <code>int getSSRMaxSteps() const</code></li>
+</ul>
+<p>Linear march sample count. Higher gives sharper, longer reflections (and helps thin contacts register) at more cost. Default <code>48</code>.</p>
+<hr />
+<h3 id="ssrintensity">ssrIntensity<a class="headerlink" href="#ssrintensity" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setSSRIntensity(float intensity)</code></li>
+<li><em>Getter:</em> <code>float getSSRIntensity() const</code></li>
+</ul>
+<p>Overall reflection strength multiplier applied in the composite. Default <code>1.0</code>.</p>
+<hr />
+<h3 id="ssrblur">ssrBlur<a class="headerlink" href="#ssrblur" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setSSRBlur(float blur)</code></li>
+<li><em>Getter:</em> <code>float getSSRBlur() const</code></li>
+</ul>
+<p>Glossy blur amount in <code>[0..1]</code>. <code>0</code> keeps mirror-sharp reflections; higher values blur the reflection in proportion to each surface's roughness. Default <code>0.0</code>.</p>
+<hr />
+<h3 id="ssrdebugmode">ssrDebugMode<a class="headerlink" href="#ssrdebugmode" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setSSRDebugMode(int mode)</code></li>
+<li><em>Getter:</em> <code>int getSSRDebugMode() const</code></li>
+</ul>
+<p>Debug visualization of the SSR G-buffer, rendered full-screen: <code>0</code> off, <code>1</code> reflection buffer, <code>2</code> normal, <code>3</code> roughness, <code>4</code> metallic, <code>5</code> albedo, <code>6</code> IBL specular. Not serialized.</p>
+<hr />
+<h3 id="fixedresolutionenabled">fixedResolutionEnabled<a class="headerlink" href="#fixedresolutionenabled" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setFixedResolutionEnabled(bool fixedResolutionEnabled)</code></li>
+<li><em>Getter:</em> <code>bool isFixedResolutionEnabled() const</code></li>
+</ul>
+<p>Renders the main camera into an internal buffer of <a href="#fixedresolutionwidth-fixedresolutionheight">fixedResolutionWidth × fixedResolutionHeight</a> and upscales the result to the view rect, instead of rendering at the window's native resolution. Takes effect only when this scene is the Engine main scene; scenes added as layers always render at native resolution. Letterboxing, input mapping, and object coordinates keep following the canvas and scaling mode. In the editor, the fixed resolution is applied during play mode only. Toggling at runtime rebuilds the scene's render pipelines, which may cause a brief hitch — prefer changing the size instead. See <a href="../../../manual/multiple-resolutions/#fixed-resolution">Multiple Resolutions</a>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">C++</label><label for="__tabbed_7_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setFixedResolutionSize</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span><span class="w"> </span><span class="mi">180</span><span class="p">);</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">scene</span><span class="p">.</span><span class="n">setFixedResolutionFilter</span><span class="p">(</span><span class="n">TextureFilter</span><span class="o">::</span><span class="n">NEAREST</span><span class="p">);</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">scene</span><span class="p">.</span><span class="n">setFixedResolutionEnabled</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nv">scene</span><span class="p">:</span><span class="nf">setFixedResolutionSize</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span><span class="w"> </span><span class="mi">180</span><span class="p">)</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nv">scene</span><span class="p">.</span><span class="py">fixedResolutionFilter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">TextureFilter</span><span class="p">.</span><span class="py">NEAREST</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="nv">scene</span><span class="p">.</span><span class="py">fixedResolutionEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="fixedresolutionwidth-fixedresolutionheight">fixedResolutionWidth, fixedResolutionHeight<a class="headerlink" href="#fixedresolutionwidth-fixedresolutionheight" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setters:</em> <code>void setFixedResolutionWidth(unsigned int width)</code>, <code>void setFixedResolutionHeight(unsigned int height)</code>, <code>void setFixedResolutionSize(unsigned int width, unsigned int height)</code></li>
+<li><em>Getters:</em> <code>unsigned int getFixedResolutionWidth() const</code>, <code>unsigned int getFixedResolutionHeight() const</code></li>
+</ul>
+<p>The internal render resolution in pixels used when <a href="#fixedresolutionenabled">fixedResolutionEnabled</a> is on. Can be changed at any time — the internal buffer is recreated on the next frame with no interruption, which makes render-scale options and dynamic resolution scaling cheap. Keep the aspect ratio equal to the canvas aspect ratio to avoid non-square pixels. Defaults <code>640 × 360</code>.</p>
+<hr />
+<h3 id="fixedresolutionfilter">fixedResolutionFilter<a class="headerlink" href="#fixedresolutionfilter" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setFixedResolutionFilter(TextureFilter filter)</code></li>
+<li><em>Getter:</em> <code>TextureFilter getFixedResolutionFilter() const</code></li>
+</ul>
+<p>Sampling filter used when the fixed-resolution image is upscaled to the view rect: <code>TextureFilter::NEAREST</code> (default) keeps hard pixel edges for a pixel-art look; <code>TextureFilter::LINEAR</code> interpolates smoothly, which suits fixed resolution used purely as a performance measure.</p>
+<hr />
+<h3 id="defaultmeshshader">defaultMeshShader<a class="headerlink" href="#defaultmeshshader" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setDefaultMeshShader(const std::string&amp; path)</code></li>
+<li><em>Getter:</em> <code>const std::string&amp; getDefaultMeshShader() const</code></li>
+</ul>
+<p>Scene-wide custom shader for Mesh components. The value is a project-relative base path to a forked shader (for example <code>"shaders/myMesh"</code>, resolving to <code>.vert</code>/<code>.frag</code>), or <code>"a.vert|b.frag"</code> for separately named files. Every Mesh whose own custom shader is empty uses it; an empty string (default) means the engine built-in. A shader assigned on the component always takes priority. Changing the value reloads the affected meshes. The fork's uniform values can be set for the whole scene with <a href="#setdefaultshaderuniform">setDefaultShaderUniform</a>. See <a href="../../../editor/custom-shaders/#scene-default-shaders">Custom Shaders — Scene default shaders</a>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">C++</label><label for="__tabbed_8_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setDefaultMeshShader</span><span class="p">(</span><span class="s">&quot;shaders/toon&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nv">scene</span><span class="p">.</span><span class="py">defaultMeshShader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;shaders/toon&quot;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="defaultuishader">defaultUIShader<a class="headerlink" href="#defaultuishader" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setDefaultUIShader(const std::string&amp; path)</code></li>
+<li><em>Getter:</em> <code>const std::string&amp; getDefaultUIShader() const</code></li>
+</ul>
+<p>Scene-wide custom shader for UI components. Same semantics as <a href="#defaultmeshshader">defaultMeshShader</a>.</p>
+<hr />
+<h3 id="defaultskyshader">defaultSkyShader<a class="headerlink" href="#defaultskyshader" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setDefaultSkyShader(const std::string&amp; path)</code></li>
+<li><em>Getter:</em> <code>const std::string&amp; getDefaultSkyShader() const</code></li>
+</ul>
+<p>Scene-wide custom shader for the Sky component. Same semantics as <a href="#defaultmeshshader">defaultMeshShader</a>.</p>
+<hr />
+<h3 id="defaultpointsshader">defaultPointsShader<a class="headerlink" href="#defaultpointsshader" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setDefaultPointsShader(const std::string&amp; path)</code></li>
+<li><em>Getter:</em> <code>const std::string&amp; getDefaultPointsShader() const</code></li>
+</ul>
+<p>Scene-wide custom shader for Points components. Same semantics as <a href="#defaultmeshshader">defaultMeshShader</a>.</p>
+<hr />
+<h3 id="defaultlinesshader">defaultLinesShader<a class="headerlink" href="#defaultlinesshader" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setDefaultLinesShader(const std::string&amp; path)</code></li>
+<li><em>Getter:</em> <code>const std::string&amp; getDefaultLinesShader() const</code></li>
+</ul>
+<p>Scene-wide custom shader for Lines components. Same semantics as <a href="#defaultmeshshader">defaultMeshShader</a>.</p>
+<hr />
+<h3 id="defaultwatershader">defaultWaterShader<a class="headerlink" href="#defaultwatershader" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setDefaultWaterShader(const std::string&amp; path)</code></li>
+<li><em>Getter:</em> <code>const std::string&amp; getDefaultWaterShader() const</code></li>
+</ul>
+<p>Scene-wide custom shader for <a href="../water/">Water</a> components. Same semantics as <a href="#defaultmeshshader">defaultMeshShader</a>. It covers the water surface only; the underwater fade has no scene default and is forked per water with <a href="../water/#customshader-customunderwatershader">customUnderwaterShader</a>.</p>
+<hr />
+<h3 id="postprocesspasses">postProcessPasses<a class="headerlink" href="#postprocesspasses" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setPostProcessPasses(const std::vector&lt;PostProcessPass&gt;&amp; passes)</code></li>
+<li><em>Getter:</em> <code>const std::vector&lt;PostProcessPass&gt;&amp; getPostProcessPasses() const</code></li>
+</ul>
+<p>Ordered chain of fullscreen post-process passes run over the scene's finished image, on the main camera only. Each entry is a <a href="../postprocesspass/">PostProcessPass</a> with the fork to run, an enable flag, and the values of its <code>u_fs_postParams</code> members. In Lua the property is a 1-based sequence of <code>PostProcessPass</code> values (a copy — assign it back to apply changes); build the chain as a sequence (a <code>{...}</code> literal or <code>table.insert</code>), whose array order is the pass order, and note that <code>pass_index</code> arguments such as <a href="#setpostprocessuniform">setPostProcessUniform</a> count from 0.</p>
+<p>Setting the chain rebuilds the passes on the next frame, unless only uniform values changed (same shaders and enable flags), in which case the compiled chain is kept and just the values are rewritten. For a single value or pass on a live chain, <a href="#setpostprocessuniform">setPostProcessUniform</a> and <a href="#setpostprocesspassenabled">setPostProcessPassEnabled</a> are the direct route. See <a href="../../../editor/custom-shaders/#post-process-passes">Custom Shaders — Post-process passes</a>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">C++</label><label for="__tabbed_9_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">PostProcessPass</span><span class="w"> </span><span class="n">sharpen</span><span class="p">;</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">sharpen</span><span class="p">.</span><span class="n">shader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;shaders/sharpen&quot;</span><span class="p">;</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="n">sharpen</span><span class="p">.</span><span class="n">setUniform</span><span class="p">(</span><span class="s">&quot;amount&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">);</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="n">scene</span><span class="p">.</span><span class="n">setPostProcessPasses</span><span class="p">({</span><span class="n">sharpen</span><span class="p">});</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">sharpen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">PostProcessPass</span><span class="p">()</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nv">sharpen</span><span class="p">.</span><span class="py">shader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;shaders/sharpen&quot;</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nv">sharpen</span><span class="p">:</span><span class="nf">setUniform</span><span class="p">(</span><span class="s2">&quot;amount&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="nv">scene</span><span class="p">.</span><span class="py">postProcessPasses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nv">sharpen</span><span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="enableuievents">enableUIEvents<a class="headerlink" href="#enableuievents" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter:</em> <code>void setEnableUIEvents(UIEventState enableUIEvents)</code></li>
+<li><em>Getter:</em> <code>UIEventState getEnableUIEvents() const</code></li>
+</ul>
+<p>Per-scene override for UI event routing. See <a href="#uieventstate">UIEventState</a>.</p>
+<h2 id="method-details">Method details<a class="headerlink" href="#method-details" title="Link to this section">&para;</a></h2>
+<h3 id="load">load<a class="headerlink" href="#load" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void load()</code></li>
+</ul>
+<p>Initializes the scene subsystems. Called automatically by the engine when the scene is added via <code>Engine::setScene</code> or <code>Engine::addSceneLayer</code>. Only call manually when managing scenes outside the engine lifecycle.</p>
+<hr />
+<h3 id="destroy">destroy<a class="headerlink" href="#destroy" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void destroy()</code></li>
+</ul>
+<p>Tears down all subsystems and destroys every entity in the scene. Called automatically by the engine when the scene is removed from the stack.</p>
+<hr />
+<h3 id="draw">draw<a class="headerlink" href="#draw" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void draw()</code></li>
+</ul>
+<p>Triggers a render pass for this scene. Normally called by the engine each frame; use only for custom render pipelines.</p>
+<hr />
+<h3 id="update">update<a class="headerlink" href="#update" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void update(double dt)</code></li>
+</ul>
+<p>Runs one variable-step update for all subscribed systems. <code>dt</code> is the frame delta in seconds. Normally called by the engine.</p>
+<hr />
+<h3 id="fixedupdate">fixedUpdate<a class="headerlink" href="#fixedupdate" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void fixedUpdate(double dt)</code></li>
+</ul>
+<p>Runs one fixed-step update for physics and other time-sensitive systems. <code>dt</code> equals <a href="../engine/#updatetime">Engine::updateTime</a>. Normally called by the engine.</p>
+<hr />
+<h3 id="setcamera">setCamera<a class="headerlink" href="#setcamera" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void setCamera(Camera* camera)</code></li>
+<li><code>void setCamera(Entity camera)</code></li>
+</ul>
+<p>Sets the active camera for this scene. Only one camera can be active at a time. Pass the <code>Camera</code> object or its underlying <code>Entity</code> handle.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">C++</label><label for="__tabbed_10_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">Camera</span><span class="w"> </span><span class="nf">cam</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">cam</span><span class="p">.</span><span class="n">activate</span><span class="p">();</span><span class="w">           </span><span class="c1">// equivalent shortcut</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="c1">// or:</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="n">scene</span><span class="p">.</span><span class="n">setCamera</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cam</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">cam</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Camera</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nv">scene</span><span class="p">:</span><span class="nf">setCamera</span><span class="p">(</span><span class="nv">cam</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="getcamera">getCamera<a class="headerlink" href="#getcamera" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>Entity getCamera() const</code></li>
+</ul>
+<p>Returns the entity handle of the currently active camera.</p>
+<hr />
+<h3 id="setviewcamera">setViewCamera<a class="headerlink" href="#setviewcamera" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void setViewCamera(Entity camera)</code></li>
+</ul>
+<p>Draws the scene from <code>camera</code> instead of the active camera, while <a href="#getcamera">getCamera</a> keeps returning the active one, so scripts, audio, and UI events are unaffected. Effects tied to the main camera (shadows, SSAO, SSR, post-processing, terrain and mesh detail) follow the view camera. Pass <code>NULL_ENTITY</code> to draw from the active camera again. The editor uses it for its <a href="../../../editor/scene-view/#detached-camera">detached camera</a>.</p>
+<hr />
+<h3 id="getrendercamera">getRenderCamera<a class="headerlink" href="#getrendercamera" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>Entity getRenderCamera() const</code></li>
+</ul>
+<p>Returns the camera the scene is drawn from: the view camera when one is set, otherwise the active camera.</p>
+<hr />
+<h3 id="setbackgroundcolor">setBackgroundColor<a class="headerlink" href="#setbackgroundcolor" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void setBackgroundColor(Vector4 color)</code></li>
+<li><code>void setBackgroundColor(float red, float green, float blue)</code></li>
+<li><code>void setBackgroundColor(float red, float green, float blue, float alpha)</code></li>
+</ul>
+<p>Sets the clear color used before rendering the scene each frame.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">C++</label><label for="__tabbed_11_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setBackgroundColor</span><span class="p">(</span><span class="mf">0.05f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nv">scene</span><span class="p">:</span><span class="nf">setBackgroundColor</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="setlightstate">setLightState<a class="headerlink" href="#setlightstate" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void setLightState(LightState state)</code></li>
+<li><code>LightState getLightState() const</code></li>
+</ul>
+<p>Overrides automatic lighting detection. See <a href="#lightstate">LightState</a>.</p>
+<hr />
+<h3 id="setglobalillumination">setGlobalIllumination<a class="headerlink" href="#setglobalillumination" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void setGlobalIllumination(float intensity, Vector3 color)</code></li>
+<li><code>void setGlobalIllumination(float intensity)</code></li>
+<li><code>void setGlobalIllumination(Vector3 color)</code></li>
+</ul>
+<p>Sets the ambient (global illumination) light for the scene. Intensity scales brightness; color tints the light. Flat-shaded or unlit materials are not affected.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">C++</label><label for="__tabbed_12_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setGlobalIllumination</span><span class="p">(</span><span class="mf">0.3f</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.95f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9f</span><span class="p">));</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nv">scene</span><span class="p">:</span><span class="nf">setGlobalIllumination</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.95</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9</span><span class="p">))</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="setambientlight2d">setAmbientLight2D<a class="headerlink" href="#setambientlight2d" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void setAmbientLight2D(float intensity, Vector3 color)</code></li>
+<li><code>void setAmbientLight2D(float intensity)</code></li>
+<li><code>void setAmbientLight2D(Vector3 color)</code></li>
+</ul>
+<p>Sets the ambient light for the <strong>2D lighting path</strong> (see <a href="../light2d/">Light2D</a>). Every <a href="../light2d/">Light2D</a> adds on top of this base level, so dim the ambient to make 2D lights visible. Separate from <a href="#setglobalillumination">setGlobalIllumination</a>, which drives the 3D PBR ambient.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">C++</label><label for="__tabbed_13_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setAmbientLight2D</span><span class="p">(</span><span class="mf">0.15f</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mf">0.9f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">));</span><span class="w"> </span><span class="c1">// dark, blueish night</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nv">scene</span><span class="p">:</span><span class="nf">setAmbientLight2D</span><span class="p">(</span><span class="mf">0.15</span><span class="p">,</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">))</span><span class="w"> </span><span class="c1">-- dark, blueish night</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="enableuievents_1">enableUIEvents<a class="headerlink" href="#enableuievents_1" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void enableUIEvents()</code></li>
+</ul>
+<p>Shorthand for <code>setEnableUIEvents(UIEventState::ENABLED)</code>.</p>
+<hr />
+<h3 id="isenableuievents">isEnableUIEvents<a class="headerlink" href="#isenableuievents" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>bool isEnableUIEvents() const</code></li>
+</ul>
+<p>Returns <code>true</code> if UI events are enabled for this scene (either via explicit <code>ENABLED</code> state or engine default).</p>
+<hr />
+<h3 id="canreceiveuievents">canReceiveUIEvents<a class="headerlink" href="#canreceiveuievents" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>bool canReceiveUIEvents()</code></li>
+</ul>
+<p>Returns <code>true</code> if this scene is currently the topmost scene that is able to receive UI pointer events. The engine calls this internally to route events to the correct scene layer.</p>
+<hr />
+<h3 id="updatecamerasize">updateCameraSize<a class="headerlink" href="#updatecamerasize" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void updateCameraSize()</code></li>
+</ul>
+<p>Recalculates the active camera's projection to match the current canvas size. Called automatically when the canvas changes; call manually after resizing the viewport from script.</p>
+<hr />
+<h3 id="setdefaultshaderuniform">setDefaultShaderUniform<a class="headerlink" href="#setdefaultshaderuniform" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void setDefaultShaderUniform(ShaderType type, const std::string&amp; name, const Vector4&amp; value)</code></li>
+<li><code>void setDefaultShaderUniform(ShaderType type, const std::string&amp; name, const Vector3&amp; value)</code></li>
+<li><code>void setDefaultShaderUniform(ShaderType type, const std::string&amp; name, const Vector2&amp; value)</code></li>
+<li><code>void setDefaultShaderUniform(ShaderType type, const std::string&amp; name, float value)</code></li>
+<li><code>Vector4 getDefaultShaderUniform(ShaderType type, const std::string&amp; name) const</code></li>
+<li><code>bool removeDefaultShaderUniform(ShaderType type, const std::string&amp; name)</code></li>
+<li><code>void setDefaultShaderUniforms(ShaderType type, const ShaderUniformValues&amp; values)</code> (C++ only)</li>
+<li><code>const ShaderUniformValues&amp; getDefaultShaderUniforms(ShaderType type) const</code> (C++ only)</li>
+</ul>
+<p>Scene values for the custom blocks (<code>u_vs_customParams</code> / <code>u_fs_customParams</code>) of the scene default shader of <code>type</code> (see <a href="#shadertype">ShaderType</a>), by member name. Every component that inherits that default reads them for the members it does not set itself; a value set on the component with <a href="../mesh/#setshaderuniform">setShaderUniform</a> wins. Setting a value only rewrites the uploaded blocks, so it can run every frame. A narrower value leaves the remaining components at zero, and a member with no value on either side reads zero. A type without a scene default is ignored, and a reserved name (<code>time</code>, <code>resolution</code>) logs an error. <code>getDefaultShaderUniform</code> returns the scene's stored value, zero when unset; <code>removeDefaultShaderUniform</code> drops it and returns whether it existed. The values stay when the default shader changes, so a fork with the same member names picks them up. See <a href="../../../editor/custom-shaders/#scene-default-shaders">Custom Shaders — Scene default shaders</a>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">C++</label><label for="__tabbed_14_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setDefaultShaderUniform</span><span class="p">(</span><span class="n">ShaderType</span><span class="o">::</span><span class="n">MESH</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;exposure&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">);</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="n">scene</span><span class="p">.</span><span class="n">setDefaultShaderUniform</span><span class="p">(</span><span class="n">ShaderType</span><span class="o">::</span><span class="n">MESH</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;rimColor&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Vector4</span><span class="p">(</span><span class="mf">0.2f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">));</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nv">scene</span><span class="p">:</span><span class="nf">setDefaultShaderUniform</span><span class="p">(</span><span class="nv">ShaderType</span><span class="p">.</span><span class="py">MESH</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;exposure&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="nv">scene</span><span class="p">:</span><span class="nf">setDefaultShaderUniform</span><span class="p">(</span><span class="nv">ShaderType</span><span class="p">.</span><span class="py">MESH</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;rimColor&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">Vector4</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="setpostprocessuniform">setPostProcessUniform<a class="headerlink" href="#setpostprocessuniform" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void setPostProcessUniform(unsigned int index, const std::string&amp; name, const Vector4&amp; value)</code></li>
+<li><code>void setPostProcessUniform(unsigned int index, const std::string&amp; name, const Vector3&amp; value)</code></li>
+<li><code>void setPostProcessUniform(unsigned int index, const std::string&amp; name, const Vector2&amp; value)</code></li>
+<li><code>void setPostProcessUniform(unsigned int index, const std::string&amp; name, float value)</code></li>
+<li><code>Vector4 getPostProcessUniform(unsigned int index, const std::string&amp; name) const</code></li>
+<li><code>bool removePostProcessUniform(unsigned int index, const std::string&amp; name)</code></li>
+</ul>
+<p>Sets one member of the <code>u_fs_postParams</code> block of the pass at <code>index</code> (0 = first pass of <a href="#postprocesspasses">postProcessPasses</a>), by member name. Only the uploaded block is rewritten — the chain is not rebuilt — so it can run every frame. A narrower value leaves the remaining components at zero; a member with no value reads zero. An index past the chain, or a reserved name (<code>time</code>, <code>resolution</code>, written by the engine every frame), logs an error and is ignored. <code>getPostProcessUniform</code> returns the stored value, zero when unset; <code>removePostProcessUniform</code> drops it (the member reads zero again) and returns whether it existed.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">C++</label><label for="__tabbed_15_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setPostProcessUniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;amount&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8f</span><span class="p">);</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="n">scene</span><span class="p">.</span><span class="n">setPostProcessUniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;tintColor&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Vector4</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">));</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nv">scene</span><span class="p">:</span><span class="nf">setPostProcessUniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;amount&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">)</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="nv">scene</span><span class="p">:</span><span class="nf">setPostProcessUniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;tintColor&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">Vector4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="setpostprocesspassenabled">setPostProcessPassEnabled<a class="headerlink" href="#setpostprocesspassenabled" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void setPostProcessPassEnabled(unsigned int index, bool enabled)</code></li>
+<li><code>bool isPostProcessPassEnabled(unsigned int index) const</code></li>
+</ul>
+<p>Turns the pass at <code>index</code> on or off. A change rebuilds the chain on the next frame (the compiled shader is kept, so it is cheap, but not something to toggle every frame). An index past the chain logs an error; <code>isPostProcessPassEnabled</code> returns <code>false</code> for it.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">C++</label><label for="__tabbed_16_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setPostProcessPassEnabled</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nv">scene</span><span class="p">:</span><span class="nf">setPostProcessPassEnabled</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="removesubscriptionsbytag">removeSubscriptionsByTag<a class="headerlink" href="#removesubscriptionsbytag" title="Link to this section">&para;</a></h3>
+<ul>
+<li><code>void removeSubscriptionsByTag(const std::string&amp; substring)</code></li>
+</ul>
+<p>Removes all event subscriptions whose tag string contains <code>substring</code>. Used to clean up callbacks belonging to a destroyed script or component.</p>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../engine/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Engine</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../postprocesspass/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">PostProcessPass</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/reference/classes/scene.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#scene" class="dx-toc-link" data-level="1">Scene</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#description" class="dx-toc-link" data-level="2">Description</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#properties" class="dx-toc-link" data-level="3">Properties</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#methods" class="dx-toc-link" data-level="3">Methods</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#enumerations" class="dx-toc-link" data-level="2">Enumerations</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#lightstate" class="dx-toc-link" data-level="3">LightState</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#uieventstate" class="dx-toc-link" data-level="3">UIEventState</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#shadowquality" class="dx-toc-link" data-level="3">ShadowQuality</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#shadertype" class="dx-toc-link" data-level="3">ShaderType</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#property-details" class="dx-toc-link" data-level="2">Property details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#backgroundcolor" class="dx-toc-link" data-level="3">backgroundColor</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#shadowquality_1" class="dx-toc-link" data-level="3">shadowQuality</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#meshlodenabled-meshlodthreshold" class="dx-toc-link" data-level="3">meshLodEnabled / meshLodThreshold</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#depthprepassenabled" class="dx-toc-link" data-level="3">depthPrepassEnabled</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#lightstate_1" class="dx-toc-link" data-level="3">lightState</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#globalilluminationintensity" class="dx-toc-link" data-level="3">globalIlluminationIntensity</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#globalilluminationcolor" class="dx-toc-link" data-level="3">globalIlluminationColor</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ambientlight2dintensity" class="dx-toc-link" data-level="3">ambientLight2DIntensity</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ambientlight2dcolor" class="dx-toc-link" data-level="3">ambientLight2DColor</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#shadow2dquality" class="dx-toc-link" data-level="3">shadow2DQuality</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#gravity2d" class="dx-toc-link" data-level="3">gravity2D</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#gravity3d" class="dx-toc-link" data-level="3">gravity3D</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ssaoenabled" class="dx-toc-link" data-level="3">ssaoEnabled</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ssaoradius" class="dx-toc-link" data-level="3">ssaoRadius</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ssaointensity" class="dx-toc-link" data-level="3">ssaoIntensity</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ssaobias" class="dx-toc-link" data-level="3">ssaoBias</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ssaodebug" class="dx-toc-link" data-level="3">ssaoDebug</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ssrenabled" class="dx-toc-link" data-level="3">ssrEnabled</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ssrmaxdistance" class="dx-toc-link" data-level="3">ssrMaxDistance</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ssrthickness" class="dx-toc-link" data-level="3">ssrThickness</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ssrmaxsteps" class="dx-toc-link" data-level="3">ssrMaxSteps</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ssrintensity" class="dx-toc-link" data-level="3">ssrIntensity</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ssrblur" class="dx-toc-link" data-level="3">ssrBlur</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ssrdebugmode" class="dx-toc-link" data-level="3">ssrDebugMode</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#fixedresolutionenabled" class="dx-toc-link" data-level="3">fixedResolutionEnabled</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#fixedresolutionwidth-fixedresolutionheight" class="dx-toc-link" data-level="3">fixedResolutionWidth, fixedResolutionHeight</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#fixedresolutionfilter" class="dx-toc-link" data-level="3">fixedResolutionFilter</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#defaultmeshshader" class="dx-toc-link" data-level="3">defaultMeshShader</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#defaultuishader" class="dx-toc-link" data-level="3">defaultUIShader</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#defaultskyshader" class="dx-toc-link" data-level="3">defaultSkyShader</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#defaultpointsshader" class="dx-toc-link" data-level="3">defaultPointsShader</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#defaultlinesshader" class="dx-toc-link" data-level="3">defaultLinesShader</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#defaultwatershader" class="dx-toc-link" data-level="3">defaultWaterShader</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#postprocesspasses" class="dx-toc-link" data-level="3">postProcessPasses</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#enableuievents" class="dx-toc-link" data-level="3">enableUIEvents</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#method-details" class="dx-toc-link" data-level="2">Method details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#load" class="dx-toc-link" data-level="3">load</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#destroy" class="dx-toc-link" data-level="3">destroy</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#draw" class="dx-toc-link" data-level="3">draw</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#update" class="dx-toc-link" data-level="3">update</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#fixedupdate" class="dx-toc-link" data-level="3">fixedUpdate</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setcamera" class="dx-toc-link" data-level="3">setCamera</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getcamera" class="dx-toc-link" data-level="3">getCamera</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setviewcamera" class="dx-toc-link" data-level="3">setViewCamera</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getrendercamera" class="dx-toc-link" data-level="3">getRenderCamera</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setbackgroundcolor" class="dx-toc-link" data-level="3">setBackgroundColor</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setlightstate" class="dx-toc-link" data-level="3">setLightState</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setglobalillumination" class="dx-toc-link" data-level="3">setGlobalIllumination</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setambientlight2d" class="dx-toc-link" data-level="3">setAmbientLight2D</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#enableuievents_1" class="dx-toc-link" data-level="3">enableUIEvents</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#isenableuievents" class="dx-toc-link" data-level="3">isEnableUIEvents</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#canreceiveuievents" class="dx-toc-link" data-level="3">canReceiveUIEvents</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#updatecamerasize" class="dx-toc-link" data-level="3">updateCameraSize</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setdefaultshaderuniform" class="dx-toc-link" data-level="3">setDefaultShaderUniform</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setpostprocessuniform" class="dx-toc-link" data-level="3">setPostProcessUniform</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setpostprocesspassenabled" class="dx-toc-link" data-level="3">setPostProcessPassEnabled</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#removesubscriptionsbytag" class="dx-toc-link" data-level="3">removeSubscriptionsByTag</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../../versions.json";
+    window.QUANTUM_PAGE_URL = "reference/classes/scene/";
+  </script>
+  <script src="../../../js/quantum.js" defer></script>
+</body>
+</html>

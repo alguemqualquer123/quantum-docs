@@ -8,7 +8,7 @@ description: Vector3 API reference (C++ and Lua).
 
 ## Description
 
-A 3D vector with `float` components `x`, `y`, and `z`. The primary type for 3D positions, directions, normals, colours (RGB), and velocity in Doriax.
+A 3D vector with `float` components `x`, `y`, and `z`. The primary type for 3D positions, directions, normals, colours (RGB), and velocity in Quantum.
 
 `+` and `-` work on two vectors. `*` and `/` take a number or another vector, which multiplies or divides per component, and the number can also come first in a multiplication (`2 * v`). Comparison operators (`==`, `<`) are also available.
 

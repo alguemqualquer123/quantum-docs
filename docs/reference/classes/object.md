@@ -13,8 +13,8 @@ description: Object API reference — transform, hierarchy, visibility, billboar
 === "C++"
 
     ```cpp
-    #include "Doriax.h"
-    using namespace doriax;
+    #include "Quantum.h"
+    using namespace quantum;
 
     Sprite sprite(&scene);
     sprite.setPosition(100.0f, 200.0f, 0.0f);

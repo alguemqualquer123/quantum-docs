@@ -10,7 +10,7 @@ description: Color API reference (C++ and Lua).
 
 A static utility class providing colour space conversion between **linear** (physically-based) and **sRGB** (perceptually uniform, display-encoded) colour spaces.
 
-Doriax's rendering pipeline works in linear colour space. When you specify a colour constant (e.g. a material's `baseColorFactor`) it should typically be in linear space. If you are reading a colour from a design tool or HTML hex code, it is likely in sRGB space and needs conversion before use.
+Quantum's rendering pipeline works in linear colour space. When you specify a colour constant (e.g. a material's `baseColorFactor`) it should typically be in linear space. If you are reading a colour from a design tool or HTML hex code, it is likely in sRGB space and needs conversion before use.
 
 ### Methods
 

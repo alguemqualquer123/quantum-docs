@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particles — Quantum Engine Docs</title>
+  <meta name="description" content="Particles API reference (C++ and Lua).">
+  <meta property="og:title" content="Particles — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/reference/classes/particles/">
+
+  <link rel="icon" type="image/png" href="../../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../../css/quantum.css">
+  <link rel="stylesheet" href="../../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="particles">Particles<a class="headerlink" href="#particles" title="Link to this section">&para;</a></h1>
+<p><strong>Inherits:</strong> <a href="../action/">Action</a><br />
+<strong>C++ type:</strong> <code>Particles</code></p>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Link to this section">&para;</a></h2>
+<p>A GPU-accelerated particle emitter driven by the <a href="../action/">Action</a> system. <code>Particles</code> handles birth, lifetime, movement, colour, and death for large numbers of small quads (sprites) to create effects such as fire, smoke, sparks, rain, and explosions.</p>
+<p>The emitter has two layers of per-particle customisation:</p>
+<ul>
+<li><strong>Initializers</strong> — applied once at birth to set the particle's starting value.</li>
+<li><strong>Modifiers</strong> — applied over the particle's lifetime to interpolate a value from one state to another, with optional easing.</li>
+</ul>
+<h3 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Link to this section">&para;</a></h3>
+<p>Available in C++ and Lua:</p>
+<ul>
+<li><code>Particles(Scene* scene)</code> — creates a new entity.</li>
+<li><code>Particles(Scene* scene, Entity entity)</code> — wraps an existing entity without taking ownership.</li>
+</ul>
+<p>In Lua, use <code>Particles(scene, entity)</code> to access an existing action. The entity must
+already have the components required by this type; wrapping does not add them.
+See <a href="../entityhandle/#ownership-and-lifetime">EntityHandle ownership</a>.</p>
+<h3 id="properties">Properties<a class="headerlink" href="#properties" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Default</th>
+<th>Langs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unsigned int</td>
+<td><a href="#maxparticles">maxParticles</a></td>
+<td><code>100</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#rate">rate</a></td>
+<td><code>10</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>int</td>
+<td><a href="#maxperupdate">maxPerUpdate</a></td>
+<td><code>10</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#emitter">emitter</a></td>
+<td><code>true</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#loop">loop</a></td>
+<td><code>true</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#localspace">localSpace</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td><a href="#particleemittershape">ParticleEmitterShape</a></td>
+<td><a href="#emittershape">emitterShape</a></td>
+<td><code>Box</code></td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Langs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void</td>
+<td><a href="#reset">reset</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setlifeinitializer">setLifeInitializer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setpositioninitializer">setPositionInitializer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setspherepositioninitializer">setSpherePositionInitializer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#sethemispherepositioninitializer">setHemispherePositionInitializer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setcirclepositioninitializer">setCirclePositionInitializer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setconepositioninitializer">setConePositionInitializer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setpositionmodifier">setPositionModifier</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#addburst-setbursts-clearbursts">addBurst</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#addburst-setbursts-clearbursts">setBursts</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#addburst-setbursts-clearbursts">clearBursts</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setvelocityinitializer">setVelocityInitializer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setvelocitymodifier">setVelocityModifier</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setaccelerationinitializer">setAccelerationInitializer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setaccelerationmodifier">setAccelerationModifier</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setcolorinitializer">setColorInitializer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setcolormodifier">setColorModifier</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#addcolorgradientstop-setcolorgradient-clearcolorgradient-setcolorgradientusesrgb">addColorGradientStop</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#addcolorgradientstop-setcolorgradient-clearcolorgradient-setcolorgradientusesrgb">setColorGradient</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#addcolorgradientstop-setcolorgradient-clearcolorgradient-setcolorgradientusesrgb">clearColorGradient</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#addcolorgradientstop-setcolorgradient-clearcolorgradient-setcolorgradientusesrgb">setColorGradientUseSRGB</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setalphainitializer">setAlphaInitializer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setalphamodifier">setAlphaModifier</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setsizeinitializer">setSizeInitializer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setsizemodifier">setSizeModifier</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setspriteinitializer">setSpriteIntializer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setspritemodifier">setSpriteModifier</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setrotationinitializer">setRotationInitializer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setrotationmodifier">setRotationModifier</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setscaleinitializer">setScaleInitializer</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setscalemodifier">setScaleModifier</a></td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<h2 id="enumerations">Enumerations<a class="headerlink" href="#enumerations" title="Link to this section">&para;</a></h2>
+<h3 id="particleemittershape">ParticleEmitterShape<a class="headerlink" href="#particleemittershape" title="Link to this section">&para;</a></h3>
+<p>The volume from which new particles are spawned.</p>
+<ul>
+<li><strong>Box</strong> — Particles spawn within a box region defined by <a href="#setpositioninitializer">setPositionInitializer</a>.</li>
+<li><strong>Sphere</strong> — Particles spawn within a sphere. Configure with <a href="#setspherepositioninitializer">setSpherePositionInitializer</a>.</li>
+<li><strong>Hemisphere</strong> — Particles spawn within the upper hemisphere. Configure with <a href="#sethemispherepositioninitializer">setHemispherePositionInitializer</a>.</li>
+<li><strong>Circle</strong> — Particles spawn on a flat circle. Configure with <a href="#setcirclepositioninitializer">setCirclePositionInitializer</a>.</li>
+<li><strong>Cone</strong> — Particles spawn inside a cone pointing upward. Configure with <a href="#setconepositioninitializer">setConePositionInitializer</a>.</li>
+</ul>
+<hr />
+<h2 id="property-details">Property details<a class="headerlink" href="#property-details" title="Link to this section">&para;</a></h2>
+<h3 id="maxparticles">maxParticles<a class="headerlink" href="#maxparticles" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setMaxParticles</strong>(unsigned int maxParticles)</li>
+<li><em>Getter</em>: unsigned int <strong>getMaxParticles</strong>() const</li>
+</ul>
+<p>The maximum number of particles alive at any time. Increase this for denser effects; be mindful of GPU/CPU budget.</p>
+<hr />
+<h3 id="rate">rate<a class="headerlink" href="#rate" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setRate</strong>(int rate)</li>
+<li><em>Getter</em>: int <strong>getRate</strong>() const</li>
+</ul>
+<p>Number of new particles spawned per second while the emitter is active.</p>
+<hr />
+<h3 id="maxperupdate">maxPerUpdate<a class="headerlink" href="#maxperupdate" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setMaxPerUpdate</strong>(int maxPerUpdate)</li>
+<li><em>Getter</em>: int <strong>getMaxPerUpdate</strong>() const</li>
+</ul>
+<p>Caps the number of new particles spawned in a single update tick. Prevents a very long delta time (e.g. after a frame spike) from spawning hundreds of particles in one frame.</p>
+<hr />
+<h3 id="emitter">emitter<a class="headerlink" href="#emitter" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setEmitter</strong>(bool emitter)</li>
+<li><em>Getter</em>: bool <strong>isEmitter</strong>() const</li>
+</ul>
+<p>When <code>true</code>, the particle system actively spawns new particles at the configured <a href="#rate">rate</a>. Set to <code>false</code> to stop new emissions while allowing existing particles to finish their lifetime.</p>
+<hr />
+<h3 id="loop">loop<a class="headerlink" href="#loop" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setLoop</strong>(bool loop)</li>
+<li><em>Getter</em>: bool <strong>isLoop</strong>() const</li>
+</ul>
+<p>When <code>true</code>, the particle system restarts automatically after all particles have died. When <code>false</code>, the system stops after the first complete emission cycle.</p>
+<hr />
+<h3 id="localspace">localSpace<a class="headerlink" href="#localspace" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setLocalSpace</strong>(bool localSpace)</li>
+<li><em>Getter</em>: bool <strong>isLocalSpace</strong>() const</li>
+</ul>
+<p>When <code>true</code>, particle positions are in local object space — they move with the emitter entity. When <code>false</code> (default), positions are in world space — particles continue along their trajectories even after the emitter moves.</p>
+<hr />
+<h3 id="emittershape">emitterShape<a class="headerlink" href="#emittershape" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setPositionInitializerShape</strong>(<a href="#particleemittershape">ParticleEmitterShape</a> shape)</li>
+<li><em>Getter</em>: <a href="#particleemittershape">ParticleEmitterShape</a> <strong>getPositionInitializerShape</strong>() const</li>
+</ul>
+<p>The spawn volume for new particles. See <a href="#particleemittershape">ParticleEmitterShape</a>.</p>
+<hr />
+<h2 id="method-details">Method details<a class="headerlink" href="#method-details" title="Link to this section">&para;</a></h2>
+<h3 id="reset">reset<a class="headerlink" href="#reset" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>reset</strong>()</li>
+</ul>
+<p>Immediately destroys all live particles and resets the emitter to its initial state.</p>
+<hr />
+<h3 id="setlifeinitializer">setLifeInitializer<a class="headerlink" href="#setlifeinitializer" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setLifeInitializer</strong>(float life)</li>
+<li>void <strong>setLifeInitializer</strong>(float minLife, float maxLife)</li>
+</ul>
+<p>Set how long (in seconds) each particle lives. The two-argument form randomises lifetime between <code>minLife</code> and <code>maxLife</code>.</p>
+<hr />
+<h3 id="setpositioninitializer">setPositionInitializer<a class="headerlink" href="#setpositioninitializer" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setPositionInitializer</strong>(Vector3 position)</li>
+<li>void <strong>setPositionInitializer</strong>(Vector3 minPosition, Vector3 maxPosition)</li>
+</ul>
+<p>Sets the spawn position (or random range) relative to the emitter. For Box shape, <code>minPosition</code> and <code>maxPosition</code> define the box corners.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Particles</span><span class="w"> </span><span class="nf">fire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">fire</span><span class="p">.</span><span class="n">setLifeInitializer</span><span class="p">(</span><span class="mf">1.5f</span><span class="p">,</span><span class="w"> </span><span class="mf">2.5f</span><span class="p">);</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">fire</span><span class="p">.</span><span class="n">setPositionInitializer</span><span class="p">(</span><span class="n">Vector3</span><span class="p">(</span><span class="mf">-0.5f</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">-0.5f</span><span class="p">),</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mf">0.5f</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">));</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">fire</span><span class="p">.</span><span class="n">setVelocityInitializer</span><span class="p">(</span><span class="n">Vector3</span><span class="p">(</span><span class="mf">-0.2f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">-0.2f</span><span class="p">),</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mf">0.2f</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2f</span><span class="p">));</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">fire</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">fire</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Particles</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">fire</span><span class="p">:</span><span class="nf">setLifeInitializer</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mf">2.5</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">fire</span><span class="p">:</span><span class="nf">setPositionInitializer</span><span class="p">(</span><span class="nf">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.5</span><span class="p">),</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">))</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">fire</span><span class="p">:</span><span class="nf">setVelocityInitializer</span><span class="p">(</span><span class="nf">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.2</span><span class="p">),</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">))</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nv">fire</span><span class="p">:</span><span class="nf">start</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="setspherepositioninitializer">setSpherePositionInitializer<a class="headerlink" href="#setspherepositioninitializer" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setSpherePositionInitializer</strong>(float radius)</li>
+<li>void <strong>setSpherePositionInitializer</strong>(float radius, float innerRadius)</li>
+</ul>
+<p>Spawns particles within a sphere of the given radius. <code>innerRadius</code> creates a hollow sphere (donut shape) — particles only spawn in the shell between <code>innerRadius</code> and <code>radius</code>.</p>
+<hr />
+<h3 id="sethemispherepositioninitializer">setHemispherePositionInitializer<a class="headerlink" href="#sethemispherepositioninitializer" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setHemispherePositionInitializer</strong>(float radius)</li>
+<li>void <strong>setHemispherePositionInitializer</strong>(float radius, float innerRadius)</li>
+</ul>
+<p>Spawns particles within the upper hemisphere (Y ≥ 0). Useful for upward explosions or fountain effects.</p>
+<hr />
+<h3 id="setcirclepositioninitializer">setCirclePositionInitializer<a class="headerlink" href="#setcirclepositioninitializer" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setCirclePositionInitializer</strong>(float radius)</li>
+<li>void <strong>setCirclePositionInitializer</strong>(float radius, float innerRadius)</li>
+</ul>
+<p>Spawns particles on a flat circle in the XZ plane. <code>innerRadius</code> creates a ring.</p>
+<hr />
+<h3 id="setconepositioninitializer">setConePositionInitializer<a class="headerlink" href="#setconepositioninitializer" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setConePositionInitializer</strong>(float angle, float height)</li>
+</ul>
+<p>Spawns particles inside a cone. <code>angle</code> is the half-angle of the cone (in degrees or radians depending on <code>Engine::useDegrees</code>), and <code>height</code> is its vertical extent.</p>
+<hr />
+<h3 id="setpositionmodifier">setPositionModifier<a class="headerlink" href="#setpositionmodifier" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setPositionModifier</strong>(float fromTime, float toTime, Vector3 fromPosition, Vector3 toPosition)</li>
+<li>void <strong>setPositionModifier</strong>(float fromTime, float toTime, Vector3 fromPosition, Vector3 toPosition, EaseType functionType)</li>
+</ul>
+<p>Adds a position offset over the particle's normalised lifetime (0 = birth, 1 = death). The <code>fromTime</code> and <code>toTime</code> values are in the <code>[0, 1]</code> range. An optional <a href="../timedaction/#easetype">EaseType</a> controls interpolation.</p>
+<hr />
+<h3 id="addburst-setbursts-clearbursts">addBurst / setBursts / clearBursts<a class="headerlink" href="#addburst-setbursts-clearbursts" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>addBurst</strong>(float time, int count)</li>
+<li>void <strong>addBurst</strong>(float time, int minCount, int maxCount)</li>
+<li>void <strong>setBursts</strong>(std::vector\&lt;ParticleBurst&gt; bursts)</li>
+<li>void <strong>clearBursts</strong>()</li>
+</ul>
+<p>Bursts spawn a fixed number of particles at a specific time (in seconds) during the emitter's cycle, independent of <a href="#rate">rate</a>. Useful for explosions.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Particles</span><span class="w"> </span><span class="nf">explosion</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">explosion</span><span class="p">.</span><span class="n">setEmitter</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">explosion</span><span class="p">.</span><span class="n">addBurst</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">);</span><span class="w">  </span><span class="c1">// spawn 50–80 particles at t=0</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">explosion</span><span class="p">.</span><span class="n">setLoop</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">explosion</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">explosion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Particles</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">explosion</span><span class="p">.</span><span class="py">emitter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">explosion</span><span class="p">:</span><span class="nf">addBurst</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nv">explosion</span><span class="p">.</span><span class="py">loop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nv">explosion</span><span class="p">:</span><span class="nf">start</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="setvelocityinitializer">setVelocityInitializer<a class="headerlink" href="#setvelocityinitializer" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setVelocityInitializer</strong>(Vector3 velocity)</li>
+<li>void <strong>setVelocityInitializer</strong>(Vector3 minVelocity, Vector3 maxVelocity)</li>
+</ul>
+<p>Sets the initial velocity (units per second) at birth. The range form picks a random velocity for each particle between <code>minVelocity</code> and <code>maxVelocity</code>.</p>
+<hr />
+<h3 id="setvelocitymodifier">setVelocityModifier<a class="headerlink" href="#setvelocitymodifier" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setVelocityModifier</strong>(float fromTime, float toTime, Vector3 fromVelocity, Vector3 toVelocity)</li>
+<li>void <strong>setVelocityModifier</strong>(float fromTime, float toTime, Vector3 fromVelocity, Vector3 toVelocity, EaseType functionType)</li>
+</ul>
+<p>Interpolates the particle's velocity offset over its normalised lifetime. Times are in the <code>[0, 1]</code> range.</p>
+<hr />
+<h3 id="setaccelerationinitializer">setAccelerationInitializer<a class="headerlink" href="#setaccelerationinitializer" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setAccelerationInitializer</strong>(Vector3 acceleration)</li>
+<li>void <strong>setAccelerationInitializer</strong>(Vector3 minAcceleration, Vector3 maxAcceleration)</li>
+</ul>
+<p>Sets a constant per-particle acceleration (like gravity) applied from birth. Use <code>Vector3(0, -9.81f, 0)</code> to simulate gravity.</p>
+<hr />
+<h3 id="setaccelerationmodifier">setAccelerationModifier<a class="headerlink" href="#setaccelerationmodifier" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setAccelerationModifier</strong>(float fromTime, float toTime, Vector3 fromAcceleration, Vector3 toAcceleration)</li>
+<li>void <strong>setAccelerationModifier</strong>(float fromTime, float toTime, Vector3 fromAcceleration, Vector3 toAcceleration, EaseType functionType)</li>
+</ul>
+<p>Animates the per-particle acceleration offset over its normalised lifetime.</p>
+<hr />
+<h3 id="setcolorinitializer">setColorInitializer<a class="headerlink" href="#setcolorinitializer" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setColorInitializer</strong>(Vector3 color)</li>
+<li>void <strong>setColorInitializer</strong>(Vector3 minColor, Vector3 maxColor)</li>
+</ul>
+<p>Sets the particle's initial linear-space RGB colour. The range form randomises colour per particle.</p>
+<hr />
+<h3 id="setcolormodifier">setColorModifier<a class="headerlink" href="#setcolormodifier" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setColorModifier</strong>(float fromTime, float toTime, Vector3 fromColor, Vector3 toColor)</li>
+<li>void <strong>setColorModifier</strong>(float fromTime, float toTime, Vector3 fromColor, Vector3 toColor, EaseType functionType)</li>
+</ul>
+<p>Lerps colour over the particle's normalised lifetime. Times are in <code>[0, 1]</code>.</p>
+<hr />
+<h3 id="addcolorgradientstop-setcolorgradient-clearcolorgradient-setcolorgradientusesrgb">addColorGradientStop / setColorGradient / clearColorGradient / setColorGradientUseSRGB<a class="headerlink" href="#addcolorgradientstop-setcolorgradient-clearcolorgradient-setcolorgradientusesrgb" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>addColorGradientStop</strong>(float time, Vector3 color)</li>
+<li>void <strong>setColorGradient</strong>(std::vector\&lt;ParticleColorGradientStop&gt; stops)</li>
+<li>void <strong>clearColorGradient</strong>()</li>
+<li>void <strong>setColorGradientUseSRGB</strong>(bool useSRGB)</li>
+</ul>
+<p>Defines a multi-stop colour gradient applied over the particle's lifetime instead of a simple two-point modifier. <code>addColorGradientStop()</code> adds one stop at <code>time</code> (0–1). <code>setColorGradientUseSRGB()</code> enables perceptually-linear interpolation through sRGB colour space.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">C++</label><label for="__tabbed_3_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">fire</span><span class="p">.</span><span class="n">addColorGradientStop</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">));</span><span class="w">  </span><span class="c1">// orange</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">fire</span><span class="p">.</span><span class="n">addColorGradientStop</span><span class="p">(</span><span class="mf">0.5f</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">));</span><span class="w">  </span><span class="c1">// red</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">fire</span><span class="p">.</span><span class="n">addColorGradientStop</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mf">0.2f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2f</span><span class="p">));</span><span class="w">  </span><span class="c1">// smoke grey</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nv">fire</span><span class="p">:</span><span class="nf">addColorGradientStop</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">))</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nv">fire</span><span class="p">:</span><span class="nf">addColorGradientStop</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">))</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nv">fire</span><span class="p">:</span><span class="nf">addColorGradientStop</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">))</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="setalphainitializer">setAlphaInitializer<a class="headerlink" href="#setalphainitializer" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setAlphaInitializer</strong>(float alpha)</li>
+<li>void <strong>setAlphaInitializer</strong>(float minAlpha, float maxAlpha)</li>
+</ul>
+<p>Sets the initial opacity for each particle. <code>1.0</code> = fully opaque, <code>0.0</code> = invisible.</p>
+<hr />
+<h3 id="setalphamodifier">setAlphaModifier<a class="headerlink" href="#setalphamodifier" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setAlphaModifier</strong>(float fromTime, float toTime, float fromAlpha, float toAlpha)</li>
+<li>void <strong>setAlphaModifier</strong>(float fromTime, float toTime, float fromAlpha, float toAlpha, EaseType functionType)</li>
+</ul>
+<p>Animates opacity over the particle's normalised lifetime. For a fade-out effect, use <code>fromTime=0, toTime=1, fromAlpha=1, toAlpha=0</code>.</p>
+<hr />
+<h3 id="setsizeinitializer">setSizeInitializer<a class="headerlink" href="#setsizeinitializer" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setSizeInitializer</strong>(float size)</li>
+<li>void <strong>setSizeInitializer</strong>(float minSize, float maxSize)</li>
+</ul>
+<p>Sets the initial uniform size of each particle in world units.</p>
+<hr />
+<h3 id="setsizemodifier">setSizeModifier<a class="headerlink" href="#setsizemodifier" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setSizeModifier</strong>(float fromTime, float toTime, float fromSize, float toSize)</li>
+<li>void <strong>setSizeModifier</strong>(float fromTime, float toTime, float fromSize, float toSize, EaseType functionType)</li>
+</ul>
+<p>Animates particle size over its normalised lifetime.</p>
+<hr />
+<h3 id="setspriteinitializer">setSpriteInitializer<a class="headerlink" href="#setspriteinitializer" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setSpriteIntializer</strong>(std::vector\&lt;int&gt; frames)</li>
+<li>void <strong>setSpriteIntializer</strong>(int minFrame, int maxFrame)</li>
+</ul>
+<p>Sets which sprite atlas frame each particle shows at birth. The vector form provides an explicit list to pick from randomly; the two-integer form picks a random frame in the range.</p>
+<p>Requires the emitter mesh to have an atlas configured (see <a href="../sprite/">Sprite</a> frame definitions).</p>
+<hr />
+<h3 id="setspritemodifier">setSpriteModifier<a class="headerlink" href="#setspritemodifier" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setSpriteModifier</strong>(float fromTime, float toTime, std::vector\&lt;int&gt; frames)</li>
+<li>void <strong>setSpriteModifier</strong>(float fromTime, float toTime, std::vector\&lt;int&gt; frames, EaseType functionType)</li>
+</ul>
+<p>Cycles through a list of sprite frames during the particle's lifetime, enabling flip-book animation.</p>
+<hr />
+<h3 id="setrotationinitializer">setRotationInitializer<a class="headerlink" href="#setrotationinitializer" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setRotationInitializer</strong>(Quaternion rotation)</li>
+<li>void <strong>setRotationInitializer</strong>(float rotation)</li>
+<li>void <strong>setRotationInitializer</strong>(Quaternion minRotation, Quaternion maxRotation)</li>
+<li>void <strong>setRotationInitializer</strong>(float minRotation, float maxRotation)</li>
+</ul>
+<p>Sets the initial rotation of each particle. The scalar overload takes an angle (degrees or radians per <code>Engine::useDegrees</code>) around the Z axis for 2D-style billboard rotation.</p>
+<hr />
+<h3 id="setrotationmodifier">setRotationModifier<a class="headerlink" href="#setrotationmodifier" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setRotationModifier</strong>(float fromTime, float toTime, float fromRotation, float toRotation)</li>
+<li>void <strong>setRotationModifier</strong>(float fromTime, float toTime, Quaternion fromRotation, Quaternion toRotation)</li>
+<li>void <strong>setRotationModifier</strong>(float fromTime, float toTime, float fromRotation, float toRotation, EaseType functionType)</li>
+</ul>
+<p>Animates rotation over the particle's normalised lifetime.</p>
+<hr />
+<h3 id="setscaleinitializer">setScaleInitializer<a class="headerlink" href="#setscaleinitializer" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setScaleInitializer</strong>(float scale)</li>
+<li>void <strong>setScaleInitializer</strong>(Vector3 scale)</li>
+<li>void <strong>setScaleInitializer</strong>(float minScale, float maxScale)</li>
+<li>void <strong>setScaleInitializer</strong>(Vector3 minScale, Vector3 maxScale)</li>
+</ul>
+<p>Sets the initial scale at birth. Use the <code>Vector3</code> overload for non-uniform scale.</p>
+<hr />
+<h3 id="setscalemodifier">setScaleModifier<a class="headerlink" href="#setscalemodifier" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setScaleModifier</strong>(float fromTime, float toTime, float fromScale, float toScale)</li>
+<li>void <strong>setScaleModifier</strong>(float fromTime, float toTime, Vector3 fromScale, Vector3 toScale)</li>
+<li>void <strong>setScaleModifier</strong>(float fromTime, float toTime, Vector3 fromScale, Vector3 toScale, EaseType functionType)</li>
+</ul>
+<p>Animates the particle's scale over its normalised lifetime. Useful for particles that shrink as they die.</p>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../animation/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Animation</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../subsystem/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">SubSystem</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/reference/classes/particles.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#particles" class="dx-toc-link" data-level="1">Particles</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#description" class="dx-toc-link" data-level="2">Description</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#constructors" class="dx-toc-link" data-level="3">Constructors</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#properties" class="dx-toc-link" data-level="3">Properties</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#methods" class="dx-toc-link" data-level="3">Methods</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#enumerations" class="dx-toc-link" data-level="2">Enumerations</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#particleemittershape" class="dx-toc-link" data-level="3">ParticleEmitterShape</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#property-details" class="dx-toc-link" data-level="2">Property details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#maxparticles" class="dx-toc-link" data-level="3">maxParticles</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#rate" class="dx-toc-link" data-level="3">rate</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#maxperupdate" class="dx-toc-link" data-level="3">maxPerUpdate</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#emitter" class="dx-toc-link" data-level="3">emitter</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#loop" class="dx-toc-link" data-level="3">loop</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#localspace" class="dx-toc-link" data-level="3">localSpace</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#emittershape" class="dx-toc-link" data-level="3">emitterShape</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#method-details" class="dx-toc-link" data-level="2">Method details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#reset" class="dx-toc-link" data-level="3">reset</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setlifeinitializer" class="dx-toc-link" data-level="3">setLifeInitializer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setpositioninitializer" class="dx-toc-link" data-level="3">setPositionInitializer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setspherepositioninitializer" class="dx-toc-link" data-level="3">setSpherePositionInitializer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#sethemispherepositioninitializer" class="dx-toc-link" data-level="3">setHemispherePositionInitializer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setcirclepositioninitializer" class="dx-toc-link" data-level="3">setCirclePositionInitializer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setconepositioninitializer" class="dx-toc-link" data-level="3">setConePositionInitializer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setpositionmodifier" class="dx-toc-link" data-level="3">setPositionModifier</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#addburst-setbursts-clearbursts" class="dx-toc-link" data-level="3">addBurst / setBursts / clearBursts</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setvelocityinitializer" class="dx-toc-link" data-level="3">setVelocityInitializer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setvelocitymodifier" class="dx-toc-link" data-level="3">setVelocityModifier</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setaccelerationinitializer" class="dx-toc-link" data-level="3">setAccelerationInitializer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setaccelerationmodifier" class="dx-toc-link" data-level="3">setAccelerationModifier</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setcolorinitializer" class="dx-toc-link" data-level="3">setColorInitializer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setcolormodifier" class="dx-toc-link" data-level="3">setColorModifier</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#addcolorgradientstop-setcolorgradient-clearcolorgradient-setcolorgradientusesrgb" class="dx-toc-link" data-level="3">addColorGradientStop / setColorGradient / clearColorGradient / setColorGradientUseSRGB</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setalphainitializer" class="dx-toc-link" data-level="3">setAlphaInitializer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setalphamodifier" class="dx-toc-link" data-level="3">setAlphaModifier</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setsizeinitializer" class="dx-toc-link" data-level="3">setSizeInitializer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setsizemodifier" class="dx-toc-link" data-level="3">setSizeModifier</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setspriteinitializer" class="dx-toc-link" data-level="3">setSpriteInitializer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setspritemodifier" class="dx-toc-link" data-level="3">setSpriteModifier</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setrotationinitializer" class="dx-toc-link" data-level="3">setRotationInitializer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setrotationmodifier" class="dx-toc-link" data-level="3">setRotationModifier</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setscaleinitializer" class="dx-toc-link" data-level="3">setScaleInitializer</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setscalemodifier" class="dx-toc-link" data-level="3">setScaleModifier</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../../versions.json";
+    window.QUANTUM_PAGE_URL = "reference/classes/particles/";
+  </script>
+  <script src="../../../js/quantum.js" defer></script>
+</body>
+</html>

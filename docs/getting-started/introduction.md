@@ -1,20 +1,21 @@
 ---
-description: An overview of Doriax Engine — its architecture, features, and what you can build with it.
+description: An overview of Quantum Engine — its architecture, features, and what you can build with it.
 ---
 
 # Introduction
 
-**Doriax Engine** is a free, open-source 2D/3D game engine with an integrated editor
+**Quantum Engine** is a free, open-source 2D/3D game engine with an integrated editor
 for building cross-platform games and interactive projects. It combines a lightweight,
 data-oriented runtime with a modern desktop editor, so you can author scenes visually,
 script in Lua or C++, and export to multiple platforms from a single environment.
 
-Doriax is the continuation of **Supernova Engine** under a new identity and a broader
-workflow focused on visual editing, shader generation, and project export.
+Quantum is maintained by SR VINIX as a focused C++17 engine/editor stack. The
+repository combines the runtime, editor, headless tools, templates, and platform
+workflows in one source tree.
 
 ## Design philosophy
 
-Doriax is built around a few core principles:
+Quantum is built around a few core principles:
 
 - **Lightweight and efficient** — no heavy GUI overhead or unnecessary processing. The
   engine stays lean and produces small output.
@@ -27,8 +28,8 @@ Doriax is built around a few core principles:
 - **Independent runtime** — export turns scenes and bundles into C++ that builds and
   runs without the editor. See
   [how export works](../editor/export.md#from-editor-data-to-runtime-code).
-- **Write once, deploy everywhere** — a single project can target six platforms with
-  native graphics backends.
+- **Observable production workflow** — real-frame captures, shader matrices, asset
+  manifests, crash sidecars, and release artifact hashes make the pipeline testable.
 
 ## Documentation structure
 
@@ -36,7 +37,7 @@ This documentation follows a broad structure similar to large engine manuals:
 
 | Section | Use it for |
 | --- | --- |
-| Getting Started | Install Doriax, understand the editor, and create a first project |
+| Getting Started | Install Quantum, understand the editor, and create a first project |
 | Tutorials | Step-by-step 2D, 3D, and export walkthroughs |
 | Editor | Panels, project workflow, assets, code editing, animation, and export tools |
 | Manual | Engine concepts and subsystem guides |
@@ -61,7 +62,13 @@ This documentation follows a broad structure similar to large engine manuals:
 - GLTF and OBJ model loading, and FBX import
 - Skeletal animation and morph targets
 - PBR materials, dynamic shadows, fog, sky, and water
+- HDR post-processing with bloom, TAA, motion blur, LUT grading, SSGI, SSR, decals,
+  clustered forward lighting, and analytical atmosphere
 - Particle systems, UI, terrain LOD, mesh LOD, and instancing
+- Authenticated UDP networking, replication policy, prediction, reconnect, and
+  two-window local multiplayer testing
+- Headless Lua lint/debug, visual-script graph validation, deep asset verification,
+  DXPK2 resource-pack integrity, and release smoke reports
 - Scene serialization, texture and shader pools, and multithreading
 - 3D audio
 - Google AdMob ads, Google Play and App Store in-app purchases, and web game portal SDKs
@@ -85,12 +92,12 @@ This documentation follows a broad structure similar to large engine manuals:
 
 <a class="dx-card" href="../installation/">
 <p class="dx-card-title">Installation →</p>
-<p class="dx-card-desc">Download the editor or build Doriax from source.</p>
+<p class="dx-card-desc">Download the editor or build Quantum from source.</p>
 </a>
 
 <a class="dx-card" href="../first-project/">
 <p class="dx-card-title">Your First Project →</p>
-<p class="dx-card-desc">Build and run your first Doriax scene.</p>
+<p class="dx-card-desc">Build and run your first Quantum scene.</p>
 </a>
 
 <a class="dx-card" href="../../manual/architecture/">

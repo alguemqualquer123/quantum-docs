@@ -1,10 +1,10 @@
 ---
-description: Targeting Android with Doriax.
+description: Targeting Android with Quantum.
 ---
 
 # Building for Android
 
-Doriax can target **Android** for your exported game projects. The runtime supports
+Quantum can target **Android** for your exported game projects. The runtime supports
 Android with an OpenGL ES 3.1 backend through the Android Native Activity path.
 
 ## Requirements
@@ -23,7 +23,7 @@ Android with an OpenGL ES 3.1 backend through the Android Native Activity path.
    Play Billing services. See [Android settings](../editor/project-settings.md#android).
 4. Optional: enable **Project Settings → Directories → Native Resource Pack** to ship
    assets and Lua files in one `resources.pak` instead of as loose files.
-5. Export your project from the Doriax editor as **Source Code**, with the Android
+5. Export your project from the Quantum editor as **Source Code**, with the Android
    preset selected in the Export Window's graphic backends.
 6. Open the generated Android workspace in Android Studio, then build and run on a
    device or emulator.
@@ -82,14 +82,14 @@ template builds both optional services in, so its `minSdkVersion` is 24.
 
 ```bash
 cd engine/workspaces/androidstudio
-./gradlew assembleDebug
+./gradlew --no-daemon --stacktrace assembleRelease \
+  -PQUANTUM_VERSION=v0.1.0 -PQUANTUM_VERSION_CODE=1
 ```
 
 Android builds link the Android log, EGL/OpenGL ES, OpenSL ES, Game Activity, and Game
 Frame Pacing libraries.
 
-!!! note "Tooling is being refreshed"
-    Android project export and the associated workspace tooling are being updated under
-    the Doriax name. Some paths and steps may still reference the legacy Supernova
-    layout while the transition completes. Check the
-    [repository](https://github.com/doriaxengine/doriax) for the latest specifics.
+!!! note "Current tooling"
+    Android project export and workspace tooling use the Quantum naming. Check the
+    [repository](https://github.com/alguemqualquer123/quantum) for the current Gradle
+    workflow and release manifest requirements.

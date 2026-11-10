@@ -1,0 +1,2409 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rendering Pipeline — Quantum Engine Docs</title>
+  <meta name="description" content="Cameras, render systems, PBR materials, lighting, shadows, reflections, water, mesh LOD, depth prepass, instancing, shaders, framebuffers, and backend support in Quantum.">
+  <meta property="og:title" content="Rendering Pipeline — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/manual/rendering-pipeline/">
+
+  <link rel="icon" type="image/png" href="../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/quantum.css">
+  <link rel="stylesheet" href="../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="rendering-pipeline">Rendering Pipeline<a class="headerlink" href="#rendering-pipeline" title="Link to this section">&para;</a></h1>
+<p>Quantum renders through a flexible pipeline that supports 2D, 3D, UI, and
+render-to-texture workflows. The same codebase targets OpenGL, OpenGL ES, Metal,
+Direct3D 11, and WebGPU through a backend abstraction layer.</p>
+<h2 id="high-level-render-flow">High-level render flow<a class="headerlink" href="#high-level-render-flow" title="Link to this section">&para;</a></h2>
+<p>Each frame, the engine runs the following phases in order:</p>
+<ol>
+<li><strong>Camera update</strong> — The active scene camera computes the view matrix and projection
+   matrix.</li>
+<li><strong>Frustum culling</strong> — Renderables outside the camera frustum are excluded. Terrain
+   and tilemaps cull below entity level: only the terrain nodes and tilemap chunks that
+   the camera can see are submitted. <a href="../terrain/#foliage">Terrain foliage</a> is batched into
+   chunks around the camera and culled the same way, with instances scaling in over the
+   last quarter of the layer's draw distance instead of popping. Instanced meshes keep a
+   <a href="#culling-granularity">per-view instance list</a> for the main camera and each shadow
+   atlas slot, so instances outside a view are not submitted to it.</li>
+<li><strong>Depth prepass</strong> <em>(optional)</em> — When <a href="#depth-prepass">depth prepass</a> is enabled, opaque
+   meshes write depth only so the colour pass can shade each pixel once. Off by default.</li>
+<li><strong>Opaque pass</strong> — Opaque geometry is sorted front-to-back and drawn with depth
+   testing enabled for early-Z efficiency. With <a href="#mesh-detail-lod">mesh detail</a> on,
+   each mesh picks a detail level from its projected geometric error.</li>
+<li><strong>Lighting and shadows</strong> — Shadow maps are rendered for each shadow-casting light,
+   then the lighting pass applies directional, point, and spot lights.</li>
+<li><strong>Skybox and IBL</strong> — The sky cubemap is drawn (when visible). Environment maps derived
+   from the sky feed <strong>image-based lighting (IBL)</strong> on meshes that opt in.</li>
+<li><strong>Transparent pass</strong> — Objects with blending enabled are sorted back-to-front and
+   drawn after opaque geometry. Blended submeshes still depth-test, but they do <strong>not</strong>
+   write depth in the colour pass, so overlapping translucent surfaces composite instead
+   of punching holes in each other. A mesh marked transparent (including by
+   <code>autoTransparency</code>) is skipped by the SSAO depth pre-pass and the SSR G-buffer;
+   shadow maps still render it. A <a href="#water">Water</a> surface is drawn inside this pass:
+   transparencies on the far side of it first, then the water, then the rest.</li>
+<li><strong>UI pass</strong> — UI entities are rendered in screen-space canvas coordinates, on top of
+   the 3D or 2D scene.</li>
+<li><strong>Post-processing</strong> — Screen-space effects run over the finished image: SSR composites
+   its reflections, then the scene's <a href="#post-processing">post-process chain</a> applies each
+   enabled user pass in order. (<a href="#fog">Fog</a> is not a post pass — it is computed in the
+   mesh shader.)</li>
+</ol>
+<p>Cameras that render to a texture (minimaps, <a href="#mirrors-and-planar-reflections">mirrors</a>,
+<a href="#water">water reflections</a>, portals) run this same flow into their own framebuffer before
+the main view is drawn.</p>
+<h2 id="cameras">Cameras<a class="headerlink" href="#cameras" title="Link to this section">&para;</a></h2>
+<p>Three camera projection modes are available:</p>
+<table>
+<thead>
+<tr>
+<th>Projection</th>
+<th>Use</th>
+<th>Object</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Perspective</strong></td>
+<td>3D games</td>
+<td><code>Camera</code> with <code>setType(CameraType::CAMERA_PERSPECTIVE)</code></td>
+</tr>
+<tr>
+<td><strong>Orthographic</strong></td>
+<td>2D games, isometric</td>
+<td><code>Camera</code> with <code>setType(CameraType::CAMERA_ORTHO)</code></td>
+</tr>
+<tr>
+<td><strong>UI</strong></td>
+<td>Screen-space canvas</td>
+<td><code>Camera</code> with <code>setType(CameraType::CAMERA_UI)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>Camera::setNearClip()</code> and <code>Camera::setFarClip()</code> to tune depth precision. Set a
+tight near/far range — a large ratio (e.g. 0.1 to 100 000) causes depth fighting on
+distant surfaces. You can also configure the projection in one call with
+<code>setPerspective(yfov, aspect, near, far)</code> or <code>setOrtho(left, right, bottom, top, near, far)</code>.</p>
+<p>Each camera also decides whether it uses the depth buffer at all.
+<code>Camera::setDepthTest(false)</code> drops depth testing and depth writes from its colour pass,
+so the camera composites renderables in submission order — later draws land on top,
+whatever their distance — and the back-to-front sorting of <code>setTransparentSort()</code> is
+skipped with it. That is the canvas behaviour a 2D or UI scene wants, so the camera a scene
+creates for itself and the ones the editor adds to a 2D scene already have it off; a 3D
+camera keeps it on so geometry occludes by depth.</p>
+<p>A camera can render to its own texture instead of the screen — see
+<a href="#framebuffers-and-render-to-texture">Framebuffers and render-to-texture</a> below.</p>
+<h2 id="pbr-materials">PBR materials<a class="headerlink" href="#pbr-materials" title="Link to this section">&para;</a></h2>
+<p>Quantum uses a <strong>Physically Based Rendering</strong> (PBR) material model with the following
+texture slots and scalar properties:</p>
+<table>
+<thead>
+<tr>
+<th>Slot / Property</th>
+<th>Controls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>baseColorTexture</code> + <code>baseColorFactor</code></td>
+<td>Base surface color (albedo)</td>
+</tr>
+<tr>
+<td><code>alphaMode</code></td>
+<td>Alpha handling: <code>AUTO</code>, <code>ALPHA_OPAQUE</code>, <code>MASK</code>, or <code>BLEND</code></td>
+</tr>
+<tr>
+<td><code>alphaCutoff</code></td>
+<td>Cutout threshold for <code>MASK</code> materials (default <code>0.5</code>)</td>
+</tr>
+<tr>
+<td><code>normalTexture</code></td>
+<td>Surface micro-detail</td>
+</tr>
+<tr>
+<td><code>metallicRoughnessTexture</code> + <code>metallicFactor</code></td>
+<td>Surface reflectivity (0 = dielectric, 1 = metal)</td>
+</tr>
+<tr>
+<td><code>metallicRoughnessTexture</code> + <code>roughnessFactor</code></td>
+<td>Highlight spread (0 = mirror-smooth, 1 = fully rough)</td>
+</tr>
+<tr>
+<td><code>occlusionTexture</code></td>
+<td>Ambient occlusion darkening in crevices</td>
+</tr>
+<tr>
+<td><code>emissiveTexture</code> + <code>emissiveFactor</code></td>
+<td>Self-illuminated areas that ignore lighting</td>
+</tr>
+</tbody>
+</table>
+<p>Metallic and roughness share one texture, following the GLTF convention (roughness in
+the green channel, metallic in the blue channel).</p>
+<p>Alpha is the product of <code>baseColorFactor.a</code> and the base-colour texture's alpha.
+<code>ALPHA_OPAQUE</code> forces the result opaque, <code>MASK</code> discards pixels below <code>alphaCutoff</code>, and
+<code>BLEND</code> preserves partial alpha for transparent rendering. <code>AUTO</code> keeps the historical
+Quantum texture-alpha detection used by editor-created materials. Imported GLTF/GLB
+materials preserve their explicit alpha mode. A blended submesh (<code>BLEND</code>, or <code>AUTO</code> when
+the texture or factor is translucent) disables depth writes on its colour pipeline.</p>
+<p>The <code>MASK</code> test is identical in the lit, shadow/depth, and SSR G-buffer passes. A cutout
+therefore casts and contributes to screen-space effects with the same silhouette that
+is visible in the colour pass.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Material</span><span class="w"> </span><span class="n">mat</span><span class="p">;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">mat</span><span class="p">.</span><span class="n">baseColorTexture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Texture</span><span class="p">(</span><span class="s">&quot;textures/rock_albedo.png&quot;</span><span class="p">);</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">mat</span><span class="p">.</span><span class="n">normalTexture</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">Texture</span><span class="p">(</span><span class="s">&quot;textures/rock_normal.png&quot;</span><span class="p">);</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">mat</span><span class="p">.</span><span class="n">roughnessFactor</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mf">0.85f</span><span class="p">;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">mat</span><span class="p">.</span><span class="n">metallicFactor</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">mesh</span><span class="p">.</span><span class="n">setMaterial</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">mat</span><span class="p">);</span><span class="w">   </span><span class="c1">// submesh index, material</span>
+</code></pre></div>
+<h2 id="lighting">Lighting<a class="headerlink" href="#lighting" title="Link to this section">&para;</a></h2>
+<p>The engine supports three light types plus global illumination:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Directional</strong></td>
+<td>Sun / moon — affects the entire scene</td>
+</tr>
+<tr>
+<td><strong>Point</strong></td>
+<td>Omni-directional bulbs, torches</td>
+</tr>
+<tr>
+<td><strong>Spot</strong></td>
+<td>Flashlights, stage lighting, headlights</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Scene ambient light</strong> (<code>Scene::setGlobalIllumination</code>) fills shadowed areas with a flat
+tint. It is separate from IBL — ambient light affects all lit meshes uniformly, while IBL
+adds directional reflections and diffuse fill derived from the sky environment.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Light</span><span class="w"> </span><span class="nf">sun</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">sun</span><span class="p">.</span><span class="n">setType</span><span class="p">(</span><span class="n">LightType</span><span class="o">::</span><span class="n">DIRECTIONAL</span><span class="p">);</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">sun</span><span class="p">.</span><span class="n">setDirection</span><span class="p">(</span><span class="n">Vector3</span><span class="p">(</span><span class="mf">-0.5f</span><span class="p">,</span><span class="w"> </span><span class="mf">-1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">-0.5f</span><span class="p">));</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">sun</span><span class="p">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">Vector3</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.95f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8f</span><span class="p">));</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">sun</span><span class="p">.</span><span class="n">setIntensity</span><span class="p">(</span><span class="mf">3.0f</span><span class="p">);</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">sun</span><span class="p">.</span><span class="n">setShadows</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="more-lights-than-max_lights">More lights than <code>MAX_LIGHTS</code><a class="headerlink" href="#more-lights-than-max_lights" title="Link to this section">&para;</a></h3>
+<p>The shaders take <code>MAX_LIGHTS</code> (6) lights at once, but a scene can hold more. Each frame
+the lights with an intensity above zero fill those slots: directional lights first, then
+the point and spot lights nearest the main camera. A light already in a slot counts as 10%
+nearer, so two lights at about the same distance don't swap back and forth as the camera
+moves. A light at intensity <code>0</code> takes no slot, so switching it off frees one for another
+light.</p>
+<p>Shadow atlas slots then go to the shadow-casting lights among the selected ones. The
+shader variants still follow every light in the scene, so a light moving in or out of the
+selection never rebuilds a shader.</p>
+<p>Render-to-texture cameras, mirrors, reflecting water and reflection probes pick the lights
+nearest to their own position the same way, favouring the ones the main camera uses. A
+light that only such a view picks has no shadow or spot mask there.</p>
+<h3 id="shadow-maps">Shadow maps<a class="headerlink" href="#shadow-maps" title="Link to this section">&para;</a></h3>
+<p>Each shadow-casting light renders a depth map. Engine limits (adjustable at build
+time):</p>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Default</th>
+<th>Controls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MAX_LIGHTS</code></td>
+<td>6</td>
+<td>Max simultaneous lights</td>
+</tr>
+<tr>
+<td><code>MAX_SHADOW_ATLAS_SLOTS</code></td>
+<td>9</td>
+<td>Projective atlas slots (one per spot light or directional cascade)</td>
+</tr>
+<tr>
+<td><code>MAX_POINT_SHADOW_ATLAS_SLOTS</code></td>
+<td>24</td>
+<td>Point atlas slots, <code>SHADOW_CUBE_FACES</code> (6) per light</td>
+</tr>
+<tr>
+<td><code>MAX_POINT_SHADOW_LIGHTS</code></td>
+<td>4</td>
+<td>Shadow-casting point lights (derived from the two above)</td>
+</tr>
+<tr>
+<td><code>MAX_SHADOWCASCADES</code></td>
+<td>4</td>
+<td>Cascades for directional CSM</td>
+</tr>
+</tbody>
+</table>
+<p>Shadow edge smoothness is a per-scene setting, <code>Scene::setShadowQuality</code>, with
+<strong>Percentage Closer Filtering (PCF)</strong> kernels of <code>NONE</code> (1 tap), <code>LOW</code>
+(3x3, default), <code>MEDIUM</code> (5x5), or <code>HIGH</code> (7x7). The kernel size is uniform-driven, so
+changing it applies instantly without shader rebuilds:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setShadowQuality</span><span class="p">(</span><span class="n">ShadowQuality</span><span class="o">::</span><span class="n">MEDIUM</span><span class="p">);</span>
+</code></pre></div>
+<p>Directional and spot shadows sample a depth atlas through a hardware comparison
+sampler, so every tap is already filtered across a 2x2 neighbourhood: <code>NONE</code> still
+softens edges slightly rather than producing hard ones. The PCF kernel then pairs those
+bilinear taps along each axis, so a 3×3 / 5×5 / 7×7 filter costs about a quarter of the
+naïve tap count while matching the same weighted result. Point lights keep a packed
+colour depth map and stay hard-edged at <code>NONE</code>.</p>
+<h2 id="2d-lighting-and-shadows">2D lighting and shadows<a class="headerlink" href="#2d-lighting-and-shadows" title="Link to this section">&para;</a></h2>
+<p>2D scenes use a <strong>dedicated forward light path</strong> instead of the PBR model: each
+<a href="../../reference/classes/light2d/">Light2D</a> contributes
+<code>color · intensity · falloff(distance)</code> and all contributions add on top of the scene's
+<strong>2D ambient light</strong> (<code>Scene::setAmbientLight2D</code>). The result multiplies the sprite's
+base color, so the unlit fast path is preserved — a 2D-lit sprite costs far less than a
+PBR-lit mesh. Both paths can coexist: a mesh lit by 3D lights in the same scene simply
+adds the 2D contribution on top.</p>
+<p>A light's optional <code>height</code> places it on a virtual Z above the 2D plane, giving normal
+maps a direction to respond to. Sprites, tilemaps, and mesh polygons generate tangents
+automatically, so assigning a normal texture to their material is enough.</p>
+<p>2D lights ignore the scene's <code>lightState</code> flag — that switch controls only the 3D
+lighting pass.</p>
+<h3 id="1d-polar-shadow-maps">1D polar shadow maps<a class="headerlink" href="#1d-polar-shadow-maps" title="Link to this section">&para;</a></h3>
+<p>Shadows from <a href="../../reference/classes/occluder2d/">Occluder2D</a> components use per-light
+<strong>1D polar shadow maps</strong>: all occluder outlines in the scene are merged into one segment
+buffer and rendered into a one-pixel-tall atlas row per shadow-casting light, where the
+X axis is the angle around the light and the stored value is the distance to the nearest
+occluder. Lit fragments compare their own angle and distance against the row, with a PCF
+filter along it for soft edges: the light's <code>shadowSoftness</code> sets the penumbra width and
+the scene's <code>shadow2DQuality</code> (<code>NONE</code> / <code>LOW</code> / <code>MEDIUM</code> / <code>HIGH</code> — 1 to 13 taps) sets
+how smoothly it is sampled. The tap count is uniform-driven, so quality changes apply
+instantly without shader rebuilds.</p>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Default</th>
+<th>Controls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MAX_LIGHTS_2D</code></td>
+<td>16</td>
+<td>Max simultaneous 2D lights (and shadow atlas rows)</td>
+</tr>
+</tbody>
+</table>
+<p>The shadow pass renders line segments only (no scene geometry), so it stays cheap even
+with many occluders; each shadow-enabled light adds one atlas row at the light's
+<code>mapResolution</code> width. Each light's shadow attenuates only that light's own
+contribution — ambient light is never shadowed. See
+<a href="../2d-graphics/#2d-lighting">2D Graphics — 2D lighting</a> for the usage guide.</p>
+<h2 id="fog">Fog<a class="headerlink" href="#fog" title="Link to this section">&para;</a></h2>
+<p><img alt="Linear fog fading distant houses, with the FogComponent settings" src="../../assets/screenshots/editor-fog.png" /></p>
+<p><code>Fog</code> adds atmospheric depth. Two modes are available:</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LINEAR</code></td>
+<td>Fog blends from <code>linearStart</code> to full density at <code>linearEnd</code></td>
+</tr>
+<tr>
+<td><code>EXPONENTIAL</code></td>
+<td>Density increases exponentially with distance</td>
+</tr>
+<tr>
+<td><code>EXPONENTIALSQUARED</code></td>
+<td>Steeper exponential falloff</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">Fog</span><span class="w"> </span><span class="nf">fog</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">fog</span><span class="p">.</span><span class="n">setType</span><span class="p">(</span><span class="n">FogType</span><span class="o">::</span><span class="n">EXPONENTIAL</span><span class="p">);</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">fog</span><span class="p">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">Vector3</span><span class="p">(</span><span class="mf">0.7f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8f</span><span class="p">));</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">fog</span><span class="p">.</span><span class="n">setDensity</span><span class="p">(</span><span class="mf">0.02f</span><span class="p">);</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1">// For LINEAR mode use fog.setLinearStartEnd(start, end) instead of density</span>
+</code></pre></div>
+<h2 id="skybox">Skybox<a class="headerlink" href="#skybox" title="Link to this section">&para;</a></h2>
+<p>Add a <strong>Sky</strong> entity (Skybox component) and assign either a single cubemap texture or six
+cube-face textures. The sky is rendered as an infinite background behind opaque geometry.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">SkyBox</span><span class="w"> </span><span class="nf">sky</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">sky</span><span class="p">.</span><span class="n">setTexture</span><span class="p">(</span><span class="s">&quot;textures/sky_cubemap.png&quot;</span><span class="p">);</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1">// or per-face:</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">sky</span><span class="p">.</span><span class="n">setTextures</span><span class="p">(</span><span class="s">&quot;daysky&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="s">&quot;sky/px.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sky/nx.png&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="s">&quot;sky/py.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sky/ny.png&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="s">&quot;sky/pz.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sky/nz.png&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>In the editor, the Sky component also exposes <strong>Visible</strong>. When disabled, the sky is not
+drawn in the viewport but still generates IBL environment maps for meshes that use them.
+Use this when you want reflections and indirect lighting from an environment without
+showing the sky dome itself (for example, an interior level with a hidden outdoor HDR
+environment).</p>
+<h2 id="image-based-lighting-ibl">Image-based lighting (IBL)<a class="headerlink" href="#image-based-lighting-ibl" title="Link to this section">&para;</a></h2>
+<p>When a scene contains a Sky entity with a valid cubemap texture, the engine builds two
+environment maps from that sky:</p>
+<table>
+<thead>
+<tr>
+<th>Map</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Irradiance</strong></td>
+<td>Diffuse ambient fill — soft colour bounced from every direction</td>
+</tr>
+<tr>
+<td><strong>Prefiltered specular</strong></td>
+<td>Glossy reflections — sharper highlights on smooth (low-roughness) surfaces</td>
+</tr>
+</tbody>
+</table>
+<p>These maps follow the glTF-style split-sum approximation used in modern PBR pipelines.
+Rough surfaces sample blurrier mips; mirror-like surfaces pick up crisp sky detail.</p>
+<p>IBL is <strong>per mesh</strong>. Each mesh has a <strong>Receive IBL</strong> flag (default <code>false</code> in new scenes).
+Only meshes with this enabled combine punctual lights (directional/point/spot) with the
+sky environment. Meshes also need <strong>Receive Lights</strong> enabled and a valid normal (tangent
+space for normal maps).</p>
+<p>Typical workflow:</p>
+<ol>
+<li>Add a Sky entity and assign a cubemap (HDR or LDR).</li>
+<li>Select meshes that should reflect the environment (metal, glass, wet stone, etc.).</li>
+<li>Enable <strong>Receive IBL</strong> on those meshes in the Properties window, or call
+   <code>setReceiveIBL(true)</code> (Lua: <code>mesh.receiveIBL = true</code>) in code.</li>
+<li>Tune <strong>Roughness</strong> and <strong>Metallic</strong> on the material — low roughness makes reflections
+   more obvious.</li>
+</ol>
+<p>The material preview sphere in the Properties window updates when <strong>Receive IBL</strong> is
+toggled, so you can compare lit-only vs environment-lit looks before play mode.</p>
+<div class="admonition note">
+<p class="admonition-title">One sky per scene</p>
+<p>The render system uses the first Sky component in the scene for both drawing and IBL
+generation. Keep a single active sky environment unless you know you are replacing it.</p>
+</div>
+<h2 id="reflection-probes">Reflection probes<a class="headerlink" href="#reflection-probes" title="Link to this section">&para;</a></h2>
+<p><a href="#image-based-lighting-ibl">IBL</a> reflects one sky environment everywhere, which reads as
+"outdoors" on every surface. A <strong>Reflection Probe</strong> captures the environment <em>at a point
+in the scene</em> and applies it to meshes inside a box-shaped influence volume — chrome in a
+garage reflects the garage, not the sky. Probe reflections are <strong>box-projected</strong>
+(parallax-corrected): reflection rays are projected onto the influence box, so the
+reflection stays anchored to the room's walls as objects and the camera move, instead of
+floating at infinity.</p>
+<p>The simplest way to add one is the <strong>Reflection Probe</strong> entry in the Structure panel's
+create menu. Size its <strong>Box Size</strong> to the room or area it represents, and enable
+<strong>Receive IBL</strong> (plus <strong>Receive Lights</strong>) on the meshes inside — probes use the same
+per-mesh opt-in as sky IBL. A Sky is not required: probes supply the specular
+(reflection) term on their own, while diffuse ambient still comes from the sky
+irradiance when one is present.</p>
+<h3 id="static-and-dynamic-probes">Static and dynamic probes<a class="headerlink" href="#static-and-dynamic-probes" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Static</strong></td>
+<td>Uses an authored cubemap when one is assigned; otherwise captures the scene once at load (or when <strong>Refresh Probe</strong> is pressed) and keeps that result.</td>
+</tr>
+<tr>
+<td><strong>Dynamic</strong></td>
+<td>Re-captures the scene at runtime according to its update policy.</td>
+</tr>
+</tbody>
+</table>
+<p>An authored cubemap is the best-quality and cheapest option: it is GGX-prefiltered and
+cached like the sky environment, so rough surfaces get correct blurry reflections.
+Runtime captures have no prefiltered mip chain — rough surfaces approximate the blur
+with a small angular filter — so prefer static probes with authored cubemaps for
+strongly rough materials.</p>
+<p>Dynamic probes choose when to re-capture with <strong>Update</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Update</th>
+<th>When it captures</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>On Load</strong></td>
+<td>Once when the scene starts</td>
+</tr>
+<tr>
+<td><strong>On Move</strong></td>
+<td>Whenever the probe entity moves</td>
+</tr>
+<tr>
+<td><strong>Interval</strong></td>
+<td>Every <strong>Update Interval</strong> seconds</td>
+</tr>
+<tr>
+<td><strong>Manual</strong></td>
+<td>Only when requested — the <strong>Refresh Probe</strong> button in the editor, or setting <code>needUpdate = true</code> from code</td>
+</tr>
+</tbody>
+</table>
+<p>Runtime captures share a strict budget of <strong>one cubemap face per frame</strong>: a full refresh
+takes six frames, and multiple pending probes take turns. Even several dynamic probes
+therefore cost a fraction of a <a href="#mirrors-and-planar-reflections">mirror's</a> full extra
+scene render per frame — the trade-off is latency, not throughput.</p>
+<h3 id="influence-volume-and-blending">Influence volume and blending<a class="headerlink" href="#influence-volume-and-blending" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Box Size</strong></td>
+<td>The influence volume's size, scaled by the entity's world scale. The box is world-axis-aligned and centred on the entity.</td>
+</tr>
+<tr>
+<td><strong>Box Offset</strong></td>
+<td>Moves the influence box in the entity's local space. The cubemap is still captured at the entity origin (shown as a gold marker in the viewport when they differ).</td>
+</tr>
+<tr>
+<td><strong>Blend Distance</strong></td>
+<td>Fade band inside the box edges where the probe blends into the sky IBL, hiding the seam at the volume boundary. Runtime blending is limited to the box's smallest half-extent.</td>
+</tr>
+<tr>
+<td><strong>Intensity</strong></td>
+<td>Multiplier on the probe's reflection contribution.</td>
+</tr>
+<tr>
+<td><strong>Priority</strong></td>
+<td>When influence boxes overlap, the higher-priority probe wins; on a tie, the probe whose centre is nearest the mesh wins.</td>
+</tr>
+</tbody>
+</table>
+<p>The engine picks <strong>one probe per mesh</strong> (using the mesh's world-bounds centre), so keep
+volumes room-sized rather than object-sized: a mesh is either inside a probe's box or it
+falls back to the sky environment.</p>
+<h3 id="capture-settings">Capture settings<a class="headerlink" href="#capture-settings" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cubemap</strong></td>
+<td><em>(static only)</em> Authored six-face cubemap. Leave empty to capture at load instead.</td>
+</tr>
+<tr>
+<td><strong>Resolution</strong></td>
+<td>Capture cubemap face size (16–1024, default 128).</td>
+</tr>
+<tr>
+<td><strong>Near / Far</strong></td>
+<td>Clip planes of the capture cameras.</td>
+</tr>
+<tr>
+<td><strong>Include Sky</strong></td>
+<td>Whether the sky (and scene background colour) appears in the capture.</td>
+</tr>
+</tbody>
+</table>
+<p>Individual meshes stay out of captures with <strong>Render in Probes</strong> on the Mesh component
+(<code>renderInReflectionProbes</code>). Turn it off for geometry wrapped around a probe — a car
+body with a probe at its centre, say — which would otherwise fill its own reflection.
+The mesh still renders normally everywhere else. Toggling it re-captures every probe in
+the scene, because static and non-interval probes keep their baked cubemap until
+something invalidates it.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// C++: a dynamic probe covering a 12x6x12 room</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">ReflectionProbe</span><span class="w"> </span><span class="nf">probe</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">probe</span><span class="p">.</span><span class="n">setPosition</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">);</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">probe</span><span class="p">.</span><span class="n">setBoxSize</span><span class="p">(</span><span class="mf">12.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">6.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">12.0f</span><span class="p">);</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">probe</span><span class="p">.</span><span class="n">setMode</span><span class="p">(</span><span class="n">ReflectionProbeMode</span><span class="o">::</span><span class="n">DYNAMIC</span><span class="p">);</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">probe</span><span class="p">.</span><span class="n">setUpdateMode</span><span class="p">(</span><span class="n">ReflectionProbeUpdateMode</span><span class="o">::</span><span class="n">MANUAL</span><span class="p">);</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">probe</span><span class="p">.</span><span class="n">refresh</span><span class="p">();</span><span class="w">   </span><span class="c1">// manual re-capture from code</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">probe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ReflectionProbe</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nv">probe</span><span class="p">:</span><span class="nf">setPosition</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nv">probe</span><span class="p">:</span><span class="nf">setBoxSize</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nv">probe</span><span class="p">.</span><span class="py">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">ReflectionProbeMode</span><span class="p">.</span><span class="py">DYNAMIC</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nv">probe</span><span class="p">.</span><span class="py">updateMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">ReflectionProbeUpdateMode</span><span class="p">.</span><span class="py">MANUAL</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nv">probe</span><span class="p">:</span><span class="nf">refresh</span><span class="p">()</span><span class="w">   </span><span class="c1">-- manual re-capture from code</span>
+</code></pre></div>
+<p>With <a href="#screen-space-reflections-ssr">SSR</a> enabled, surfaces lit by a local probe keep
+their probe reflection and SSR adds on-screen detail on top; only sky-IBL surfaces use
+SSR's energy-conserving replace path.</p>
+<div class="admonition note">
+<p class="admonition-title">Capture scope and limitations</p>
+<p>Runtime captures render opaque meshes and (optionally) the sky. Transparent meshes,
+UI, and particles are skipped. Point and spot shadows are reused in captures, but
+directional shadow cascades are fitted to the main camera, so their coverage inside a
+capture can be partial. A probe never appears in its own capture, and captures do not
+include other probes' reflections (no recursion).</p>
+</div>
+<h2 id="ambient-occlusion-ssao">Ambient occlusion (SSAO)<a class="headerlink" href="#ambient-occlusion-ssao" title="Link to this section">&para;</a></h2>
+<p>Screen-space ambient occlusion darkens creases, corners, and contact areas where ambient
+light is naturally blocked. Like Godot, Unity, and Unreal, it modulates only the
+<strong>ambient/indirect</strong> term (IBL or global illumination) — direct light from your sun, point,
+and spot lights is left untouched — so it reads as soft contact shading rather than a
+second shadow.</p>
+<p>Each frame the render system runs a small depth pre-pass for the main camera, derives
+occlusion from a rotated hemisphere kernel, blurs it, and the lit mesh shader multiplies
+the result into its ambient term.</p>
+<p>SSAO is a scene setting:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setSSAOEnabled</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">scene</span><span class="p">.</span><span class="n">setSSAORadius</span><span class="p">(</span><span class="mf">0.5f</span><span class="p">);</span><span class="w">     </span><span class="c1">// view-space sampling radius (world units)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">scene</span><span class="p">.</span><span class="n">setSSAOIntensity</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">);</span><span class="w">  </span><span class="c1">// strength (exponent on the occlusion factor)</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">scene</span><span class="p">.</span><span class="n">setSSAOBias</span><span class="p">(</span><span class="mf">0.025f</span><span class="p">);</span><span class="w">     </span><span class="c1">// depth bias to avoid self-occlusion acne</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">scene</span><span class="p">.</span><span class="py">ssaoEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nv">scene</span><span class="p">.</span><span class="py">ssaoRadius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nv">scene</span><span class="p">.</span><span class="py">ssaoIntensity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="nv">scene</span><span class="p">.</span><span class="py">ssaoBias</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.025</span>
+</code></pre></div>
+<p>In the editor, the same controls live under <strong>Scene → Ambient Occlusion (SSAO)</strong> in the
+Properties window, including a <strong>Debug View</strong> toggle that renders the raw AO buffer so you
+can tune radius/intensity/bias directly.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Radius</strong></td>
+<td>How far samples reach in view space — larger is broader/softer, smaller stays in tight creases</td>
+</tr>
+<tr>
+<td><strong>Intensity</strong></td>
+<td>Darkening strength; raise to make occlusion more pronounced</td>
+</tr>
+<tr>
+<td><strong>Bias</strong></td>
+<td>Pushes samples off the surface to stop flat areas self-occluding (acne)</td>
+</tr>
+</tbody>
+</table>
+<p>Because the effect only touches ambient light, it is most visible with a strong ambient
+source — raise <strong>Global Illumination Intensity</strong> or use IBL if SSAO looks too subtle in a
+scene lit mainly by direct light.</p>
+<div class="admonition note">
+<p class="admonition-title">Scope and limitations</p>
+<p>SSAO is computed for the main camera; render-to-texture cameras and terrain are
+currently excluded (terrain would exceed the shader's sampler limit). Normals are
+reconstructed from depth when SSAO runs alone; when
+<a href="#screen-space-reflections-ssr">SSR</a> is also enabled SSAO reuses the SSR G-buffer's
+depth <strong>and</strong> geometric normals — a single shared geometry pass, and sharper at
+silhouettes. Enabling SSAO recompiles lit mesh shaders.</p>
+</div>
+<h2 id="screen-space-reflections-ssr">Screen-space reflections (SSR)<a class="headerlink" href="#screen-space-reflections-ssr" title="Link to this section">&para;</a></h2>
+<p><img alt="A scene with SSAO and SSR enabled in its settings" src="../../assets/screenshots/editor-pirate-adventure.png" /></p>
+<p>Screen-space reflections add real-time reflections of on-screen geometry — wet floors,
+polished metal, glossy surfaces — by marching the camera depth buffer in screen space and
+sampling the lit scene colour where a reflected ray hits. Like Godot and Unity, SSR is
+<em>energy-conserving</em>: where a ray finds a hit it <strong>replaces</strong> the surface's
+<a href="#image-based-lighting-ibl">IBL</a> environment reflection rather than adding on top of it, and
+where a ray misses (off-screen or occluded) the IBL reflection remains as the fallback. A
+local <code>ReflectionProbeComponent</code> is selected by the renderable's bounds center; its captured
+reflection remains in the forward colour pass while SSR adds only the confident screen-space
+detail. So SSR refines what IBL already provides instead of double-counting it.</p>
+<p>When SSR is enabled the main camera first renders a small <strong>G-buffer</strong> geometry pre-pass —
+packed depth, view-space normal, roughness/metallic, and base colour — then runs three
+fullscreen passes. <a href="../terrain/#pbr-layers">Terrain</a> evaluates its painted layers in this
+pass too, so a reflective wet patch reflects like one:</p>
+<ol>
+<li><strong>March</strong> — reflect the view ray about the G-buffer normal and step it through depth
+   (with a binary-search refine) until it crosses on-screen geometry.</li>
+<li><strong>Glossy blur</strong> <em>(optional)</em> — blurs the reflection in proportion to surface roughness,
+   so rough materials get soft reflections while mirrors stay sharp.</li>
+<li><strong>Composite</strong> — recomputes the surface's IBL specular and blends the reflection over it
+   with the correct GGX reflectance (including metal tint), writing the final image.</li>
+</ol>
+<p>The opaque colour pass is rendered into an offscreen buffer first so the march has a full
+scene-colour image to sample. SSR therefore requires a framebuffer destination — the editor
+viewport, a <a href="#framebuffers-and-render-to-texture">render-to-texture</a> camera, or an engine
+framebuffer.</p>
+<p>SSR is a scene setting:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setSSREnabled</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">scene</span><span class="p">.</span><span class="n">setSSRMaxDistance</span><span class="p">(</span><span class="mf">8.0f</span><span class="p">);</span><span class="w">   </span><span class="c1">// max ray length in view-space units</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">scene</span><span class="p">.</span><span class="n">setSSRThickness</span><span class="p">(</span><span class="mf">0.5f</span><span class="p">);</span><span class="w">     </span><span class="c1">// depth-compare tolerance (view-space units)</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">scene</span><span class="p">.</span><span class="n">setSSRMaxSteps</span><span class="p">(</span><span class="mi">48</span><span class="p">);</span><span class="w">        </span><span class="c1">// linear march sample count (quality vs cost)</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">scene</span><span class="p">.</span><span class="n">setSSRIntensity</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">);</span><span class="w">     </span><span class="c1">// reflection strength multiplier</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">scene</span><span class="p">.</span><span class="n">setSSRBlur</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">);</span><span class="w">          </span><span class="c1">// glossy blur amount [0..1] (0 = sharp/mirror)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">scene</span><span class="p">.</span><span class="py">ssrEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nv">scene</span><span class="p">.</span><span class="py">ssrMaxDistance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">8.0</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nv">scene</span><span class="p">.</span><span class="py">ssrThickness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="nv">scene</span><span class="p">.</span><span class="py">ssrMaxSteps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">48</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="nv">scene</span><span class="p">.</span><span class="py">ssrIntensity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="nv">scene</span><span class="p">.</span><span class="py">ssrBlur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
+</code></pre></div>
+<p>In the editor the same controls live under <strong>Scene → Screen-Space Reflections (SSR)</strong> in the
+Properties window, plus a <strong>Debug View</strong> dropdown for tuning.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Max Distance</strong></td>
+<td>How far a reflection ray travels in view space before giving up</td>
+</tr>
+<tr>
+<td><strong>Thickness</strong></td>
+<td>Depth tolerance for accepting a hit — smaller is stricter; larger fills gaps but can smear at contacts</td>
+</tr>
+<tr>
+<td><strong>Max Steps</strong></td>
+<td>March sample count — higher gives sharper/longer reflections at more cost; raise it if reflections miss thin contacts</td>
+</tr>
+<tr>
+<td><strong>Intensity</strong></td>
+<td>Overall reflection strength</td>
+</tr>
+<tr>
+<td><strong>Glossy Blur</strong></td>
+<td><code>0</code> = mirror; raise to blur reflections by surface roughness</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Debug View</strong> renders one G-buffer channel full-screen: <code>Reflection</code> (the raw reflection
+buffer), <code>Normal</code>, <code>Roughness</code>, <code>Metallic</code>, <code>Albedo</code>, or <code>IBL Specular</code> (the recomputed
+environment term SSR blends against — compare it with the in-scene reflections to confirm
+the energy match). <code>Off</code> shows the normal render. Per-pixel roughness, metallic, and base
+colour come from the material factors and the metallic-roughness / base-colour textures.</p>
+<div class="admonition note">
+<p class="admonition-title">Scope and limitations</p>
+<p>SSR is screen-space, so it only reflects what is currently on screen: reflections fade
+out near the screen edges and cannot show off-screen or occluded geometry (IBL fills
+those in). Thin contact lines where an object meets a reflective surface can leave a
+small seam — raise <strong>Max Steps</strong> or lower <strong>Thickness</strong> to tighten it. SSR runs for the
+main camera only and is skipped when there is no framebuffer destination.</p>
+<p>The reproducible visual fixture <code>--render-feature ssrfallback</code> creates a 32 px dynamic
+local probe, captures its six faces in memory, and compares a real 640x360 presented
+frame. It is useful for validating the fallback plumbing without changing a project
+scene; GPU/driver-specific reference images are still separate release evidence.</p>
+</div>
+<h2 id="post-processing">Post-processing<a class="headerlink" href="#post-processing" title="Link to this section">&para;</a></h2>
+<p>A scene can run an ordered chain of user <strong>fullscreen passes</strong> over its finished image.
+Each pass is a forked shader picked in the editor's <strong>Post-processing</strong> scene settings;
+see <a href="../../editor/custom-shaders/#post-process-passes">Custom Shaders — Post-process passes</a>
+for authoring them.</p>
+<p><img alt="A post-process pass drawing outlines and posterized colour over a 3D scene" src="../../assets/screenshots/editor-postprocess.png" /></p>
+<p>The chain runs on the scene's active camera, after the opaque, transparent, UI, and SSR
+passes and before the fixed-resolution upscale. Enabling it redirects the colour
+pass into an offscreen buffer, exactly like SSR does, and the passes ping-pong between two
+buffers so a chain of any length costs two render targets. The last pass writes the real
+destination — the camera framebuffer, the fixed-resolution target, or the screen.</p>
+<p>A pass reads the previous pass's output (<code>u_sceneColorTexture</code>) and may also sample depth
+(<code>u_depthTexture</code>), the SSR G-buffer (<code>u_gbufferTexture</code>), and ambient occlusion
+(<code>u_ssaoTexture</code>). When a pass samples depth while SSR and SSAO are both off, the engine
+runs the depth pre-pass for it, so depth-driven effects work on their own.</p>
+<p>Values declared in the pass's <code>u_fs_postParams</code> block become editable rows in the scene
+settings, and the engine writes <code>resolution</code> and <code>time</code> into that block every frame.
+Scripts set them with <code>Scene.setPostProcessUniform</code>, which rewrites the value without
+rebuilding the chain. Component shaders have the same mechanism, reserved names
+included, through their <code>u_vs_customParams</code> / <code>u_fs_customParams</code> blocks — see
+<a href="../../editor/custom-shaders/#shader-uniforms">Custom Shaders — Shader uniforms</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Scope</p>
+<p>The chain runs for the scene's active camera only — secondary cameras such as mirrors
+and minimaps skip it, and so does a scene drawn as a layer, where a fullscreen pass
+would overwrite the scene below. Disabled passes are still exported, so a pass can be
+turned back on without recompiling.</p>
+</div>
+<h2 id="framebuffers-and-render-to-texture">Framebuffers and render-to-texture<a class="headerlink" href="#framebuffers-and-render-to-texture" title="Link to this section">&para;</a></h2>
+<p>A camera can capture its output to a texture instead of the screen — for minimaps,
+portals, mirrors, security monitors, or dynamic UI previews. Enable render-to-texture
+on the camera and pass its framebuffer wherever a texture is accepted (<code>Mesh</code>, <code>Image</code>,
+<code>Polygon</code>, and others have a <code>setTexture(Framebuffer*)</code> overload):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">Camera</span><span class="w"> </span><span class="nf">minimapCam</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">minimapCam</span><span class="p">.</span><span class="n">setRenderToTexture</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">minimapCam</span><span class="p">.</span><span class="n">setFramebufferSize</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="w"> </span><span class="mi">512</span><span class="p">);</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1">// Use the camera&#39;s output as a texture on a UI image</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="n">Image</span><span class="w"> </span><span class="nf">preview</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uiScene</span><span class="p">);</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">preview</span><span class="p">.</span><span class="n">setTexture</span><span class="p">(</span><span class="n">minimapCam</span><span class="p">.</span><span class="n">getFramebuffer</span><span class="p">());</span>
+</code></pre></div>
+<p>In the editor, any <strong>Texture</strong> field can use a camera as its source instead of an image
+file: click the camera button on the field (or drag a camera entity from the Structure
+panel onto it). The chosen camera is switched to render-to-texture and its output feeds
+the slot — the basis for the manual mirror setup below. A camera used this way cannot
+also be the scene's main camera.</p>
+<p>A related mechanism lets the <strong>main camera itself</strong> render offscreen at a fixed
+internal resolution that is then upscaled to the window — for pixel-art rendering or
+GPU performance scaling. That is a scene setting rather than a camera one; see
+<a href="../multiple-resolutions/#fixed-resolution">Multiple Resolutions — Fixed resolution</a>.</p>
+<h2 id="mirrors-and-planar-reflections">Mirrors and planar reflections<a class="headerlink" href="#mirrors-and-planar-reflections" title="Link to this section">&para;</a></h2>
+<p>A <strong>Mirror</strong> turns a flat surface into a true planar reflection — the kind used for
+mirrors, still water, and polished floors. It is built on render-to-texture: the engine
+renders the scene a second time from the viewpoint <em>reflected across the mirror plane</em>,
+then maps that image back onto the surface. For an animated water surface, use
+<a href="#water">Water</a> instead, which has a planar reflection option of its own.</p>
+<p>The simplest way to add one is the <strong>Mirror</strong> entry in the Structure panel's create menu
+(or <strong>Basic shape → Wall</strong> plus a <strong>Mirror</strong> component). This creates an upright
+<a href="../../reference/classes/shape/">Wall</a> whose surface normal faces the camera, with a
+<code>MirrorComponent</code> already attached. No camera or texture wiring is required — the
+component manages its own reflection camera internally.</p>
+<p>In code, the <a href="../../reference/classes/mirror/">Mirror</a> class is the same thing: it derives
+from <code>Shape</code>, so it builds its own surface and attaches the component in one step.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">Mirror</span><span class="w"> </span><span class="nf">mirror</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">mirror</span><span class="p">.</span><span class="n">createWall</span><span class="p">(</span><span class="mf">10.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">10.0f</span><span class="p">);</span><span class="w">   </span><span class="c1">// vertical quad, +Z normal (faces the camera)</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">mirror</span><span class="p">.</span><span class="n">setReceiveLights</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="w">    </span><span class="c1">// optional: show the reflection unshaded</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">mirror</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Mirror</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nv">mirror</span><span class="p">:</span><span class="nf">createWall</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span><span class="w"> </span><span class="mf">10.0</span><span class="p">)</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nv">mirror</span><span class="p">.</span><span class="py">receiveLights</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>To make an <strong>existing</strong> mesh reflective instead of creating a new one, use
+<code>Mesh::setAsMirror()</code>, which works on any flat mesh; pass a normal —
+<code>setAsMirror(Vector3(0, 1, 0))</code> — when the surface isn't a Wall (for example a floor
+created with <code>createPlane</code>). Use <code>removeMirror()</code> / <code>isMirror()</code> to toggle or query it.</p>
+<h3 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reflected camera</td>
+<td>Each frame the active camera is mirrored across the surface plane (entity position + normal). This preserves the handedness flip a real mirror has, so reflected geometry is rendered with <strong>reversed face winding</strong> to stay front-facing.</td>
+</tr>
+<tr>
+<td>Projective sampling</td>
+<td>The surface samples the reflection texture by screen position, not by mesh UVs, so the reflection stays correctly aligned regardless of the surface's size or placement.</td>
+</tr>
+<tr>
+<td>Oblique clipping</td>
+<td>The reflection camera's near plane is bent onto the mirror plane (Lengyel oblique projection), so geometry <strong>behind</strong> the mirror cannot leak into the reflection. The sky is excluded from this clip and reflects normally.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lighting-in-the-reflection">Lighting in the reflection<a class="headerlink" href="#lighting-in-the-reflection" title="Link to this section">&para;</a></h3>
+<p>A mirror shows the side of an object that <strong>faces the mirror</strong> — usually not the side
+your key light hits. That side is lit only by whatever indirect lighting the scene has,
+so a single directional light plus a flat global illumination colour renders it as a
+washed-out silhouette: with a white ambient, a pale grey ghost of the object.</p>
+<p>This is not a mirror artefact — the reflection is rendered with the same lights as the
+main view. The fix is the scene's indirect lighting:</p>
+<ul>
+<li>Enable <a href="../../reference/classes/mesh/#receiveibl"><strong>Receive IBL</strong></a> on the reflected
+  meshes so their shaded sides take colour from the sky environment instead of a flat
+  ambient. This is the closest match to how objects look in the main view.</li>
+<li>Or add a low-intensity fill light pointing back toward the mirror, so the reflected
+  side gets some direct light of its own.</li>
+</ul>
+<p>The same applies to the mirror surface itself: leaving <strong>Receive Lights</strong> on shades the
+reflection with the mirror's own material, while turning it off shows the reflected image
+directly.</p>
+<h3 id="the-normal-field">The Normal field<a class="headerlink" href="#the-normal-field" title="Link to this section">&para;</a></h3>
+<p><code>MirrorComponent</code> exposes a single <strong>Normal</strong> — the reflecting surface direction in the
+mesh's local space (default <code>+Z</code>, matching a Wall), reachable in scripts as
+<a href="../../reference/classes/mirror/#normal"><code>Mirror::normal</code></a>. It is transformed by the
+entity's rotation to build the world mirror plane, so rotating the mirror entity orients
+the reflection automatically.</p>
+<div class="admonition tip">
+<p class="admonition-title">If the reflection looks wrong</p>
+<p>The reflection image is the same whichever way the normal points, but the
+behind-the-mirror clipping depends on its sign. If the reflection is clipped on the
+wrong side (showing geometry that should be hidden, or going mostly empty), flip the
+sign of the <strong>Normal</strong>.</p>
+</div>
+<h3 id="cost">Cost<a class="headerlink" href="#cost" title="Link to this section">&para;</a></h3>
+<p>A mirror renders the visible scene <strong>one additional time per frame</strong> into its own
+off-screen target — the same inherent cost planar reflections have in every engine. Use
+them deliberately:</p>
+<ul>
+<li>Prefer one hero mirror / water plane over many.</li>
+<li>A mirror never reflects itself, and reflections of other mirrors are not recursive.</li>
+<li>The reflection target matches the canvas resolution by default; lowering it trades
+  sharpness for performance.</li>
+</ul>
+<h2 id="water">Water<a class="headerlink" href="#water" title="Link to this section">&para;</a></h2>
+<p>A <strong>Water</strong> entity draws an animated water surface: waves, ripples, reflections,
+refraction, foam, and a view from below the surface, all from one component. It has its
+own render path, like the sky, so it needs no mesh, material, or camera wiring. Add one
+with the <strong>Water</strong> entry of the Structure panel's create menu, or in code with the
+<a href="../../reference/classes/water/">Water</a> class:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">Water</span><span class="w"> </span><span class="nf">water</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">water</span><span class="p">.</span><span class="n">setSize</span><span class="p">(</span><span class="mf">80.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">80.0f</span><span class="p">);</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="n">water</span><span class="p">.</span><span class="n">setWaveHeight</span><span class="p">(</span><span class="mf">0.4f</span><span class="p">);</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="n">water</span><span class="p">.</span><span class="n">setPlanarReflection</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">water</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Water</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nv">water</span><span class="p">:</span><span class="nf">setSize</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">)</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="nv">water</span><span class="p">.</span><span class="py">waveHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.4</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="nv">water</span><span class="p">.</span><span class="py">planarReflection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Every field is listed in <a href="../../editor/properties/#water-component">Properties — Water component</a>.</p>
+<h3 id="waves-and-ripples">Waves and ripples<a class="headerlink" href="#waves-and-ripples" title="Link to this section">&para;</a></h3>
+<p>The surface is a grid <strong>Size</strong> wide (X) and deep (Z), centred on the entity at its
+height, with <strong>Subdivisions</strong> cells along each side. It stays level even when the entity is tilted;
+moving, rotating, or scaling the entity changes the area it covers. Four <strong>Gerstner
+waves</strong> displace the grid, all derived from the wave <strong>Height</strong>, <strong>Length</strong>, <strong>Direction</strong>,
+and <strong>Steepness</strong>. They are computed in world space, so scaling the entity never stretches
+them, and longer waves travel faster, as they do on deep water. Steepness is lowered
+automatically where the crests would fold over.</p>
+<p>Small <strong>ripples</strong> come from a tiling normal map (a built-in one unless you assign your
+own), sampled in two layers that drift across each other.</p>
+<p>The engine evaluates the same waves on the CPU, so
+<a href="../../reference/classes/water/#getheight-getnormal">Water.getHeight</a> and the
+<a href="../physics/#buoyancy">buoyancy</a> of 3D bodies follow the surface the next frame draws.</p>
+<p>In the editor the waves hold still while the scene is stopped or paused and move during
+Play. An exported game always animates them.</p>
+<h3 id="reflection-and-lighting">Reflection and lighting<a class="headerlink" href="#reflection-and-lighting" title="Link to this section">&para;</a></h3>
+<p>The water reflects the sky (or the background colour when the scene has no sky), mixed by
+a Fresnel term so it reflects more at grazing angles and shows its own colour when looked
+into. Scene lights add sun glints and light the water body; with <strong>Receive Shadows</strong> on
+and a shadow-casting light in the scene, shadows darken both. The water is fogged like any
+mesh when the scene has <a href="#fog">Fog</a>.</p>
+<p><strong>Planar Reflection</strong> reflects the scene as well, through a reflection camera mirrored
+across the water plane, like a <a href="#mirrors-and-planar-reflections">Mirror</a>, drawn at half
+the canvas resolution. Only the main camera sees it; render-to-texture cameras, mirrors,
+and other waters' reflection passes see the water reflect the sky.</p>
+<h3 id="depth-effects">Depth effects<a class="headerlink" href="#depth-effects" title="Link to this section">&para;</a></h3>
+<p>With <strong>Depth Effects</strong> on, the water reads the scene depth for shore foam, soft edges
+where it meets geometry, and a tint that deepens with the water under each pixel. The
+depth comes from the <a href="#screen-space-reflections-ssr">SSR</a> G-buffer or the
+<a href="#ambient-occlusion-ssao">SSAO</a> / post-process depth pre-pass when one of them already
+ran; otherwise the engine adds a depth pre-pass for the water. Only the main camera has
+the scene depth, so other cameras draw the water without these effects.</p>
+<h3 id="refraction">Refraction<a class="headerlink" href="#refraction" title="Link to this section">&para;</a></h3>
+<p>With <strong>Refraction</strong> on, the scene behind the water shows through it, bent by the ripples
+and absorbed by the water it crosses: the clearest channel of the shallow colour fades
+over <strong>Depth Fade</strong>, the others faster, and the deep colour fills in the scattered light.
+For it, the main camera splits its colour pass in two:</p>
+<ol>
+<li>Opaque geometry, the sky, and the transparencies on the far side of the water.</li>
+<li>A copy of that image into a scene-copy target.</li>
+<li>The water, sampling the copy, then the remaining transparencies.</li>
+</ol>
+<p>With <a href="#screen-space-reflections-ssr">SSR</a> on and a water in view, SSR is composited into
+the copy, so its reflections land under the water and the water is drawn over them. An
+exported game drawing straight to the screen renders into an offscreen target while a
+refracting water is drawn, then copies it to the screen.</p>
+<p>Other cameras, and a water with refraction off, show the water alpha-blended over the
+scene instead.</p>
+<h4 id="caustics">Caustics<a class="headerlink" href="#caustics" title="Link to this section">&para;</a></h4>
+<p>With refraction and <strong>Depth Effects</strong> on, the floor seen through the water carries
+<strong>Caustics</strong>: drifting webs of sunlight focused by the waves. The water places them on the
+floor it finds in the scene depth, so they follow any geometry under it. They are brightest
+in shallow water, fade as it deepens, and scale with the directional light reaching the
+surface, so an overcast or night scene shows little of them. <strong>Caustics Scale</strong> is the
+world size of one cell of the pattern; set <strong>Caustics</strong> to 0 to turn them off.</p>
+<h3 id="transparent-objects-and-water">Transparent objects and water<a class="headerlink" href="#transparent-objects-and-water" title="Link to this section">&para;</a></h3>
+<p>The water writes depth, so a wave hides the trough behind it. Transparent objects —
+blended meshes, particles, and points — are therefore split per camera: an object entirely
+on the far side of the surface from the eye, within the water's area, is drawn before the
+water and seen through it; everything else, including an object that crosses the surface,
+is drawn after it.</p>
+<h3 id="underwater">Underwater<a class="headerlink" href="#underwater" title="Link to this section">&para;</a></h3>
+<p>When the main camera goes below the surface, inside the water's area, the surface seen
+from below shows the sky only through a bright window overhead, and the rest of the scene
+fades into the water with distance, using the same shallow colour, deep colour, and
+<strong>Depth Fade</strong>. With Depth Effects off the fade is even, as if everything were Depth Fade
+away. The fade is a fullscreen pass with its own shader, <code>underwater.frag</code>, which can be
+<a href="../../editor/custom-shaders/#water-shaders">forked</a>. Turn <strong>Underwater</strong> off on a water to
+skip it; while editing, the viewport's <strong>Disable underwater</strong> setting keeps the editor
+camera's view clear.</p>
+<h3 id="water-exclusions">Water exclusions<a class="headerlink" href="#water-exclusions" title="Link to this section">&para;</a></h3>
+<p>A <a href="../../reference/classes/waterexclusion/">WaterExclusion</a> keeps the water out of a volume,
+like a boat floating with its floor below the waterline. The water shader tests the world
+position of each fragment against the volumes over the water, so the cut follows the waves,
+shows in every view, including reflections and render-to-texture cameras, and leaves the
+waves in front of the boat drawn. A box or sphere is tested exactly. A hull, the convex hull
+of the entity's meshes, is kept as a 128 × 128 map of its bottom and top seen from above,
+one layer per hull in a shared texture array: sloped sides come out within a few
+millimetres and straight walls within a texel. Each water draw takes the 8 volumes nearest
+to the camera.</p>
+<p>The same volumes stop the underwater fade for a camera inside them and the buoyancy of the
+bodies inside them.</p>
+<h3 id="cost_1">Cost<a class="headerlink" href="#cost_1" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Extra work</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grid</td>
+<td><code>(Subdivisions + 1)²</code> vertices, displaced in the vertex shader</td>
+</tr>
+<tr>
+<td>Planar Reflection</td>
+<td>The visible scene drawn once more, at half resolution</td>
+</tr>
+<tr>
+<td>Refraction</td>
+<td>One copy of the scene per frame, and the main pass split around it</td>
+</tr>
+<tr>
+<td>Depth Effects</td>
+<td>A depth pre-pass, only when SSAO, SSR, and post-process depth are all off</td>
+</tr>
+<tr>
+<td>Underwater</td>
+<td>One fullscreen pass while the camera is below the surface</td>
+</tr>
+<tr>
+<td>Water Exclusion</td>
+<td>A volume test per water fragment, with one texture lookup inside a hull's bounds</td>
+</tr>
+</tbody>
+</table>
+<p>Each water compiles its own <a href="../shader-variants/#water">shader variant</a> from the features
+it uses, and the scene can set a default water shader like it does for other types.</p>
+<h2 id="shaders">Shaders<a class="headerlink" href="#shaders" title="Link to this section">&para;</a></h2>
+<p>Shaders are authored in GLSL and transpiled by the shader builder for each supported
+backend. Shader data files are generated at export time.</p>
+<p>Each renderable type (Mesh, UI, Points, Lines, Sky, Water) has a built-in shader. In the editor
+you can <strong>fork</strong> any of them — per component, or as a scene-wide default for that type —
+and edit the GLSL; the engine keeps driving the variant system, lighting, and the
+shadow/depth/G-buffer passes. A Mesh can fork its depth shader too, so a colour fork that
+displaces vertices or discards keeps its shadows in step. A shader set on the component
+wins over the scene default, which wins over the built-in. The same fork mechanism provides
+the scene's <a href="#post-processing">post-process passes</a>. See
+<a href="../../editor/custom-shaders/">Custom Shaders</a>.</p>
+<p>Built-in skinned variants bind bone matrices through a <strong>storage buffer</strong> (<code>sbo_skinning</code>)
+on Vulkan, Metal, and Direct3D 11, or through an <strong>unfilterable RGBA32F bone texture</strong>
+sampled with <code>texelFetch</code> on OpenGL / OpenGL ES. The colour, depth/shadow, and G-buffer
+passes share that path, so large skeletons are not capped by a uniform-block size. Shader
+reflection keeps the backend-specific storage-buffer bindings, which Metal requires for
+validation. The CPU array is still sized by <code>MAX_BONES</code> (default 96); see
+<a href="../3d-graphics/#gltf-compatibility-and-limits">3D Graphics — GLTF compatibility and limits</a>.
+The editor revisions its compiled shader cache when this built-in shader interface
+changes, so an updated editor does not reuse incompatible older skinned variants.</p>
+<p>GPU pipeline creation can be deferred by the graphics backend. If a pipeline variant
+fails creation or validation, Quantum skips that draw instead of submitting its uniform,
+binding, and draw commands against the failed handle. Diagnose the original pipeline
+creation message in the Output panel; the dependent validation-error cascade is
+suppressed.</p>
+<p>Supported graphics backends (<code>GraphicBackend</code> enum):</p>
+<table>
+<thead>
+<tr>
+<th>Backend constant</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GLCORE</code></td>
+<td>Desktop OpenGL 3.3+</td>
+</tr>
+<tr>
+<td><code>GLES3</code></td>
+<td>OpenGL ES 3 (Android, WebGL2)</td>
+</tr>
+<tr>
+<td><code>D3D11</code></td>
+<td>Windows Direct3D 11</td>
+</tr>
+<tr>
+<td><code>METAL</code></td>
+<td>macOS and iOS Metal</td>
+</tr>
+<tr>
+<td><code>WGPU</code></td>
+<td>WebGPU</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gpu-instancing">GPU instancing<a class="headerlink" href="#gpu-instancing" title="Link to this section">&para;</a></h2>
+<p>Draw large numbers of identical objects (trees, rocks, enemies) efficiently with mesh
+instancing. Each instance has its own transform (and optional color and texture region)
+stored in a GPU buffer, eliminating per-draw CPU overhead:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">mesh</span><span class="p">.</span><span class="n">createInstancedMesh</span><span class="p">();</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">mesh</span><span class="p">.</span><span class="n">setMaxInstances</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span><span class="n">mesh</span><span class="p">.</span><span class="n">addInstance</span><span class="p">(</span><span class="n">Vector3</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">Quaternion</span><span class="p">(),</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>Instances can be modified later with <code>updateInstance(index, ...)</code> and read back with
+<code>getInstance(index)</code>. Instance transforms may rotate, mirror, and scale non-uniformly;
+normals and tangents are transformed correctly, so a tree stretched taller is still lit
+as a tree.</p>
+<p>Instancing uses geometry on the <strong>same entity</strong> as the instanced mesh. Multi-node GLTF
+models that keep child mesh entities will not draw instances until you
+<a href="../3d-graphics/#merging-static-model-meshes">merge static model meshes</a> into the root
+(or build instances on a single-mesh entity / basic shape). In the editor, the Instanced
+Mesh panel warns when a model still uses the child-mesh layout.</p>
+<h3 id="distance-fade">Distance fade<a class="headerlink" href="#distance-fade" title="Link to this section">&para;</a></h3>
+<p><strong>Distance Fade</strong> shrinks instances to nothing between <strong>Fade Start</strong> and <strong>Fade End</strong>,
+both measured from the camera in the entity's model space. It is a vertex-shader scale,
+not a dither: the engine has no temporal anti-aliasing, so a stipple fade reads as dots
+on thin foliage. Turning it on selects a different shader variant (<code>Ifd</code>), while the two
+distances are plain uniforms that can be dragged freely.</p>
+<p>On the built-in triangle mesh shaders — no custom colour or depth fork, no scene default
+mesh shader, and <a href="#screen-space-reflections-ssr">SSR</a> off — instances past <strong>Fade End</strong>
+are also dropped from the draw list, so they cost neither vertices nor a fragment. Custom
+shaders and the SSR G-buffer still draw every instance and rely on the vertex scale alone.</p>
+<p>Fade is what keeps a field of instances from popping at the edge of its draw distance;
+the terrain's <a href="../terrain/#foliage">foliage layers</a> set it up for themselves from each
+layer's draw distance. From script, <code>Mesh::setDistanceFade</code> / <code>setFadeRange</code> expose the
+same controls as the Instanced Mesh panel.</p>
+<h3 id="culling-granularity">Culling granularity<a class="headerlink" href="#culling-granularity" title="Link to this section">&para;</a></h3>
+<p>An instanced entity is culled as a whole: its bounds are rebuilt from its instances, so
+one entity holding a whole forest has a bounding box covering the map and is drawn in
+full every frame. Splitting the same instances into one entity per region — the terrain
+foliage uses chunks around the camera — gives the frustum something to reject.</p>
+<p>That trades against batch size, because instancing batches per model and per entity. A
+region that offers every model variation ends up with two or three instances per draw
+call. Picking a small subset of the palette per region, deterministically from its
+coordinates, keeps the batches large while the whole map still uses every model.</p>
+<p><strong>Cull Instances</strong> (default on) then filters <em>inside</em> the entity. The main camera and each
+shadow atlas slot keep their own instance list: only instances that intersect that view's
+frustum are uploaded, nearest first and grouped by <a href="#mesh-detail-lod">detail level</a>.
+Mirrors and other render-to-texture cameras still draw the full batch. Turn culling off
+when a shader moves instances away from the bounds the CPU computed — those instances
+would otherwise vanish as soon as their authored positions leave the frustum. With it off
+the entity is not frustum-culled as a whole either, so the batch always reaches the GPU.</p>
+<p><strong>Cull Distance</strong> (default <code>0</code> = unlimited) drops instances farther than that many world
+units from the main camera from the same culled views, shadow slots included. Unlike
+<a href="#distance-fade">distance fade</a> it is a hard cut that keeps instances full-sized until
+they disappear, and it works with custom shaders and the SSR G-buffer. Hide the pop with
+<a href="#fog">fog</a> or a distant representation. It follows <strong>Cull Instances</strong>, so turning that
+off disables the distance too.</p>
+<h2 id="mesh-detail-lod">Mesh detail (LOD)<a class="headerlink" href="#mesh-detail-lod" title="Link to this section">&para;</a></h2>
+<p>Meshes can drop geometric detail as they recede, so a distant prop costs fewer triangles
+than the same mesh at the camera. It is <strong>off by default</strong>: every mesh draws its full
+geometry and no levels are built. Turning the scene's <strong>Enabled</strong> switch on is the only
+step needed; each mesh then follows it unless its <strong>Detail Levels</strong> is turned off.</p>
+<p>While the switch is on, the engine builds extra index ranges with
+<a href="https://github.com/zeux/meshoptimizer">meshoptimizer</a> for each mesh —
+asynchronously on the thread pool, keyed by a hash of the geometry so identical meshes
+share the result — and turning it off frees their GPU buffers. Level 0 is the source;
+up to three simplified levels keep roughly 50%, 25%, and 12.5% of the source triangles,
+stopping early when a mesh cannot shrink further. <code>MAX_MESH_LODS</code> (default 4) is the
+compile-time cap.</p>
+<p>A detail level is chosen from <strong>projected geometric error</strong>: the simplification's
+deviation from the source, in mesh units, is compared with how many world units one
+screen pixel spans at that distance. The scene's <strong>Threshold</strong> is how many pixels of
+error a simplified mesh may show (default <code>1</code>). Shadow maps use a fixed two-texel budget
+instead, so casters stay sharp enough for the PCF filter.</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Scene::setMeshLodEnabled</code></td>
+<td><code>false</code></td>
+<td>Master switch; while off no levels are built</td>
+</tr>
+<tr>
+<td><code>Scene::setMeshLodThreshold</code></td>
+<td><code>1.0</code></td>
+<td>Allowed screen-space error in pixels; lower keeps more detail</td>
+</tr>
+<tr>
+<td><code>Mesh::setLodEnabled</code></td>
+<td><code>true</code></td>
+<td>Per-mesh opt-out (follows the scene switch); toggling it reloads the mesh</td>
+</tr>
+<tr>
+<td><code>Mesh::setLodBias</code></td>
+<td><code>1.0</code></td>
+<td>Above 1 keeps detail longer; below 1 drops it sooner</td>
+</tr>
+</tbody>
+</table>
+<p>Terrain and tilemaps keep their own LOD and are not simplified this way. Detail levels
+apply to the main camera and to shadow maps; mirrors and other render-to-texture cameras
+draw the source mesh. Instanced meshes pick a level <em>per instance</em> in those same views.</p>
+<p>In the editor the scene controls live under <strong>Scene → Mesh Detail (LOD)</strong> when nothing
+is selected, and each mesh has <strong>Detail Levels</strong> / <strong>Detail Bias</strong> on the Mesh component.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setMeshLodEnabled</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">scene</span><span class="p">.</span><span class="n">setMeshLodThreshold</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">);</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="n">mesh</span><span class="p">.</span><span class="n">setLodBias</span><span class="p">(</span><span class="mf">1.5f</span><span class="p">);</span><span class="w">       </span><span class="c1">// keep this hero prop sharper than the default</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="n">statue</span><span class="p">.</span><span class="n">setLodEnabled</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="w"> </span><span class="c1">// this silhouette must never change</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nv">scene</span><span class="p">.</span><span class="py">meshLodEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nv">scene</span><span class="p">.</span><span class="py">meshLodThreshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="nv">mesh</span><span class="p">.</span><span class="py">lodBias</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="nv">statue</span><span class="p">.</span><span class="py">lodEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+</code></pre></div>
+<h2 id="depth-prepass">Depth prepass<a class="headerlink" href="#depth-prepass" title="Link to this section">&para;</a></h2>
+<p>An optional <strong>depth-only pass</strong> runs on the main camera before the opaque colour draws,
+writing the same depth the colour pass will test. Later fragments fail the depth test
+instead of running the lit mesh shader, so each pixel is shaded once. That pays off when
+many opaque surfaces overlap in screen space — dense foliage, layered interiors — and
+costs an extra geometry pass when they do not.</p>
+<p>The setting is off by default. Toggling it reloads meshes, because the prepass pipelines
+are built with each mesh. It runs only for the main camera and only while that camera
+has depth testing on; 2D and UI cameras skip it. A mesh whose colour shader is forked
+without a matching <a href="../../editor/custom-shaders/#the-depth-shader-row">depth fork</a> is left
+out of the prepass, so its vertices stay consistent with the colour pass.</p>
+<p>This is separate from the small depth target SSAO (and some post-process passes) already
+build when they need a depth texture. Enabling the scene prepass does not replace those.</p>
+<p>In the editor the toggle is <strong>Scene → Depth Prepass</strong>. From script:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setDepthPrepassEnabled</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nv">scene</span><span class="p">.</span><span class="py">depthPrepassEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+</code></pre></div>
+<h2 id="performance-guidelines">Performance guidelines<a class="headerlink" href="#performance-guidelines" title="Link to this section">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Guideline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Draw calls</td>
+<td>Reduce with instancing, atlases, and shared <code>.material</code> files</td>
+</tr>
+<tr>
+<td>Mesh LOD</td>
+<td>Turn scene Mesh Detail on for triangle-heavy scenes; raise <strong>Threshold</strong> or lower a mesh's <strong>Detail Bias</strong> to drop triangles sooner</td>
+</tr>
+<tr>
+<td>Instance culling</td>
+<td>Keep <strong>Cull Instances</strong> on unless a shader moves instances off their bounds; split huge batches into regional entities</td>
+</tr>
+<tr>
+<td>Depth prepass</td>
+<td>Enable for heavy opaque overdraw (forests, interiors); leave off when most pixels are shaded once already</td>
+</tr>
+<tr>
+<td>IBL cost</td>
+<td>Environment maps are rebuilt when the sky texture changes; disable <strong>Receive IBL</strong> on distant or unimportant meshes</td>
+</tr>
+<tr>
+<td>Shadow casters</td>
+<td>Limit shadow-casting lights; cascade only when needed; turn off <strong>Cast Shadows</strong> on grass-scale <a href="../terrain/#foliage">terrain foliage</a></td>
+</tr>
+<tr>
+<td>Transparent objects</td>
+<td>Keep transparent draw counts low; sort correctly</td>
+</tr>
+<tr>
+<td>Tilemaps</td>
+<td>Chunk culling is automatic, so map size costs little; a tilemap is capped at 16 383 tiles</td>
+</tr>
+<tr>
+<td>Mobile shaders</td>
+<td>Simplify PBR (skip normal maps, lower cascade count)</td>
+</tr>
+<tr>
+<td>Render targets</td>
+<td>Minimize framebuffer resolution for off-screen effects</td>
+</tr>
+<tr>
+<td>Mirrors</td>
+<td>Each mirror re-renders the scene once per frame; keep one hero reflection and lower its target resolution if needed</td>
+</tr>
+<tr>
+<td>Water</td>
+<td>Keep <strong>Subdivisions</strong> as low as the waves allow; Planar Reflection re-renders the scene and Refraction copies it once per frame</td>
+</tr>
+<tr>
+<td>SSR</td>
+<td>Adds a G-buffer geometry pass plus fullscreen march/blur/composite passes; lower <strong>Max Steps</strong> for cost, and it shares its geometry pass with SSAO when both are on</td>
+</tr>
+<tr>
+<td>Textures</td>
+<td>Use compressed formats (ETC2/BC) on mobile/desktop respectively</td>
+</tr>
+</tbody>
+</table>
+<p>The editor footer reports FPS, frame time, draw calls, and triangles for the last drawn
+frame. <code>Engine::getFrameStats()</code> returns the same counters from C++. For a repeatable
+capture with VSync forced off, use the
+<a href="../../editor/command-line/#benchmark-measure-scene-fps"><code>benchmark</code></a> command.</p>
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Link to this section">&para;</a></h2>
+<ul>
+<li><a href="../../reference/classes/camera/">Camera</a></li>
+<li><a href="../../reference/classes/light/">Light</a></li>
+<li><a href="../../reference/classes/material/">Material</a></li>
+<li><a href="../../reference/classes/texture/">Texture</a></li>
+<li><a href="../../reference/classes/fog/">Fog</a></li>
+<li><a href="../../reference/classes/skybox/">Skybox</a></li>
+<li><a href="../../reference/classes/reflectionprobe/">ReflectionProbe</a></li>
+<li><a href="../../reference/classes/water/">Water</a></li>
+<li><a href="../../reference/classes/mesh/">Mesh</a></li>
+<li><a href="../../reference/classes/rendersystem/">RenderSystem</a></li>
+</ul>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../3d-graphics/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">3D Graphics</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../shader-variants/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Shader Variants</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/manual/rendering-pipeline.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#rendering-pipeline" class="dx-toc-link" data-level="1">Rendering Pipeline</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#high-level-render-flow" class="dx-toc-link" data-level="2">High-level render flow</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#cameras" class="dx-toc-link" data-level="2">Cameras</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#pbr-materials" class="dx-toc-link" data-level="2">PBR materials</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#lighting" class="dx-toc-link" data-level="2">Lighting</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#more-lights-than-max_lights" class="dx-toc-link" data-level="3">More lights than MAX_LIGHTS</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#shadow-maps" class="dx-toc-link" data-level="3">Shadow maps</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#2d-lighting-and-shadows" class="dx-toc-link" data-level="2">2D lighting and shadows</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#1d-polar-shadow-maps" class="dx-toc-link" data-level="3">1D polar shadow maps</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#fog" class="dx-toc-link" data-level="2">Fog</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#skybox" class="dx-toc-link" data-level="2">Skybox</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#image-based-lighting-ibl" class="dx-toc-link" data-level="2">Image-based lighting (IBL)</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#reflection-probes" class="dx-toc-link" data-level="2">Reflection probes</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#static-and-dynamic-probes" class="dx-toc-link" data-level="3">Static and dynamic probes</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#influence-volume-and-blending" class="dx-toc-link" data-level="3">Influence volume and blending</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#capture-settings" class="dx-toc-link" data-level="3">Capture settings</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#ambient-occlusion-ssao" class="dx-toc-link" data-level="2">Ambient occlusion (SSAO)</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#screen-space-reflections-ssr" class="dx-toc-link" data-level="2">Screen-space reflections (SSR)</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#post-processing" class="dx-toc-link" data-level="2">Post-processing</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#framebuffers-and-render-to-texture" class="dx-toc-link" data-level="2">Framebuffers and render-to-texture</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#mirrors-and-planar-reflections" class="dx-toc-link" data-level="2">Mirrors and planar reflections</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#how-it-works" class="dx-toc-link" data-level="3">How it works</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#lighting-in-the-reflection" class="dx-toc-link" data-level="3">Lighting in the reflection</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#the-normal-field" class="dx-toc-link" data-level="3">The Normal field</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#cost" class="dx-toc-link" data-level="3">Cost</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#water" class="dx-toc-link" data-level="2">Water</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#waves-and-ripples" class="dx-toc-link" data-level="3">Waves and ripples</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#reflection-and-lighting" class="dx-toc-link" data-level="3">Reflection and lighting</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#depth-effects" class="dx-toc-link" data-level="3">Depth effects</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#refraction" class="dx-toc-link" data-level="3">Refraction</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#caustics" class="dx-toc-link" data-level="4">Caustics</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#transparent-objects-and-water" class="dx-toc-link" data-level="3">Transparent objects and water</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#underwater" class="dx-toc-link" data-level="3">Underwater</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#water-exclusions" class="dx-toc-link" data-level="3">Water exclusions</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#cost_1" class="dx-toc-link" data-level="3">Cost</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#shaders" class="dx-toc-link" data-level="2">Shaders</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#gpu-instancing" class="dx-toc-link" data-level="2">GPU instancing</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#distance-fade" class="dx-toc-link" data-level="3">Distance fade</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#culling-granularity" class="dx-toc-link" data-level="3">Culling granularity</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#mesh-detail-lod" class="dx-toc-link" data-level="2">Mesh detail (LOD)</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#depth-prepass" class="dx-toc-link" data-level="2">Depth prepass</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#performance-guidelines" class="dx-toc-link" data-level="2">Performance guidelines</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#see-also" class="dx-toc-link" data-level="2">See also</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../versions.json";
+    window.QUANTUM_PAGE_URL = "manual/rendering-pipeline/";
+  </script>
+  <script src="../../js/quantum.js" defer></script>
+</body>
+</html>

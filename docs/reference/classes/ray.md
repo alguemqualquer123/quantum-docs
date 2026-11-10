@@ -8,7 +8,7 @@ description: Ray API reference (C++ and Lua).
 
 ## Description
 
-A ray defined by an origin point and a direction/length vector. Used for raycasting — detecting which objects lie along the ray. Doriax supports raycasts against geometric volumes ([AABB](aabb.md), [OBB](obb.md), [Sphere](sphere.md), [Plane](plane.md)), against the physics simulation ([Body2D](body2d.md) / [Body3D](body3d.md)), and against the bounds of every mesh in a scene, which needs no physics at all.
+A ray defined by an origin point and a direction/length vector. Used for raycasting — detecting which objects lie along the ray. Quantum supports raycasts against geometric volumes ([AABB](aabb.md), [OBB](obb.md), [Sphere](sphere.md), [Plane](plane.md)), against the physics simulation ([Body2D](body2d.md) / [Body3D](body3d.md)), and against the bounds of every mesh in a scene, which needs no physics at all.
 
 The direction vector doubles as the *length* of the ray — objects beyond `origin + direction` are not reported as hits.
 

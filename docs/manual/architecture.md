@@ -1,10 +1,10 @@
 ---
-description: Runtime architecture of Doriax: Engine, Scene, ECS, systems, managers, rendering, physics, and scripting.
+description: Runtime architecture of Quantum: Engine, Scene, ECS, systems, managers, rendering, physics, and scripting.
 ---
 
 # Engine Architecture
 
-Doriax is organized around a small runtime core, an ECS, scene-scoped subsystems, and
+Quantum is organized around a small runtime core, an ECS, scene-scoped subsystems, and
 high-level object wrappers. The editor uses this runtime API, while the runtime itself
 has no dependency on editor internals.
 
@@ -78,4 +78,4 @@ code needs to load scenes or instantiate prefab-like entity hierarchies by ID or
 
 Lua and C++ both drive the same runtime. Lua bindings expose engine classes, object
 wrappers, components, math types, actions, I/O helpers, and enums. C++ code includes
-`Doriax.h` and registers startup code with `DORIAX_INIT`.
+`Quantum.h` and registers startup code with `QUANTUM_INIT`.

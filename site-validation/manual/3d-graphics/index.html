@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Graphics — Quantum Engine Docs</title>
+  <meta name="description" content="Working with 3D graphics in Quantum — models, materials, lighting, the sky system, reflections, and water.">
+  <meta property="og:title" content="3D Graphics — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/manual/3d-graphics/">
+
+  <link rel="icon" type="image/png" href="../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/quantum.css">
+  <link rel="stylesheet" href="../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="3d-graphics">3D Graphics<a class="headerlink" href="#3d-graphics" title="Link to this section">&para;</a></h1>
+<p>Quantum provides a complete 3D pipeline with model loading, physically-based rendering,
+dynamic lighting, and environment effects.</p>
+<p><img alt="A 3D tower-defence map in the editor" src="../../assets/screenshots/editor-bastion-vale.png" /></p>
+<h2 id="models">Models<a class="headerlink" href="#models" title="Link to this section">&para;</a></h2>
+<p>Quantum loads 3D models in <strong>GLTF</strong> and <strong>OBJ</strong> formats, and <strong>FBX</strong> through an automatic
+conversion to glTF (see <a href="#fbx-models">FBX models</a>). Import a model as a resource and add it
+to a scene as an entity, then position it with its transform.</p>
+<p>Models support:</p>
+<ul>
+<li><strong>Skeletal animation</strong> — animate rigged characters via bones</li>
+<li><strong>Node animation</strong> — play transform clips on the imported glTF node tree</li>
+<li><strong>Morph targets</strong> — blend between mesh shapes for facial animation and deformation</li>
+</ul>
+<p><img alt="A rigged character with its skeleton drawn in the viewport" src="../../assets/screenshots/editor-bones.png" /></p>
+<h3 id="gltf-compatibility-and-limits">GLTF compatibility and limits<a class="headerlink" href="#gltf-compatibility-and-limits" title="Link to this section">&para;</a></h3>
+<p>Skinned GLTF models are not limited by a fixed-size shader uniform block. Bone matrices
+are uploaded each frame through a <strong>storage buffer</strong> (Vulkan, Metal, Direct3D 11) or an
+<strong>unfilterable bone texture</strong> (OpenGL / OpenGL ES), so large skeletons skin correctly on
+every backend.</p>
+<p>The CPU bone-matrix array still has a compile-time capacity, <code>MAX_BONES</code> (default
+<strong>96</strong>). The editor grows that array for larger skins; export then raises <code>MAX_BONES</code> in
+the generated CMake project to cover the largest skin in your scenes (never below 96).
+A model loaded only at runtime that exceeds the exported capacity is rejected and the
+loader writes an error to the log. Raise <code>MAX_BONES</code> yourself in a standalone engine
+build if you spawn such models from code. See the
+<a href="../../reference/classes/model/#gltf-import-support-and-limits">Model reference</a> and
+<a href="../../reference/build-options/#engine-capacity-macros">Build Options — Engine capacity macros</a>.</p>
+<p>Morph-target capacity is per mesh primitive and depends on the data exported for each
+target:</p>
+<table>
+<thead>
+<tr>
+<th>Morph data</th>
+<th>Maximum loaded targets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Position only</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Position plus normal or tangent</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Position, normal, and tangent</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>The importer bases that capacity on the leading targets it actually loads and ignores
+the unsupported tail. Sparse GLTF accessors are supported for morph-target attributes,
+including sparse accessors without a dense base <code>bufferView</code>; Quantum expands them into
+dense GPU vertex data during loading. See the <a href="../../reference/classes/model/#gltf-import-support-and-limits">Model reference</a>
+for the exact import behaviour.</p>
+<h3 id="gltf-node-hierarchy">GLTF node hierarchy<a class="headerlink" href="#gltf-node-hierarchy" title="Link to this section">&para;</a></h3>
+<p>How a GLTF becomes entities depends on what the file contains:</p>
+<table>
+<thead>
+<tr>
+<th>File contents</th>
+<th>Scene layout</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Animation clips, or more than one skin</td>
+<td>The <strong>full node tree</strong> is imported. Every glTF node becomes a child entity (transform-only helpers, joints, and mesh nodes), parented as in the file.</td>
+</tr>
+<tr>
+<td>Several mesh nodes, no clips and a single skin (or none)</td>
+<td>One <strong>child mesh entity per mesh node</strong>, parented under the model root. Joints still use the legacy skeleton path when the file has one skin and no clips.</td>
+</tr>
+<tr>
+<td>A single static mesh</td>
+<td>Geometry lives on the Model entity itself.</td>
+</tr>
+</tbody>
+</table>
+<p>On both child paths the Model entity keeps only its <code>Transform</code> and <code>ModelComponent</code>. It
+gets a <code>MeshComponent</code> only when the geometry lives on it: a single mesh, an OBJ, or a
+<a href="#merging-static-model-meshes">merged</a> model.</p>
+<p>On the full-tree path, bone and mesh mappings point into those node entities rather than
+sitting in a separate skeleton. Animation channels target the node they were authored
+against, so transform-only nodes (not just joints) play back. Models may use <strong>more than
+one skin</strong>: each skinned mesh keeps its own joint order and inverse-bind matrices, and
+the renderer builds that mesh's bone matrices from those joints.</p>
+<p>Imported models with child nodes start collapsed in the
+<a href="../../editor/structure/#tree-marks-and-collapse">Structure panel</a>. Expand the model when
+you need to select a specific node, joint, or child mesh.</p>
+<p>On the child-mesh path the parts are yours to arrange: nest them under each other or
+under a plain entity inside the model, and the scene saves that layout. Full node-tree
+imports keep joints, helper nodes, animated parts, and rigid parts that inherit a node's
+animation where the file authored them; skinned parts and rigid parts the file does not
+animate can be moved, onto bones included, and any entity can be attached to a bone. See
+<a href="../../editor/structure/#organizing-the-parts-of-a-model">Structure — Organizing the parts of a model</a>.</p>
+<h3 id="merging-static-model-meshes">Merging static model meshes<a class="headerlink" href="#merging-static-model-meshes" title="Link to this section">&para;</a></h3>
+<p>A GLTF with several mesh nodes normally keeps those meshes on child entities. That
+hierarchy is useful for editing parts separately, but
+<a href="../rendering-pipeline/#gpu-instancing">GPU instancing</a> draws only the geometry on the
+entity that owns <code>InstancedMeshComponent</code>.</p>
+<p>For static props (no skinning, morph targets, or embedded animations), bake the children
+into the root:</p>
+<ol>
+<li>Select the Model in the <a href="../../editor/structure/#merge-static-model">Structure panel</a>.</li>
+<li>Right-click and choose <strong>Merge static model</strong>.</li>
+<li>Add <strong>Instanced Mesh</strong> (or set <code>ModelComponent::mergeStaticMeshes</code> before reload in
+   C++ / exported project code).</li>
+</ol>
+<p><strong>Restore model mesh children</strong> reverses the flatten. Merge is refused for skinned,
+animated, or morph-target models, and when the flattened result would exceed the root
+submesh limit. It is also refused while the parts are rearranged inside the model; use
+<strong>Reset mesh parenting</strong> first.</p>
+<p>Mesh settings (lighting, shadows, detail levels, transparency and the custom shaders)
+follow the geometry. A reload of the same file gives each part the settings saved for its
+node, found by name and then by index, so reordered nodes keep theirs. Restoring gives the
+merged mesh's settings to every part, and merging takes those of the first part. A different
+file is a fresh import, so the meshes it creates start with the defaults.</p>
+<h3 id="reloading-a-rearranged-model">Reloading a rearranged model<a class="headerlink" href="#reloading-a-rearranged-model" title="Link to this section">&para;</a></h3>
+<p>A model normally rebuilds its child entities on every reload: the old parts are deleted
+and the file creates fresh ones. Re-assigning the <strong>same</strong> model file — the usual step
+after re-exporting from your DCC — keeps what you arranged, in one of two ways depending
+on how the file imports.</p>
+<p><strong>Child-mesh models</strong> (static, or a single skin without clips) whose parts have been
+<a href="../../editor/structure/#organizing-the-parts-of-a-model">rearranged</a> keep the existing
+part entities and refresh their geometry and materials in place. Assigning a different
+file, merging, or restoring still rebuilds the parts.</p>
+<p>Whenever the file loads against existing part entities — that in-place reload, or
+reopening a saved scene — each part is paired with a mesh node of the file by <strong>node
+name</strong>, so re-exporting with nodes reordered keeps every part on its own geometry. The
+pairing goes:</p>
+<ol>
+<li>A part whose name still matches the node at its saved index keeps that node.</li>
+<li>Remaining nodes claim the part with the same name, wherever it moved to.</li>
+<li>Nodes without a name, and parts you renamed in the editor, fall back to the saved
+   index.</li>
+</ol>
+<p>A part left without a node stays in the scene as a plain entity and no longer belongs to
+the model (a warning names it in the log); delete it or keep it as you see fit. A new
+node in the file gets a new part under the model root. Kept parts keep the transform
+saved in the scene — the file's node transform is applied only when a part is created —
+and their <a href="#editing-an-imported-models-submeshes">submesh overrides</a> are preserved.</p>
+<p><strong>Full node-tree models</strong> cannot be refreshed in place, because the node transforms,
+joints, and animation clips all come from the file. They are rebuilt, and the editor
+then puts your arrangement back by node name: every part you moved returns to the node
+or group you left it under, keeping the local transform you gave it. A part the
+re-export turned into something that may no longer move — it gained keyframes, or now
+sits under an animated node — stays where the new file puts it, with a warning in the
+log. Part entities are new after this kind of reload, so entity references that pointed
+at a part have to be re-assigned.</p>
+<p><strong>Attachments survive both kinds of reload.</strong> Anything you hung on a bone, a helper
+node, or a part — a light, a camera, an empty holding a prop, another model — is kept
+and re-attached to the same-named node with the same local offset, on static models
+too. The node is matched by name as well as index, so it follows a re-export that
+reorders nodes; if the node is gone from the file, the entity is left directly under the
+model with a warning.</p>
+<p>Assigning a <strong>different</strong> model file rebuilds everything from that file and does not
+carry attachments or arrangements over.</p>
+<h3 id="fbx-models">FBX models<a class="headerlink" href="#fbx-models" title="Link to this section">&para;</a></h3>
+<p>The engine does not read FBX itself. The editor converts each FBX file to a binary glTF,
+and the engine loads that conversion wherever the FBX is used, so scenes, components, and
+scripts keep the <code>.fbx</code> path:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Model</span><span class="w"> </span><span class="nf">hero</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">hero</span><span class="p">.</span><span class="n">loadModel</span><span class="p">(</span><span class="s">&quot;characters/hero.fbx&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">hero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Model</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">hero</span><span class="p">:</span><span class="nf">loadModel</span><span class="p">(</span><span class="s2">&quot;characters/hero.fbx&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>A script can load any FBX in the assets directory, because Play and export convert them
+all first. An FBX without a conversion does not load, so an engine build used without the
+editor cannot load FBX at all.</p>
+<p>While you work, conversions live in <code>.quantum/imported/</code>, which mirrors the assets
+directory (<code>characters/hero.fbx</code> becomes <code>.quantum/imported/characters/hero.fbx.glb</code>) and is
+not committed. An exported game ships each one beside its FBX as <code>hero.fbx.glb</code> and leaves
+the <code>.fbx</code> out. See <a href="../../editor/export/#fbx-models">Export — FBX models</a>.</p>
+<p>The editor converts an FBX the first time it is used (dropped into a scene, picked for a
+component or a terrain layer, or previewed in the Resources Browser), when Play starts, and
+on export. It converts it again when the FBX or one of its textures changes. Models in open
+scenes then reload the way a re-assigned file does, keeping your arrangement (see
+<a href="#reloading-a-rearranged-model">Reloading a rearranged model</a>). <strong>Reimport</strong> in the
+<a href="../../editor/resources/#context-menu">Resources Browser</a> forces a conversion.</p>
+<p>Texture paths stored in an FBX often point at the artist's machine, so each texture is
+looked up in this order:</p>
+<ol>
+<li>The paths stored in the FBX, when they lead inside the assets directory.</li>
+<li>The file name in the FBX's folder, in its <code>textures</code>, <code>images</code>, <code>materials</code>, <code>maps</code>, or
+   <code>tex</code> subfolder, and in the same places of each parent folder up to the assets root.</li>
+<li>The stored paths outside the assets directory.</li>
+</ol>
+<p>A texture found inside the assets directory stays a separate file that the conversion
+refers to. One found only outside is embedded in the conversion. A texture that is not
+found is left out with a warning in the Output panel, and adding it later converts the FBX
+again. Maps that glTF keeps in one image are combined into a new embedded image: an
+opacity map goes into the base colour's alpha, and separate roughness and metalness maps
+are packed together.</p>
+<table>
+<thead>
+<tr>
+<th>FBX content</th>
+<th>Converted to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Units and axes</td>
+<td>Meters, Y up</td>
+</tr>
+<tr>
+<td>Meshes and materials</td>
+<td>glTF meshes with PBR materials. Instances of one mesh that use different materials keep them</td>
+</tr>
+<tr>
+<td>UV sets</td>
+<td>The first two. Textures on a third set use the first</td>
+</tr>
+<tr>
+<td>Vertex colours</td>
+<td>Vertex colours</td>
+</tr>
+<tr>
+<td>Skins</td>
+<td>Up to four joint influences per vertex</td>
+</tr>
+<tr>
+<td>Blend shapes</td>
+<td>Morph targets with position offsets, up to 8 rendered (see the capacity table above). An in-between shape keeps only its full-weight target</td>
+</tr>
+<tr>
+<td>Animation stacks</td>
+<td>Clips sampled at 30 frames per second, blend-shape weights included</td>
+</tr>
+</tbody>
+</table>
+<p>Texture tiling and offset are not converted, and cameras and lights in the file become
+empty nodes.</p>
+<h2 id="pbr-materials">PBR materials<a class="headerlink" href="#pbr-materials" title="Link to this section">&para;</a></h2>
+<p>Rendering is <strong>physically based (PBR)</strong>, producing realistic surfaces that respond
+correctly to lighting. Materials drive how light interacts with each surface, supporting
+photorealistic results.</p>
+<p><img alt="A PBR material in the Properties window" src="../../assets/screenshots/properties-pbr-material.png" /></p>
+<p>Materials can use albedo, normal, roughness, metallic, and emission data. Imported
+GLTF materials are converted into the engine material representation during loading;
+editor-created materials are serialized with the project and baked into exported
+output.</p>
+<p>GLTF <code>OPAQUE</code>, <code>MASK</code>, and <code>BLEND</code> alpha modes are preserved. For masked materials,
+the GLTF <code>alphaCutoff</code> value (default <code>0.5</code>) controls the combined base-colour factor
+and texture alpha test in both the visible surface and its shadow/depth passes. Blended
+submeshes keep depth testing but <strong>disable depth writes</strong> in the colour pass so overlapping
+translucent surfaces composite instead of occluding each other. When auto-transparency
+marks the mesh transparent, the SSAO depth pre-pass and SSR G-buffer skip it; shadow
+maps still render it. In the editor, expand <strong>Mesh → Submesh → Material</strong> to change
+<strong>Alpha Mode</strong> and <strong>Alpha Cutoff</strong>. See the
+<a href="../../reference/classes/material/#alphamode-alphacutoff">Material reference</a> for the mode
+behaviours.</p>
+<p>A mesh with <strong>Face Culling</strong> off is lit on both sides: the back face shades with its
+normal (and normal map) flipped toward the viewer, as glTF specifies for double-sided
+materials, instead of appearing in shadow. <strong>Leaf Transmission</strong>
+(<a href="../../reference/classes/material/#foliagetransmission"><code>foliageTransmission</code></a>, <code>0</code>–<code>1</code>,
+default <code>0</code>) adds the light that passes through a thin surface such as a leaf when the
+sun is behind it, scaled by the base colour and the same shadow term as direct lighting.
+Set it per submesh in the editor, or author it in the glTF as the material extra
+<code>quantum_foliage_transmission</code>; ordinary glTF materials are unaffected.</p>
+<h3 id="editing-an-imported-models-submeshes">Editing an imported model's submeshes<a class="headerlink" href="#editing-an-imported-models-submeshes" title="Link to this section">&para;</a></h3>
+<p>A model's geometry and materials are rebuilt from its source file every time the scene
+loads, so the file — not the scene — is what the mesh normally follows. Editing a submesh
+property of an imported model in the editor records an <strong>override</strong> on the model: the
+edited field keeps your value across scene restarts, play/stop, and exported builds, while
+every field you left alone still follows the source file.</p>
+<p>That applies to the whole <strong>Submesh</strong> section — material values and textures, linked
+<code>.material</code> files, <strong>Face Culling</strong>, <strong>Texture Shadow</strong>, and <strong>Primitive Type</strong> — on the
+Model entity itself and on the child mesh entities a multi-node GLTF creates.</p>
+<p>Because only the edited fields are pinned, re-exporting the model from your DCC still
+propagates everything else. Change a texture in Blender and re-export: meshes where you
+only tweaked base colour pick up the new texture and keep your colour.</p>
+<p>Overrides are matched to the primitive they came from by its GLTF node and material name
+(the material name alone for OBJ), not by position. Reordering nodes or primitives in the
+source file therefore keeps each edit on the right geometry. When that identity no longer
+resolves to exactly one primitive — the node or material was renamed or removed, or two of
+them now share a name — the override is dropped instead of applied to whichever geometry
+took the old slot. Re-apply the edit after that kind of re-export.</p>
+<p>Assigning a <strong>different</strong> model file to the entity is a fresh import and clears the
+overrides. Reloading the same file — <strong>Merge static model</strong> or <strong>Restore model mesh
+children</strong> — keeps them.</p>
+<p>Scenes authored before overrides existed are migrated the first time they load: the values
+saved in the scene are compared against the source file, and only the fields that really
+differ become overrides.</p>
+<h3 id="shared-material-files-material">Shared material files (<code>.material</code>)<a class="headerlink" href="#shared-material-files-material" title="Link to this section">&para;</a></h3>
+<p>Each mesh submesh can reference a standalone <strong><code>.material</code></strong> file in your project instead
+of embedding values only inside the scene. Multiple meshes can link to the same file so
+they always stay in sync — change the file once and every linked mesh updates.</p>
+<p><strong>Create a material file from the editor:</strong></p>
+<ol>
+<li>Select a mesh and open its <strong>Material</strong> row in the Properties window.</li>
+<li>Tune base colour, textures, metallic, and roughness as needed.</li>
+<li><strong>Drag the material preview</strong> from Properties into the <a href="../../editor/resources/">Resources Browser</a>.</li>
+<li>The editor creates <code>Material.material</code> (or <code>Material_1.material</code>, etc.) in the folder
+   you drop on and <strong>links</strong> the submesh to that file.</li>
+</ol>
+<p><strong>Apply an existing material file:</strong></p>
+<ul>
+<li>Drag a <code>.material</code> file from the Resources Browser onto a mesh in the <a href="../../editor/scene-view/">Scene view</a>, or</li>
+<li>Drop it onto the <strong>Material</strong> field in Properties (live preview while hovering).</li>
+</ul>
+<p>Linked materials reload automatically when the file changes on disk. Use the <strong>unlink</strong>
+button (chain icon) next to the material name in Properties to copy the values back into
+the scene as a local, unlinked material.</p>
+<p>See <a href="../../editor/resources/#material-files">Resources Browser — Material files</a> and
+<a href="../../editor/properties/#mesh-materials-and-ibl">Properties — Mesh materials</a> for the
+full workflow.</p>
+<h2 id="lighting-and-shadows">Lighting and shadows<a class="headerlink" href="#lighting-and-shadows" title="Link to this section">&para;</a></h2>
+<p>Quantum supports multiple light types with <strong>dynamic shadows</strong>, so moving objects cast
+and receive shadows in real time.</p>
+<p><img alt="A directional light casting shadows, with its settings in the Properties window" src="../../assets/screenshots/editor-lighting.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Light type</th>
+<th>Best use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Directional</td>
+<td>Sunlight or broad outdoor lighting</td>
+</tr>
+<tr>
+<td>Point</td>
+<td>Lamps, torches, explosions, and local lights</td>
+</tr>
+<tr>
+<td>Spot</td>
+<td>Flashlights, cones, and focused effects</td>
+</tr>
+</tbody>
+</table>
+<p>A scene can have any number of lights, but only six are used at once: past that,
+directional lights come first, then the ones nearest the camera (see
+<a href="../rendering-pipeline/#more-lights-than-max_lights">Rendering Pipeline — More lights than <code>MAX_LIGHTS</code></a>).
+Directional lights support cascaded shadow maps. Tune edge smoothness with
+<code>Scene::setShadowQuality</code> (<code>NONE</code> / <code>LOW</code> / <code>MEDIUM</code> / <code>HIGH</code> PCF filtering).</p>
+<h3 id="projected-spot-light-masks">Projected spot-light masks<a class="headerlink" href="#projected-spot-light-masks" title="Link to this section">&para;</a></h3>
+<p>A spot light uses a circular inner/outer cone by default. To project an arbitrary shape,
+select the spot light and assign an image to <strong>Light → Mask</strong>. No separate shape mode is
+needed: an assigned mask automatically becomes the complete light shape, and clearing it
+restores the circular cone.</p>
+<p>Mask alpha controls light intensity when the image contains transparency; otherwise the
+engine uses luminance (black is unlit and white is fully lit). The <strong>Angle Cone</strong> property
+sets the vertical projection angle, while the image aspect ratio sets its width. The scene
+gizmo and spot shadow frustum use that same orientation and aspect ratio.</p>
+<p>For C++ and Lua setup, in-memory masks, and clearing a mask at runtime, see
+<a href="../../reference/classes/light/#spotmask">Light.spotMask</a>.</p>
+<p>Enable <strong>screen-space ambient occlusion</strong> with <code>Scene::setSSAOEnabled(true)</code> to add soft
+contact shading in creases and corners. It affects ambient/indirect light only — see
+<a href="../rendering-pipeline/#ambient-occlusion-ssao">Rendering Pipeline — Ambient occlusion (SSAO)</a>.</p>
+<h2 id="environment">Environment<a class="headerlink" href="#environment" title="Link to this section">&para;</a></h2>
+<p>Add atmosphere to your scenes with:</p>
+<ul>
+<li><strong>Fog</strong> — depth-based atmospheric fog</li>
+<li><strong>Sky system</strong> — a configurable cubemap background that also drives <strong>image-based
+  lighting (IBL)</strong> for reflective surfaces</li>
+<li><strong>Reflection probes</strong> — local, box-shaped reflection environments for interiors and
+  enclosed areas</li>
+<li><strong>Water</strong> — animated water surfaces with waves, reflections, refraction, and foam</li>
+</ul>
+<h3 id="sky-and-reflections">Sky and reflections<a class="headerlink" href="#sky-and-reflections" title="Link to this section">&para;</a></h3>
+<p>A <strong>Sky</strong> entity provides the scene background and the lighting environment for IBL.
+Assign a cubemap texture (six faces or a single cross layout). Meshes that should pick up
+sky reflections and indirect colour need <strong>Receive IBL</strong> enabled on their Mesh
+component — see <a href="../rendering-pipeline/#image-based-lighting-ibl">Rendering Pipeline — IBL</a>.</p>
+<p>Use <strong>Visible</strong> on the Sky component when you want IBL without drawing the sky dome
+(for example, a studio HDR used only for reflections). The sky texture still generates
+irradiance and prefiltered maps either way.</p>
+<p>IBL gives soft, environment-wide reflections suited to curved and rough surfaces. For a
+<strong>local environment</strong> (a room, garage, or cave) use a <strong>Reflection Probe</strong>; for a
+<strong>sharp, mirror-like reflection on a flat surface</strong>, add a <strong>Mirror</strong> — see below.</p>
+<h3 id="reflection-probes">Reflection probes<a class="headerlink" href="#reflection-probes" title="Link to this section">&para;</a></h3>
+<p>Sky IBL reflects the same environment everywhere, which looks wrong indoors. A
+<strong>Reflection Probe</strong> (Structure panel's create menu) captures the scene at its own
+position and applies that environment to meshes inside a box-shaped influence volume,
+with box-projected (parallax-corrected) reflections that stay anchored to the room.
+Probes can be <strong>static</strong> — an authored cubemap or a one-time capture at load — or
+<strong>dynamic</strong>, re-capturing at runtime on move, on an interval, or on demand. A mesh that
+wraps around a probe would show up inside its own reflection, so turn off its <strong>Render
+in Probes</strong> flag to keep it out of captures. See
+<a href="../rendering-pipeline/#reflection-probes">Rendering Pipeline — Reflection probes</a>.</p>
+<h3 id="mirrors">Mirrors<a class="headerlink" href="#mirrors" title="Link to this section">&para;</a></h3>
+<p>For a true planar reflection on a flat surface — a mirror, still water, or a polished
+floor — add a <strong>Mirror</strong> from the Structure panel's create menu. It produces an upright
+reflective wall that reflects the scene from the viewer's mirrored viewpoint, with no
+camera or texture setup required. Because a mirror shows the side of an object facing it
+— the side a single key light usually misses — reflected meshes want <strong>Receive IBL</strong> or a
+fill light to avoid looking washed out. See
+<a href="../rendering-pipeline/#mirrors-and-planar-reflections">Rendering Pipeline — Mirrors and planar reflections</a>
+for how it works, its lighting, and its performance cost.</p>
+<h3 id="water">Water<a class="headerlink" href="#water" title="Link to this section">&para;</a></h3>
+<p>For a sea, a lake, or a pool, add a <strong>Water</strong> from the Structure panel's create menu. It
+draws an animated surface at the entity's height: Gerstner waves you shape with a height,
+length, direction, and steepness, scrolling ripples, sky or planar reflections, refraction
+of the scene behind it, shore and crest foam, and a fade into the water when the camera
+goes below the surface. Dynamic 3D bodies with a <strong>Buoyancy</strong> above <code>0</code> float on its
+waves, and scripts can read the surface with <code>Water.getHeight</code>. See
+<a href="../rendering-pipeline/#water">Rendering Pipeline — Water</a>,
+<a href="../physics/#buoyancy">Physics — Buoyancy</a>, and the <a href="../../reference/classes/water/">Water reference</a>.</p>
+<h2 id="cameras">Cameras<a class="headerlink" href="#cameras" title="Link to this section">&para;</a></h2>
+<p>Cameras define the viewpoint into a 3D scene. Position and orient a camera entity, and
+set it as the scene's active camera to control what the player sees.</p>
+<p><img alt="Previewing the view through a scene camera" src="../../assets/screenshots/editor-camera-preview.png" /></p>
+<p>Cameras can be perspective, orthographic, or UI cameras. A scene owns an active camera
+entity; editor scene cameras are separate from game cameras so you can navigate while
+preserving the player's view.</p>
+<h2 id="additional-features">Additional features<a class="headerlink" href="#additional-features" title="Link to this section">&para;</a></h2>
+<p>The runtime also supports <a href="../particles/">particle systems</a>, <a href="../terrain/">terrain</a> with
+level-of-detail (LOD), automatic <a href="../rendering-pipeline/#mesh-detail-lod">mesh detail levels</a>
+for distant props, and <a href="../rendering-pipeline/#gpu-instancing">mesh instancing</a> for
+efficiently rendering many copies of the same geometry. An optional
+<a href="../rendering-pipeline/#depth-prepass">depth prepass</a> cuts overdraw on dense opaque scenes.</p>
+<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Link to this section">&para;</a></h2>
+<p>Add interactivity with <a href="../physics/">Physics</a>, or learn how to ship your game in
+<a href="../../editor/export/">Export Window</a>.</p>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../2d-graphics/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">2D Graphics</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../rendering-pipeline/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Rendering Pipeline</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/manual/3d-graphics.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#3d-graphics" class="dx-toc-link" data-level="1">3D Graphics</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#models" class="dx-toc-link" data-level="2">Models</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#gltf-compatibility-and-limits" class="dx-toc-link" data-level="3">GLTF compatibility and limits</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#gltf-node-hierarchy" class="dx-toc-link" data-level="3">GLTF node hierarchy</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#merging-static-model-meshes" class="dx-toc-link" data-level="3">Merging static model meshes</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#reloading-a-rearranged-model" class="dx-toc-link" data-level="3">Reloading a rearranged model</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#fbx-models" class="dx-toc-link" data-level="3">FBX models</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#pbr-materials" class="dx-toc-link" data-level="2">PBR materials</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#editing-an-imported-models-submeshes" class="dx-toc-link" data-level="3">Editing an imported model's submeshes</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#shared-material-files-material" class="dx-toc-link" data-level="3">Shared material files (.material)</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#lighting-and-shadows" class="dx-toc-link" data-level="2">Lighting and shadows</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#projected-spot-light-masks" class="dx-toc-link" data-level="3">Projected spot-light masks</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#environment" class="dx-toc-link" data-level="2">Environment</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#sky-and-reflections" class="dx-toc-link" data-level="3">Sky and reflections</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#reflection-probes" class="dx-toc-link" data-level="3">Reflection probes</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#mirrors" class="dx-toc-link" data-level="3">Mirrors</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#water" class="dx-toc-link" data-level="3">Water</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#cameras" class="dx-toc-link" data-level="2">Cameras</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#additional-features" class="dx-toc-link" data-level="2">Additional features</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#next-steps" class="dx-toc-link" data-level="2">Next steps</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../versions.json";
+    window.QUANTUM_PAGE_URL = "manual/3d-graphics/";
+  </script>
+  <script src="../../js/quantum.js" defer></script>
+</body>
+</html>

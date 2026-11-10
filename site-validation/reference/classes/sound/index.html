@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sound — Quantum Engine Docs</title>
+  <meta name="description" content="Sound API reference (C++ and Lua).">
+  <meta property="og:title" content="Sound — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/reference/classes/sound/">
+
+  <link rel="icon" type="image/png" href="../../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../../css/quantum.css">
+  <link rel="stylesheet" href="../../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="sound">Sound<a class="headerlink" href="#sound" title="Link to this section">&para;</a></h1>
+<p><strong>Inherits:</strong> <a href="../entityhandle/">EntityHandle</a><br />
+<strong>C++ type:</strong> <code>Sound</code></p>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Link to this section">&para;</a></h2>
+<p>Plays audio clips in a scene, supporting both 2D and 3D positional audio. <code>Sound</code> wraps the <a href="https://solhsa.com/soloud/">SoLoud</a> audio engine, giving you precise control over playback state, volume, pitch, panning, looping, 3D attenuation and Doppler effect.</p>
+<p>A 2D sound is heard at the same volume and position regardless of where in the scene the listener or source is placed; a 3D sound is automatically attenuated based on the distance between the sound entity and the active camera.</p>
+<h3 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Link to this section">&para;</a></h3>
+<p>All three overloads are available in C++ and Lua:</p>
+<ul>
+<li><code>Sound(Scene* scene)</code> — creates a new 2D sound entity.</li>
+<li><code>Sound(Scene* scene, bool is3D)</code> — creates a new sound entity, adding a transform when <code>is3D</code> is <code>true</code>.</li>
+<li><code>Sound(Scene* scene, Entity entity)</code> — wraps an existing sound entity without taking ownership or adding components.</li>
+</ul>
+<p>In Lua, a numeric second argument is an entity ID; use <code>true</code> or <code>false</code> to choose
+the 3D/2D creation overload. For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">sound2D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Sound</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">local</span><span class="w"> </span><span class="nv">sound3D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Sound</span><span class="p">(</span><span class="nv">scene</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">local</span><span class="w"> </span><span class="nv">existingSound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Sound</span><span class="p">(</span><span class="nv">scene</span><span class="p">,</span><span class="w"> </span><span class="nv">soundEntity</span><span class="p">)</span>
+</code></pre></div>
+<p>Keep newly created owning handles alive while you need their entities. See
+<a href="../entityhandle/#ownership-and-lifetime">EntityHandle ownership</a>.</p>
+<h3 id="properties">Properties<a class="headerlink" href="#properties" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Default</th>
+<th>Langs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bool</td>
+<td><a href="#sound3d">sound3D</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#clockedsound">clockedSound</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>double</td>
+<td><a href="#volume">volume</a></td>
+<td><code>1.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#speed">speed</a></td>
+<td><code>1.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#pan">pan</a></td>
+<td><code>0.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#looping">looping</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>double</td>
+<td><a href="#loopingpoint">loopingPoint</a></td>
+<td><code>0.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#protectvoice">protectVoice</a></td>
+<td><code>false</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#mindistance-maxdistance">minDistance</a></td>
+<td><code>1.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#mindistance-maxdistance">maxDistance</a></td>
+<td><code>1000.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td><a href="#soundattenuation">SoundAttenuation</a></td>
+<td><a href="#attenuationmodel">attenuationModel</a></td>
+<td><code>NO_ATTENUATION</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#attenuationrollofffactor">attenuationRolloffFactor</a></td>
+<td><code>1.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>float</td>
+<td><a href="#dopplerfactor">dopplerFactor</a></td>
+<td><code>1.0</code></td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Langs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td><a href="#loadsound">loadSound</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#destroysound">destroySound</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td><a href="../object/">Object</a></td>
+<td><a href="#getobject">getObject</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#play-pause-stop">play</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#play-pause-stop">pause</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#play-pause-stop">stop</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#seek">seek</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>double</td>
+<td><a href="#getlength-getplayingtime">getLength</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>double</td>
+<td><a href="#getlength-getplayingtime">getPlayingTime</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#isplaying-ispaused-isstopped">isPlaying</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#isplaying-ispaused-isstopped">isPaused</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>bool</td>
+<td><a href="#isplaying-ispaused-isstopped">isStopped</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#setinaudiblebehavior">setInaudibleBehavior</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void</td>
+<td><a href="#mindistance-maxdistance">setMinMaxDistance</a></td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<h2 id="enumerations">Enumerations<a class="headerlink" href="#enumerations" title="Link to this section">&para;</a></h2>
+<h3 id="soundattenuation">SoundAttenuation<a class="headerlink" href="#soundattenuation" title="Link to this section">&para;</a></h3>
+<p>Controls how volume falls off with distance in 3D audio.</p>
+<ul>
+<li><strong>NO_ATTENUATION</strong> - No distance attenuation; the sound is heard at full volume everywhere</li>
+<li><strong>INVERSE_DISTANCE</strong> - Classic <code>1 / distance</code> model, similar to the OpenAL default</li>
+<li><strong>LINEAR_DISTANCE</strong> - Linear ramp from <code>minDistance</code> to <code>maxDistance</code></li>
+<li><strong>EXPONENTIAL_DISTANCE</strong> - Exponential roll-off; volume drops quickly after <code>minDistance</code></li>
+</ul>
+<hr />
+<h2 id="property-details">Property details<a class="headerlink" href="#property-details" title="Link to this section">&para;</a></h2>
+<h3 id="sound3d">sound3D<a class="headerlink" href="#sound3d" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setSound3D</strong>(bool sound3D)</li>
+<li><em>Getter</em>: bool <strong>isSound3D</strong>() const</li>
+</ul>
+<p>When <code>true</code>, the sound is rendered in 3D space relative to the active camera. The entity's world position is used as the source position. When <code>false</code>, the sound is a standard stereo/mono clip with no positional information.</p>
+<hr />
+<h3 id="clockedsound">clockedSound<a class="headerlink" href="#clockedsound" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setClockedSound</strong>(bool enableClocked)</li>
+<li><em>Getter</em>: bool <strong>isClockedSound</strong>() const</li>
+</ul>
+<p>When enabled, SoLoud plays the sound in <em>clocked</em> mode. This keeps multiple streamed sounds synchronised to the engine's update tick, which is important when mixing music with synchronised sound effects. Has no effect on loaded WAV/OGG samples (<code>Wav</code>).</p>
+<hr />
+<h3 id="volume">volume<a class="headerlink" href="#volume" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setVolume</strong>(double volume)</li>
+<li><em>Getter</em>: double <strong>getVolume</strong>() const</li>
+</ul>
+<p>Master volume for this source. A value of <code>1.0</code> is full-volume, <code>0.0</code> is silent. Values above <code>1.0</code> are allowed but may clip the audio output.</p>
+<hr />
+<h3 id="speed">speed<a class="headerlink" href="#speed" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setSpeed</strong>(float speed)</li>
+<li><em>Getter</em>: float <strong>getSpeed</strong>() const</li>
+</ul>
+<p>Playback speed (pitch) multiplier. <code>1.0</code> is normal, <code>2.0</code> plays at double speed (one octave up), <code>0.5</code> plays at half speed (one octave down).</p>
+<hr />
+<h3 id="pan">pan<a class="headerlink" href="#pan" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setPan</strong>(float pan)</li>
+<li><em>Getter</em>: float <strong>getPan</strong>() const</li>
+</ul>
+<p>Stereo pan. <code>-1.0</code> is fully left, <code>0.0</code> is centre, <code>1.0</code> is fully right. Panning has no effect when <code>sound3D</code> is <code>true</code>.</p>
+<hr />
+<h3 id="looping">looping<a class="headerlink" href="#looping" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setLooping</strong>(bool looping)</li>
+<li><em>Getter</em>: bool <strong>isLooping</strong>() const</li>
+</ul>
+<p>When <code>true</code>, the clip restarts from <a href="#loopingpoint">loopingPoint</a> after it finishes.</p>
+<hr />
+<h3 id="loopingpoint">loopingPoint<a class="headerlink" href="#loopingpoint" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setLoopingPoint</strong>(double loopingPoint)</li>
+<li><em>Getter</em>: double <strong>getLoopingPoint</strong>() const</li>
+</ul>
+<p>Position in <strong>seconds</strong> at which the clip restarts when <a href="#looping">looping</a> is <code>true</code>. Defaults to <code>0.0</code> (beginning of the clip).</p>
+<hr />
+<h3 id="protectvoice">protectVoice<a class="headerlink" href="#protectvoice" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setProtectVoice</strong>(bool protectVoice)</li>
+<li><em>Getter</em>: bool <strong>isProtectVoice</strong>() const</li>
+</ul>
+<p>If <code>true</code>, SoLoud will never steal this voice when all voice slots are occupied. Use for critical audio (e.g. player death sounds) that must always play.</p>
+<hr />
+<h3 id="mindistance-maxdistance">minDistance / maxDistance<a class="headerlink" href="#mindistance-maxdistance" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setMinDistance</strong>(float minDistance)</li>
+<li><em>Getter</em>: float <strong>getMinDistance</strong>() const</li>
+<li><em>Setter</em>: void <strong>setMaxDistance</strong>(float maxDistance)</li>
+<li><em>Getter</em>: float <strong>getMaxDistance</strong>() const</li>
+<li><em>Combined setter</em>: void <strong>setMinMaxDistance</strong>(float minDistance, float maxDistance)</li>
+</ul>
+<p>Distance thresholds used by the <a href="#attenuationmodel">attenuationModel</a> when <code>sound3D</code> is <code>true</code>.</p>
+<ul>
+<li>Inside <code>minDistance</code> the sound plays at full volume.</li>
+<li>Beyond <code>maxDistance</code> the sound is inaudible (for <code>LINEAR_DISTANCE</code>) or effectively silent.</li>
+</ul>
+<hr />
+<h3 id="attenuationmodel">attenuationModel<a class="headerlink" href="#attenuationmodel" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setAttenuationModel</strong>(<a href="#soundattenuation">SoundAttenuation</a> attenuationModel)</li>
+<li><em>Getter</em>: <a href="#soundattenuation">SoundAttenuation</a> <strong>getAttenuationModel</strong>() const</li>
+</ul>
+<p>Select the distance-attenuation algorithm for this 3D source. See <a href="#soundattenuation">SoundAttenuation</a> for the available values.</p>
+<hr />
+<h3 id="attenuationrollofffactor">attenuationRolloffFactor<a class="headerlink" href="#attenuationrollofffactor" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setAttenuationRolloffFactor</strong>(float attenuationRolloffFactor)</li>
+<li><em>Getter</em>: float <strong>getAttenuationRolloffFactor</strong>() const</li>
+</ul>
+<p>Scales how aggressively the attenuation model reduces volume with distance. Higher values mean faster roll-off. The exact meaning depends on the <a href="#attenuationmodel">attenuationModel</a> in use.</p>
+<hr />
+<h3 id="dopplerfactor">dopplerFactor<a class="headerlink" href="#dopplerfactor" title="Link to this section">&para;</a></h3>
+<ul>
+<li><em>Setter</em>: void <strong>setDopplerFactor</strong>(float dopplerFactor)</li>
+<li><em>Getter</em>: float <strong>getDopplerFactor</strong>() const</li>
+</ul>
+<p>Controls the intensity of the Doppler pitch shift for this 3D source. <code>0.0</code> disables Doppler; <code>1.0</code> is physically accurate; values above <code>1.0</code> exaggerate the effect. Requires <code>sound3D</code> to be <code>true</code>.</p>
+<hr />
+<h2 id="method-details">Method details<a class="headerlink" href="#method-details" title="Link to this section">&para;</a></h2>
+<h3 id="loadsound">loadSound<a class="headerlink" href="#loadsound" title="Link to this section">&para;</a></h3>
+<ul>
+<li>int <strong>loadSound</strong>(const std::string&amp; filename)</li>
+</ul>
+<p>Loads an audio file from disk. Supported formats depend on the SoLoud build bundled with Quantum (WAV, OGG, FLAC, MP3, and others). Returns <code>1</code> once the file is loaded, and <code>0</code> while it is still loading with <a href="../engine/#asyncloading">async loading</a>, when it failed, or before the view is ready. Loading a different file replaces the current one.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Sound</span><span class="w"> </span><span class="nf">bgm</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">bgm</span><span class="p">.</span><span class="n">loadSound</span><span class="p">(</span><span class="s">&quot;sounds/music.ogg&quot;</span><span class="p">);</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">bgm</span><span class="p">.</span><span class="n">setLooping</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">bgm</span><span class="p">.</span><span class="n">play</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">bgm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Sound</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">bgm</span><span class="p">:</span><span class="nf">loadSound</span><span class="p">(</span><span class="s2">&quot;sounds/music.ogg&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nv">bgm</span><span class="p">.</span><span class="py">looping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nv">bgm</span><span class="p">:</span><span class="nf">play</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="destroysound">destroySound<a class="headerlink" href="#destroysound" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>destroySound</strong>()</li>
+</ul>
+<p>Unloads the audio data and frees the SoLoud voice slot. Call this when the sound is no longer needed to free memory immediately without destroying the entity.</p>
+<hr />
+<h3 id="getobject">getObject<a class="headerlink" href="#getobject" title="Link to this section">&para;</a></h3>
+<ul>
+<li><a href="../object/">Object</a> <strong>getObject</strong>() const</li>
+</ul>
+<p>Returns the <code>Object</code> component of this sound entity. Use this to set the world-space position for 3D audio or to attach the sound to a parent entity.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">Sound</span><span class="w"> </span><span class="nf">footstep</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span><span class="w">  </span><span class="c1">// 3D sound</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">footstep</span><span class="p">.</span><span class="n">loadSound</span><span class="p">(</span><span class="s">&quot;sounds/step.wav&quot;</span><span class="p">);</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">footstep</span><span class="p">.</span><span class="n">getObject</span><span class="p">().</span><span class="n">setPosition</span><span class="p">(</span><span class="n">playerPos</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">footstep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Sound</span><span class="p">(</span><span class="nv">scene</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nv">footstep</span><span class="p">:</span><span class="nf">loadSound</span><span class="p">(</span><span class="s2">&quot;sounds/step.wav&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kd">local</span><span class="w"> </span><span class="nv">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">footstep</span><span class="p">:</span><span class="nf">getObject</span><span class="p">()</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nv">source</span><span class="p">.</span><span class="py">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">playerPos</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="play-pause-stop">play / pause / stop<a class="headerlink" href="#play-pause-stop" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>play</strong>()</li>
+<li>void <strong>pause</strong>()</li>
+<li>void <strong>stop</strong>()</li>
+</ul>
+<p>Control the playback state of the sound. <code>play()</code> starts or resumes from the current position, <code>pause()</code> freezes playback at the current position, and <code>stop()</code> resets the position to the beginning.</p>
+<hr />
+<h3 id="seek">seek<a class="headerlink" href="#seek" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>seek</strong>(double time)</li>
+</ul>
+<p>Jump to a specific position in <strong>seconds</strong> within the audio clip. Has no effect if no clip is loaded.</p>
+<hr />
+<h3 id="getlength-getplayingtime">getLength / getPlayingTime<a class="headerlink" href="#getlength-getplayingtime" title="Link to this section">&para;</a></h3>
+<ul>
+<li>double <strong>getLength</strong>()</li>
+<li>double <strong>getPlayingTime</strong>()</li>
+</ul>
+<p><code>getLength()</code> returns the total duration of the loaded clip in <strong>seconds</strong>. <code>getPlayingTime()</code> returns the current playback cursor position in <strong>seconds</strong>.</p>
+<hr />
+<h3 id="isplaying-ispaused-isstopped">isPlaying / isPaused / isStopped<a class="headerlink" href="#isplaying-ispaused-isstopped" title="Link to this section">&para;</a></h3>
+<ul>
+<li>bool <strong>isPlaying</strong>()</li>
+<li>bool <strong>isPaused</strong>()</li>
+<li>bool <strong>isStopped</strong>()</li>
+</ul>
+<p>Query the current playback state.</p>
+<hr />
+<h3 id="setinaudiblebehavior">setInaudibleBehavior<a class="headerlink" href="#setinaudiblebehavior" title="Link to this section">&para;</a></h3>
+<ul>
+<li>void <strong>setInaudibleBehavior</strong>(bool mustTick, bool kill)</li>
+</ul>
+<p>Controls what SoLoud does when this voice becomes inaudible (volume reaches zero or the source is out of range).</p>
+<ul>
+<li><strong>mustTick</strong> — when <code>true</code>, the voice continues to advance its playback position even while inaudible, so it stays in sync with other sources.</li>
+<li><strong>kill</strong> — when <code>true</code>, the voice is automatically removed once it becomes inaudible, freeing a voice slot.</li>
+</ul>
+<p>If both are <code>false</code>, the voice is simply paused while inaudible and resumes when it becomes audible again.</p>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../waterexclusion/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">WaterExclusion</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../button/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Button</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/reference/classes/sound.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#sound" class="dx-toc-link" data-level="1">Sound</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#description" class="dx-toc-link" data-level="2">Description</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#constructors" class="dx-toc-link" data-level="3">Constructors</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#properties" class="dx-toc-link" data-level="3">Properties</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#methods" class="dx-toc-link" data-level="3">Methods</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#enumerations" class="dx-toc-link" data-level="2">Enumerations</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#soundattenuation" class="dx-toc-link" data-level="3">SoundAttenuation</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#property-details" class="dx-toc-link" data-level="2">Property details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#sound3d" class="dx-toc-link" data-level="3">sound3D</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#clockedsound" class="dx-toc-link" data-level="3">clockedSound</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#volume" class="dx-toc-link" data-level="3">volume</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#speed" class="dx-toc-link" data-level="3">speed</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#pan" class="dx-toc-link" data-level="3">pan</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#looping" class="dx-toc-link" data-level="3">looping</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#loopingpoint" class="dx-toc-link" data-level="3">loopingPoint</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#protectvoice" class="dx-toc-link" data-level="3">protectVoice</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#mindistance-maxdistance" class="dx-toc-link" data-level="3">minDistance / maxDistance</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#attenuationmodel" class="dx-toc-link" data-level="3">attenuationModel</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#attenuationrollofffactor" class="dx-toc-link" data-level="3">attenuationRolloffFactor</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#dopplerfactor" class="dx-toc-link" data-level="3">dopplerFactor</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#method-details" class="dx-toc-link" data-level="2">Method details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#loadsound" class="dx-toc-link" data-level="3">loadSound</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#destroysound" class="dx-toc-link" data-level="3">destroySound</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getobject" class="dx-toc-link" data-level="3">getObject</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#play-pause-stop" class="dx-toc-link" data-level="3">play / pause / stop</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#seek" class="dx-toc-link" data-level="3">seek</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getlength-getplayingtime" class="dx-toc-link" data-level="3">getLength / getPlayingTime</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#isplaying-ispaused-isstopped" class="dx-toc-link" data-level="3">isPlaying / isPaused / isStopped</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setinaudiblebehavior" class="dx-toc-link" data-level="3">setInaudibleBehavior</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../../versions.json";
+    window.QUANTUM_PAGE_URL = "reference/classes/sound/";
+  </script>
+  <script src="../../../js/quantum.js" defer></script>
+</body>
+</html>

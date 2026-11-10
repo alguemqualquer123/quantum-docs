@@ -1,10 +1,10 @@
 ---
-description: How to contribute to the Doriax documentation site.
+description: How to contribute to the Quantum documentation site.
 ---
 
 # Documentation Guide
 
-The documentation site is built with MkDocs and a custom Doriax theme. Source pages
+The documentation site is built with MkDocs and a custom Quantum theme. Source pages
 live under `docs/`; generated site output lives under `site/`.
 
 ## Local preview
@@ -18,7 +18,7 @@ mkdocs build --strict
 ## Reference documentation
 
 API reference pages live under `docs/reference/classes/`. Each file documents **one
-class** with C++ and Lua on the same page ([Supernova-style](https://github.com/supernovaengine/supernova-docs)).
+class** with C++ and Lua on the same page, using the Quantum naming and examples.
 
 **Do not** use a bulk markdown generator in this repo. Pages are edited by hand.
 
@@ -27,8 +27,7 @@ class** with C++ and Lua on the same page ([Supernova-style](https://github.com/
 To list every bound class, method, and property, run the engine script (reference only):
 
 ```bash
-python3 /path/to/doriax/generate_api_suggestions.py \
-  engine/core/script/binding /tmp/out.h engine/core
+cmake --build build --target generate_lua_docs generate_lua_types
 ```
 
 Use that output when adding or verifying APIs. Then edit the matching
@@ -81,9 +80,9 @@ docs from `main`:
 
 | URL | Contents |
 | --- | --- |
-| `docs.doriax.org/` | Latest stable release (canonical URLs) |
-| `docs.doriax.org/0.7/` | The 0.7 release series |
-| `docs.doriax.org/unstable/` | Current `main` branch |
+| `alguemqualquer123.github.io/quantum-docs/` | Latest stable release (canonical URLs) |
+| `alguemqualquer123.github.io/quantum-docs/0.7/` | The 0.7 release series |
+| `alguemqualquer123.github.io/quantum-docs/unstable/` | Current `main` branch |
 
 `main` is always the unstable docs. Changes land there and reach the stable URLs
 only when a release is tagged, so a page describing an unreleased feature does

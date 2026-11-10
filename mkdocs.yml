@@ -1,13 +1,13 @@
-site_name: Doriax Engine Docs
-site_url: 'https://docs.doriax.org'
-site_author: 'Eduardo Doria'
-site_description: 'Official documentation for the Doriax game engine — a free, lightweight, open-source engine for building 2D and 3D games with Lua or C++.'
+site_name: Quantum Engine Docs
+site_url: 'https://alguemqualquer123.github.io/quantum-docs/'
+site_author: 'SR VINIX'
+site_description: 'Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.'
 
-repo_name: 'doriaxengine/doriax'
-repo_url: 'https://github.com/doriaxengine/doriax'
-edit_uri: 'https://github.com/doriaxengine/doriax-docs/edit/main/docs/'
+repo_name: 'alguemqualquer123/quantum'
+repo_url: 'https://github.com/alguemqualquer123/quantum'
+edit_uri: 'https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/'
 
-copyright: 'Copyright &copy; 2026 Eduardo Doria. Documentation under CC-BY 4.0.'
+copyright: 'Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.'
 
 watch:
   - theme
@@ -15,8 +15,8 @@ watch:
 theme:
   name: null
   custom_dir: 'theme/'
-  logo: 'assets/logo/logo_part1.png'
-  favicon: 'assets/logo/logo_part1.png'
+  logo: 'assets/logo/quantum_mark.png'
+  favicon: 'assets/logo/quantum_favicon.png'
 
 extra:
   # Versioning. These are the values for a plain `mkdocs build` / `mkdocs serve`;
@@ -32,12 +32,10 @@ extra:
 
   social:
     - name: GitHub
-      link: 'https://github.com/doriaxengine/doriax'
+      link: 'https://github.com/alguemqualquer123/quantum'
     - name: Discord
-      link: 'https://discord.gg/yXXDyJf3gT'
-  homepage: 'https://doriax.org'
-  analytics:
-    property: G-D2G3S99SDC
+      link: 'https://discord.gg/gSHUVHXNwP'
+  homepage: 'https://alguemqualquer123.github.io/quantum-docs/'
 
 markdown_extensions:
   - tables
@@ -96,10 +94,13 @@ nav:
       - Terrain Editor: 'editor/terrain-editor.md'
       - Animation Timeline: 'editor/animation.md'
       - Code Editor: 'editor/code-editor.md'
+      - Script Debugger: 'editor/script-debugger.md'
       - Custom Shaders: 'editor/custom-shaders.md'
       - Export Window: 'editor/export.md'
       - Command-Line Tools: 'editor/command-line.md'
       - MCP Server: 'editor/mcp-server.md'
+      - Network Play: 'editor/network-play.md'
+      - Stability & Recovery: 'editor/stability-and-recovery.md'
   - Manual:
       - Engine Architecture: 'manual/architecture.md'
       - Scenes & Entities: 'manual/scenes-and-entities.md'
@@ -125,6 +126,11 @@ nav:
       - Math & Utilities: 'manual/math-and-utilities.md'
       - Threading & Async Loading: 'manual/threading-and-async-loading.md'
       - Monetization: 'manual/monetization.md'
+      - Networking: 'manual/networking.md'
+      - Rendering Upgrade Status: 'manual/rendering-upgrade.md'
+      - Scripting Tools: 'manual/scripting-tools.md'
+      - Asset Pipeline: 'manual/asset-pipeline.md'
+      - Release & Platforms: 'manual/release-and-platforms.md'
   - Reference:
       - API Index: 'reference/index.md'
       - Enumerations: 'reference/enums.md'

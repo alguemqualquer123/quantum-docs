@@ -1,5 +1,5 @@
 ---
-description: Doriax API enumerations exposed to C++ and Lua.
+description: Quantum API enumerations exposed to C++ and Lua.
 ---
 
 # Enumerations
@@ -45,5 +45,5 @@ types. C++-only enums are noted below. See [Engine](classes/engine.md) for `Scal
 | `RecurrenceMode` / `SubscriptionReplacementMode` | Subscription pricing and plan changes |
 | `WebPortalType` / `WebPortalAdType` / `WebPortalEnvironment` | Web game portals |
 
-Run `doriax/generate_api_suggestions.py` against the engine binding folder for the
+Run `quantum/generate_api_suggestions.py` against the engine binding folder for the
 authoritative member list when documenting new enum values.

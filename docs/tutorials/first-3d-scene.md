@@ -1,11 +1,11 @@
 ---
-description: Build a small 3D Doriax scene with a model, camera, light, physics, and play mode.
+description: Build a small 3D Quantum scene with a model, camera, light, physics, and play mode.
 ---
 
 # First 3D Scene
 
 This tutorial creates a complete small 3D scene and introduces the essential pieces of
-a Doriax 3D level: scene setup, camera, directional light, a 3D model, PBR materials,
+a Quantum 3D level: scene setup, camera, directional light, a 3D model, PBR materials,
 and optional collision.
 
 ![The finished 3D scene running in play mode](../assets/screenshots/tutorial-3d-play.png)

@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdMob — Quantum Engine Docs</title>
+  <meta name="description" content="AdMob API reference (C++ and Lua) — Google Mobile Ads on Android and iOS, with consent, banners, and full-screen ads.">
+  <meta property="og:title" content="AdMob — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/reference/classes/admob/">
+
+  <link rel="icon" type="image/png" href="../../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../../css/quantum.css">
+  <link rel="stylesheet" href="../../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="admob">AdMob<a class="headerlink" href="#admob" title="Link to this section">&para;</a></h1>
+<p><strong>C++ type:</strong> <code>AdMob</code> (static) · <strong>Header:</strong> <code>AdMob.h</code></p>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Link to this section">&para;</a></h2>
+<p>Google Mobile Ads on Android and iOS: banner, interstitial, rewarded, rewarded
+interstitial and app open ads, plus Google's consent form (User Messaging Platform).
+Exports include the SDK only when <strong>Google AdMob</strong> is enabled in the project's
+<a href="../../../editor/project-settings/#android">Android</a> or
+<a href="../../../editor/project-settings/#ios">iOS</a> settings. Everywhere else the calls still
+compile and run, and report <code>errorNotAvailable</code> through their events.</p>
+<p>Results arrive as <a href="#events">events</a> at the start of a frame, never as return values.
+Loading a format again replaces its ad. See <a href="../../../manual/monetization/#admob">Monetization</a>
+for the setup and the full flow.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">REGISTER_EVENT</span><span class="p">(</span><span class="n">AdMob</span><span class="o">::</span><span class="n">onUserEarnedReward</span><span class="p">,</span><span class="w"> </span><span class="n">onUserEarnedReward</span><span class="p">);</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">AdMob</span><span class="o">::</span><span class="n">loadRewardedAd</span><span class="p">(</span><span class="s">&quot;ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx&quot;</span><span class="p">);</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Shop::onUserEarnedReward</span><span class="p">(</span><span class="n">AdMobFormat</span><span class="w"> </span><span class="n">format</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">coins</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">amount</span><span class="p">;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nf">RegisterEvent</span><span class="p">(</span><span class="nv">self</span><span class="p">,</span><span class="w"> </span><span class="nv">AdMob</span><span class="p">.</span><span class="py">onUserEarnedReward</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;onUserEarnedReward&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">AdMob</span><span class="p">.</span><span class="nf">loadRewardedAd</span><span class="p">(</span><span class="s2">&quot;ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kr">function</span><span class="w"> </span><span class="nc">Shop</span><span class="p">:</span><span class="nf">onUserEarnedReward</span><span class="p">(</span><span class="nv">format</span><span class="p">,</span><span class="w"> </span><span class="nv">rewardType</span><span class="p">,</span><span class="w"> </span><span class="nv">amount</span><span class="p">)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nv">self</span><span class="p">.</span><span class="py">coins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">coins</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">amount</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Langs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>static void</td>
+<td><a href="#initialize-isinitialized">initialize</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#initialize-isinitialized">isInitialized</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#request-settings">setMaxAdContentRating</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static <a href="#admobrating">AdMobRating</a></td>
+<td><a href="#request-settings">getMaxAdContentRating</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#request-settings">setAgeRestriction</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static <a href="#admobagerestriction">AdMobAgeRestriction</a></td>
+<td><a href="#request-settings">getAgeRestriction</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#request-settings">setPersonalization</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static <a href="#admobpersonalization">AdMobPersonalization</a></td>
+<td><a href="#request-settings">getPersonalization</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#settestdeviceids-gettestdeviceids">setTestDeviceIds</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static std::vector\&lt;std::string&gt;</td>
+<td><a href="#settestdeviceids-gettestdeviceids">getTestDeviceIds</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#requestconsent">requestConsent</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#setconsentdebuggeography-getconsentdebuggeography">setConsentDebugGeography</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static <a href="#admobdebuggeography">AdMobDebugGeography</a></td>
+<td><a href="#setconsentdebuggeography-getconsentdebuggeography">getConsentDebugGeography</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static <a href="#admobconsentstatus">AdMobConsentStatus</a></td>
+<td><a href="#getconsentstatus-canrequestads">getConsentStatus</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#getconsentstatus-canrequestads">canRequestAds</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#isprivacyoptionsrequired-showprivacyoptionsform">isPrivacyOptionsRequired</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#isprivacyoptionsrequired-showprivacyoptionsform">showPrivacyOptionsForm</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#resetconsent">resetConsent</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#loadbannerad">loadBannerAd</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#banner-control">isBannerAdLoaded</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#banner-control">showBannerAd</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#banner-control">hideBannerAd</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#banner-control">isBannerAdVisible</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#banner-control">setBannerAdPosition</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static <a href="#admobbannerposition">AdMobBannerPosition</a></td>
+<td><a href="#banner-control">getBannerAdPosition</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#banner-control">removeBannerAd</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static int</td>
+<td><a href="#banner-control">getBannerAdWidth</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static int</td>
+<td><a href="#banner-control">getBannerAdHeight</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#full-screen-ads">loadInterstitialAd</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#full-screen-ads">isInterstitialAdLoaded</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#full-screen-ads">showInterstitialAd</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#full-screen-ads">loadRewardedAd</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#full-screen-ads">isRewardedAdLoaded</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#full-screen-ads">showRewardedAd</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#full-screen-ads">loadRewardedInterstitialAd</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#full-screen-ads">isRewardedInterstitialAdLoaded</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#full-screen-ads">showRewardedInterstitialAd</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#full-screen-ads">loadAppOpenAd</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static bool</td>
+<td><a href="#full-screen-ads">isAppOpenAdLoaded</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#full-screen-ads">showAppOpenAd</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#setserversideverificationoptions">setServerSideVerificationOptions</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#setappvolume-setappmuted">setAppVolume</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#setappvolume-setappmuted">setAppMuted</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>static void</td>
+<td><a href="#openadinspector">openAdInspector</a></td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<h3 id="callback-events">Callback events<a class="headerlink" href="#callback-events" title="Link to this section">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Callback</th>
+<th>Name</th>
+<th>Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void()</td>
+<td><a href="#events">onInitialized</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(int, std::string)</td>
+<td><a href="#events">onConsentUpdated</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(AdMobFormat)</td>
+<td><a href="#events">onAdLoaded</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(AdMobFormat, int, std::string)</td>
+<td><a href="#events">onAdFailedToLoad</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(AdMobFormat)</td>
+<td><a href="#events">onAdShown</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(AdMobFormat, int, std::string)</td>
+<td><a href="#events">onAdFailedToShow</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(AdMobFormat)</td>
+<td><a href="#events">onAdDismissed</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(AdMobFormat)</td>
+<td><a href="#events">onAdClicked</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(AdMobFormat)</td>
+<td><a href="#events">onAdImpression</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(AdMobFormat, std::string, int)</td>
+<td><a href="#events">onUserEarnedReward</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(AdMobFormat, long long, std::string, AdMobPrecision)</td>
+<td><a href="#events">onAdPaid</a></td>
+<td>C++ | Lua</td>
+</tr>
+<tr>
+<td>void(int, std::string)</td>
+<td><a href="#events">onAdInspectorClosed</a></td>
+<td>C++ | Lua</td>
+</tr>
+</tbody>
+</table>
+<h2 id="method-details">Method details<a class="headerlink" href="#method-details" title="Link to this section">&para;</a></h2>
+<h3 id="initialize-isinitialized">initialize / isInitialized<a class="headerlink" href="#initialize-isinitialized" title="Link to this section">&para;</a></h3>
+<ul>
+<li>static void <strong>initialize</strong>()</li>
+<li>static bool <strong>isInitialized</strong>()</li>
+</ul>
+<p>Starts Google Mobile Ads with the <a href="#request-settings">request settings</a> made so far.
+<a href="#events"><code>onInitialized</code></a> fires when it is ready, and <code>isInitialized()</code> is true from
+then on. Call it once <a href="#requestconsent">consent</a> allows ad requests
+(<a href="#getconsentstatus-canrequestads"><code>canRequestAds()</code></a>), and load the first ads in
+<code>onInitialized</code>.</p>
+<hr />
+<h3 id="request-settings">Request settings<a class="headerlink" href="#request-settings" title="Link to this section">&para;</a></h3>
+<ul>
+<li>static void <strong>setMaxAdContentRating</strong>(<a href="#admobrating">AdMobRating</a> rating)</li>
+<li>static <a href="#admobrating">AdMobRating</a> <strong>getMaxAdContentRating</strong>()</li>
+<li>static void <strong>setAgeRestriction</strong>(<a href="#admobagerestriction">AdMobAgeRestriction</a> restriction)</li>
+<li>static <a href="#admobagerestriction">AdMobAgeRestriction</a> <strong>getAgeRestriction</strong>()</li>
+<li>static void <strong>setPersonalization</strong>(<a href="#admobpersonalization">AdMobPersonalization</a> personalization)</li>
+<li>static <a href="#admobpersonalization">AdMobPersonalization</a> <strong>getPersonalization</strong>()</li>
+</ul>
+<p>Settings for the ad requests made after them. Set them before
+<a href="#requestconsent"><code>requestConsent()</code></a> and <code>initialize()</code>; settings made earlier reach the
+first requests too. All default to <code>UNSPECIFIED</code> or <code>DEFAULT</code>.</p>
+<ul>
+<li><strong>Max ad content rating</strong> — the highest content rating of the ads served.</li>
+<li><strong>Age restriction</strong> — <code>CHILD</code> for a game directed at children and <code>TEEN</code> for one
+  directed at teens. <code>CHILD</code> also makes <code>requestConsent()</code> ask as for a user under the
+  age of consent.</li>
+<li><strong>Personalization</strong> — <code>DISABLED</code> asks for non-personalized ads only.</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">AdMob</span><span class="o">::</span><span class="n">setAgeRestriction</span><span class="p">(</span><span class="n">AdMobAgeRestriction</span><span class="o">::</span><span class="n">CHILD</span><span class="p">);</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">AdMob</span><span class="o">::</span><span class="n">setMaxAdContentRating</span><span class="p">(</span><span class="n">AdMobRating</span><span class="o">::</span><span class="n">GENERAL</span><span class="p">);</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">AdMob</span><span class="o">::</span><span class="n">requestConsent</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">AdMob</span><span class="p">.</span><span class="nf">setAgeRestriction</span><span class="p">(</span><span class="nv">AdMobAgeRestriction</span><span class="p">.</span><span class="py">CHILD</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">AdMob</span><span class="p">.</span><span class="nf">setMaxAdContentRating</span><span class="p">(</span><span class="nv">AdMobRating</span><span class="p">.</span><span class="py">GENERAL</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">AdMob</span><span class="p">.</span><span class="nf">requestConsent</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="settestdeviceids-gettestdeviceids">setTestDeviceIds / getTestDeviceIds<a class="headerlink" href="#settestdeviceids-gettestdeviceids" title="Link to this section">&para;</a></h3>
+<ul>
+<li>static void <strong>setTestDeviceIds</strong>(const std::vector\&lt;std::string&gt;&amp; ids)</li>
+<li>static std::vector\&lt;std::string&gt; <strong>getTestDeviceIds</strong>()</li>
+</ul>
+<p>Devices that get test ads, by the hashed ID Google Mobile Ads prints to the device log
+(Logcat or the Xcode console). The consent debug settings also apply only to these
+devices. In Lua, pass a table of strings.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">AdMob</span><span class="p">.</span><span class="nf">setTestDeviceIds</span><span class="p">({</span><span class="w"> </span><span class="s2">&quot;33BE2250B43518CCDA7DE426D04EE231&quot;</span><span class="w"> </span><span class="p">})</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="requestconsent">requestConsent<a class="headerlink" href="#requestconsent" title="Link to this section">&para;</a></h3>
+<ul>
+<li>static void <strong>requestConsent</strong>()</li>
+</ul>
+<p>Updates the user's consent information and shows Google's consent form when the user
+still has to answer, as Google's policies require in the EEA, the UK, Switzerland and
+some US states. Call it at every launch, before <code>initialize()</code>.
+<a href="#events"><code>onConsentUpdated(errorCode, message)</code></a> reports the result, with <code>errorCode</code> 0
+on success. Without AdMob in the build it reports <code>errorNotAvailable</code>.</p>
+<hr />
+<h3 id="setconsentdebuggeography-getconsentdebuggeography">setConsentDebugGeography / getConsentDebugGeography<a class="headerlink" href="#setconsentdebuggeography-getconsentdebuggeography" title="Link to this section">&para;</a></h3>
+<ul>
+<li>static void <strong>setConsentDebugGeography</strong>(<a href="#admobdebuggeography">AdMobDebugGeography</a> geography)</li>
+<li>static <a href="#admobdebuggeography">AdMobDebugGeography</a> <strong>getConsentDebugGeography</strong>()</li>
+</ul>
+<p>Makes the next <code>requestConsent()</code> on a <a href="#settestdeviceids-gettestdeviceids">test device</a>
+act as if the user were in that region, to see the consent form from anywhere. Defaults
+to <code>DISABLED</code>.</p>
+<hr />
+<h3 id="getconsentstatus-canrequestads">getConsentStatus / canRequestAds<a class="headerlink" href="#getconsentstatus-canrequestads" title="Link to this section">&para;</a></h3>
+<ul>
+<li>static <a href="#admobconsentstatus">AdMobConsentStatus</a> <strong>getConsentStatus</strong>()</li>
+<li>static bool <strong>canRequestAds</strong>()</li>
+</ul>
+<p>The consent state Google has stored. <code>canRequestAds()</code> is true once the consent allows ad
+requests, including consent from an earlier launch. Without AdMob in the build they
+return <code>UNKNOWN</code> and <code>false</code>.</p>
+<hr />
+<h3 id="isprivacyoptionsrequired-showprivacyoptionsform">isPrivacyOptionsRequired / showPrivacyOptionsForm<a class="headerlink" href="#isprivacyoptionsrequired-showprivacyoptionsform" title="Link to this section">&para;</a></h3>
+<ul>
+<li>static bool <strong>isPrivacyOptionsRequired</strong>()</li>
+<li>static void <strong>showPrivacyOptionsForm</strong>()</li>
+</ul>
+<p>When <code>isPrivacyOptionsRequired()</code> is true, the game must offer a way back to the consent
+form, such as a <strong>Privacy</strong> button in its settings, which calls
+<code>showPrivacyOptionsForm()</code>. Closing the form reports through <code>onConsentUpdated</code>.</p>
+<hr />
+<h3 id="resetconsent">resetConsent<a class="headerlink" href="#resetconsent" title="Link to this section">&para;</a></h3>
+<ul>
+<li>static void <strong>resetConsent</strong>()</li>
+</ul>
+<p>Forgets the stored consent, so the next <code>requestConsent()</code> asks again. Meant for testing.</p>
+<hr />
+<h3 id="loadbannerad">loadBannerAd<a class="headerlink" href="#loadbannerad" title="Link to this section">&para;</a></h3>
+<ul>
+<li>static void <strong>loadBannerAd</strong>(const std::string&amp; adUnitId, <a href="#admobbannersize">AdMobBannerSize</a> size = ADAPTIVE, <a href="#admobbannerposition">AdMobBannerPosition</a> position = BOTTOM)</li>
+</ul>
+<p>Loads a banner and shows it over the game as soon as it loads, replacing any banner
+already there. <code>onAdLoaded(BANNER)</code> or <code>onAdFailedToLoad(BANNER, ...)</code> reports the
+result. An <code>ADAPTIVE</code> banner takes the screen width when it loads, so load it again after
+the screen rotates.</p>
+<p>Banners refresh at the rate set on their ad unit. A refresh that fails reports
+<code>onAdFailedToLoad(BANNER, ...)</code> while the last ad keeps showing, and
+<code>isBannerAdLoaded()</code> stays true.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">C++</label><label for="__tabbed_4_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">AdMob</span><span class="o">::</span><span class="n">loadBannerAd</span><span class="p">(</span><span class="s">&quot;ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx&quot;</span><span class="p">);</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">AdMob</span><span class="o">::</span><span class="n">loadBannerAd</span><span class="p">(</span><span class="s">&quot;ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">AdMobBannerSize</span><span class="o">::</span><span class="n">BANNER</span><span class="p">,</span><span class="w"> </span><span class="n">AdMobBannerPosition</span><span class="o">::</span><span class="n">TOP</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">AdMob</span><span class="p">.</span><span class="nf">loadBannerAd</span><span class="p">(</span><span class="s2">&quot;ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nv">AdMob</span><span class="p">.</span><span class="nf">loadBannerAd</span><span class="p">(</span><span class="s2">&quot;ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">AdMobBannerSize</span><span class="p">.</span><span class="py">BANNER</span><span class="p">,</span><span class="w"> </span><span class="nv">AdMobBannerPosition</span><span class="p">.</span><span class="py">TOP</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="banner-control">Banner control<a class="headerlink" href="#banner-control" title="Link to this section">&para;</a></h3>
+<ul>
+<li>static bool <strong>isBannerAdLoaded</strong>()</li>
+<li>static void <strong>showBannerAd</strong>()</li>
+<li>static void <strong>hideBannerAd</strong>()</li>
+<li>static bool <strong>isBannerAdVisible</strong>()</li>
+<li>static void <strong>setBannerAdPosition</strong>(<a href="#admobbannerposition">AdMobBannerPosition</a> position)</li>
+<li>static <a href="#admobbannerposition">AdMobBannerPosition</a> <strong>getBannerAdPosition</strong>()</li>
+<li>static void <strong>removeBannerAd</strong>()</li>
+<li>static int <strong>getBannerAdWidth</strong>()</li>
+<li>static int <strong>getBannerAdHeight</strong>()</li>
+</ul>
+<p><code>hideBannerAd()</code> and <code>showBannerAd()</code> toggle the banner without reloading it, and
+<code>isBannerAdVisible()</code> is true when it is loaded and not hidden. <code>setBannerAdPosition()</code>
+moves it. <code>removeBannerAd()</code> destroys it; results of its load still on their way are
+dropped.</p>
+<p><code>getBannerAdWidth()</code> and <code>getBannerAdHeight()</code> give the loaded banner's size in screen
+pixels, as <a href="../system/#getscreenwidth-getscreenheight"><code>System::getScreenWidth</code></a> counts
+them, and are 0 until it loads. On Android the banner also stays clear of display
+cutouts and visible system bars.</p>
+<hr />
+<h3 id="full-screen-ads">Full-screen ads<a class="headerlink" href="#full-screen-ads" title="Link to this section">&para;</a></h3>
+<ul>
+<li>static void <strong>loadInterstitialAd</strong>(const std::string&amp; adUnitId)</li>
+<li>static bool <strong>isInterstitialAdLoaded</strong>()</li>
+<li>static void <strong>showInterstitialAd</strong>()</li>
+<li>static void <strong>loadRewardedAd</strong>(const std::string&amp; adUnitId)</li>
+<li>static bool <strong>isRewardedAdLoaded</strong>()</li>
+<li>static void <strong>showRewardedAd</strong>()</li>
+<li>static void <strong>loadRewardedInterstitialAd</strong>(const std::string&amp; adUnitId)</li>
+<li>static bool <strong>isRewardedInterstitialAdLoaded</strong>()</li>
+<li>static void <strong>showRewardedInterstitialAd</strong>()</li>
+<li>static void <strong>loadAppOpenAd</strong>(const std::string&amp; adUnitId)</li>
+<li>static bool <strong>isAppOpenAdLoaded</strong>()</li>
+<li>static void <strong>showAppOpenAd</strong>()</li>
+</ul>
+<p>Each format holds one ad. <code>load...()</code> loads it, replacing a loaded one, and
+<code>onAdLoaded(format)</code> or <code>onAdFailedToLoad(format, errorCode, message)</code> reports the
+result; only the latest load of a format reports. <code>is...Loaded()</code> is true from
+<code>onAdLoaded</code> until the ad is shown.</p>
+<p><code>show...()</code> shows the ad once: <code>onAdShown</code>, <code>onAdImpression</code> and <code>onAdDismissed</code> follow,
+and the format needs loading again. Showing a format that is not loaded reports
+<code>onAdFailedToShow(format, errorNotLoaded, message)</code>. While the ad covers the game, the
+engine <a href="../../../manual/monetization/#ads-pause-the-game">pauses</a>.</p>
+<ul>
+<li><strong>Rewarded</strong> and <strong>rewarded interstitial</strong> ads report the reward through
+  <code>onUserEarnedReward(format, type, amount)</code>. A player who closes the ad early gets no
+  such event.</li>
+<li><strong>App open</strong> ads expire four hours after loading, as Google stops serving them then:
+  <code>isAppOpenAdLoaded()</code> turns false, and showing one reports "The ad expired, load it
+  again".</li>
+</ul>
+<hr />
+<h3 id="setserversideverificationoptions">setServerSideVerificationOptions<a class="headerlink" href="#setserversideverificationoptions" title="Link to this section">&para;</a></h3>
+<ul>
+<li>static void <strong>setServerSideVerificationOptions</strong>(const std::string&amp; userId, const std::string&amp; customData = "")</li>
+</ul>
+<p>Data passed to the server-side verification callback of rewarded ads, which lets your
+server confirm a reward before granting it. It applies to the rewarded and rewarded
+interstitial ads shown after the call.</p>
+<hr />
+<h3 id="setappvolume-setappmuted">setAppVolume / setAppMuted<a class="headerlink" href="#setappvolume-setappmuted" title="Link to this section">&para;</a></h3>
+<ul>
+<li>static void <strong>setAppVolume</strong>(float volume)</li>
+<li>static void <strong>setAppMuted</strong>(bool muted)</li>
+</ul>
+<p>Volume of video ads relative to the game, from 0 to 1, and whether they play muted.
+Match them to the game's own volume settings.</p>
+<hr />
+<h3 id="openadinspector">openAdInspector<a class="headerlink" href="#openadinspector" title="Link to this section">&para;</a></h3>
+<ul>
+<li>static void <strong>openAdInspector</strong>()</li>
+</ul>
+<p>Opens Google's Ad Inspector, which shows the requests and mediation results of each ad
+unit. It only opens on a <a href="#settestdeviceids-gettestdeviceids">test device</a>.
+<code>onAdInspectorClosed(errorCode, message)</code> fires when it closes.</p>
+<h2 id="events">Events<a class="headerlink" href="#events" title="Link to this section">&para;</a></h2>
+<p>Each event is a static <code>FunctionSubscribe</code> member; subscribe with <code>REGISTER_EVENT</code> in C++
+or <code>RegisterEvent</code> in Lua (see <a href="../../../manual/events/#service-events">Events</a>). C++
+handlers take the parameters by value, exactly as listed.</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Parameters</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>onInitialized</code></td>
+<td>—</td>
+<td>Google Mobile Ads is ready to load ads</td>
+</tr>
+<tr>
+<td><code>onConsentUpdated</code></td>
+<td><code>int errorCode, std::string message</code></td>
+<td><code>requestConsent()</code> or the privacy options form finished. <code>errorCode</code> is 0 on success</td>
+</tr>
+<tr>
+<td><code>onAdLoaded</code></td>
+<td><code>AdMobFormat format</code></td>
+<td>An ad loaded and can be shown</td>
+</tr>
+<tr>
+<td><code>onAdFailedToLoad</code></td>
+<td><code>AdMobFormat format, int errorCode, std::string message</code></td>
+<td>An ad failed to load, with Google's error code</td>
+</tr>
+<tr>
+<td><code>onAdShown</code></td>
+<td><code>AdMobFormat format</code></td>
+<td>A full-screen ad opened, or a banner opened an overlay after a click</td>
+</tr>
+<tr>
+<td><code>onAdFailedToShow</code></td>
+<td><code>AdMobFormat format, int errorCode, std::string message</code></td>
+<td>A full-screen ad could not be shown</td>
+</tr>
+<tr>
+<td><code>onAdDismissed</code></td>
+<td><code>AdMobFormat format</code></td>
+<td>A full-screen ad, or a banner's overlay, closed</td>
+</tr>
+<tr>
+<td><code>onAdClicked</code></td>
+<td><code>AdMobFormat format</code></td>
+<td>An ad was clicked</td>
+</tr>
+<tr>
+<td><code>onAdImpression</code></td>
+<td><code>AdMobFormat format</code></td>
+<td>An ad recorded an impression</td>
+</tr>
+<tr>
+<td><code>onUserEarnedReward</code></td>
+<td><code>AdMobFormat format, std::string type, int amount</code></td>
+<td>The player earned the reward of a rewarded ad. Type and amount come from the ad unit</td>
+</tr>
+<tr>
+<td><code>onAdPaid</code></td>
+<td><code>AdMobFormat format, long long valueMicros, std::string currencyCode, AdMobPrecision precision</code></td>
+<td>An ad earned revenue, in millionths of the currency</td>
+</tr>
+<tr>
+<td><code>onAdInspectorClosed</code></td>
+<td><code>int errorCode, std::string message</code></td>
+<td>The Ad Inspector closed</td>
+</tr>
+</tbody>
+</table>
+<p>On Android, the events of a full-screen ad arrive when it closes, since the whole app
+pauses while it shows.</p>
+<h2 id="constants">Constants<a class="headerlink" href="#constants" title="Link to this section">&para;</a></h2>
+<p>Error codes the engine reports in place of Google's:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>errorNotAvailable</code></td>
+<td><code>-1</code></td>
+<td>The platform or the build has no AdMob</td>
+</tr>
+<tr>
+<td><code>errorNotLoaded</code></td>
+<td><code>-2</code></td>
+<td>The ad shown was not loaded, or has expired</td>
+</tr>
+</tbody>
+</table>
+<h2 id="enumerations">Enumerations<a class="headerlink" href="#enumerations" title="Link to this section">&para;</a></h2>
+<h3 id="admobformat">AdMobFormat<a class="headerlink" href="#admobformat" title="Link to this section">&para;</a></h3>
+<ul>
+<li><strong>BANNER</strong></li>
+<li><strong>INTERSTITIAL</strong></li>
+<li><strong>REWARDED</strong></li>
+<li><strong>REWARDED_INTERSTITIAL</strong></li>
+<li><strong>APP_OPEN</strong></li>
+</ul>
+<hr />
+<h3 id="admobbannersize">AdMobBannerSize<a class="headerlink" href="#admobbannersize" title="Link to this section">&para;</a></h3>
+<p>Fixed sizes are in Google's units: dp on Android, points on iOS.</p>
+<ul>
+<li><strong>ADAPTIVE</strong> — Anchored adaptive banner: the screen width, with a height Google picks.</li>
+<li><strong>BANNER</strong> — 320×50.</li>
+<li><strong>LARGE_BANNER</strong> — 320×100.</li>
+<li><strong>MEDIUM_RECTANGLE</strong> — 300×250.</li>
+<li><strong>FULL_BANNER</strong> — 468×60.</li>
+<li><strong>LEADERBOARD</strong> — 728×90.</li>
+</ul>
+<hr />
+<h3 id="admobbannerposition">AdMobBannerPosition<a class="headerlink" href="#admobbannerposition" title="Link to this section">&para;</a></h3>
+<p><code>TOP</code>, <code>BOTTOM</code>, <code>TOP_LEFT</code>, <code>TOP_RIGHT</code>, <code>BOTTOM_LEFT</code>, <code>BOTTOM_RIGHT</code>, <code>CENTER</code></p>
+<hr />
+<h3 id="admobrating">AdMobRating<a class="headerlink" href="#admobrating" title="Link to this section">&para;</a></h3>
+<ul>
+<li><strong>UNSPECIFIED</strong> — No limit set.</li>
+<li><strong>GENERAL</strong> — Content for general audiences.</li>
+<li><strong>PARENTAL_GUIDANCE</strong> — Content for most audiences, with parental guidance.</li>
+<li><strong>TEEN</strong> — Content for teen and older audiences.</li>
+<li><strong>MATURE_AUDIENCE</strong> — Content only for mature audiences.</li>
+</ul>
+<hr />
+<h3 id="admobagerestriction">AdMobAgeRestriction<a class="headerlink" href="#admobagerestriction" title="Link to this section">&para;</a></h3>
+<ul>
+<li><strong>UNSPECIFIED</strong> — No age treatment.</li>
+<li><strong>CHILD</strong> — Directed at children; also asks for consent as for a user under the age of consent.</li>
+<li><strong>TEEN</strong> — Directed at teens.</li>
+</ul>
+<hr />
+<h3 id="admobpersonalization">AdMobPersonalization<a class="headerlink" href="#admobpersonalization" title="Link to this section">&para;</a></h3>
+<ul>
+<li><strong>DEFAULT</strong> — Google decides.</li>
+<li><strong>ENABLED</strong> — Personalized ads allowed.</li>
+<li><strong>DISABLED</strong> — Non-personalized ads only.</li>
+</ul>
+<hr />
+<h3 id="admobconsentstatus">AdMobConsentStatus<a class="headerlink" href="#admobconsentstatus" title="Link to this section">&para;</a></h3>
+<ul>
+<li><strong>UNKNOWN</strong> — Not known yet, or no AdMob in the build.</li>
+<li><strong>REQUIRED</strong> — The user has to answer the consent form.</li>
+<li><strong>NOT_REQUIRED</strong> — No consent needed, as outside the regulated regions.</li>
+<li><strong>OBTAINED</strong> — The user answered.</li>
+</ul>
+<hr />
+<h3 id="admobdebuggeography">AdMobDebugGeography<a class="headerlink" href="#admobdebuggeography" title="Link to this section">&para;</a></h3>
+<p><code>DISABLED</code>, <code>EEA</code>, <code>REGULATED_US_STATE</code>, <code>OTHER</code></p>
+<hr />
+<h3 id="admobprecision">AdMobPrecision<a class="headerlink" href="#admobprecision" title="Link to this section">&para;</a></h3>
+<p>How exact an <a href="#events"><code>onAdPaid</code></a> value is.</p>
+<ul>
+<li><strong>UNKNOWN</strong></li>
+<li><strong>ESTIMATED</strong> — Estimated from aggregated data.</li>
+<li><strong>PUBLISHER_PROVIDED</strong> — From the CPM set in a mediation network.</li>
+<li><strong>PRECISE</strong> — The value paid for this ad.</li>
+</ul>
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Link to this section">&para;</a></h2>
+<ul>
+<li><a href="../../../manual/monetization/">Monetization</a> — setup, consent, and testing</li>
+<li><a href="../inapppurchase/">InAppPurchase</a> and <a href="../webportal/">WebPortal</a></li>
+</ul>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../bundlemanager/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">BundleManager</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../inapppurchase/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">InAppPurchase</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/reference/classes/admob.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#admob" class="dx-toc-link" data-level="1">AdMob</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#description" class="dx-toc-link" data-level="2">Description</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#methods" class="dx-toc-link" data-level="3">Methods</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#callback-events" class="dx-toc-link" data-level="3">Callback events</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#method-details" class="dx-toc-link" data-level="2">Method details</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#initialize-isinitialized" class="dx-toc-link" data-level="3">initialize / isInitialized</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#request-settings" class="dx-toc-link" data-level="3">Request settings</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#settestdeviceids-gettestdeviceids" class="dx-toc-link" data-level="3">setTestDeviceIds / getTestDeviceIds</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#requestconsent" class="dx-toc-link" data-level="3">requestConsent</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setconsentdebuggeography-getconsentdebuggeography" class="dx-toc-link" data-level="3">setConsentDebugGeography / getConsentDebugGeography</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#getconsentstatus-canrequestads" class="dx-toc-link" data-level="3">getConsentStatus / canRequestAds</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#isprivacyoptionsrequired-showprivacyoptionsform" class="dx-toc-link" data-level="3">isPrivacyOptionsRequired / showPrivacyOptionsForm</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#resetconsent" class="dx-toc-link" data-level="3">resetConsent</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#loadbannerad" class="dx-toc-link" data-level="3">loadBannerAd</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#banner-control" class="dx-toc-link" data-level="3">Banner control</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#full-screen-ads" class="dx-toc-link" data-level="3">Full-screen ads</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setserversideverificationoptions" class="dx-toc-link" data-level="3">setServerSideVerificationOptions</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setappvolume-setappmuted" class="dx-toc-link" data-level="3">setAppVolume / setAppMuted</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#openadinspector" class="dx-toc-link" data-level="3">openAdInspector</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#events" class="dx-toc-link" data-level="2">Events</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#constants" class="dx-toc-link" data-level="2">Constants</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#enumerations" class="dx-toc-link" data-level="2">Enumerations</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#admobformat" class="dx-toc-link" data-level="3">AdMobFormat</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#admobbannersize" class="dx-toc-link" data-level="3">AdMobBannerSize</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#admobbannerposition" class="dx-toc-link" data-level="3">AdMobBannerPosition</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#admobrating" class="dx-toc-link" data-level="3">AdMobRating</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#admobagerestriction" class="dx-toc-link" data-level="3">AdMobAgeRestriction</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#admobpersonalization" class="dx-toc-link" data-level="3">AdMobPersonalization</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#admobconsentstatus" class="dx-toc-link" data-level="3">AdMobConsentStatus</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#admobdebuggeography" class="dx-toc-link" data-level="3">AdMobDebugGeography</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#admobprecision" class="dx-toc-link" data-level="3">AdMobPrecision</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#see-also" class="dx-toc-link" data-level="2">See also</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../../versions.json";
+    window.QUANTUM_PAGE_URL = "reference/classes/admob/";
+  </script>
+  <script src="../../../js/quantum.js" defer></script>
+</body>
+</html>

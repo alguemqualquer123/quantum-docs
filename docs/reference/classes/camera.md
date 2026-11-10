@@ -13,8 +13,8 @@ description: Camera API reference — orthographic and perspective projection, t
 === "C++"
 
     ```cpp
-    #include "Doriax.h"
-    using namespace doriax;
+    #include "Quantum.h"
+    using namespace quantum;
 
     Camera cam(&scene);
     cam.setPerspective(60.0f, 1.333f, 0.1f, 1000.0f);

@@ -90,7 +90,7 @@ File path to a TTF/OTF font file, or a TrueType collection (`.ttc`). The `font`
 property and the overloads without an index read or write slot `0`, the main font.
 Setting the main font does not clear the fallback slots.
 
-Doriax stores a fixed `FontArray` with `MAX_TEXT_FONTS` slots (four by default). Index
+Quantum stores a fixed `FontArray` with `MAX_TEXT_FONTS` slots (four by default). Index
 `0` is the main font; indexes `1` through `3` are tried in order when an earlier font
 does not contain a character. Empty slots are skipped. Indexes are zero-based in both
 C++ and Lua.

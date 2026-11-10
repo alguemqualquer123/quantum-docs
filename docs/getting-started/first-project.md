@@ -1,17 +1,17 @@
 ---
-description: Create your first Doriax project in the editor, add entities and components, attach a script, and run it.
+description: Create your first Quantum project in the editor, add entities and components, attach a script, and run it.
 ---
 
 # Your First Project
 
-This walkthrough uses the current Doriax editor workflow. Older Doriax/Supernova
-examples often start by writing a full scene in code; that still works for low-level
+This walkthrough uses the current Quantum editor workflow. Older examples often
+start by writing a full scene in code; that still works for low-level
 runtime use, but day-to-day projects should start in the editor: create a project,
 author a scene, add entities and components, attach scripts, then run in play mode.
 
 ## Create a project
 
-Open the Doriax editor. If there is no saved project to reopen, the editor starts with
+Open the Quantum editor. If there is no saved project to reopen, the editor starts with
 a temporary project and a new 3D scene; there is no startup dialog. Choose
 **File → Save All**, enter a name, and select an empty directory before doing work
 you want to keep. See [Project Workflow](../editor/project-workflow.md#creating-a-project)
@@ -128,7 +128,7 @@ script. C++ scripts use `DPROPERTY` for values that should appear in the Propert
 `REGISTER_ENGINE_EVENT` for callbacks.
 
 !!! warning "Mixing Lua and C++ entry points"
-    Editor-authored projects should not rely on both `main.lua` and C++ `DORIAX_INIT`
+    Editor-authored projects should not rely on both `main.lua` and C++ `QUANTUM_INIT`
     code to set the startup scene. If both paths call `Engine.setScene()` /
     `Engine::setScene()`, one startup path can replace the other. Use `NO_CPP_INIT` or
     `NO_LUA_INIT` when you intentionally want only one entry point.

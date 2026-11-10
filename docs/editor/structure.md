@@ -1,11 +1,11 @@
 ---
-description: How the Doriax Structure panel represents scenes, child scenes, entities, hierarchy, and non-transform entities.
+description: How the Quantum Structure panel represents scenes, child scenes, entities, hierarchy, and non-transform entities.
 ---
 
 # Structure Panel
 
 The Structure panel is the editor's tree view for scenes and entities. It is also the
-clearest way to understand Doriax's ECS model: everything shown under a scene is an
+clearest way to understand Quantum's ECS model: everything shown under a scene is an
 entity, but only entities with a `Transform` participate in the spatial hierarchy.
 
 ![The Structure panel: a child scene first, then entities without a Transform, then the hierarchy](../assets/screenshots/structure-panel.png)

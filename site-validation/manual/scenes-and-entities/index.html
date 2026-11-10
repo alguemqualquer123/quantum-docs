@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scenes & Entities — Quantum Engine Docs</title>
+  <meta name="description" content="Scenes, entities, transforms, scene types, child scenes, and bundles in Quantum Engine.">
+  <meta property="og:title" content="Scenes & Entities — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/manual/scenes-and-entities/">
+
+  <link rel="icon" type="image/png" href="../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/quantum.css">
+  <link rel="stylesheet" href="../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../editor/" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/custom-shaders/" class="dx-nav-link ">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../editor/stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="scenes-entities">Scenes &amp; Entities<a class="headerlink" href="#scenes-entities" title="Link to this section">&para;</a></h1>
+<p>A <strong>scene</strong> is the container for everything that exists in a part of your game:
+entities, cameras, lights, physics, scripts, and the systems that update them each
+frame. A game is typically made of one or more scenes that you create, configure, and
+switch between at runtime.</p>
+<h2 id="scenes">Scenes<a class="headerlink" href="#scenes" title="Link to this section">&para;</a></h2>
+<p>A scene owns a collection of entities and drives their updates. Internally, <code>Scene</code>
+extends <code>EntityRegistry</code>, so it owns entity allocation, component storage, and subsystem
+registration. You create a scene, populate it with entities, and tell the engine to run
+it.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Lua</label><label for="__tabbed_1_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Scene</span><span class="p">()</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1">-- ... add entities ...</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nv">Engine</span><span class="p">.</span><span class="nf">setScene</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Quantum.h&quot;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">quantum</span><span class="p">;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">Scene</span><span class="w"> </span><span class="n">scene</span><span class="p">;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1">// ... add entities ...</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">Engine</span><span class="o">::</span><span class="n">setScene</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>You can have several scenes loaded at the same time. The most common pattern is one
+main scene for gameplay with additional scene layers for overlays, menus, or transition
+effects.</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>C++ API</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Set the main scene</td>
+<td><code>Engine::setScene(scene)</code></td>
+</tr>
+<tr>
+<td>Add an overlay/layer</td>
+<td><code>Engine::addSceneLayer(scene)</code></td>
+</tr>
+<tr>
+<td>Execute once and discard</td>
+<td><code>Engine::executeSceneOnce(scene)</code></td>
+</tr>
+<tr>
+<td>Remove one layer</td>
+<td><code>Engine::removeScene(scene)</code></td>
+</tr>
+<tr>
+<td>Clear all scenes</td>
+<td><code>Engine::removeAllScenes()</code></td>
+</tr>
+</tbody>
+</table>
+<p>For project-level scene switching, use <code>SceneManager</code> to register scene factories and
+load scenes by name or numeric ID:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">SceneManager</span><span class="o">::</span><span class="n">registerScene</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Level1&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[]()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="n">Scene</span><span class="w"> </span><span class="n">level</span><span class="p">;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">Engine</span><span class="o">::</span><span class="n">setScene</span><span class="p">(</span><span class="o">&amp;</span><span class="n">level</span><span class="p">);</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">});</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">SceneManager</span><span class="o">::</span><span class="n">loadScene</span><span class="p">(</span><span class="s">&quot;Level1&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>That form registers a stack that can be <strong>loaded</strong>. To also overlay it with
+<code>addChildScene</code>, pass a second factory that only creates the scenes — see
+<a href="../../reference/classes/scenemanager/#registerscene">registerScene</a>. Scenes registered by
+the editor always get both.</p>
+<p>See <a href="#switching-scenes-with-scenemanager">Switching scenes with SceneManager</a> for full
+scene transitions and on-demand overlays at runtime.</p>
+<h2 id="scene-types">Scene types<a class="headerlink" href="#scene-types" title="Link to this section">&para;</a></h2>
+<p>All scenes use the same <code>Scene</code> class and ECS foundation at runtime. The <strong>scene type</strong>
+is an authoring concept that tells the editor which defaults, camera setup, and tools to
+use.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Editor defaults</th>
+<th>Typical use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>3D</strong></td>
+<td>Perspective camera, 3D gizmos, lighting setup</td>
+<td>Open-world levels, first/third-person games, 3D platformers</td>
+</tr>
+<tr>
+<td><strong>2D</strong></td>
+<td>Orthographic camera, canvas gizmos, 2D tools</td>
+<td>Top-down games, side-scrollers, puzzle games, tilemaps</td>
+</tr>
+<tr>
+<td><strong>UI</strong></td>
+<td>Screen-space canvas, anchor gizmos</td>
+<td>Menus, HUDs, settings screens, overlays</td>
+</tr>
+</tbody>
+</table>
+<p>A 3D scene can contain UI entities, and a UI scene can reference 2D or 3D child scenes.
+This compositing model is the foundation for in-game HUDs: create a separate <strong>UI
+scene</strong> and add it as a scene layer on top of the gameplay scene.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">-- Load a HUD scene on top of the main gameplay scene</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">Engine</span><span class="p">.</span><span class="nf">setScene</span><span class="p">(</span><span class="nv">gameplayScene</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">Engine</span><span class="p">.</span><span class="nf">addSceneLayer</span><span class="p">(</span><span class="nv">hudScene</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="entities">Entities<a class="headerlink" href="#entities" title="Link to this section">&para;</a></h2>
+<p>An <strong>entity</strong> is a lightweight integer identifier that lives in a scene. By itself it
+holds no behavior or data; it gains both by having <strong>components</strong> attached to it. This
+is the core of the <a href="../entity-component-system/">Entity Component System</a>.</p>
+<p>Higher-level objects in Quantum — <code>Sprite</code>, <code>Model</code>, <code>Camera</code>, <code>Button</code>, etc. — are
+convenience wrappers. They create or reference an entity and manipulate the components
+it needs for you.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Scene</span><span class="p">()</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nv">triangle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Polygon</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nv">triangle</span><span class="p">.</span><span class="py">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nv">triangle</span><span class="p">:</span><span class="nf">setColor</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="transforms">Transforms<a class="headerlink" href="#transforms" title="Link to this section">&para;</a></h2>
+<p>Most visible entities have a <strong>Transform</strong> component that defines their <strong>position</strong>,
+<strong>rotation</strong>, and <strong>scale</strong> in space. Transforms can be parented to build hierarchies —
+moving a parent moves all its children with it.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nv">entity</span><span class="p">.</span><span class="py">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nv">entity</span><span class="p">.</span><span class="py">rotation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Quaternion</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nv">entity</span><span class="p">.</span><span class="py">scale</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<p>When an entity has a parent, its world transform is derived from the full parent chain.
+Local transforms are relative to the parent; world transforms are absolute.</p>
+<h2 id="entities-without-transforms">Entities without transforms<a class="headerlink" href="#entities-without-transforms" title="Link to this section">&para;</a></h2>
+<p>Not every entity needs a Transform. Non-transform entities are useful for:</p>
+<ul>
+<li>Logic-only scripts and global state</li>
+<li>Non-spatial (2D panned) audio</li>
+<li>Scene environment components like Fog or Skybox</li>
+<li>Physics joints that link two body entities</li>
+<li>Actions and animations targeting another entity</li>
+</ul>
+<p>In the editor's <a href="../../editor/structure/">Structure Panel</a>, these entities appear in a
+separate area above the transform hierarchy. They can be selected and edited but cannot
+be parented until a Transform is added.</p>
+<h2 id="scene-settings">Scene settings<a class="headerlink" href="#scene-settings" title="Link to this section">&para;</a></h2>
+<p>Every scene owns rendering and interaction state that affects all entities within it:</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Active camera</td>
+<td>The <code>Camera</code> entity used for rendering</td>
+</tr>
+<tr>
+<td>Background color</td>
+<td>Clear color for the scene</td>
+</tr>
+<tr>
+<td>Shadow quality</td>
+<td>PCF filtering level for smoother shadow edges (<code>NONE</code> to <code>HIGH</code>)</td>
+</tr>
+<tr>
+<td>Light state</td>
+<td><code>OFF</code>, <code>ON</code>, or <code>AUTO</code> (auto-detects lights in the scene)</td>
+</tr>
+<tr>
+<td>Global illumination</td>
+<td>Ambient light color and intensity</td>
+</tr>
+<tr>
+<td>Ambient occlusion (SSAO)</td>
+<td>Screen-space ambient occlusion — enable plus radius, intensity, and bias — see <a href="../rendering-pipeline/#ambient-occlusion-ssao">Rendering Pipeline</a></td>
+</tr>
+<tr>
+<td>Reflections (SSR)</td>
+<td>Screen-space reflections — enable plus distance, thickness, intensity, and glossy blur — see <a href="../rendering-pipeline/#screen-space-reflections-ssr">Rendering Pipeline</a></td>
+</tr>
+<tr>
+<td>Ambient light (2D)</td>
+<td>Flat ambient color and intensity for 2D scenes, with its own 2D shadow quality — see <a href="../2d-graphics/#2d-lighting">2D lighting</a></td>
+</tr>
+<tr>
+<td>Physics gravity</td>
+<td>Per-world gravity in m/s² — 2D (Box2D) and 3D (Jolt) are independent — see <a href="../physics/#gravity">Physics</a></td>
+</tr>
+<tr>
+<td>Fixed resolution</td>
+<td>Render the main scene at a fixed internal size and upscale it to the window — see <a href="../multiple-resolutions/#fixed-resolution">Multiple Resolutions</a></td>
+</tr>
+<tr>
+<td>UI events</td>
+<td>Enables/disables UI input processing for the scene</td>
+</tr>
+<tr>
+<td>Default shaders</td>
+<td>Per-type custom shaders (Mesh, UI, Sky, Points, Lines) used by every component of that type without its own custom shader — see <a href="../../editor/custom-shaders/#scene-default-shaders">Custom Shaders</a></td>
+</tr>
+<tr>
+<td>Canvas size</td>
+<td>Logical resolution for 2D and UI scenes</td>
+</tr>
+</tbody>
+</table>
+<p>Edit these in the editor by selecting the scene root in the <a href="../../editor/structure/">Structure panel</a>
+with no entity selected; the settings appear in the <a href="../../editor/properties/">Properties window</a>.
+Which sections are shown depends on the scene type — 2D and UI scenes hide 3D-only options such
+as SSAO and SSR. As with component fields, any setting changed from its default shows a small
+<strong>reset arrow</strong> next to its label that restores the default, and every change is saved with the
+scene and undoable.</p>
+<h2 id="scene-stacks">Scene stacks<a class="headerlink" href="#scene-stacks" title="Link to this section">&para;</a></h2>
+<p>When the engine runs, every loaded scene lives in an ordered list of <strong>layers</strong>, and a
+group of scenes that are loaded together is called a <strong>scene stack</strong>:</p>
+<ul>
+<li>The <strong>main scene</strong> is always the bottom layer. There is exactly one per stack.</li>
+<li>Each additional scene is a <strong>layer</strong> drawn on top of the layers before it.</li>
+<li>The <strong>last</strong> layer is the topmost — it renders over everything below it.</li>
+</ul>
+<p>In the editor, each scene file is the main scene of its own stack, and you attach other
+scenes to it as <strong>child scenes</strong>. At export, the editor turns each stack into a factory
+that calls <code>Engine::setScene()</code> for the main scene and <code>Engine::addSceneLayer()</code> for each
+child, then registers it with <code>SceneManager</code>.</p>
+<h2 id="child-scenes">Child scenes<a class="headerlink" href="#child-scenes" title="Link to this section">&para;</a></h2>
+<p>A <strong>child scene</strong> reference lets one scene load and run another as part of the same stack.
+Child scenes share the same engine tick but keep their own entity and component storage,
+so they stay cleanly separated. Use them for:</p>
+<ul>
+<li><strong>Persistent UI</strong> — a HUD or menu scene that stays loaded across gameplay level changes.</li>
+<li><strong>Shared setup</strong> — a single lighting and skybox scene included in every level.</li>
+<li><strong>Additive worlds</strong> — large open worlds assembled from independently-authored chunks.
+  Bodies in different chunks don't collide (see the note below).</li>
+<li><strong>Scene streaming</strong> — load and unload sections without a full scene transition.</li>
+<li><strong>Pop-ups and pause menus</strong> — UI that appears on demand and is removed without
+  reloading the level.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Each scene has its own physics world</p>
+<p>Every scene runs its own 2D and 3D physics world. A body in one scene never collides
+with a body in another scene. A ray cast only tests the scene you pass it, and a
+joint connects only bodies of its own scene. Keep everything that must touch
+physically in one scene, and use child scenes for parts that don't, such as a HUD,
+lighting or menus. If chunks of an additive world have to interact, see
+<a href="../physics/#physics-across-scenes">Physics across scenes</a>.</p>
+<p>Entity IDs are also numbered per scene. That is why the editor only lets you
+reference a child scene's entity from a
+<a href="../../editor/properties/#entity-references">script property</a>.</p>
+</div>
+<h3 id="adding-a-child-scene-in-the-editor">Adding a child scene in the editor<a class="headerlink" href="#adding-a-child-scene-in-the-editor" title="Link to this section">&para;</a></h3>
+<p>Select the parent scene in the <a href="../../editor/structure/">Structure panel</a> and either:</p>
+<ul>
+<li>right-click the scene root and choose <strong>Add child scene → <em>SceneName</em></strong>, or</li>
+<li>drag a <code>.scene</code> file from the <a href="../../editor/resources/">Resources Browser</a> onto the
+  scene root.</li>
+</ul>
+<p>A child scene can have child scenes of its own, but a scene can't contain itself, directly
+or through other child scenes. The editor refuses an add that would create such a cycle.</p>
+<p>Child scenes are listed <strong>above</strong> the parent's entities. Click the eye icon next to a
+child scene to load it <em>inline</em>, so you can see and edit its entities in context — this
+is an editor convenience and does not change runtime behavior.</p>
+<h3 id="start-active">Start active<a class="headerlink" href="#start-active" title="Link to this section">&para;</a></h3>
+<p>Each child scene reference has a <strong>Start active</strong> flag (right-click the child scene node →
+<strong>Start active</strong>). It controls whether the child scene is added to the engine
+automatically when its parent loads:</p>
+<table>
+<thead>
+<tr>
+<th>Start active</th>
+<th>Behavior when the parent loads</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>On</strong> (default)</td>
+<td>The child scene is created <strong>and</strong> added as a layer. It runs and renders immediately.</td>
+<td>HUDs, persistent overlays, shared lighting — anything always present.</td>
+</tr>
+<tr>
+<td><strong>Off</strong></td>
+<td>The child scene is still created and prepared (its entities, scripts, and <code>Scene*</code> are all ready), but it is <strong>not</strong> added to the engine.</td>
+<td>Pause menus, dialogs, level sections — anything you reveal later.</td>
+</tr>
+</tbody>
+</table>
+<p>A child scene that starts inactive is <em>ready but hidden</em>. Because it is already built,
+showing it later with <a href="#switching-scenes-with-scenemanager"><code>SceneManager.addChildScene</code></a>
+is instant — there is no loading cost at the moment it appears.</p>
+<p><strong>Start active</strong> is not what makes a scene addable at runtime; any registered scene can be
+overlaid, and one that is not a child scene is simply built the first time you add it.
+What the flag controls is whether the scene comes up <em>with its parent</em>, and inactive
+children are the ones already paid for. See
+<a href="#preloaded-or-built-on-demand">Preloaded or built on demand</a>.</p>
+<h3 id="scene-order">Scene order<a class="headerlink" href="#scene-order" title="Link to this section">&para;</a></h3>
+<p>The order of the layers follows the order the child scenes are listed under their parent
+in the Structure panel, which is the order you added them. The main scene stays at the
+bottom; each child scene draws on top of the ones above it in the list. <strong>Put a HUD or
+menu scene last so it renders over the gameplay below it.</strong></p>
+<p>To change the order, remove the child scenes and add them back in the sequence you want —
+the one added last ends up on top. At runtime, <code>SceneManager.addChildScene</code> always adds a
+scene <strong>on top</strong> of the current layers, so re-adding is also how you bring a layer to the
+front.</p>
+<h2 id="switching-scenes-with-scenemanager">Switching scenes with SceneManager<a class="headerlink" href="#switching-scenes-with-scenemanager" title="Link to this section">&para;</a></h2>
+<p><a href="../../reference/classes/scenemanager/"><code>SceneManager</code></a> is the runtime entry point for
+moving between scenes. The editor registers every scene stack for you at startup, so from
+a script you refer to scenes by their <strong>name</strong> (or numeric ID) and never touch the
+factory functions directly. There are two ways to change what is on screen.</p>
+<h3 id="migrate-to-another-scene">Migrate to another scene<a class="headerlink" href="#migrate-to-another-scene" title="Link to this section">&para;</a></h3>
+<p><code>SceneManager.loadScene</code> performs a full <strong>transition</strong>: it removes every currently loaded
+scene (<code>Engine::removeAllScenes()</code> — main <em>and</em> all layers), then builds the requested
+stack from scratch and runs it. Use it to move between levels, menus, and game-over
+screens.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Lua</label><label for="__tabbed_3_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">-- Leave the current scene entirely and load another</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nv">SceneManager</span><span class="p">.</span><span class="nf">loadScene</span><span class="p">(</span><span class="s2">&quot;Level2&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1">-- Or by registration ID</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nv">SceneManager</span><span class="p">.</span><span class="nf">loadScene</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">SceneManager</span><span class="o">::</span><span class="n">loadScene</span><span class="p">(</span><span class="s">&quot;Level2&quot;</span><span class="p">);</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">SceneManager</span><span class="o">::</span><span class="n">loadScene</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">One stack at a time</p>
+<p><code>loadScene</code> clears everything first, so you do <strong>not</strong> call it once per layer. Attach
+persistent layers (a HUD, shared lighting) as <strong>start-active child scenes</strong> of the
+target scene instead — they come up with it in a single <code>loadScene</code> call.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Called from a running scene</p>
+<p>From a script, a physics contact or an input event the transition happens at the start
+of the <strong>next frame</strong>, so the calling scene and its scripts finish what they are doing
+intact; <code>SceneManager::isLoadPending()</code> is <code>true</code> until then. See
+<a href="../../reference/classes/scenemanager/#loadscene">SceneManager</a>.</p>
+</div>
+<h3 id="show-a-loading-screen">Show a loading screen<a class="headerlink" href="#show-a-loading-screen" title="Link to this section">&para;</a></h3>
+<p>Building a large scene takes a moment. Pick a UI scene as the <strong>Loading Scene</strong> in
+<a href="../../editor/project-settings/#loading">Project Settings → General → Loading</a> and
+<code>loadScene</code> shows it over the old scene, replaces the old scene behind it, and removes it
+once the new scene has loaded. From code:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Lua</label><label for="__tabbed_4_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">SceneManager</span><span class="p">.</span><span class="nf">setLoadingScene</span><span class="p">(</span><span class="s2">&quot;Loading&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nv">SceneManager</span><span class="p">.</span><span class="py">loadingDelay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.3</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">SceneManager</span><span class="o">::</span><span class="n">setLoadingScene</span><span class="p">(</span><span class="s">&quot;Loading&quot;</span><span class="p">);</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">SceneManager</span><span class="o">::</span><span class="n">setLoadingDelay</span><span class="p">(</span><span class="mf">0.3f</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><code>SceneManager.loading</code> and <code>SceneManager.loadingProgress</code> drive its animation. Turn on
+<a href="../threading-and-async-loading/#loading-screens">async loading</a> so it keeps animating while
+textures and sounds stream in. A level starts its gameplay in
+<a href="../../reference/classes/engine/#onsceneloaded"><code>Engine.onSceneLoaded</code></a>, which fires once it
+has loaded, still behind the loading scene.</p>
+<h3 id="overlay-a-scene-without-leaving-the-current-one">Overlay a scene without leaving the current one<a class="headerlink" href="#overlay-a-scene-without-leaving-the-current-one" title="Link to this section">&para;</a></h3>
+<p><code>SceneManager.addChildScene</code> and <code>removeChildScene</code> add or remove a scene <strong>on top</strong> of
+what is already running, with no transition. This is how you show a pause menu, dialog, or
+HUD toggle over live gameplay. Any registered scene can be overlaid — it does not have to
+belong to the loaded stack. If its scenes have not been built yet, <code>addChildScene</code> builds
+them before showing them.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Lua</label><label for="__tabbed_5_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1">-- Open a pause menu over the running game</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onPause</span><span class="p">()</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">SceneManager</span><span class="p">.</span><span class="nf">addChildScene</span><span class="p">(</span><span class="s2">&quot;PauseMenu&quot;</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">        </span><span class="nv">Engine</span><span class="p">.</span><span class="nf">pauseGameEvents</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w">   </span><span class="c1">-- freeze gameplay updates</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="kr">end</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="kr">end</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="c1">-- &quot;Resume&quot; button handler inside the PauseMenu scene</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="nv">resumeBtn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Button</span><span class="p">(</span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="nv">resumeBtn</span><span class="p">.</span><span class="py">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Resume&quot;</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="kd">local</span><span class="w"> </span><span class="nv">btnComp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">resumeBtn</span><span class="p">:</span><span class="nf">getButtonComponent</span><span class="p">()</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="nv">btnComp</span><span class="p">.</span><span class="py">onPress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">function</span><span class="p">()</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">    </span><span class="nv">SceneManager</span><span class="p">.</span><span class="nf">removeChildScene</span><span class="p">(</span><span class="s2">&quot;PauseMenu&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">    </span><span class="nv">Engine</span><span class="p">.</span><span class="nf">pauseGameEvents</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1">// Open a pause menu over the running game</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">SceneManager</span><span class="o">::</span><span class="n">addChildScene</span><span class="p">(</span><span class="s">&quot;PauseMenu&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="n">Engine</span><span class="o">::</span><span class="n">pauseGameEvents</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="p">}</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="c1">// &quot;Resume&quot; button handler inside the PauseMenu scene</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">resumeBtn</span><span class="p">.</span><span class="n">getComponent</span><span class="o">&lt;</span><span class="n">ButtonComponent</span><span class="o">&gt;</span><span class="p">().</span><span class="n">onPress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span><span class="n">SceneManager</span><span class="o">::</span><span class="n">removeChildScene</span><span class="p">(</span><span class="s">&quot;PauseMenu&quot;</span><span class="p">);</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">    </span><span class="n">Engine</span><span class="o">::</span><span class="n">pauseGameEvents</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="p">};</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Because <code>addChildScene</code> puts the scene at the top of the layer list, the overlay always
+draws above the gameplay below it. <code>removeChildScene</code> takes it back out and leaves the
+main scene and other layers untouched — it does not destroy the scene, so adding it again
+brings it back exactly as you left it, scroll position and all.</p>
+<p><code>addChildScene</code> is also safe from a script's <code>init</code> while that script's own stack is
+still loading — a level that opens its HUD from code. The stack it adds survives the
+load; only scenes no running stack involves are torn down by the transition.</p>
+<h3 id="preloaded-or-built-on-demand">Preloaded or built on demand<a class="headerlink" href="#preloaded-or-built-on-demand" title="Link to this section">&para;</a></h3>
+<p>Because <code>addChildScene</code> can build a stack itself, you choose when a scene pays for its
+own setup:</p>
+<table>
+<thead>
+<tr>
+<th>How the scene is set up</th>
+<th>Built</th>
+<th>First time it is shown</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Child scene, <strong>Start active → On</strong></td>
+<td>With its parent</td>
+<td>Already on screen</td>
+</tr>
+<tr>
+<td>Child scene, <strong>Start active → Off</strong></td>
+<td>With its parent</td>
+<td>Instant — it is ready and waiting</td>
+</tr>
+<tr>
+<td>Not a child scene at all</td>
+<td>On the first <code>addChildScene</code></td>
+<td>Pauses to create entities and start scripts</td>
+</tr>
+</tbody>
+</table>
+<p>Keep something you toggle often — a pause menu, a HUD panel — as an inactive child, so
+showing it costs nothing. Leave a heavy screen you may never open — a full inventory, a
+map, an end-of-game summary — out of the child list, so a session that never opens it
+never pays for it.</p>
+<div class="admonition warning">
+<p class="admonition-title">Cross-scene references need the scene to exist</p>
+<p>If a script in one scene references entities in another (see
+<a href="../../reference/classes/scenemanager/#setsceneptr-getsceneptr-removesceneptr">SceneManager.setScenePtr</a>),
+the referenced scene must be built when that script initializes. Keep it a child
+scene — active or inactive — so it comes up with its parent. A scene built on demand
+does not exist yet when the parent's scripts start.</p>
+</div>
+<h3 id="knowing-where-you-are">Knowing where you are<a class="headerlink" href="#knowing-where-you-are" title="Link to this section">&para;</a></h3>
+<p><code>SceneManager</code> also reports the current state, which is handy for transition logic and
+save systems:</p>
+<table>
+<thead>
+<tr>
+<th>Query</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SceneManager.getCurrentSceneName()</code></td>
+<td>Name of the most recently loaded scene</td>
+</tr>
+<tr>
+<td><code>SceneManager.getCurrentSceneId()</code></td>
+<td>ID of the most recently loaded scene</td>
+</tr>
+<tr>
+<td><code>SceneManager.getSceneNames()</code></td>
+<td>All registered scene names</td>
+</tr>
+<tr>
+<td><code>SceneManager.getSceneId(name)</code></td>
+<td>Numeric ID for a name (<code>0</code> if unknown)</td>
+</tr>
+<tr>
+<td><code>SceneManager.loading</code></td>
+<td><code>true</code> from <code>loadScene</code> until the new scene has loaded and its loading scene has closed</td>
+</tr>
+</tbody>
+</table>
+<p>See the <a href="../../reference/classes/scenemanager/">SceneManager reference</a> for the complete
+API.</p>
+<h2 id="creating-uis-as-scenes">Creating UIs as scenes<a class="headerlink" href="#creating-uis-as-scenes" title="Link to this section">&para;</a></h2>
+<p>User interfaces fit the child-scene model naturally. The recommended pattern is to author
+each interface — HUD, main menu, pause menu, settings — as its own <strong>UI scene</strong>, then
+bring it on screen as a layer:</p>
+<ol>
+<li>Create a <a href="../user-interface/"><strong>UI scene</strong></a> and add widgets to it
+   (<a href="../../reference/classes/panel/"><code>Panel</code></a>, <a href="../../reference/classes/button/"><code>Button</code></a>,
+   <a href="../../reference/classes/text/"><code>Text</code></a>, and so on).</li>
+<li>Add it as a <strong>child scene</strong> of the gameplay scene it belongs to.</li>
+<li>Choose its <a href="#start-active"><strong>Start active</strong></a> flag:<ul>
+<li><strong>On</strong> for a permanent HUD that should appear with the level.</li>
+<li><strong>Off</strong> for a menu or dialog you open later with <code>SceneManager.addChildScene</code>.</li>
+</ul>
+</li>
+<li>Keep the UI scene <strong>last</strong> in the child list so its widgets draw above the game.</li>
+</ol>
+<p>Because a UI scene is screen-space and self-contained, you can swap menus without touching
+gameplay data and load or unload interfaces independently. For widget construction,
+anchoring, events, and canvas scaling, see the <a href="../user-interface/">User Interface</a> manual
+and the <a href="../../tutorials/first-ui-scene/">First UI Scene</a> tutorial.</p>
+<h2 id="bundles">Bundles<a class="headerlink" href="#bundles" title="Link to this section">&para;</a></h2>
+<p><strong>Bundles</strong> are reusable entity hierarchy templates — similar to prefabs in other
+engines. They let you define a configured group of entities once and place the same
+hierarchy in any number of scenes.</p>
+<h3 id="how-bundles-work">How bundles work<a class="headerlink" href="#how-bundles-work" title="Link to this section">&para;</a></h3>
+<p>A bundle is authored visually in the editor (or defined in script) and saved as a YAML
+file. During export, the bundle is converted into a <strong>factory function</strong> registered with
+<code>BundleManager</code>. At runtime, calling <code>createBundle</code> runs the factory and returns the
+root entity of the new hierarchy.</p>
+<p>Unlike simple duplication, bundles:</p>
+<ul>
+<li>Are a <strong>single source of truth</strong> — editing the bundle definition updates every scene
+  that references it.</li>
+<li>Are <strong>shared across scenes</strong> — the same bundle can be instantiated in many scenes
+  without duplicating authored data.</li>
+<li><strong>Can be created and destroyed at runtime</strong> — useful for enemies, projectiles, UI
+  cards, and any pooled or on-demand hierarchy.</li>
+</ul>
+<h3 id="creating-a-bundle-in-the-editor">Creating a bundle in the editor<a class="headerlink" href="#creating-a-bundle-in-the-editor" title="Link to this section">&para;</a></h3>
+<ol>
+<li>Build the entity hierarchy you want to reuse.</li>
+<li>In the Resources Browser, open the folder the bundle should be saved to.</li>
+<li>Right-click the root entity in the Structure panel and choose <strong>Save as Bundle</strong>
+   (dragging the entity onto the Resources Browser does the same thing).</li>
+</ol>
+<p>The editor writes <code>&lt;EntityName&gt;.bundle</code> into that folder and replaces the hierarchy in
+the scene with an instance of it; rename the file in the Resources Browser to change the
+bundle name. Bundles can live in any project folder — <code>bundles/</code> is just a convention.
+See <a href="../../editor/bundles/">Bundles</a> for the full editor workflow.</p>
+<h3 id="using-a-bundle-at-runtime">Using a bundle at runtime<a class="headerlink" href="#using-a-bundle-at-runtime" title="Link to this section">&para;</a></h3>
+<p>Bundle <strong>registration</strong> is generated automatically by the export step (it emits a C++
+<code>registerBundle</code> call that wires the factory to the bundle name/ID). At runtime you
+mainly call <code>createBundle</code> and <code>destroyBundle</code>. Note that <code>createBundle</code> takes the bundle
+<strong>name first, then the scene</strong>, and returns the root <code>Entity</code>. Entity IDs are
+scene-local: to parent the instance under an existing entity, look it up in the destination
+scene with <code>createBundle(name, scene, "parentName")</code>, or pass an object that already carries
+its scene. Every call creates its own root, so a bundle can be spawned as many times as you
+want. Member entities are created when the factory runs, so their ids differ between the
+editor and a build; reach them by name under the instance root with
+<a href="../../reference/classes/entityregistry/#findentity"><code>findEntity(name, root)</code></a> rather than
+by id.</p>
+<p>A spawned instance runs its scripts like the scene does: Lua <code>init()</code> and C++ constructors
+run before <code>createBundle</code> returns. <code>destroyBundle</code> stops them, then removes the instance along
+with anything parented under it since, bundles spawned there included. A C++ script that
+destroys its own bundle is deleted during that call, so it must return without touching its
+members.</p>
+<div class="admonition note">
+<p class="admonition-title">There is no direct <code>.bundle</code> file loader</p>
+<p>You don't load a <code>.bundle</code> file by path at runtime. Export turns each file into a
+registered factory, and you spawn it by the <strong>bundle name</strong> — the file's path with the
+<code>.bundle</code> extension removed and forward slashes (so <code>bundles/enemies/EnemyShip.bundle</code>
+is created as <code>"enemies/EnemyShip"</code>). Only the bundles a scene instantiates and the
+ones listed in <strong>Project → Bundles</strong> are registered, so a bundle spawned from script
+alone has to be listed there. Use <code>BundleManager.getBundleNames()</code> to list everything
+that is registered.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Lua</label><label for="__tabbed_6_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">-- Create an instance (name first, then scene)</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kd">local</span><span class="w"> </span><span class="nv">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BundleManager</span><span class="p">.</span><span class="nf">createBundle</span><span class="p">(</span><span class="s2">&quot;enemy_grunt&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">scene</span><span class="p">)</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1">-- Attach under a named entity in that scene</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="nv">BundleManager</span><span class="p">.</span><span class="nf">createBundle</span><span class="p">(</span><span class="s2">&quot;enemy_grunt&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">scene</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;spawn&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="c1">-- Destroy it later (scene first, then root entity)</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="nv">BundleManager</span><span class="p">.</span><span class="nf">destroyBundle</span><span class="p">(</span><span class="nv">scene</span><span class="p">,</span><span class="w"> </span><span class="nv">root</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1">// Registration is normally emitted by export, e.g.:</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">BundleManager</span><span class="o">::</span><span class="n">registerBundle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;enemy_grunt&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="p">[](</span><span class="n">Scene</span><span class="o">*</span><span class="w"> </span><span class="n">scene</span><span class="p">,</span><span class="w"> </span><span class="n">Entity</span><span class="w"> </span><span class="n">parent</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">        </span><span class="c1">// factory body</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">    </span><span class="p">});</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="n">Entity</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BundleManager</span><span class="o">::</span><span class="n">createBundle</span><span class="p">(</span><span class="s">&quot;enemy_grunt&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="n">BundleManager</span><span class="o">::</span><span class="n">createBundle</span><span class="p">(</span><span class="s">&quot;enemy_grunt&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">scene</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;spawn&quot;</span><span class="p">);</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="c1">// Destroy when done</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="n">BundleManager</span><span class="o">::</span><span class="n">destroyBundle</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">,</span><span class="w"> </span><span class="n">root</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>See <a href="../../reference/classes/bundlemanager/">BundleManager</a> for the full API reference.</p>
+<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Link to this section">&para;</a></h2>
+<ul>
+<li><a href="../entity-component-system/">Entity Component System</a> — how data and behavior are
+  organized under the hood.</li>
+<li><a href="../scripting/">Scripting</a> — add gameplay logic to entities.</li>
+<li><a href="../../editor/project-workflow/">Project Workflow</a> — how to manage scenes and bundles
+  in the editor.</li>
+</ul>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../architecture/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Engine Architecture</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../entity-component-system/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Entity Component System</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/manual/scenes-and-entities.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#scenes-entities" class="dx-toc-link" data-level="1">Scenes &amp; Entities</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#scenes" class="dx-toc-link" data-level="2">Scenes</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#scene-types" class="dx-toc-link" data-level="2">Scene types</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#entities" class="dx-toc-link" data-level="2">Entities</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#transforms" class="dx-toc-link" data-level="2">Transforms</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#entities-without-transforms" class="dx-toc-link" data-level="2">Entities without transforms</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#scene-settings" class="dx-toc-link" data-level="2">Scene settings</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#scene-stacks" class="dx-toc-link" data-level="2">Scene stacks</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#child-scenes" class="dx-toc-link" data-level="2">Child scenes</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#adding-a-child-scene-in-the-editor" class="dx-toc-link" data-level="3">Adding a child scene in the editor</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#start-active" class="dx-toc-link" data-level="3">Start active</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#scene-order" class="dx-toc-link" data-level="3">Scene order</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#switching-scenes-with-scenemanager" class="dx-toc-link" data-level="2">Switching scenes with SceneManager</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#migrate-to-another-scene" class="dx-toc-link" data-level="3">Migrate to another scene</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#show-a-loading-screen" class="dx-toc-link" data-level="3">Show a loading screen</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#overlay-a-scene-without-leaving-the-current-one" class="dx-toc-link" data-level="3">Overlay a scene without leaving the current one</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#preloaded-or-built-on-demand" class="dx-toc-link" data-level="3">Preloaded or built on demand</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#knowing-where-you-are" class="dx-toc-link" data-level="3">Knowing where you are</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#creating-uis-as-scenes" class="dx-toc-link" data-level="2">Creating UIs as scenes</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#bundles" class="dx-toc-link" data-level="2">Bundles</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#how-bundles-work" class="dx-toc-link" data-level="3">How bundles work</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#creating-a-bundle-in-the-editor" class="dx-toc-link" data-level="3">Creating a bundle in the editor</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#using-a-bundle-at-runtime" class="dx-toc-link" data-level="3">Using a bundle at runtime</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#next-steps" class="dx-toc-link" data-level="2">Next steps</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../versions.json";
+    window.QUANTUM_PAGE_URL = "manual/scenes-and-entities/";
+  </script>
+  <script src="../../js/quantum.js" defer></script>
+</body>
+</html>

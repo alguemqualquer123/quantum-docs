@@ -1,10 +1,10 @@
 ---
-description: Targeting iOS with Doriax.
+description: Targeting iOS with Quantum.
 ---
 
 # Building for iOS
 
-Doriax can target **iOS** for your exported game projects, using the Metal graphics
+Quantum can target **iOS** for your exported game projects, using the Metal graphics
 backend and the native Apple app backend.
 
 ## Requirements
@@ -23,7 +23,7 @@ backend and the native Apple app backend.
 3. Export the project as **Source Code** with the iOS backend preset selected. The
    exporter writes those settings into the generated `Info.plist` and `AppIcon` asset
    set, so the workspace opens already configured.
-4. Open `workspaces/xcode/Doriax.xcodeproj` in the export folder.
+4. Open `workspaces/xcode/Quantum.xcodeproj` in the export folder.
 5. Select a simulator or a connected device, then build and run from Xcode.
 
 ## The exported workspace
@@ -38,7 +38,7 @@ targets, so a project `Log.h` would replace the engine's.
 The export also sets the project's [C++ Standard](../editor/project-settings.md#build)
 and the [engine capacity macros](../reference/build-options.md#engine-capacity-macros).
 [`ProjectBuild.cmake`](../manual/cpp-build-setup.md#customizing-the-build) does not
-apply. The **Doriax macOS** scheme of the same workspace builds the game for macOS.
+apply. The **Quantum macOS** scheme of the same workspace builds the game for macOS.
 
 ## Command-line build
 
@@ -48,8 +48,8 @@ Xcode or `xcodebuild` from that folder:
 
 ```bash
 cd workspaces/xcode
-xcodebuild build -sdk iphonesimulator -project Doriax.xcodeproj \
-    -configuration Debug -scheme "Doriax iOS"
+xcodebuild build -sdk iphonesimulator -project Quantum.xcodeproj \
+    -configuration Release -target "Quantum iOS"
 ```
 
 iOS runtime builds use Metal and set the deployment target to iOS 15.0 in the engine
@@ -61,14 +61,14 @@ bundle after each build, since iOS reads them from inside the app.
 The [`AdMob`](../reference/classes/admob.md) class runs on Google Mobile Ads SDK 13.11.0
 and the User Messaging Platform, vendored as static xcframeworks under
 `engine/platform/apple/GoogleMobileAdsSdkiOS-13.11.0`. The Xcode template links them and
-compiles the AdMob adapter, `AdMobAdapter.m`, behind the `DORIAX_ADMOB` define.
+compiles the AdMob adapter, `AdMobAdapter.m`, behind the `QUANTUM_ADMOB` define.
 
 A Source Code export with **Google AdMob** off in the iOS settings unlinks both
 frameworks, drops the define, and removes the `GADApplicationIdentifier` and
 `NSUserTrackingUsageDescription` keys from `Info.plist`. With it on, the export writes
 the **AdMob App ID** and the **Tracking Description** into those keys.
 
-CMake builds follow the [`DORIAX_ADMOB`](../reference/build-options.md#runtime-project-options)
+CMake builds follow the [`QUANTUM_ADMOB`](../reference/build-options.md#runtime-project-options)
 option, on by default. With CMake 3.28 or newer the xcframeworks are linked whole, and
 Xcode picks the device or simulator slice; older CMake links the simulator slice only.
 The SDK also needs the Swift runtime libraries, which a placeholder Swift source in that
@@ -80,15 +80,14 @@ The [`InAppPurchase`](../reference/classes/inapppurchase.md) class runs on Store
 through `StoreKitAdapter.swift`, which implements the Objective-C interface declared in
 `StoreKitAdapter.h`, the target's bridging header. That Swift feature needs Swift 6.1, so
 building with App Store purchases takes Xcode 16.3 or later. The engine uses the adapter
-when built with the `DORIAX_STOREKIT` define.
+when built with the `QUANTUM_STOREKIT` define.
 
 A Source Code export with **App Store Purchases** off in the iOS settings removes the
 adapter, the bridging header setting and the define. CMake builds follow the
-[`DORIAX_STOREKIT`](../reference/build-options.md#runtime-project-options) option, on by
+[`QUANTUM_STOREKIT`](../reference/build-options.md#runtime-project-options) option, on by
 default.
 
-!!! note "Tooling is being refreshed"
-    iOS project export and the Xcode workspace tooling are being updated under the
-    Doriax name. Some paths may still reference the legacy Supernova layout while the
-    transition completes. Check the
-    [repository](https://github.com/doriaxengine/doriax) for current details.
+!!! note "Current tooling"
+    iOS project export and Xcode workspace tooling use the Quantum name and current
+    project layout. Check the [repository](https://github.com/alguemqualquer123/quantum)
+    for the current target and signing workflow.

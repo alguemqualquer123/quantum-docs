@@ -1,19 +1,19 @@
 ---
-description: Index of all Doriax API classes (C++ and Lua on each page).
+description: Index of all Quantum API classes (C++ and Lua on each page).
 ---
 
 # API Reference
 
-Each class page documents the **C++ and Lua** API together, in the style of the
-[Supernova Engine docs](https://github.com/supernovaengine/supernova-docs).
+Each class page documents the **C++ and Lua** API together in a consistent Quantum
+reference format.
 
 Pages with detailed method descriptions: **Engine**, **Scene**, **Object**, **Input**,
 **Camera**, **Body2D**, **PhysicsSystem**, and related core types. Other classes list
 the full API surface; expand descriptions over time by editing the markdown files
 under `docs/reference/classes/`.
 
-Use `doriax/generate_api_suggestions.py` in the engine repo to inventory bindings
-when adding new APIs.
+Use `tools/reflector` and the `generate_lua_docs` / `generate_lua_types` targets in the
+engine repo to inventory bindings when adding new APIs.
 
 See also [Enumerations](enums.md) and [Build Options](build-options.md).
 

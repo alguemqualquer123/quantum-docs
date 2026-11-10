@@ -4,7 +4,7 @@ description: Show Google AdMob ads, sell in-app purchases on Google Play and the
 
 # Monetization
 
-Doriax has three service classes for earning from a game. They are static classes that
+Quantum has three service classes for earning from a game. They are static classes that
 any script can call, and each one talks to a platform SDK that an export includes only
 when it is enabled in [Project Settings](../editor/project-settings.md#platforms):
 
@@ -36,12 +36,12 @@ Subscribe with the same helpers as any other [event](events.md#service-events):
     #include "ScriptBase.h"
     #include "AdMob.h"
 
-    class Ads : public doriax::ScriptBase {
+    class Ads : public quantum::ScriptBase {
     public:
-        Ads(doriax::Scene* scene, doriax::Entity entity);
+        Ads(quantum::Scene* scene, quantum::Entity entity);
         ~Ads();
 
-        void onAdLoaded(doriax::AdMobFormat format);
+        void onAdLoaded(quantum::AdMobFormat format);
     };
 
     // Ads.cpp
@@ -136,22 +136,22 @@ Audience settings such as
     #include "ScriptBase.h"
     #include "AdMob.h"
 
-    class Ads : public doriax::ScriptBase {
+    class Ads : public quantum::ScriptBase {
     public:
-        Ads(doriax::Scene* scene, doriax::Entity entity);
+        Ads(quantum::Scene* scene, quantum::Entity entity);
         ~Ads();
 
         void showBreak();
 
         void onConsentUpdated(int errorCode, std::string message);
         void onInitialized();
-        void onAdDismissed(doriax::AdMobFormat format);
+        void onAdDismissed(quantum::AdMobFormat format);
     };
 
     // Ads.cpp
     #include "Ads.h"
 
-    using namespace doriax;
+    using namespace quantum;
 
     static const char* interstitialId = "ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx";
 
@@ -427,10 +427,10 @@ restored.
     void buyCoins();
     void restore();
 
-    void onStoreReady(doriax::BillingResponse response, std::string message);
+    void onStoreReady(quantum::BillingResponse response, std::string message);
     void onResume();
-    void onPurchaseUpdated(doriax::PurchaseDetails purchase);
-    void onPurchaseFailed(std::string productId, doriax::BillingResponse response, std::string message);
+    void onPurchaseUpdated(quantum::PurchaseDetails purchase);
+    void onPurchaseFailed(std::string productId, quantum::BillingResponse response, std::string message);
 
     // Store.cpp
     static const std::string coinsId = "coins_100";    // consumable
@@ -658,8 +658,8 @@ build has.
     void levelComplete();
     void watchAdForCoins();
 
-    void onAdFinished(doriax::WebPortalAdType type);
-    void onAdError(doriax::WebPortalAdType type, std::string code, std::string message);
+    void onAdFinished(quantum::WebPortalAdType type);
+    void onAdError(quantum::WebPortalAdType type, std::string code, std::string message);
 
     // Portal.cpp
     Portal::Portal(Scene* scene, Entity entity): ScriptBase(scene, entity) {

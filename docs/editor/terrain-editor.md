@@ -1,5 +1,5 @@
 ---
-description: The Doriax Terrain Editor window — sculpt brushes, PBR layer painting, scattered foliage, and object placement over a heightmap terrain.
+description: The Quantum Terrain Editor window — sculpt brushes, PBR layer painting, scattered foliage, and object placement over a heightmap terrain.
 ---
 
 # Terrain Editor

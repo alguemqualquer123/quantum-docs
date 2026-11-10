@@ -1,10 +1,10 @@
 ---
-description: Understand the data-oriented Entity Component System that powers Doriax Engine.
+description: Understand the data-oriented Entity Component System that powers Quantum Engine.
 ---
 
 # Entity Component System
 
-Doriax is built on an Entity Component System. This is not only an internal
+Quantum is built on an Entity Component System. This is not only an internal
 implementation detail; it is the mental model used by the editor, the runtime, and the
 API.
 

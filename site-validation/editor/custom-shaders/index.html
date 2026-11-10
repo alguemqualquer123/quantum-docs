@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Shaders — Quantum Engine Docs</title>
+  <meta name="description" content="Fork, edit, and customize the built-in shaders for Mesh (colour and depth), UI, Points, Lines, Sky, and Water (surface and underwater) — per component or as scene-wide defaults — feed them custom uniforms from the editor or from scripts, and add custom post-process passes, directly in the Quantum editor.">
+  <meta property="og:title" content="Custom Shaders — Quantum Engine Docs">
+  <meta property="og:description" content="Official documentation for Quantum — a C++17 game engine and visual editor for 2D/3D games, Lua/C++ scripting, rendering, networking, and cross-platform release.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://alguemqualquer123.github.io/quantum-docs/editor/custom-shaders/">
+
+  <link rel="icon" type="image/png" href="../../assets/logo/quantum_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/quantum.css">
+  <link rel="stylesheet" href="../../css/highlight.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#dx-content">Skip to content</a>
+
+  <header class="dx-header" id="dx-header">
+  <div class="dx-header-inner">
+    <div class="dx-header-left">
+      <button class="dx-sidebar-toggle" id="dx-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://alguemqualquer123.github.io/quantum-docs/" class="dx-logo">
+        <img src="../../assets/logo/quantum_mark.png" alt="Quantum" class="dx-logo-icon">
+        <img src="../../assets/logo/quantum_wordmark.png" alt="Quantum Engine" class="dx-logo-wordmark">
+      </a>
+      <span class="dx-logo-docs-tag">Docs</span>
+
+      <div class="dx-version-select" id="dx-version-select" hidden>
+        <button class="dx-version-trigger" id="dx-version-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dx-version-current" id="dx-version-current">unstable</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="dx-version-menu" id="dx-version-menu" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="dx-header-center">
+      <button class="dx-search-trigger" id="dx-search-trigger" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="dx-header-right">
+      <a href="https://github.com/alguemqualquer123/quantum/releases" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Download</a>
+      <a href="https://discord.gg/gSHUVHXNwP" class="dx-header-link dx-hide-mobile" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/alguemqualquer123/quantum" class="dx-header-icon" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="dx-layout">
+    
+
+<aside class="dx-sidebar" id="dx-sidebar">
+  <div class="dx-sidebar-inner">
+    <nav class="dx-nav" aria-label="Documentation navigation">
+      
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../.." class="dx-nav-link ">
+          Home
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Getting Started</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../getting-started/introduction/" class="dx-nav-link ">
+          Introduction
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/installation/" class="dx-nav-link ">
+          Installation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/first-project/" class="dx-nav-link ">
+          Your First Project
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../getting-started/the-editor/" class="dx-nav-link ">
+          The Editor
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Tutorials</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-2d-scene/" class="dx-nav-link ">
+          First 2D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-3d-scene/" class="dx-nav-link ">
+          First 3D Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/first-ui-scene/" class="dx-nav-link ">
+          First UI Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../tutorials/exporting-a-project/" class="dx-nav-link ">
+          Exporting a Project
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section is-expanded">
+        <button class="dx-nav-section-toggle" aria-expanded="true">
+          <span>Editor</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../" class="dx-nav-link ">
+          Editor Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../project-workflow/" class="dx-nav-link ">
+          Project Workflow
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../project-settings/" class="dx-nav-link ">
+          Project Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../version-control/" class="dx-nav-link ">
+          Version Control
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../editor-settings/" class="dx-nav-link ">
+          Editor Settings
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../structure/" class="dx-nav-link ">
+          Structure Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../scene-view/" class="dx-nav-link ">
+          Scene View
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../properties/" class="dx-nav-link ">
+          Properties & Components
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../resources/" class="dx-nav-link ">
+          Resources Browser
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../bundles/" class="dx-nav-link ">
+          Bundles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../sprite-slicer/" class="dx-nav-link ">
+          Sprite Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../tileset-slicer/" class="dx-nav-link ">
+          Tileset Slicer
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../terrain-editor/" class="dx-nav-link ">
+          Terrain Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../animation/" class="dx-nav-link ">
+          Animation Timeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../code-editor/" class="dx-nav-link ">
+          Code Editor
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../script-debugger/" class="dx-nav-link ">
+          Script Debugger
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="./" class="dx-nav-link is-active">
+          Custom Shaders
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../export/" class="dx-nav-link ">
+          Export Window
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../command-line/" class="dx-nav-link ">
+          Command-Line Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../mcp-server/" class="dx-nav-link ">
+          MCP Server
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../network-play/" class="dx-nav-link ">
+          Network Play
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../stability-and-recovery/" class="dx-nav-link ">
+          Stability & Recovery
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Manual</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../manual/architecture/" class="dx-nav-link ">
+          Engine Architecture
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scenes-and-entities/" class="dx-nav-link ">
+          Scenes & Entities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/entity-component-system/" class="dx-nav-link ">
+          Entity Component System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scripting/" class="dx-nav-link ">
+          Scripting
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/creating-scripts/" class="dx-nav-link ">
+          Creating Scripts
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/cpp-build-setup/" class="dx-nav-link ">
+          C++ Build Setup
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/events/" class="dx-nav-link ">
+          Events
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/script-properties/" class="dx-nav-link ">
+          Script Properties
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/resources-and-assets/" class="dx-nav-link ">
+          Resources & Assets
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/2d-graphics/" class="dx-nav-link ">
+          2D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/3d-graphics/" class="dx-nav-link ">
+          3D Graphics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/rendering-pipeline/" class="dx-nav-link ">
+          Rendering Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/shader-variants/" class="dx-nav-link ">
+          Shader Variants
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/multiple-resolutions/" class="dx-nav-link ">
+          Multiple Resolutions
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/user-interface/" class="dx-nav-link ">
+          User Interface
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/terrain/" class="dx-nav-link ">
+          Terrain
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/physics/" class="dx-nav-link ">
+          Physics
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/audio/" class="dx-nav-link ">
+          Audio
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/math-and-utilities/" class="dx-nav-link ">
+          Math & Utilities
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/threading-and-async-loading/" class="dx-nav-link ">
+          Threading & Async Loading
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/monetization/" class="dx-nav-link ">
+          Monetization
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/networking/" class="dx-nav-link ">
+          Networking
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/rendering-upgrade/" class="dx-nav-link ">
+          Rendering Upgrade Status
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/scripting-tools/" class="dx-nav-link ">
+          Scripting Tools
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/asset-pipeline/" class="dx-nav-link ">
+          Asset Pipeline
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../manual/release-and-platforms/" class="dx-nav-link ">
+          Release & Platforms
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Reference</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/" class="dx-nav-link ">
+          API Index
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/enums/" class="dx-nav-link ">
+          Enumerations
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/build-options/" class="dx-nav-link ">
+          Build Options
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Core</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/engine/" class="dx-nav-link ">
+          Engine
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scene/" class="dx-nav-link ">
+          Scene
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/postprocesspass/" class="dx-nav-link ">
+          PostProcessPass
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/input/" class="dx-nav-link ">
+          Input
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/log/" class="dx-nav-link ">
+          Log
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/system/" class="dx-nav-link ">
+          System
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityregistry/" class="dx-nav-link ">
+          EntityRegistry
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/entityhandle/" class="dx-nav-link ">
+          EntityHandle
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Objects</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/object/" class="dx-nav-link ">
+          Object
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mesh/" class="dx-nav-link ">
+          Mesh
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sprite/" class="dx-nav-link ">
+          Sprite
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/camera/" class="dx-nav-link ">
+          Camera
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light/" class="dx-nav-link ">
+          Light
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/light2d/" class="dx-nav-link ">
+          Light2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/occluder2d/" class="dx-nav-link ">
+          Occluder2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/model/" class="dx-nav-link ">
+          Model
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/shape/" class="dx-nav-link ">
+          Shape
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/mirror/" class="dx-nav-link ">
+          Mirror
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/water/" class="dx-nav-link ">
+          Water
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/waterexclusion/" class="dx-nav-link ">
+          WaterExclusion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/sound/" class="dx-nav-link ">
+          Sound
+        </a>
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>UI</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/button/" class="dx-nav-link ">
+          Button
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/panel/" class="dx-nav-link ">
+          Panel
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/text/" class="dx-nav-link ">
+          Text
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/textedit/" class="dx-nav-link ">
+          TextEdit
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/image/" class="dx-nav-link ">
+          Image
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/container/" class="dx-nav-link ">
+          Container
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uilayout/" class="dx-nav-link ">
+          UILayout
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scrollbar/" class="dx-nav-link ">
+          Scrollbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/progressbar/" class="dx-nav-link ">
+          Progressbar
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/polygon/" class="dx-nav-link ">
+          Polygon
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Physics</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body2d/" class="dx-nav-link ">
+          Body2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/body3d/" class="dx-nav-link ">
+          Body3D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint2d/" class="dx-nav-link ">
+          Joint2D
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/joint3d/" class="dx-nav-link ">
+          Joint3D
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Actions</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/action/" class="dx-nav-link ">
+          Action
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/animation/" class="dx-nav-link ">
+          Animation
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/particles/" class="dx-nav-link ">
+          Particles
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Systems</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/subsystem/" class="dx-nav-link ">
+          SubSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/meshsystem/" class="dx-nav-link ">
+          MeshSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/rendersystem/" class="dx-nav-link ">
+          RenderSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/physicssystem/" class="dx-nav-link ">
+          PhysicsSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/audiosystem/" class="dx-nav-link ">
+          AudioSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/actionsystem/" class="dx-nav-link ">
+          ActionSystem
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/uisystem/" class="dx-nav-link ">
+          UISystem
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Managers</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scenemanager/" class="dx-nav-link ">
+          SceneManager
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/bundlemanager/" class="dx-nav-link ">
+          BundleManager
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Services</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/admob/" class="dx-nav-link ">
+          AdMob
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/inapppurchase/" class="dx-nav-link ">
+          InAppPurchase
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/webportal/" class="dx-nav-link ">
+          WebPortal
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Scripting</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/scriptbase/" class="dx-nav-link ">
+          ScriptBase
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Math</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector2/" class="dx-nav-link ">
+          Vector2
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector3/" class="dx-nav-link ">
+          Vector3
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/vector4/" class="dx-nav-link ">
+          Vector4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/matrix4/" class="dx-nav-link ">
+          Matrix4
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/quaternion/" class="dx-nav-link ">
+          Quaternion
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../reference/classes/ray/" class="dx-nav-link ">
+          Ray
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Building from Source</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../building/overview/" class="dx-nav-link ">
+          Overview
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/build-script/" class="dx-nav-link ">
+          Build Script
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/windows/" class="dx-nav-link ">
+          Windows
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/linux/" class="dx-nav-link ">
+          Linux
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/macos/" class="dx-nav-link ">
+          macOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/android/" class="dx-nav-link ">
+          Android
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/ios/" class="dx-nav-link ">
+          iOS
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../building/html5/" class="dx-nav-link ">
+          HTML5
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>Contributing</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../contributing/documentation-guide/" class="dx-nav-link ">
+          Documentation Guide
+        </a>
+      </li>
+</ul>
+
+      </li>
+      <li class="dx-nav-section ">
+        <button class="dx-nav-section-toggle" aria-expanded="false">
+          <span>About</span>
+          <svg class="dx-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        
+<ul class="dx-nav-list">
+      <li class="dx-nav-item">
+        <a href="../../about/faq/" class="dx-nav-link ">
+          FAQ
+        </a>
+      </li>
+      <li class="dx-nav-item">
+        <a href="../../about/license/" class="dx-nav-link ">
+          License & Credits
+        </a>
+      </li>
+</ul>
+
+      </li>
+</ul>
+
+    </nav>
+  </div>
+</aside>
+<div class="dx-sidebar-scrim" id="dx-sidebar-scrim"></div>
+
+    <main class="dx-main" id="dx-content">
+      <div class="dx-version-banner" id="dx-version-banner" role="status" hidden></div>
+
+      <article class="dx-article md-typeset">
+        
+        <h1 id="custom-shaders">Custom Shaders<a class="headerlink" href="#custom-shaders" title="Link to this section">&para;</a></h1>
+<p>Quantum ships built-in shaders for each renderable type (Mesh, UI, Points, Lines, Sky,
+Water).
+The editor lets you <strong>fork</strong> any of them into your project, edit the GLSL in the
+<a href="../code-editor/">Code Editor</a>, and see the result in the viewport — without leaving the
+editor. Forked shaders are compiled and shipped with your project just like the built-in
+ones.</p>
+<p>The same fork mechanism drives <a href="#post-process-passes">post-process passes</a> — fullscreen
+shaders a scene runs over the finished image.</p>
+<h2 id="how-customization-works">How customization works<a class="headerlink" href="#how-customization-works" title="Link to this section">&para;</a></h2>
+<p>A custom shader is a <strong>fork</strong> of a built-in shader. The editor copies the built-in
+entry-point files (for example <code>mesh.vert</code> and <code>mesh.frag</code>) into a folder you pick in your
+project; you edit the shading code while the rest of the rendering contract stays intact:</p>
+<ul>
+<li>The <strong>variant system</strong> is unchanged — the engine still injects the same feature
+  defines (skinning, normal maps, shadows, IBL, fog, instancing, …) based on the mesh,
+  so your edited shader keeps working across all of those cases.</li>
+<li>Skinned forks that <code>#include "includes/skinning.glsl"</code> bind bone matrices through a
+  storage buffer, or through a bone texture when the editor compiles for OpenGL / OpenGL
+  ES (<code>SKINNING_TEXTURE</code>). Re-fork that include if you copied an older <code>skinning.glsl</code>
+  that still declared <code>mat4 bonesMatrix[MAX_BONES]</code> in a uniform block.</li>
+<li>The <strong>shadow, depth, and G-buffer passes</strong> keep using the built-in shaders, so shadow
+  casting and screen-space effects continue to work. A Mesh can fork its <strong>depth shader</strong>
+  as well — the one behind its shadow maps and the depth pre-pass — for a colour fork
+  that moves vertices or discards fragments (see <a href="#the-depth-shader-row">The Depth Shader row</a>).</li>
+<li><code>#include</code> directives still resolve against the engine's shader library, so you only
+  need the top-level <code>.vert</code>/<code>.frag</code> — not the whole include tree. If you want to edit the
+  includes as well, the fork dialog can copy them for you (see <a href="#includes">Includes</a>).</li>
+</ul>
+<p>This means you customize the <em>surface/shading logic</em> while the engine continues to drive
+lighting, passes, and built-in inputs. Values of your own — a wave speed, a dissolve
+amount, the current time — reach the fork through its <a href="#shader-uniforms">shader uniforms</a>.</p>
+<h2 id="the-shader-row">The Shader row<a class="headerlink" href="#the-shader-row" title="Link to this section">&para;</a></h2>
+<p>Open the <strong>Properties</strong> window for a Mesh, UI, Points, Lines, Sky, or Water entity. Each
+of these components has a <strong>Shader</strong> row:</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Built-in</strong> label</td>
+<td>Shown when the component uses the default engine shader.</td>
+</tr>
+<tr>
+<td><strong>Fork</strong></td>
+<td>Opens the <a href="#the-fork-shader-dialog">Fork Shader dialog</a> to choose where the fork is created and what it is called. On confirm it writes the files, assigns them to the component, and opens them in the Code Editor.</td>
+</tr>
+<tr>
+<td><strong>Edit shader files</strong></td>
+<td>Picks the <code>.vert</code> and <code>.frag</code> independently, so entry points that do not share a base name can be assigned. Changes apply as soon as both slots are set (or both cleared).</td>
+</tr>
+<tr>
+<td><strong>Open vertex</strong> / <strong>Open fragment</strong></td>
+<td>Re-opens the assigned file in the Code Editor.</td>
+</tr>
+<tr>
+<td><strong>Reset to Built-in</strong></td>
+<td>Clears the custom shader and returns to the engine default.</td>
+</tr>
+<tr>
+<td>Drag-and-drop</td>
+<td>Drop an existing <code>.vert</code>/<code>.frag</code> from the <a href="../resources/">Resources Browser</a> onto the row to assign it.</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="The Shader and Depth Shader rows of a Mesh, both on the built-in shader" src="../../assets/screenshots/properties-shader-rows.png" /></p>
+<p><strong>Fork</strong> is available only while the row shows <strong>Built-in</strong> — reset the shader first to
+fork it again, so an existing fork is never orphaned by accident.</p>
+<p>The Shader row is shown for a single selected entity (the path is per-entity). Assigning,
+editing, or resetting a custom shader is undoable.</p>
+<h2 id="the-depth-shader-row">The Depth Shader row<a class="headerlink" href="#the-depth-shader-row" title="Link to this section">&para;</a></h2>
+<p>A Mesh component has a second row, <strong>Depth Shader</strong>, with the same controls. It forks
+<code>depth.vert</code> and <code>depth.frag</code> — the shader the engine draws the mesh with into <strong>shadow
+maps</strong>, into the optional scene <a href="../../manual/rendering-pipeline/#depth-prepass">depth prepass</a>,
+and into the <strong>depth pre-pass</strong> that feeds SSAO and post-process depth while SSR is off
+(with SSR on, those read the G-buffer, which keeps the built-in shader).</p>
+<p>The colour fork never reaches those passes, so a mesh whose fork displaces vertices or
+discards fragments keeps casting the shadow of its undisplaced, undiscarded geometry —
+and self-shadows against it once the displacement grows. Fork the depth shader too, apply
+the same displacement or <code>discard</code> there, and the shadow follows. The variant defines
+(skinning, morph targets, terrain, instancing, alpha mask) are the ones <code>depth.vert</code> and
+<code>depth.frag</code> already handle, so the fork keeps working across those cases.</p>
+<p>A depth fork reads the same <a href="#shader-uniforms">shader uniforms</a> as the colour fork, so
+one value drives both: declare the same member names in its <code>u_vs_customParams</code> /
+<code>u_fs_customParams</code> blocks. It is compiled as soon as it is set — even in a scene with no
+shadow-casting light — so its members and build errors show up right away; a fork that
+fails to build is reported as <strong>Depth shader failed to build</strong> under the row while the
+built-in depth shader keeps drawing.</p>
+<p>The depth shader is per mesh — there is no scene default — and its fork name is pre-filled
+with a <code>_depth</code> suffix. Like the colour fork it is undoable, saved with the scene, exported
+with the project, and scriptable through <code>customDepthShader</code> (see
+<a href="#setting-values-from-scripts">Setting values from scripts</a>).</p>
+<div class="admonition note">
+<p class="admonition-title">Resolution in a depth fork</p>
+<p><code>resolution</code> is the size of the target being written: the shadow slot of a cascade
+or cube face, or the depth pre-pass target.</p>
+</div>
+<h3 id="depth-forks-and-the-depth-prepass">Depth forks and the depth prepass<a class="headerlink" href="#depth-forks-and-the-depth-prepass" title="Link to this section">&para;</a></h3>
+<p>With the scene <a href="../../manual/rendering-pipeline/#depth-prepass">depth prepass</a> on, the
+depth fork also writes the depth the colour pass tests against, so both must land on the
+same pixel. <code>u_vs_depthParams</code> carries <code>mvpMatrix</code> — the light (or camera) view-projection
+already multiplied by the model matrix — and <code>depth.vert</code> sets <code>gl_Position</code> from it under
+<code>invariant</code>, matching <code>mesh.vert</code> bit for bit. Keep that in a fork: multiplying
+<code>lightVPMatrix * modelMatrix</code> yourself still compiles (older forks keep working) but can
+round differently and z-fight in the prepass.</p>
+<p>A mesh whose <strong>colour</strong> shader is forked — or covered by a scene default mesh shader —
+without a depth fork is left out of the prepass and drawn once in the colour pass, since
+the built-in depth shader cannot know where the fork moves its vertices. Add a depth fork
+with the same displacement to bring it back in.</p>
+<h2 id="water-shaders">Water shaders<a class="headerlink" href="#water-shaders" title="Link to this section">&para;</a></h2>
+<p>A <a href="../../reference/classes/water/">Water</a> component has two rows. <strong>Shader</strong> forks
+<code>water.vert</code> and <code>water.frag</code>, the surface itself. <strong>Underwater Shader</strong> forks
+<code>fullscreen.vert</code> and <code>underwater.frag</code>, the fullscreen fade drawn over the scene while
+the main camera is below the surface (it needs <strong>Underwater</strong> on). Its fork name is
+pre-filled with an <code>_underwater</code> suffix, and a fork that fails to build is reported as
+<strong>Underwater shader failed to build</strong> under the row while the built-in fade keeps
+drawing.</p>
+<p>Both forks read the water's <a href="#shader-uniforms">shader uniforms</a> — the surface through
+<code>u_vs_customParams</code> / <code>u_fs_customParams</code>, the fade through <code>u_fs_customParams</code> — so one
+value can drive both. The surface shader can also be a
+<a href="#scene-default-shaders">scene default</a>; the underwater shader is per water only.</p>
+<p>The water fork keeps the engine's variant defines: <code>HAS_FOG</code>, <code>USE_SCENE_DEPTH</code> (Depth
+Effects), <code>USE_PLANAR_REFLECTION</code>, <code>USE_SHADOWS</code>, and <code>USE_REFRACTION</code> — see
+<a href="../../manual/shader-variants/#water">Shader Variants — water</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Keep the engine blocks and the wave math</p>
+<p>The engine fills <code>u_vs_waterParams</code>, <code>u_fs_waterParams</code>, and <code>u_fs_underwaterParams</code>
+by layout, not by name, so keep them as the fork copied them. New engine versions only
+append members at the end of <code>u_fs_waterParams</code>: a fork made on an older version keeps
+working without the newer effects, and logs a warning to fork it again.</p>
+<p><a href="../../reference/classes/water/#getheight-getnormal">Water.getHeight</a>, body
+<a href="../../manual/physics/#buoyancy">buoyancy</a>, and the sorting of transparent objects
+around the water use the built-in wave sum. If a fork displaces the surface
+differently in <code>water.vert</code>, they no longer match the waves it draws.</p>
+</div>
+<h2 id="the-fork-shader-dialog">The Fork Shader dialog<a class="headerlink" href="#the-fork-shader-dialog" title="Link to this section">&para;</a></h2>
+<p>Forking asks where the new shader goes before writing anything:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Destination folder</strong></td>
+<td>A tree of the folders in your project. Defaults to <code>shaders</code> when it exists, otherwise the project root.</td>
+</tr>
+<tr>
+<td><strong>Shader Name</strong></td>
+<td>The file name stem, without an extension. Letters, digits, and underscores only; other characters become <code>_</code> as you type.</td>
+</tr>
+<tr>
+<td><strong>Also fork shader includes</strong></td>
+<td>Copies the engine <code>.glsl</code> files this shader actually uses so you can edit them too. See <a href="#includes">Includes</a>.</td>
+</tr>
+<tr>
+<td><strong>Will create</strong></td>
+<td>The exact files that will be written, project-relative.</td>
+</tr>
+</tbody>
+</table>
+<p>The name is pre-filled from the entity (or the scene and shader type, for a scene default)
+and gets a numeric suffix if that name is already taken. <strong>Create</strong> stays disabled while a
+target already exists — forks never overwrite files, because undoing one deletes what it
+wrote.</p>
+<p>The layout depends on whether you fork the includes:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Files created</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Off</td>
+<td><code>&lt;folder&gt;/&lt;name&gt;.vert</code> and <code>&lt;folder&gt;/&lt;name&gt;.frag</code></td>
+</tr>
+<tr>
+<td>On</td>
+<td><code>&lt;folder&gt;/&lt;name&gt;/</code> containing <code>&lt;name&gt;.vert</code>, <code>&lt;name&gt;.frag</code>, and an <code>includes/</code> copy</td>
+</tr>
+</tbody>
+</table>
+<p>Forking includes gives the shader a folder of its own so your edited copies apply to that
+shader alone. Creating the fork is a single undoable step — undo removes the files it
+wrote and restores the previous shader.</p>
+<h2 id="scene-default-shaders">Scene default shaders<a class="headerlink" href="#scene-default-shaders" title="Link to this section">&para;</a></h2>
+<p>Besides per-component shaders, each scene can set a <strong>default custom shader per type</strong>.
+Select the scene (no entity) in the <strong>Structure panel</strong> and look for the <strong>Default
+Shaders</strong> section at the bottom of the scene settings in the Properties window. It shows
+one row per applicable type — 3D scenes list Mesh, Sky, Water, UI, Points, and Lines; 2D
+scenes omit Sky and Water; UI scenes list only UI.</p>
+<p>Each row offers the same controls as the component Shader row (fork, edit files, open
+<code>.vert</code>/<code>.frag</code>, reset, drag-and-drop), and every change is undoable.</p>
+<p>The shader used by a component is resolved with this priority:</p>
+<ol>
+<li><strong>Component shader</strong> — a custom shader assigned on the component always wins.</li>
+<li><strong>Scene default shader</strong> — used by every component of that type with no shader of its
+   own. Its Shader row shows the default's name followed by <em>(scene default)</em>.</li>
+<li><strong>Engine built-in</strong> — used when neither is set.</li>
+</ol>
+<p>A component with no custom shader <em>inherits</em> the scene default; resetting a component's
+shader returns it to the scene default (or the built-in if the scene has none). To keep a
+single component on stock shading while a scene default is active, fork the built-in
+shader for that component and leave it unedited.</p>
+<p>A default that declares <a href="#shader-uniforms">shader uniforms</a> lists them under its row, below
+a line named after the fork (for example <strong>toon Uniforms</strong>). Values set there belong to the
+scene, and every component that inherits the shader reads them. A component can still set
+its own value for a member, and that value wins (see <a href="#editing-values">Editing values</a>).
+The rows appear once a component renders with the fork, and they cover the members of
+every shader variant in use.</p>
+<p>Scene default shaders and their uniform values are saved with the scene, applied in play
+mode, and exported like any other custom shader — components that inherit them compile and
+ship the right shader variants automatically. They are also scriptable via the <code>Scene</code>
+properties <code>defaultMeshShader</code>, <code>defaultUIShader</code>, <code>defaultSkyShader</code>, <code>defaultPointsShader</code>,
+<code>defaultLinesShader</code>, and <code>defaultWaterShader</code> (see the
+<a href="../../reference/classes/scene/">Scene reference</a>), and the values through
+<a href="../../reference/classes/scene/#setdefaultshaderuniform"><code>setDefaultShaderUniform</code></a>, which
+takes the shader type (<code>ShaderType.MESH</code>, <code>ShaderType.UI</code>, and so on).</p>
+<h2 id="shader-uniforms">Shader uniforms<a class="headerlink" href="#shader-uniforms" title="Link to this section">&para;</a></h2>
+<p>A fork can declare a uniform block of its own and have the engine fill it: from rows in
+the Properties window, from a script every frame, or with the current time. This is how
+a water, wave, fire, or dissolve effect gets its parameters.</p>
+<p>Declare <code>u_vs_customParams</code> in the vertex shader, <code>u_fs_customParams</code> in the fragment
+shader, or both. Members are matched <strong>by name</strong>, so a name that appears in both blocks
+receives the same value in both stages:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// wave.vert</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">uniform</span><span class="w"> </span><span class="n">u_vs_customParams</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">time</span><span class="p">;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">amplitude</span><span class="p">;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span><span class="w"> </span><span class="n">customParams</span><span class="p">;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1">// ... in main():</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">pos</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">customParams</span><span class="p">.</span><span class="n">time</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">3.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pos</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">4.0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">customParams</span><span class="p">.</span><span class="n">amplitude</span><span class="p">;</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Vertex displacement is colour-pass only</p>
+<p>A fork only replaces the colour pass, so a vertex moved like this swims while its
+shadow stays where the mesh data is. Fork the <a href="#the-depth-shader-row">depth shader</a>
+as well and displace there too, and the shadow (and SSAO, while SSR is off) follows.
+Screen-space reflections read the built-in G-buffer and keep the undisplaced surface.</p>
+</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// wave.frag</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">uniform</span><span class="w"> </span><span class="n">u_fs_customParams</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">time</span><span class="p">;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kt">vec4</span><span class="w"> </span><span class="n">tint</span><span class="p">;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span><span class="w"> </span><span class="n">customParams</span><span class="p">;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1">// ... at the end of main():</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">g_finalColor</span><span class="p">.</span><span class="n">rgb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mix</span><span class="p">(</span><span class="n">g_finalColor</span><span class="p">.</span><span class="n">rgb</span><span class="p">,</span><span class="w"> </span><span class="n">customParams</span><span class="p">.</span><span class="n">tint</span><span class="p">.</span><span class="n">rgb</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">customParams</span><span class="p">.</span><span class="n">time</span><span class="p">));</span>
+</code></pre></div>
+<p>The built-in Mesh, UI, Points, Lines, Sky, Water, underwater, and depth sources all carry a
+comment showing the declaration, so a fresh fork has it at hand. Nothing else is needed:
+the block is picked up from the compiled shader by name, and a fork that declares none
+behaves exactly as before.</p>
+<h3 id="editing-values">Editing values<a class="headerlink" href="#editing-values" title="Link to this section">&para;</a></h3>
+<p>Every member becomes a row in the Properties window, below the component's <strong>Shader</strong> row
+and under a line named after the fork (for example <strong>wave Uniforms</strong>). Save the file and
+the rows appear. Values are stored <strong>on the component</strong>, by name:</p>
+<ul>
+<li>A Mesh keeps one set of values for all of its submeshes.</li>
+<li>A component that inherits a <a href="#scene-default-shaders">scene default shader</a> shows the
+  scene's value for any member it has not set. Editing the row gives the component its
+  own value, which wins, so two meshes on the same default shader can still be tinted
+  differently. A row with its own value has a reset arrow that goes back to the scene's.</li>
+<li>Reordering members keeps their values; renaming or deleting one drops its value. A
+  member with no value reads zero — GLSL uniform blocks have no initializers.</li>
+</ul>
+<p>The rows are drag fields (<code>float</code>, <code>vec2</code>, <code>vec3</code>, <code>vec4</code> and their <code>int</code> forms), every
+edit is undoable, and the values are saved with the scene and exported with it. Matrix and
+array members take no value and stay zero; they show as <em>Not editable</em> — declare one
+scalar or vector member per value instead.</p>
+<div class="admonition note">
+<p class="admonition-title">glTF models</p>
+<p>A multi-node glTF <code>Model</code> renders through its part entities (one Mesh component
+each); the root's own Mesh is empty unless the model is merged or single-node. Fork
+and edit the shader, and set the values, on the parts — like colour and material —
+not on the Model root.</p>
+</div>
+<p>Two names are <strong>reserved</strong> and written by the engine every frame instead of being edited;
+they head the list, dimmed, as <em>Set by the engine</em>:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time</code></td>
+<td>Seconds elapsed since startup — wall-clock time, so it keeps running in the editor viewport and while the game is paused. For gameplay-driven time, set a member of your own from a script.</td>
+</tr>
+<tr>
+<td><code>resolution</code></td>
+<td><code>xy</code> = width and height of the render target the component is drawn into — the camera's framebuffer, the fixed-resolution target, the view, or a reflection probe face — <code>zw</code> = <code>1 / width</code> and <code>1 / height</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><code>resolution</code> is what screen-space effects need (scanlines, pixel snapping, dithering
+against <code>gl_FragCoord</code>), and it follows the target: the same fork drawn by a
+render-to-texture camera sees that camera's size. Rename a member if you want to drive
+a value with one of these names yourself.</p>
+<div class="admonition warning">
+<p class="admonition-title">Do not mix int and float members</p>
+<p>The OpenGL backends flatten a uniform block into a single upload typed after its
+first member, so a block holding both <code>int</code> and <code>float</code> members uploads incorrectly
+there. Keep one block to one scalar kind. A warning under the <strong>Shader</strong> row flags a
+block that mixes them, and a name declared with different types in the vertex and
+fragment blocks (one value feeds both).</p>
+</div>
+<h3 id="setting-values-from-scripts">Setting values from scripts<a class="headerlink" href="#setting-values-from-scripts" title="Link to this section">&para;</a></h3>
+<p>The same values are scriptable, so a uniform can follow gameplay or animate every frame.
+<code>Mesh</code> (and everything derived from it — <code>Shape</code>, <code>Model</code>, <code>Sprite</code>, <code>Terrain</code>,
+<code>Tilemap</code>), <code>Image</code>, <code>Text</code>, <code>Polygon</code>, <code>Points</code>, <code>Lines</code>, <code>SkyBox</code>, and <code>Water</code> all
+expose:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>setShaderUniform(name, value)</code></td>
+<td>Sets a member. <code>value</code> is a <code>float</code>, <code>Vector2</code>, <code>Vector3</code>, or <code>Vector4</code>; the components a narrower value leaves out read zero.</td>
+</tr>
+<tr>
+<td><code>getShaderUniform(name)</code></td>
+<td>The stored value as a <code>Vector4</code> (zero when unset). It reads the value list, not the block — <code>time</code> and <code>resolution</code> are not there; scripts read the same clock as <code>Engine.systemTime</code>. Values inherited from a <a href="#scene-default-shaders">scene default</a> are not there either.</td>
+</tr>
+<tr>
+<td><code>removeShaderUniform(name)</code></td>
+<td>Drops the value; the member reads zero again.</td>
+</tr>
+<tr>
+<td><code>customShader</code></td>
+<td>The fork base path, so a script can assign or reset the fork too.</td>
+</tr>
+<tr>
+<td><code>customDepthShader</code></td>
+<td>A Mesh's <a href="#the-depth-shader-row">depth fork</a> base path; it reads the same values.</td>
+</tr>
+<tr>
+<td><code>customUnderwaterShader</code></td>
+<td>A Water's <a href="#water-shaders">underwater fork</a> base path; it reads the same values.</td>
+</tr>
+</tbody>
+</table>
+<p>Setting a value only rewrites the block bytes — no shader reload — so calling it every
+frame is fine:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Shape</span><span class="w"> </span><span class="nf">water</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">water</span><span class="p">.</span><span class="n">createPlane</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">water</span><span class="p">.</span><span class="n">setCustomShader</span><span class="p">(</span><span class="s">&quot;shaders/wave&quot;</span><span class="p">);</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">water</span><span class="p">.</span><span class="n">setShaderUniform</span><span class="p">(</span><span class="s">&quot;amplitude&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3f</span><span class="p">);</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">water</span><span class="p">.</span><span class="n">setShaderUniform</span><span class="p">(</span><span class="s">&quot;tint&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Vector4</span><span class="p">(</span><span class="mf">0.2f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">));</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kr">function</span><span class="w"> </span><span class="nc">WaveScript</span><span class="p">:</span><span class="nf">init</span><span class="p">()</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nv">self</span><span class="p">.</span><span class="py">water</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Shape</span><span class="p">(</span><span class="nv">self</span><span class="p">.</span><span class="py">scene</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nv">self</span><span class="p">.</span><span class="py">water</span><span class="p">:</span><span class="nf">createPlane</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nv">self</span><span class="p">.</span><span class="py">water</span><span class="p">.</span><span class="py">customShader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;shaders/wave&quot;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nv">self</span><span class="p">.</span><span class="py">water</span><span class="p">:</span><span class="nf">setShaderUniform</span><span class="p">(</span><span class="s2">&quot;amplitude&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nv">self</span><span class="p">.</span><span class="py">water</span><span class="p">:</span><span class="nf">setShaderUniform</span><span class="p">(</span><span class="s2">&quot;tint&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">Vector4</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">))</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nf">RegisterEngineEvent</span><span class="p">(</span><span class="nv">self</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;onUpdate&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="kr">end</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="kr">function</span><span class="w"> </span><span class="nc">WaveScript</span><span class="p">:</span><span class="nf">onUpdate</span><span class="p">()</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="c1">-- &quot;time&quot; and &quot;resolution&quot; need no call: the engine writes them. Gameplay-driven</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="c1">-- values go through the same method every frame.</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="nv">self</span><span class="p">.</span><span class="py">water</span><span class="p">:</span><span class="nf">setShaderUniform</span><span class="p">(</span><span class="s2">&quot;amplitude&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">self</span><span class="p">.</span><span class="py">stormLevel</span><span class="p">)</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="kr">end</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Setting a reserved name (<code>time</code>, <code>resolution</code>) logs an error and is ignored. For a glTF
+model, call these on the part entities (<code>Mesh(scene, scene:findEntity("Body"))</code>), as the
+note above explains. See the <a href="../../reference/classes/mesh/#setshaderuniform">Mesh reference</a>
+for the full signatures.</p>
+<div class="admonition note">
+<p class="admonition-title">Colour and depth forks only</p>
+<p>Custom blocks reach the fork's colour pass and, for a Mesh, its
+<a href="#the-depth-shader-row">depth fork</a>, which reads the same values. The G-buffer pass
+keeps the built-in shader, so a uniform-driven displacement never moves the object's
+screen-space reflection.</p>
+</div>
+<h2 id="post-process-passes">Post-process passes<a class="headerlink" href="#post-process-passes" title="Link to this section">&para;</a></h2>
+<p>A scene can run an ordered chain of <strong>fullscreen passes</strong> over its finished image:
+sharpen, tint, vignette, colour grading, and so on. Each pass is a forked shader, and
+unlike the component shaders above the chain belongs to the scene, not to any entity.</p>
+<p><img alt="A stylized outline-and-posterize pass applied to a 3D scene" src="../../assets/screenshots/editor-postprocess.png" /></p>
+<p>Select the scene (no entity) in the <strong>Structure panel</strong> and open the <strong>Post-processing</strong>
+section of the scene settings in the Properties window.</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Add Pass</strong></td>
+<td>Appends a pass. A new pass starts on the built-in passthrough, which copies the image unchanged.</td>
+</tr>
+<tr>
+<td>Pass header</td>
+<td>Names the pass after its shader, followed by its place in the chain when the panel is wide enough (<strong>NewScenePost1 [Pass 1]</strong>). Click it to fold the pass. It is dimmed while the pass is disabled.</td>
+</tr>
+<tr>
+<td><strong>↑</strong> / <strong>↓</strong></td>
+<td>On the header. Moves the pass in the chain. Passes run top to bottom.</td>
+</tr>
+<tr>
+<td><strong>🗑</strong></td>
+<td>On the header. Removes the pass. Right-clicking the header offers the same actions.</td>
+</tr>
+<tr>
+<td>Checkbox</td>
+<td>Before the shader name in the <strong>Shader</strong> row. Enables or disables the pass without removing it.</td>
+</tr>
+<tr>
+<td><strong>Shader</strong> row</td>
+<td>The same controls as any other shader row — fork, pick files, open, reset, drag-and-drop.</td>
+</tr>
+</tbody>
+</table>
+<p>Every change is undoable, and the chain is saved with the scene.</p>
+<p><img alt="A post-process pass: its header, the Shader row, and the NewScenePost1 Uniforms section" src="../../assets/screenshots/properties-postprocess.png" /></p>
+<p>The chain runs on the scene's <strong>active camera</strong>, after the opaque, transparent, UI, and
+SSR passes, and before the fixed-resolution upscale. Secondary cameras — minimaps,
+mirrors, portals — do not run it; if the active camera itself renders to a texture, the
+chain writes into that texture. A scene drawn as a layer skips its chain, because a
+fullscreen pass would overwrite the scene below it.</p>
+<h3 id="writing-a-pass">Writing a pass<a class="headerlink" href="#writing-a-pass" title="Link to this section">&para;</a></h3>
+<p>Forking a post-process pass copies <code>fullscreen.vert</code> and <code>postprocess.frag</code> into your
+project. The vertex shader draws a fullscreen triangle and normally needs no edits — all
+the work happens in the fragment shader.</p>
+<p>A pass may declare any subset of the inputs below; only the ones it actually uses are
+bound:</p>
+<table>
+<thead>
+<tr>
+<th>Sampler</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>u_sceneColorTexture</code></td>
+<td>The previous pass's output, or the scene colour for the first pass.</td>
+</tr>
+<tr>
+<td><code>u_depthTexture</code></td>
+<td>Camera-space packed depth. The engine runs a depth pre-pass for the chain when SSR and SSAO are both off, so this is always available.</td>
+</tr>
+<tr>
+<td><code>u_gbufferTexture</code></td>
+<td>View-space normal, roughness, and metallic. Only produced while <strong>SSR</strong> is enabled; reads black otherwise.</td>
+</tr>
+<tr>
+<td><code>u_ssaoTexture</code></td>
+<td>Blurred ambient occlusion. Reads white while SSAO is off.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Depth orientation</p>
+<p>Depth and the G-buffer keep the logical orientation of the depth pre-pass, so flip
+<code>v_texcoord.y</code> when sampling them on the OpenGL backends. The built-in <code>ssr.frag</code> shows
+the pattern.</p>
+</div>
+<h3 id="pass-uniforms">Pass uniforms<a class="headerlink" href="#pass-uniforms" title="Link to this section">&para;</a></h3>
+<p>Declaring a <code>u_fs_postParams</code> block makes every member an editable row of its pass, under
+a line named after the fork. No extra declaration file or editor change is needed:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">uniform</span><span class="w"> </span><span class="n">u_fs_postParams</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="kt">vec4</span><span class="w"> </span><span class="n">resolution</span><span class="p">;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">amount</span><span class="p">;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">threshold</span><span class="p">;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="kt">vec4</span><span class="w"> </span><span class="n">tintColor</span><span class="p">;</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span><span class="w"> </span><span class="n">postParams</span><span class="p">;</span>
+</code></pre></div>
+<p>Add a member, save the file, and a row appears for it. Values are stored <strong>by name</strong>, so
+reordering members keeps them, and renaming or deleting one simply drops its saved value.
+A member with no saved value is zero — GLSL uniform blocks have no initializers, so there
+is no shader-side default to read.</p>
+<p>Two names are <strong>reserved</strong> and written by the engine every frame instead of being edited.
+They head the list, dimmed, as <em>Set by the engine</em>:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>resolution</code></td>
+<td><code>xy</code> = width and height of the pass target, <code>zw</code> = <code>1 / width</code> and <code>1 / height</code>.</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td>Seconds elapsed since startup.</td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>resolution</code> for anything that depends on target size — a texel offset written as a
+literal breaks the moment the window resizes. Rename the uniform if you want to drive that
+value yourself.</p>
+<div class="admonition warning">
+<p class="admonition-title">Do not mix int and float members</p>
+<p>The OpenGL backends flatten a uniform block into a single upload typed after its first
+member, so a block holding both <code>int</code> and <code>float</code> members uploads incorrectly there.
+Keep one block to one scalar kind.</p>
+</div>
+<p>Members are edited as drag fields; matrix and array members take no value and show as
+<em>Not editable</em>.</p>
+<p>The values are scriptable as well. <code>scene:setPostProcessUniform(index, name, value)</code>
+rewrites one member of the pass at <code>index</code> (top of the list is 0, also from Lua) without
+rebuilding the chain, so it can run every frame; <code>scene:getPostProcessUniform(index, name)</code>
+reads it back, <code>scene:removePostProcessUniform(index, name)</code> drops it, and
+<code>scene:setPostProcessPassEnabled(index, enabled)</code> toggles a pass. The
+whole chain is available as <code>scene.postProcessPasses</code> — a list of <code>PostProcessPass</code> values
+with <code>shader</code>, <code>enabled</code>, and <code>setUniform</code>/<code>getUniform</code> — for scripts that build it
+themselves (in Lua a 1-based sequence, so <code>scene.postProcessPasses[1]</code> is pass index 0):</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Lua</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">scene</span><span class="p">.</span><span class="n">setPostProcessUniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;amount&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8f</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">scene</span><span class="p">:</span><span class="nf">setPostProcessUniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;amount&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>See the <a href="../../reference/classes/scene/#setpostprocessuniform">Scene reference</a>.</p>
+<h3 id="export">Export<a class="headerlink" href="#export" title="Link to this section">&para;</a></h3>
+<p>Every pass ships its forked shader, including disabled ones — the generated scene carries
+the whole chain, and the enable flag is a runtime value. A pass whose shader fails to
+compile falls back to the passthrough, so the scene keeps rendering; the list marks it
+<strong>Shader failed to build</strong> and the compiler output goes to the Output panel.</p>
+<h2 id="editing-and-live-updates">Editing and live updates<a class="headerlink" href="#editing-and-live-updates" title="Link to this section">&para;</a></h2>
+<p>Forked shaders open in the <a href="../code-editor/">Code Editor</a> with GLSL syntax highlighting
+(<code>.vert</code>, <code>.frag</code>, and <code>.glsl</code> files). When you <strong>save</strong> a shader source file, the editor
+recompiles the affected forked shaders and refreshes the viewport — no rebuild or replay
+needed.</p>
+<p><img alt="A post-process fragment shader open in the Code Editor next to its uniform rows" src="../../assets/screenshots/editor-shader-code.png" /></p>
+<p>Only shaders that actually reach the edited file through <code>#include</code> are rebuilt: the
+editor tracks each fork's real dependency graph rather than assuming everything in a
+folder is related. Editing a shader in an external editor works too — the change is picked
+up when the Code Editor reloads the file.</p>
+<div class="admonition tip">
+<p class="admonition-title">Iterate fast</p>
+<p>Keep the file open, tweak, <strong>Ctrl+S</strong>, and watch the viewport update.</p>
+</div>
+<h3 id="vertex-attribute-limit">Vertex attribute limit<a class="headerlink" href="#vertex-attribute-limit" title="Link to this section">&para;</a></h3>
+<p>A vertex stage can declare at most <strong>16 inputs</strong>, and each one has to sit at a
+<code>layout(location = N)</code> below 16 — the location indexes the engine's attribute semantic
+table, which is what the HLSL and Metal backends bind against. A shader that goes past
+either limit fails to compile with the offending input named in the Output panel, and the
+component keeps the shader it had. Reuse a free location or pack values into a wider
+vector instead of adding another input.</p>
+<p>Fragment inputs and outputs are not bound by that table, so varyings between stages are
+free of the limit.</p>
+<h2 id="includes">Includes<a class="headerlink" href="#includes" title="Link to this section">&para;</a></h2>
+<p>Shaders include by a fixed key — <code>#include "includes/pbr.glsl"</code> — and a fork resolves each
+key in this order, taking the first that exists:</p>
+<table>
+<thead>
+<tr>
+<th>Order</th>
+<th>Location</th>
+<th>Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>The fork's <strong>own folder</strong></td>
+<td>That fork only</td>
+</tr>
+<tr>
+<td>2</td>
+<td>The <strong>project root</strong></td>
+<td>Every fork in the project</td>
+</tr>
+<tr>
+<td>3</td>
+<td>The <strong>engine shader library</strong></td>
+<td>The default for everything</td>
+</tr>
+</tbody>
+</table>
+<p>A fork's folder mirrors the engine shader library, so a key keeps its shape:
+<code>includes/pbr.glsl</code> is looked up at <code>&lt;fork folder&gt;/includes/pbr.glsl</code>.</p>
+<ul>
+<li><strong>Use an engine include</strong> — <code>#include "includes/pbr.glsl"</code> resolves to the engine's copy
+  automatically; you do not need to copy anything.</li>
+<li><strong>Override an include for one shader</strong> — tick <strong>Also fork shader includes</strong> when you
+  fork. The copies land in the fork's own folder and win for that shader alone.</li>
+<li><strong>Override an include for the whole project</strong> — put the file at the same key under the
+  project root, for example <code>&lt;project&gt;/includes/pbr.glsl</code>.</li>
+<li><strong>Add your own include</strong> — drop a <code>.glsl</code> next to the fork and include it by its path
+  relative to the fork folder (<code>#include "lib/noise.glsl"</code>), or put it anywhere in the
+  project and include it relative to the project root
+  (<code>#include "shaders/lib/noise.glsl"</code>).</li>
+</ul>
+<p>Overrides never change the engine's built-in rendering — a built-in shader always uses the
+engine library. A fork stored loose in a folder shares whatever <code>includes/</code> that folder
+holds, which is why forking includes moves the shader into a folder of its own.</p>
+<div class="admonition note">
+<p class="admonition-title">Moving a fork</p>
+<p>Nothing about the fork is recorded anywhere but its file paths, so you can move,
+rename, or copy it freely — including by hand — and its includes follow. Moving a fork
+into a folder with a different <code>includes/</code> changes what it resolves to, which is what
+makes overrides opt-in per location.</p>
+</div>
+<h2 id="shader-locations">Shader locations<a class="headerlink" href="#shader-locations" title="Link to this section">&para;</a></h2>
+<p>Shaders have no directory settings. Sources live wherever you fork them — each fork
+chooses its own location in the <a href="#the-fork-shader-dialog">Fork Shader dialog</a> — and the
+engine never reads them anyway. It only consumes compiled <code>.sdat</code>.</p>
+<p>Compiled <code>.sdat</code> output goes to the project's <code>shaders</code> folder, the fixed location the
+engine reads through <code>System::getShaderPath()</code>.</p>
+<h2 id="export-and-runtime">Export and runtime<a class="headerlink" href="#export-and-runtime" title="Link to this section">&para;</a></h2>
+<p>Forked shaders flow through the same export pipeline as the built-in ones (see
+<a href="../export/#shader-compilation">Export Window — Shader compilation</a>):</p>
+<ul>
+<li>Every used shader — including your forks — is compiled and embedded into the build for
+  the target backends. The shader <em>sources</em> are not needed at runtime.</li>
+<li>To get loose <code>.sdat</code> or JSON files instead, use the
+  <a href="../command-line/#shaders-generate-shader-files-standalone"><code>shaders</code> CLI command</a>, which
+  writes them straight into its <code>--out</code> directory.</li>
+</ul>
+<p>At runtime the engine identifies a component's shader (or a post-process pass's shader)
+from the value saved on it and loads the matching compiled <code>.sdat</code> — it never reads the
+source files. Because the engine only
+cares about the compiled output, your shader sources can be organized however you like.</p>
+<div class="admonition note">
+<p class="admonition-title">Compiled vs. source location</p>
+<p>The standalone runtime loads compiled shaders from the assets' <code>shaders</code> folder, and
+never reads shader sources. An export embeds them into the build instead, so it reads
+no shader directory at runtime.</p>
+</div>
+        
+
+        <nav class="dx-footer-nav" aria-label="Page navigation">
+  <a class="dx-footer-nav-link dx-prev" href="../script-debugger/">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>
+      <span class="dx-footer-nav-label">Previous</span>
+      <span class="dx-footer-nav-title">Script Debugger</span>
+    </span>
+  </a>
+  <a class="dx-footer-nav-link dx-next" href="../export/">
+    <span>
+      <span class="dx-footer-nav-label">Next</span>
+      <span class="dx-footer-nav-title">Export Window</span>
+    </span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+      </article>
+
+      <footer class="dx-page-footer">
+  <div class="dx-page-footer-inner">
+    <a class="dx-edit-link" href="https://github.com/alguemqualquer123/quantum-docs/edit/main/docs/editor/custom-shaders.md" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit this page
+    </a>
+    <p class="dx-copyright">Copyright &copy; 2026 SR VINIX. Quantum and its upstream contributions are MIT-licensed. Documentation under CC-BY 4.0.</p>
+  </div>
+</footer>
+    </main>
+
+    
+
+<aside class="dx-toc" id="dx-toc">
+  <div class="dx-toc-inner">
+    <div class="dx-toc-title">On this page</div>
+    
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#custom-shaders" class="dx-toc-link" data-level="1">Custom Shaders</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#how-customization-works" class="dx-toc-link" data-level="2">How customization works</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#the-shader-row" class="dx-toc-link" data-level="2">The Shader row</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#the-depth-shader-row" class="dx-toc-link" data-level="2">The Depth Shader row</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#depth-forks-and-the-depth-prepass" class="dx-toc-link" data-level="3">Depth forks and the depth prepass</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#water-shaders" class="dx-toc-link" data-level="2">Water shaders</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#the-fork-shader-dialog" class="dx-toc-link" data-level="2">The Fork Shader dialog</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#scene-default-shaders" class="dx-toc-link" data-level="2">Scene default shaders</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#shader-uniforms" class="dx-toc-link" data-level="2">Shader uniforms</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#editing-values" class="dx-toc-link" data-level="3">Editing values</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#setting-values-from-scripts" class="dx-toc-link" data-level="3">Setting values from scripts</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#post-process-passes" class="dx-toc-link" data-level="2">Post-process passes</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#writing-a-pass" class="dx-toc-link" data-level="3">Writing a pass</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#pass-uniforms" class="dx-toc-link" data-level="3">Pass uniforms</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#export" class="dx-toc-link" data-level="3">Export</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#editing-and-live-updates" class="dx-toc-link" data-level="2">Editing and live updates</a>
+      
+<ul class="dx-toc-list">
+  <li class="dx-toc-entry">
+    <a href="#vertex-attribute-limit" class="dx-toc-link" data-level="3">Vertex attribute limit</a>
+  </li>
+</ul>
+
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#includes" class="dx-toc-link" data-level="2">Includes</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#shader-locations" class="dx-toc-link" data-level="2">Shader locations</a>
+  </li>
+  <li class="dx-toc-entry">
+    <a href="#export-and-runtime" class="dx-toc-link" data-level="2">Export and runtime</a>
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </div>
+</aside>
+  </div>
+
+  <div class="dx-search-overlay" id="dx-search-overlay" hidden>
+    <div class="dx-search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="dx-search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="dx-search-input" placeholder="Search the docs…" autocomplete="off" spellcheck="false">
+        <kbd class="dx-search-esc">Esc</kbd>
+      </div>
+      <ul class="dx-search-results" id="dx-search-results"></ul>
+      <div class="dx-search-empty" id="dx-search-empty" hidden>No results found.</div>
+    </div>
+  </div>
+
+  <script>
+    window.QUANTUM_BASE_URL = "../..";
+    window.QUANTUM_VERSION = "unstable";
+    window.QUANTUM_VERSIONS_URL = "../../versions.json";
+    window.QUANTUM_PAGE_URL = "editor/custom-shaders/";
+  </script>
+  <script src="../../js/quantum.js" defer></script>
+</body>
+</html>
