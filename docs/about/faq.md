@@ -53,9 +53,9 @@ You then build it with the platform's standard toolchain — see
 
 ## Is Quantum production-ready?
 
-Quantum v0.8.2 is the current stable engine release. The `main` branch and the
+Quantum v0.8.3 is the current stable engine release. The `main` branch and the
 `unstable` documentation build track active development and may contain breaking
-changes. For reproducible projects, pin the `v0.8.2` tag or a later release tag and
+changes. For reproducible projects, pin the `v0.8.3` tag or a later release tag and
 use the matching version in the documentation selector.
 
 ## How does Quantum differ from Godot, Unity, or Unreal?

@@ -216,4 +216,5 @@ nav:
       - Documentation Guide: 'contributing/documentation-guide.md'
   - About:
       - FAQ: 'about/faq.md'
+      - Engine Versions: 'about/versions.md'
       - License & Credits: 'about/license.md'

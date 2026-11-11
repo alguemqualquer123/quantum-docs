@@ -3,13 +3,13 @@
 # Builds every published version of the documentation into one output tree:
 #
 #   site/            latest stable release (mirror, the canonical URLs)
-#   site/0.7/        the 0.7 release series
+#   site/0.8.2/      an exact release tag
 #   site/unstable/   the current main branch
 #   site/versions.json   drives the version picker in the header
 #
-# One version is published per minor series, built from the highest patch tag
-# in it (v0.7.0, v0.7.1 -> series "0.7" built from v0.7.1). Pre-release tags
-# (v0.8.0-rc1) are ignored.
+# Every stable patch tag gets its own URL (v0.8.2 -> /0.8.2/). The newest tag
+# is also mirrored at the root as the canonical stable manual. Pre-release tags
+# (v0.8.0-rc1) are ignored, so the picker lists every reproducible release.
 #
 # Every version is built with main's theme/, so a layout fix reaches published
 # versions on the next build; only docs/ and mkdocs.yml come from the tag
@@ -83,26 +83,20 @@ YAML
   rm -f "$cfg"
 }
 
-declare -A SERIES_REF=() SERIES_TITLE=()
+declare -A RELEASE_REF=() RELEASE_TITLE=()
+RELEASES=()
 
-# Release tags, highest patch first; the first tag seen in a series wins.
+# Release tags, highest version first. Keep every stable patch release.
 while read -r ref; do
   [ -n "$ref" ] || continue
   version="${ref##*/v}"
   case "$version" in *-*) continue ;; esac          # skip pre-releases
-  minor="$(echo "$version" | cut -d. -f1,2)"
-  if [ -z "${SERIES_REF[$minor]:-}" ]; then
-    SERIES_REF[$minor]="$ref"
-    SERIES_TITLE[$minor]="$version"
-  fi
+  RELEASE_REF[$version]="$ref"
+  RELEASE_TITLE[$version]="$version"
+  RELEASES+=("$version")
 done < <(git for-each-ref --sort=-v:refname --format='%(refname)' 'refs/tags/v[0-9]*')
 
-SERIES=()
-while read -r s; do
-  [ -n "$s" ] && SERIES+=("$s")
-done < <(printf '%s\n' "${!SERIES_REF[@]}" | sort -Vr)
-
-LATEST="${SERIES[0]:-}"
+LATEST="${RELEASES[0]:-}"
 
 rm -rf "$OUT"
 mkdir -p "$OUT"
@@ -110,44 +104,44 @@ mkdir -p "$OUT"
 # The root build must come first: mkdocs wipes its own site_dir, and here that
 # is the directory the per-version subdirectories live in.
 if [ -n "$LATEST" ]; then
-  echo "==> latest series '$LATEST' from ${SERIES_REF[$LATEST]#refs/tags/}"
-  checkout "${SERIES_REF[$LATEST]}"
+  echo "==> latest release '$LATEST' from ${RELEASE_REF[$LATEST]#refs/tags/}"
+  checkout "${RELEASE_REF[$LATEST]}"
   build "$CHECKOUT_PATH" "$LATEST" "" false
 else
   echo "==> no release tags found; publishing 'unstable' at the root"
   build "$REPO_ROOT" unstable "" false
 fi
 
-for minor in "${SERIES[@]:-}"; do
-  [ -n "$minor" ] || continue
-  echo "==> series '$minor' from ${SERIES_REF[$minor]#refs/tags/}"
-  checkout "${SERIES_REF[$minor]}"
-  build "$CHECKOUT_PATH" "$minor" "$minor" true
+for version in "${RELEASES[@]:-}"; do
+  [ -n "$version" ] || continue
+  echo "==> release '$version' from ${RELEASE_REF[$version]#refs/tags/}"
+  checkout "${RELEASE_REF[$version]}"
+  build "$CHECKOUT_PATH" "$version" "$version" true
 done
 
 build "$REPO_ROOT" unstable unstable true
 
-SERIES_TITLES="{"
-for minor in "${SERIES[@]:-}"; do
-  [ -n "$minor" ] || continue
-  SERIES_TITLES="$SERIES_TITLES\"$minor\":\"${SERIES_TITLE[$minor]}\","
+RELEASE_TITLES="{"
+for version in "${RELEASES[@]:-}"; do
+  [ -n "$version" ] || continue
+  RELEASE_TITLES="$RELEASE_TITLES\"$version\":\"${RELEASE_TITLE[$version]}\","
 done
-SERIES_TITLES="${SERIES_TITLES%,}}"
-export SERIES_TITLES
+RELEASE_TITLES="${RELEASE_TITLES%,}}"
+export RELEASE_TITLES
 
-python3 - "$OUT/versions.json" "$LATEST" "${SERIES[@]:-}" <<'PY'
+python3 - "$OUT/versions.json" "$LATEST" "${RELEASES[@]:-}" <<'PY'
 import json, os, sys
 
 out, latest = sys.argv[1], sys.argv[2]
-series = [s for s in sys.argv[3:] if s]
-titles = json.loads(os.environ["SERIES_TITLES"])
+releases = [s for s in sys.argv[3:] if s]
+titles = json.loads(os.environ["RELEASE_TITLES"])
 
 versions = [{"id": "unstable", "title": "unstable", "note": "in development"}]
-for s in series:
+for release in releases:
     versions.append({
-        "id": s,
-        "title": titles[s],
-        "note": "latest" if s == latest else "",
+        "id": release,
+        "title": titles[release],
+        "note": "latest" if release == latest else "",
     })
 
 with open(out, "w") as f:

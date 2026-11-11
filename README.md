@@ -20,7 +20,7 @@ artifact smoke reports.
 
 ## Engine release versions
 
-The current stable engine release is **[Quantum v0.8.2](https://github.com/alguemqualquer123/quantum/releases/tag/v0.8.2)**.
+The current stable engine release is **[Quantum v0.8.3](https://github.com/alguemqualquer123/quantum/releases/tag/v0.8.3)**.
 The documentation site keeps the latest stable manual at its root, publishes the
 development documentation under [`unstable/`](https://alguemqualquer123.github.io/quantum-docs/unstable/),
 and exposes patch releases through the version selector. The engine repository is

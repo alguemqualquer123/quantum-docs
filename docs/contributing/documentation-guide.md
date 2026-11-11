@@ -75,23 +75,23 @@ Use relative links. Run `mkdocs build --strict` after nav or path changes.
 
 ## Versioned documentation
 
-The published site carries one build per release series plus the in-development
-docs from `main`:
+The published site carries one build per stable patch release plus the
+in-development docs from `main`:
 
 | URL | Contents |
 | --- | --- |
 | `alguemqualquer123.github.io/quantum-docs/` | Latest stable release (canonical URLs) |
-| `alguemqualquer123.github.io/quantum-docs/0.7/` | The 0.7 release series |
+| `alguemqualquer123.github.io/quantum-docs/0.8.2/` | Exact `v0.8.2` release |
 | `alguemqualquer123.github.io/quantum-docs/unstable/` | Current `main` branch |
 
 `main` is always the unstable docs. Changes land there and reach the stable URLs
 only when a release is tagged, so a page describing an unreleased feature does
 not have to be held back.
 
-Each series is built from its highest patch tag (`v0.7.0`, `v0.7.1` → `0.7`,
-built from `v0.7.1`). Pre-release tags are ignored.
+Every stable patch tag gets its own path (`v0.8.2` → `0.8.2`). Pre-release tags
+are ignored, so every URL is reproducible and previous releases remain available.
 
-`scripts/build-versions.sh` assembles the whole tree: it builds every series,
+`scripts/build-versions.sh` assembles the whole tree: it builds every release,
 mirrors the newest one at the root, and writes `versions.json`, which drives the
 version picker in the header. Old builds read that file at runtime, so they list
 newer releases without being rebuilt.

@@ -4,8 +4,27 @@ description: How to download the Quantum editor or build it from source on your 
 
 # Installation
 
-There are two ways to get Quantum Engine: download a prebuilt editor, or build it from
-source.
+There are three ways to get Quantum Engine: install it through the lightweight Hub,
+download a prebuilt editor package, or build it from source.
+
+## Install through Quantum Hub
+
+The recommended Windows download is the standalone **Quantum Hub**. It contains only
+the launcher and its runtime dependencies; the editor is downloaded only when you
+choose a release in the Hub.
+
+[Download Quantum Hub for Windows](https://github.com/alguemqualquer123/quantum/releases/latest/download/quantum-hub-v0.8.3-windows-amd64.zip){ .dx-btn .dx-btn-primary }
+
+1. Extract the ZIP and run `quantum-hub.exe`.
+2. Open **Installs**. The Hub automatically loads the release list from the Quantum
+   GitHub repository.
+3. Select a stable version and choose **Download / Install**.
+4. The Hub downloads the editor package, verifies its SHA-256 checksum, extracts it
+   under `%LOCALAPPDATA%\\Quantum\\Hub\\installs`, and uses it to open projects.
+
+The Hub keeps older installed versions side by side, so projects can stay pinned to
+the editor version they were created with. The source manifest is public at
+[`release-manifest.json`](https://raw.githubusercontent.com/alguemqualquer123/quantum/main/release-manifest.json).
 
 ## Download a prebuilt editor
 
