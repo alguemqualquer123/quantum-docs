@@ -35,14 +35,24 @@ padrão), verifica o marcador de dependências e grava os GLB derivados em
 `<project>/.quantum/imported/`. A execução é incremental; `--force`
 reimporta tudo, e o retorno `1` transforma uma conversão com erro em falha de CI.
 
-Deep verification checks image headers and dimensions, GLB/glTF/JSON, common
-audio formats, fonts, OBJ/FBX, YAML scenes/materials, and graph assets.
+Deep verification checks image headers and dimensions, complete GLB chunk bounds and
+JSON, glTF/JSON, common audio formats, fonts, OBJ, and FBX ASCII/binary headers and
+versions, plus YAML scenes/materials and graph assets.
 
 The standalone `quantum-resource-server` keeps its incremental index across
 restarts in `<project>/.quantum/resource-index.v1`. The cache is versioned and
 written atomically; malformed or oversized caches are ignored, then the normal
 scan revalidates file size, mtime, dependencies, and project containment. It is
 only a hash-reuse acceleration and never replaces the project tree.
+For `.gltf` files the server also resolves structured `buffers` and `images` URIs;
+for `.glb` it reads only the first JSON chunk, without loading mesh data.
+
+`assets index` also writes `.quantum/asset-metadata.v1` (`QAMI1`). This deterministic
+sidecar carries importer metadata as hex-encoded path/key/value records so the
+standalone `quantum-resource-server` can consume the same metadata without linking
+the editor. The server persists a copy in `resource-index.v1` and exposes `metadata`
+on both `index` and `entry` responses. The sidecar is optional; hashes and dependency
+diagnostics still work when it has not been generated yet.
 
 ## Deterministic packs
 

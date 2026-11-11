@@ -24,12 +24,20 @@ cpack --config build/CPackConfig.cmake --output-directory dist
 python scripts/release-smoke.py --root stage `
   --manifest stage/release-manifest.json `
   --executable stage/bin/quantum-engine.exe `
+  --editor-cmd stage/bin/quantum-editor-cmd.exe `
   --relay-executable stage/bin/quantum-network-relay.exe `
+  --resource-server stage/bin/quantum-resource-server.exe `
+  --runtime-project templates/daynight `
+  --resource-project tests/scale/probe `
   --report stage/release-smoke-report.json
 ```
 
-`release-smoke.py` runs `quantum-engine --help` and records SHA-256 and size for
-`quantum-network-relay --help`, plus SHA-256 and size for files or complete directories/bundles. The same report format is used for
+`release-smoke.py` runs `--help` on the engine, headless editor command, relay and
+resource server, recording SHA-256 and size for each, plus SHA-256 and size for
+files or complete directories/bundles. When `--runtime-project` is supplied it also
+executes the installed engine headlessly with Lua and visual-graph probes; when
+`--resource-project` is supplied it runs the installed resource server with `--once`.
+The same report format is used for
 desktop packages, Android APKs, WebGL outputs, and Apple `.app` bundles.
 Windows/MSVC shared packages install the matching VC143 runtime DLLs beside the
 engine DLL, so the extracted ZIP is not tied to the build machine's Visual Studio

@@ -113,6 +113,10 @@ The runtime also exposes a read-only catalog of registered component serializers
 and schema versions but no callbacks. The MSVC serialization smoke checks that the
 catalog is unique and complete for the built-in registrations.
 
+For ECS diagnostics, `EntityRegistry::getRegisteredComponentCatalog()` exposes
+names and signature IDs generated directly by `registerComponent<T>()`; the same
+MSVC smoke reports 59 unique component IDs.
+
 During live replication the server sends an additive `ReplicationPolicy` packet
 next to each transform snapshot. New clients apply it before evaluating local
 authority; older clients can ignore that packet and continue using the legacy
