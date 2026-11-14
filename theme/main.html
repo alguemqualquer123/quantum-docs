@@ -16,6 +16,88 @@
   {%- if config.extra.version_noindex %}
   <meta name="robots" content="noindex, follow">
   {%- endif %}
+  {#- Search-engine ownership proofs. Paste the code Google Search Console /
+      Bing Webmaster Tools hand you into mkdocs.yml extra.verification_google
+      and extra.verification_bing; empty means no tag is emitted. #}
+  {%- if config.extra.get('verification_google') %}
+  <meta name="google-site-verification" content="{{ config.extra.get('verification_google') }}">
+  {%- endif %}
+  {%- if config.extra.get('verification_bing') %}
+  <meta name="msvalidate.01" content="{{ config.extra.get('verification_bing') }}">
+  {%- endif %}
+
+  {#- The OG image lives at the canonical root so every versioned build
+      (which are noindex anyway) still resolves a card that exists. #}
+  {%- set canon_root = config.extra.get('canonical_root', config.site_url) %}
+  {%- set og_image = canon_root ~ 'assets/logo/quantum_og.png' %}
+  <meta property="og:url" content="{{ page.canonical_url }}">
+  <meta property="og:image" content="{{ og_image }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Quantum Engine — the editor open on a 3D scene">
+  <meta property="og:site_name" content="{{ config.site_name }}">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if page and page.title %}{{ page.title }} — {{ config.site_name }}{% else %}{{ config.site_name }}{% endif %}">
+  <meta name="twitter:description" content="{{ config.site_description }}">
+  <meta name="twitter:image" content="{{ og_image }}">
+  <meta name="theme-color" content="#070b16">
+
+  {#- Schema.org: one @graph per page. WebSite + BreadcrumbList everywhere,
+      SoftwareApplication on the home page, TechArticle on the manual pages. #}
+  {%- set ld = [] %}
+  {%- set _ = ld.append({
+        '@type': 'WebSite',
+        '@id': canon_root ~ '#website',
+        'url': canon_root,
+        'name': config.site_name,
+        'description': config.site_description,
+        'inLanguage': 'en',
+        'publisher': {
+          '@type': 'Organization',
+          'name': 'SR VINIX',
+          'url': 'https://github.com/alguemqualquer123'
+        }
+      }) %}
+  {%- if page and page.is_homepage %}
+  {%- set _ = ld.append({
+        '@type': 'SoftwareApplication',
+        'name': 'Quantum Engine',
+        'description': config.site_description,
+        'image': og_image,
+        'operatingSystem': 'Windows, Linux, macOS, Android, iOS, HTML5',
+        'applicationCategory': 'DeveloperApplication',
+        'softwareVersion': config.extra.get('version', ''),
+        'codeRepository': config.repo_url,
+        'license': canon_root ~ 'about/license/',
+        'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' }
+      }) %}
+  {%- else %}
+  {%- set _ = ld.append({
+        '@type': 'TechArticle',
+        'headline': page.title,
+        'description': page.meta.description if page and page.meta.description else config.site_description,
+        'inLanguage': 'en',
+        'isPartOf': { '@id': canon_root ~ '#website' },
+        'mainEntityOfPage': page.canonical_url
+      }) %}
+  {%- endif %}
+  {%- if page %}
+  {%- set crumbs = [] %}
+  {%- set _ = crumbs.append({ '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': canon_root }) %}
+  {%- for anc in page.ancestors[::-1] %}
+  {%- if anc.title %}
+  {%- set item = { '@type': 'ListItem', 'position': crumbs | length + 1, 'name': anc.title } %}
+  {%- if anc.url %}{% set _ = item.update({ 'item': config.site_url ~ anc.url }) %}{% endif %}
+  {%- set _ = crumbs.append(item) %}
+  {%- endif %}
+  {%- endfor %}
+  {%- if not page.is_homepage %}
+  {%- set _ = crumbs.append({ '@type': 'ListItem', 'position': crumbs | length + 1, 'name': page.title, 'item': page.canonical_url }) %}
+  {%- endif %}
+  {%- set _ = ld.append({ '@type': 'BreadcrumbList', 'itemListElement': crumbs }) %}
+  {%- endif %}
+  <script type="application/ld+json">{{ { '@context': 'https://schema.org', '@graph': ld } | tojson }}</script>
 
   <link rel="icon" type="image/png" href="{{ base_url }}/{{ config.theme.favicon }}">
 

@@ -14,6 +14,10 @@
 # Every version is built with main's theme/, so a layout fix reaches published
 # versions on the next build; only docs/ and mkdocs.yml come from the tag
 # itself. Set DOCS_SHARED_THEME=0 to build each version with its own theme.
+# The shared-theme copy also carries main's docs/assets/logo/ and the mkdocs
+# hook that emits robots.txt, llms.txt and llms-full.txt: release tags predate
+# those files, and the root build comes from a tag, so without the copy the
+# canonical stable tree would ship without its SEO artefacts or OG image.
 #
 # Usage: scripts/build-versions.sh [output-dir]
 set -euo pipefail
@@ -47,6 +51,9 @@ checkout() {
   if [ "$SHARED_THEME" = 1 ]; then
     rm -rf "$path/theme"
     cp -a "$REPO_ROOT/theme" "$path/theme"
+    mkdir -p "$path/docs/assets/logo" "$path/scripts"
+    cp -a "$REPO_ROOT/docs/assets/logo/." "$path/docs/assets/logo/"
+    cp -a "$REPO_ROOT/scripts/mkdocs_hooks.py" "$path/scripts/"
   fi
   CHECKOUT_PATH="$path"
 }
@@ -69,10 +76,19 @@ build() {
   fi
 
   local cfg="$src/.mkdocs.version.yml"
+  # The hook is injected only when the shared-theme copy put the file into the
+  # worktree; with DOCS_SHARED_THEME=0 a release tag has no such script and
+  # mkdocs would abort on a missing hook.
+  local hooks_yaml=""
+  if [ "$SHARED_THEME" = 1 ]; then
+    hooks_yaml="hooks:
+  - scripts/mkdocs_hooks.py
+"
+  fi
   cat > "$cfg" <<YAML
 INHERIT: mkdocs.yml
 site_url: '$url'
-extra:
+${hooks_yaml}extra:
   version: '$id'
   version_root: '$root'
   version_noindex: $noindex

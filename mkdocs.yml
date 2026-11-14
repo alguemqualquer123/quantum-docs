@@ -23,6 +23,10 @@ extra:
   # scripts/build-versions.sh overrides them per version through a generated
   # child config that INHERITs this one.
   version: 'unstable'
+  # Absolute root of the canonical stable build. The OG image and the Schema.org
+  # ids point here so that versioned (noindex) builds still resolve assets that
+  # exist; scripts/build-versions.sh overrides site_url but never this.
+  canonical_root: 'https://alguemqualquer123.github.io/quantum-docs/'
   # Relative hop from base_url up to the site root, where versions.json lives.
   # Empty for a build served at the root, '/..' for a build under /<version>/.
   version_root: ''
@@ -65,6 +69,11 @@ markdown_extensions:
 
 plugins:
   - search
+
+# Emits robots.txt, llms.txt, llms-full.txt and the IndexNow key into site_dir
+# on every build, derived from the nav so they can never drift from it.
+hooks:
+  - scripts/mkdocs_hooks.py
 
 nav:
   - Home: 'index.md'
