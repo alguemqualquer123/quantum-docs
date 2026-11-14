@@ -18,7 +18,9 @@ Build and publication tooling for the documentation site.
   hero screenshot. Run it after changing the logo, tagline or hero.
 - `indexnow-submit.py` — pushes the indexable URLs of the live sitemap to
   IndexNow (Bing, Yandex, Seznam, Naver). Run it after a deploy; IndexNow
-  checks that the key file is reachable first.
+  checks that the key file is reachable first. On the very first run it
+  answers HTTP 403 `SiteVerificationNotCompleted` while it verifies the key
+  against the host — that is expected; run it again later the same day.
 
 Search-engine ownership proofs are not scripts: paste the code Google Search
 Console or Bing Webmaster Tools hands you into `mkdocs.yml` as
